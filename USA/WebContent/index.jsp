@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP</title>
+<title>Index</title>
 </head>
 <body>
 <c:if test="${not empty member }">
@@ -33,3 +33,4 @@
 </footer>
 </body>
 </html>
+

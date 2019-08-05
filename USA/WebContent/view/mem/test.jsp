@@ -9,8 +9,6 @@
 <title>JSP</title>
 </head>
 <body>
-<form action="">
-	
-</form>
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-package controller;
+﻿package controller;
 
 import java.io.IOException;
 
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Command;
+
 import action.mem.MemLoginProAction;
 import action.mem.MemWriteProAction;
 
@@ -33,12 +34,19 @@ public class FrontController extends HttpServlet implements Process{
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
 		
+
+		String nextPage = "";
+		System.out.println(com);
+
+		Command command = null;
 		String nextPage = "";
 		
+
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
 		if(com == null && com.length() <= 0) {
 			// 예시입니다.
 			nextPage = "/index.jsp";
+
 			
 		// 회원가입 폼
 		} else if(com.equals("memWriterForm.do")) {
@@ -59,10 +67,12 @@ public class FrontController extends HttpServlet implements Process{
 			new MemLoginProAction().execute(request, response);;
 			nextPage = "/index.jsp";
 		} 
+
 		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
 		 
+
 
 	}
 
