@@ -1,4 +1,4 @@
-﻿package controller;
+package controller;
 
 import java.io.IOException;
 
@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import action.Command;
 import action.mem.MemLoginProAction;
 import action.mem.MemWriteProAction;
+import action.reg.RegViewAction;
 
-@WebServlet("gg")
-public class FrontController extends HttpServlet implements Process{
+@WebServlet("*.do")
+public class test extends HttpServlet implements Process{
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,8 +46,9 @@ public class FrontController extends HttpServlet implements Process{
 
 			
 		// 회원가입 폼
-		} else if(com.equals("memWriterForm.do")) {
-			nextPage = "/view/mem/memWrite.jsp";
+		} else if(com.equals("RegViewAction.do")) {
+			new RegViewAction().execute(request, response);
+			nextPage = "/view/reg/regView.jsp";
 			
 		// 회원가입 실행	
 		} else if(com.equals("memWritePro.do")) {

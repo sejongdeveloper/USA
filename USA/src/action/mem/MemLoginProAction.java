@@ -11,8 +11,9 @@ import action.Command;
 public class MemLoginProAction implements Command {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		return null;
 	}
 
 }
