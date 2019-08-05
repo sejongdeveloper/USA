@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Command;
+import action.mem.MemWritePro;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet implements Process{
@@ -25,6 +26,8 @@ public class FrontController extends HttpServlet implements Process{
 
 	@Override
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
@@ -36,10 +39,21 @@ public class FrontController extends HttpServlet implements Process{
 		if(com == null && com.length() <= 0) {
 			// 예시입니다.
 			nextPage = "/index.jsp";
-		} 
+			
+		// 회원가입
+		} else if(com.equals("memWritePro.do")) {
+			System.out.println("들어옴1");
+			System.out.println(request.getParameter("mem_id") );
+			command = new MemWritePro();
+			command.execute(request, response);
+			nextPage = "/index.jsp";
+			
+		}
 		
-		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
+		RequestDispatcher dis = request.getRequestDispatcher(request.getContextPath() + nextPage);
 		dis.forward(request, response);
+		 
+
 	}
 
 }
