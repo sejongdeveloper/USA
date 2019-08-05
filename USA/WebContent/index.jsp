@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP</title>
+<title>Index</title>
 </head>
 <body>
 
@@ -31,3 +31,4 @@
 </footer>
 </body>
 </html>
+
