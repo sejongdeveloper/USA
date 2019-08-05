@@ -9,6 +9,6 @@
 <title>JSP</title>
 </head>
 <body>
-
+	메인영역입니다.
 </body>
 </html>
