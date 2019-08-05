@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Command;
+import action.tra.TradeBoardListAction;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet implements Process{
@@ -31,12 +32,25 @@ public class FrontController extends HttpServlet implements Process{
 		
 		Command command = null;
 		String nextPage = "";
+		System.out.println(com);
 		
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
 		if(com == null && com.length() <= 0) {
 			// 예시입니다.
 			nextPage = "/index.jsp";
-		} 
+		}else if(com.equals("view/tra/list.do")) {
+			try {
+				
+				new TradeBoardListAction().execute(request, response);
+				RequestDispatcher rd=request.getRequestDispatcher("/view/tra/list.jsp");
+				
+				rd.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
