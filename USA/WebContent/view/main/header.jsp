@@ -15,6 +15,7 @@
         top: 0px;
         left: 210px; 
         text-decoration: none;
+        /* aa */
     }
 </style>
 </head>
@@ -22,7 +23,7 @@
 	<!-- 헤더 영역입니다. -->
 	<div class="header">
 
-	<table align="center" bgcolor="black" width="680">
+	<table bgcolor="black" width="680">
 	
 	<tr>
 		<td><a href=""><font color="white" size="4"><span style="font-weight:bold" />
