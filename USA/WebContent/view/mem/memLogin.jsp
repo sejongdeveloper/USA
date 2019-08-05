@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form action="${pageContext.request.contextPath }/memLoginPro.do">
-	아이디 <input type="text" name="mem_id"><br>
+	아이디 <input type="text" name="mem_id" value="${cookie_id }"><br>
 	비밀번호 <input type="password" name="mem_pwd"><br>
 	<input type="submit" value="로그인">
 	</form>
