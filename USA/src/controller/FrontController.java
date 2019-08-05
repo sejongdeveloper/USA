@@ -26,6 +26,7 @@ public class FrontController extends HttpServlet implements Process{
 
 	@Override
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
@@ -33,7 +34,7 @@ public class FrontController extends HttpServlet implements Process{
 		Command command = null;
 		String nextPage = "";
 		System.out.println(com);
-		
+		System.out.println(request.getParameter("hwa"));
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
 		if(com == null && com.length() <= 0) {
 			// 예시입니다.

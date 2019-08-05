@@ -1,34 +1,34 @@
 <%@page import="java.net.URLEncoder"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"  errorPage="../error/error404.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"  errorPage="../error/error404.jsp" %>
 	
 <%@ taglib prefix="c"  uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jstl/fmt_rt" %>
 <html>
 <head>
 
-<title>°Ô½ÃÆÇ</title>
+<title>ê²Œì‹œíŒ</title>
 </head>
 <body >
 ddddddddddddddddddddddd
-${listCount } Ä«¿îÆ®ÀÖ´Ï<br>
-${condition } ÄÁµð¼ÇÀÖ´Ï
+${listCount } ì¹´ìš´íŠ¸ìžˆë‹ˆ<br>
+${condition } ì»¨ë””ì…˜ìžˆë‹ˆ
 	<center>
 	
-		<b>±Û ¸ñ·Ï(ÀüÃ¼ ±Û : ${ listCount })
+		<b>ê¸€ ëª©ë¡(ì „ì²´ ê¸€ : ${ listCount })
 		</b>
 
 	 <table width="700">
 		<tr>
 			<td  align="right">
-				<a href="writeForm.do">±Û¾²±â</a>
+				<a href="writeForm.do">ê¸€ì“°ê¸°</a>
 			</td>
 		</tr>
 	</table>
 <c:if test="${ listCount == 0 }">	
 	<table width="700" border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td align="center">°Ô½ÃÆÇ¿¡ ÀúÀåµÈ ±ÛÀÌ ¾ø½À´Ï´Ù.</td>
+			<td align="center">ê²Œì‹œíŒì— ì €ìž¥ëœ ê¸€ì´ ì—†ìŠµë‹ˆë‹¤.</td>
 		</tr>
 	</table>	
 </c:if>
@@ -38,11 +38,11 @@ ${condition } ÄÁµð¼ÇÀÖ´Ï
 	<table width="700" border="1" cellpadding="0" cellspacing="0"
 		align="center">
 		<tr >
-			<td align="center" width="50">¹ø È£</td>
-			<td align="center" width="50">Á¦ ¸ñ</td>
-			<td align="center" width="50">ÀÛ¼ºÀÚ</td>
-			<td align="center" width="50">ÀÛ¼º³¯Â¥</td>
-			<td align="center" width="50">Á¶È¸¼ö</td>
+			<td align="center" width="50">ë²ˆ í˜¸</td>
+			<td align="center" width="50">ì œ ëª©</td>
+			<td align="center" width="50">ìž‘ì„±ìž</td>
+			<td align="center" width="50">ìž‘ì„±ë‚ ì§œ</td>
+			<td align="center" width="50">ì¡°íšŒìˆ˜</td>
 			<td align="center" width="50">I P</td>
 			</tr>
 			
@@ -75,9 +75,9 @@ ${condition } ÄÁµð¼ÇÀÖ´Ï
 </c:if>  
   
 
- <c:if test="${ listCount > 0 }"> <!--  ÀüÃ¼ ÆäÀÌÁöÀÇ ¼ö¸¦ ¿¬»ê -->
+ <c:if test="${ listCount > 0 }"> <!--  ì „ì²´ íŽ˜ì´ì§€ì˜ ìˆ˜ë¥¼ ì—°ì‚° -->
 	    <c:set  var="pageCount"  value="${ listCount / pageSize + (listCount % pageSize ==0 ? 0 : 1) }" />
-		<c:set  var="startPage"  value="${ 1 }" />  <!-- Â÷ÈÄ ¼öÁ¤!! -->
+		<c:set  var="startPage"  value="${ 1 }" />  <!-- ì°¨í›„ ìˆ˜ì •!! -->
 		<c:set  var="pageBlock"  value="${ 2 }" />
 		
 		
@@ -99,7 +99,7 @@ ${condition } ÄÁµð¼ÇÀÖ´Ï
 		<c:choose>
 		<c:when test="${opt!=null }">
 		<c:if test="${startPage >2 }" >
-			<a href="list.do?page=${ startPage-1  }&condition=${condition}&opt=${opt}">[ÀÌÀü] </a>
+			<a href="list.do?page=${ startPage-1  }&condition=${condition}&opt=${opt}">[ì´ì „] </a>
 		</c:if>
 
 		<c:forEach  var="i" begin="${startPage }" end="${ endPage }">
@@ -107,12 +107,12 @@ ${condition } ÄÁµð¼ÇÀÖ´Ï
 	   </c:forEach>
 	
 	<c:if test="${ endPage < pageCount }" >
-		<a href="list.do?page=${ startPage+2 }&condition=${condition}&opt=${opt}">[´ÙÀ½] </a>
+		<a href="list.do?page=${ startPage+2 }&condition=${condition}&opt=${opt}">[ë‹¤ìŒ] </a>
 	</c:if>
 	</c:when>
 	<c:when test="${opt==null }">
 		<c:if test="${startPage >2 }" >
-			<a href="list.do?page=${ startPage-1  }">[ÀÌÀü] </a>
+			<a href="list.do?page=${ startPage-1  }">[ì´ì „] </a>
 		</c:if>
 
 		<c:forEach  var="i" begin="${startPage }" end="${ endPage }">
@@ -120,7 +120,7 @@ ${condition } ÄÁµð¼ÇÀÖ´Ï
 	   </c:forEach>
 	
 	<c:if test="${ endPage < pageCount }" >
-		<a href="list.do?page=${ startPage+2 }">[´ÙÀ½] </a>
+		<a href="list.do?page=${ startPage+2 }">[ë‹¤ìŒ] </a>
 	</c:if>
 	
 	
@@ -138,13 +138,13 @@ ${condition } ÄÁµð¼ÇÀÖ´Ï
 <br>
 <form>
 			<select name="opt">
-				<option value="0">Á¦¸ñ</option>
-				<option value="1">³»¿ë</option>
-				<option value="2">Á¦¸ñ+³»¿ë</option>
-				<option value="3">±Û¾´ÀÌ</option>
+				<option value="0">ì œëª©</option>
+				<option value="1">ë‚´ìš©</option>
+				<option value="2">ì œëª©+ë‚´ìš©</option>
+				<option value="3">ê¸€ì“´ì´</option>
 			</select>
 			<input type="text" size="20" name="condition"/>&nbsp;
-			<input type="submit" value="°Ë»ö"/>
+			<input type="submit" value="ê²€ìƒ‰"/>
 		</form>	
 
 

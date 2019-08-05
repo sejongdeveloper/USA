@@ -42,7 +42,7 @@ public class TradeBoardListAction implements Command {
 	        //한글 검색시 오류가 떠서 어쩔수없이 추가함. server.xml에서 urlencoding etc-kr로 바꿀것
 	        if(condition!=null) {
 	        	
-	        	condition=URLDecoder.decode(request.getParameter("condition"),"euc-kr");
+	        	condition=URLDecoder.decode(request.getParameter("condition"),"UTF-8");
 	        }
 	        
 	       System.out.println(condition);
