@@ -1,106 +1,118 @@
 ------------
---Áú¹® Å×ÀÌºí
-------------
-create table qa(
-    qa_num number constraint qa_num_pk primary key, -- ¹øÈ£PK
-    qa_subject varchar2(300), -- Á¦¸ñ
-    qa_readcount number, -- Á¶È¸¼ö
-    qa_date date default sysdate, -- ÀÛ¼º³¯Â¥
-    qa_writer varchar2(120) constraint qa_writer_fk references mem(mem_name), -- ÀÌ¸§FK
-    qa_filename varchar2(520), -- ÆÄÀÏÀÌ¸§
-    qa_contents varchar2(4000), -- ³»¿ë
-    qa_alive number default 0-- »èÁ¦À¯¹«
-);
-
-----------------
---Áú¹® ´ñ±Û Å×ÀÌºí
-----------------
-create table qarep(
-    qarep_num number constraint qarep_num_pk primary key, -- ¹øÈ£PK
-    qarep_qanum number constraint qarep_qanum_fk references qa(qa_num), -- Áú¹®°Ô½ÃÆÇ ¹øÈ£FK
-    qarep_date date default sysdate, -- ÀÛ¼º³¯Â¥
-    qarep_contents varchar2(4000), -- ³»¿ë
-    qarep_writer varchar2(120) constraint qa_writer_fk references mem(mem_name), -- ÀÌ¸§FK
-    qarep_writerrep number, -- ºÎ¸ğÀÛ¼ºÀÚ ¹øÈ£
-    qarep_alive number default 0, -- »èÁ¦À¯¹«
-    qarep_numref number, -- ´ë´ñ±Û À¯¹«
-    qarep_numref_lv number -- ´ë´ñ±Û ¼ø¼­
-);
-
-------------
---°Å·¡ Å×ÀÌºí
-------------
-create table tra(
-    tra_num number constraint tra_num_pk primary key, -- ¹øÈ£PK
-    tra_subject varchar2(300), -- Á¦¸ñ
-    tra_readcount number, -- Á¶È¸¼ö
-    tra_date date default sysdate, -- ÀÛ¼º³¯Â¥
-    tra_writer varchar2(120) constraint qa_writer_fk references mem(mem_name), -- ÀÌ¸§FK
-    tra_filename varchar2(520), -- ÆÄÀÏÀÌ¸§
-    tra_contents varchar2(4000), -- ³»¿ë
-    tra_alive number, -- »èÁ¦À¯¹«
-    tra_head varchar2(9) -- »ğ´Ï´Ù,ÆË´Ï´Ù
-);
-
-----------------
---°Å·¡ ´ñ±Û Å×ÀÌºí
-----------------
-create table trarep(
-    trarep_num constraint trarep_num_pk primary key, -- ¹øÈ£PK
-    trarep_tranum number constraint trarep_tranum_fk references tra(tra_num), -- Áú¹®°Ô½ÃÆÇ ¹øÈ£FK
-    trarep_date date default sysdate, -- ÀÛ¼º³¯Â¥
-    trarep_contents varchar2(4000), -- ³»¿ë
-    trarep_writer varchar2(120) constraint qa_writer_fk references mem(mem_name), -- ÀÌ¸§FK
-    trarep_writerrep number, -- ºÎ¸ğÀÛ¼ºÀÚ ¹øÈ£
-    trarep_alive number default 0, -- »èÁ¦À¯¹«
-    trarep_numref number, -- ´ë´ñ±Û À¯¹«
-    trarep_numref_lv number -- ´ë´ñ±Û ¼ø¼­
-);
-
-----------------
---Áö¿ª(ÁÖ) Å×ÀÌºí
-----------------
-create table reg(
-    reg_name varchar2(120) constraint reg_name_pk primary key, -- Áö¿ª(ÁÖ)ÀÌ¸§
-    reg_subject varchar2(300), -- Á¦¸ñ
-    reg_contents varchar2(4000), -- ³»¿ë
-    reg_filename varchar2(520) -- ÆÄÀÏÀÌ¸§
-);
-
-------------
---°ü±¤ Å×ÀÌºí
-------------
-create table loc(
-    loc_name varchar2(120) constraint loc_name_pk primary key, -- °ü±¤ÀÌ¸§
-    loc_contents varchar2(4000), -- ³»¿ë
-    loc_filename varchar2(520), -- ÆÄÀÏÀÌ¸§
-    loc_regname varchar2(120) constraint loc_regname_fk references reg(reg_name) -- Áö¿ªÀÌ¸§FK
-);
-
-------------
---¸®ºä Å×ÀÌºí
-------------
-create table rev(
-    rev_num number constraint rev_num_pk primary key, -- ¹øÈ£PK
-    rev_date date default sysdate, -- ÀÛ¼º³¯Â¥
-    rev_writer varchar2(120) constraint rev_writer_fk references mem(mem_name), -- ÀÌ¸§FK
-    rev_contents varchar2(4000), -- ³»¿ë
-    rev_alive number, -- »èÁ¦À¯¹«
-    rev_score number, -- ÆòÁ¡
-    rev_locname varchar2(120) references loc(loc_name) -- °ü±¤ÀÌ¸§FK
-);
-
-------------
---È¸¿ø Å×ÀÌºí
+--íšŒì› í…Œì´ë¸”
 ------------
 create table mem(
-    mem_id varchar2(40) constraint mem_id_pk primary key, -- ¾ÆÀÌµğ
-    mem_pwd varchar2(32) not null, -- ºñ¹Ğ¹øÈ£
-    mem_ph varchar2(32), -- ÀüÈ­¹øÈ£
-    mem_name varchar2(120), -- ÀÌ¸§   
-    mem_addr varchar2(200), -- ÁÖ¼Ò
-    mem_point number default 0, -- Æ÷ÀÎÆ®
-    mem_alive number default 0, -- Å»ÅğÀ¯¹«
-    mem_cdate date default sysdate, -- °¡ÀÔ³¯Â¥
-    mem_ddate date -- Å»Åğ³¯Â¥
+    mem_id varchar2(40) constraint mem_id_pk primary key, -- ì•„ì´ë””
+    mem_pwd varchar2(32) not null, -- ë¹„ë°€ë²ˆí˜¸
+    mem_ph varchar2(32), -- ì „í™”ë²ˆí˜¸
+    mem_name varchar2(120), -- ì´ë¦„   
+    mem_addr varchar2(200), -- ì£¼ì†Œ
+    mem_filename varchar2(520), -- íŒŒì¼ì´ë¦„
+    mem_point number default 100, -- í¬ì¸íŠ¸
+    mem_alive number default 0, -- íƒˆí‡´ìœ ë¬´
+    mem_cdate date default sysdate, -- ê°€ì…ë‚ ì§œ
+    mem_ddate date -- íƒˆí‡´ë‚ ì§œ
 );
+
+------------
+--ì§ˆë¬¸ í…Œì´ë¸”
+------------
+create table qa(
+    qa_num number constraint qa_num_pk primary key, -- ë²ˆí˜¸PK
+    qa_subject varchar2(300), -- ì œëª©
+    qa_readcount number, -- ì¡°íšŒìˆ˜
+    qa_date date default sysdate, -- ì‘ì„±ë‚ ì§œ
+    qa_writer varchar2(120) constraint qa_writer_fk references mem(mem_id), -- ì•„ì´ë””FK
+    qa_filename varchar2(520), -- íŒŒì¼ì´ë¦„
+    qa_contents varchar2(4000), -- ë‚´ìš©
+    qa_alive number default 0-- ì‚­ì œìœ ë¬´
+);
+
+----------------
+--ì§ˆë¬¸ ëŒ“ê¸€ í…Œì´ë¸”
+----------------
+create table qarep(
+    qarep_num number constraint qarep_num_pk primary key, -- ë²ˆí˜¸PK
+    qarep_qanum number constraint qarep_qanum_fk references qa(qa_num), -- ì§ˆë¬¸ê²Œì‹œíŒ ë²ˆí˜¸FK
+    qarep_date date default sysdate, -- ì‘ì„±ë‚ ì§œ
+    qarep_contents varchar2(4000), -- ë‚´ìš©
+    qarep_writer varchar2(120) constraint qarep_writer_fk references mem(mem_id), -- ì•„ì´ë””FK
+    qarep_writerrep number constraint qarep_writerrep_fk references qa(qa_num), -- ë¶€ëª¨ì‘ì„±ì ë²ˆí˜¸ 
+    qarep_alive number default 0, -- ì‚­ì œìœ ë¬´
+    qarep_numref number, -- ëŒ€ëŒ“ê¸€ ìœ ë¬´
+    qarep_numref_lv number -- ëŒ€ëŒ“ê¸€ ìˆœì„œ
+);
+
+------------
+--ê±°ë˜ í…Œì´ë¸”
+------------
+create table tra(
+    tra_num number constraint tra_num_pk primary key, -- ë²ˆí˜¸PK
+    tra_subject varchar2(300), -- ì œëª©
+    tra_readcount number, -- ì¡°íšŒìˆ˜
+    tra_date date default sysdate, -- ì‘ì„±ë‚ ì§œ
+    tra_writer varchar2(120) constraint tra_writer_fk references mem(mem_id), -- ì•„ì´ë””FK
+    tra_filename varchar2(520), -- íŒŒì¼ì´ë¦„
+    tra_contents varchar2(4000), -- ë‚´ìš©
+    tra_alive number, -- ì‚­ì œìœ ë¬´
+    tra_head varchar2(9) -- ì‚½ë‹ˆë‹¤,íŒë‹ˆë‹¤
+);
+
+----------------
+--ê±°ë˜ ëŒ“ê¸€ í…Œì´ë¸”
+----------------
+create table trarep(
+    trarep_num number constraint trarep_num_pk primary key, -- ë²ˆí˜¸PK
+    trarep_tranum number constraint trarep_tranum_fk references tra(tra_num), -- ì§ˆë¬¸ê²Œì‹œíŒ ë²ˆí˜¸FK
+    trarep_date date default sysdate, -- ì‘ì„±ë‚ ì§œ
+    trarep_contents varchar2(4000), -- ë‚´ìš©
+    trarep_writer varchar2(120) constraint trarep_writer_fk references mem(mem_id), -- ì•„ì´ë””FK
+    trarep_writerrep number constraint trarep_writerrep_fk references tra(tra_num), -- ë¶€ëª¨ì‘ì„±ì ë²ˆí˜¸
+    trarep_alive number default 0, -- ì‚­ì œìœ ë¬´
+    trarep_numref number, -- ëŒ€ëŒ“ê¸€ ìœ ë¬´
+    trarep_numref_lv number -- ëŒ€ëŒ“ê¸€ ìˆœì„œ
+);
+
+-----------------
+--ì§€ì—­ì´ë¦„ í…Œì´ë¸”
+-----------------
+create table regName(
+    regName varchar2(120) constraint regName_pk primary key -- ì§€ì—­ì´ë¦„PK
+);
+
+----------------
+--ì§€ì—­(ì£¼) í…Œì´ë¸”
+----------------
+create table reg(
+    reg_num number constraint reg_num_pk primary key, -- ë²ˆí˜¸PK
+    reg_regName varchar2(120) constraint reg_regName_fk references regName(regName), -- ì§€ì—­ì´ë¦„
+    reg_subject varchar2(300), -- ì œëª©
+    reg_contents varchar2(4000), -- ë‚´ìš©
+    reg_filename varchar2(520) -- íŒŒì¼ì´ë¦„
+);
+
+------------
+--ê´€ê´‘ í…Œì´ë¸”
+------------
+create table loc(
+    loc_name varchar2(120) constraint loc_name_pk primary key, -- ê´€ê´‘ì´ë¦„
+    loc_contents varchar2(4000), -- ë‚´ìš©
+    loc_filename varchar2(520), -- íŒŒì¼ì´ë¦„
+    loc_regname number constraint loc_regname_fk references reg(reg_num) -- ì§€ì—­ì´ë¦„FK
+);
+select * from loc;
+drop table reg;
+------------
+--ë¦¬ë·° í…Œì´ë¸”
+------------
+create table rev(
+    rev_num number constraint rev_num_pk primary key, -- ë²ˆí˜¸PK
+    rev_date date default sysdate, -- ì‘ì„±ë‚ ì§œ
+    rev_writer varchar2(120) constraint rev_writer_fk references mem(mem_id), -- ì•„ì´ë””FK
+    rev_contents varchar2(4000), -- ë‚´ìš©
+    rev_alive number, -- ì‚­ì œìœ ë¬´
+    rev_score number, -- í‰ì 
+    rev_locname varchar2(120) references loc(loc_name) -- ê´€ê´‘ì´ë¦„FK
+);
+
+
