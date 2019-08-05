@@ -27,7 +27,7 @@ public class FrontController extends HttpServlet implements Process{
 
 	@Override
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("컨트롤러에 오신걸 환영합니다 ^^");
 		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
@@ -46,6 +46,7 @@ public class FrontController extends HttpServlet implements Process{
 			
 		// 회원가입 실행	
 		} else if(com.equals("memWritePro.do")) {
+			System.out.println("설마 여기로 와서 그런거니?");
 			new MemWriteProAction().execute(request, response);
 			nextPage = "/index.jsp";
 			
@@ -54,7 +55,7 @@ public class FrontController extends HttpServlet implements Process{
 			nextPage = "/view/mem/memLogin.jsp";
 			
 		// 로그인 실행
-		} else if(com.equals("memWritePro.do")) {
+		} else if(com.equals("memLoginPro.do")) {
 			new MemLoginProAction().execute(request, response);;
 			nextPage = "/index.jsp";
 		} 

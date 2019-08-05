@@ -61,5 +61,28 @@ public class MemDAO {
 		
 	} // insert() end
 	
-	
+	// 로그인
+	public boolean login(String mem_id, String mem_pwd) {
+		boolean isLogin = false;
+		try {
+			conn = getConnection();
+			String sql = "select mem_id from mem where mem_id = ? and mem_pwd = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem_id);
+			pstmt.setString(2, mem_pwd);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				isLogin = true;
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		} // try end
+		
+		return isLogin;
+	}
 }

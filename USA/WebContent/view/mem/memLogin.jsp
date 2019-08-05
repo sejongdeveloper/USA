@@ -9,7 +9,7 @@
 <title>JSP</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath }/memWritePro.do">
+	<form action="${pageContext.request.contextPath }/memLoginPro.do">
 	아이디 <input type="text" name="mem_id"><br>
 	비밀번호 <input type="password" name="mem_pwd"><br>
 	<input type="submit" value="로그인">

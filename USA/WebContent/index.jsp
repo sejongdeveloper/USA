@@ -9,7 +9,9 @@
 <title>JSP</title>
 </head>
 <body>
-
+<c:if test="${not empty member }">
+	${member }님 환영합니다^^
+</c:if>
 <header>
 	<jsp:include page="view/main/header.jsp" flush="false" />
 </header>
