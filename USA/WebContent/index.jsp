@@ -9,7 +9,7 @@
 <title>JSP</title>
 </head>
 <body>
-
+테스트 : ${test }
 <header>
 	<jsp:include page="view/main/header.jsp" flush="false" />
 </header>

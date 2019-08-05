@@ -9,6 +9,10 @@
 <title>JSP</title>
 </head>
 <body>
-
+테스트1 : ${test }
+테스트2 : ${test2 }
+<form action="${pageContext.request.contextPath }/test.do">
+	<input type="submit">
+</form>
 </body>
 </html>
