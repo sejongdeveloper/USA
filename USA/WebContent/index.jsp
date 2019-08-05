@@ -9,12 +9,23 @@
 <title>JSP</title>
 </head>
 <body>
+
 <header>
 	<jsp:include page="view/main/header.jsp" flush="false" />
 </header>
+
 <section>
-	<jsp:include page="view/main/main.jsp" flush="false" />
+<c:choose>
+	<c:when test="${empty contents }">
+		<jsp:include page="view/main/main.jsp" flush="false" />
+	</c:when>
+	
+	<c:otherwise>
+		<jsp:include page="${contents }" flush="false" />	
+	</c:otherwise>
+</c:choose>
 </section>
+
 <footer>
 	<jsp:include page="view/main/footer.jsp" flush="false" />
 </footer>
