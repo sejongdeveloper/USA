@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Command;
-import action.mem.MemWritePro;
+import action.mem.MemLoginProAction;
+import action.mem.MemWriteProAction;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet implements Process{
@@ -26,13 +27,12 @@ public class FrontController extends HttpServlet implements Process{
 
 	@Override
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		
 		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
 		
-		Command command = null;
 		String nextPage = "";
 		
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
@@ -40,17 +40,26 @@ public class FrontController extends HttpServlet implements Process{
 			// 예시입니다.
 			nextPage = "/index.jsp";
 			
-		// 회원가입
+		// 회원가입 폼
+		} else if(com.equals("memWriterForm.do")) {
+			nextPage = "/view/mem/memWrite.jsp";
+			
+		// 회원가입 실행	
 		} else if(com.equals("memWritePro.do")) {
-			System.out.println("들어옴1");
-			System.out.println(request.getParameter("mem_id") );
-			command = new MemWritePro();
-			command.execute(request, response);
+			new MemWriteProAction().execute(request, response);
 			nextPage = "/index.jsp";
 			
-		}
+		// 로그인 폼
+		} else if(com.equals("memLoginForm.do")) {
+			nextPage = "/view/mem/memLogin.jsp";
+			
+		// 로그인 실행
+		} else if(com.equals("memWritePro.do")) {
+			new MemLoginProAction().execute(request, response);;
+			nextPage = "/index.jsp";
+		} 
 		
-		RequestDispatcher dis = request.getRequestDispatcher(request.getContextPath() + nextPage);
+		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
 		 
 

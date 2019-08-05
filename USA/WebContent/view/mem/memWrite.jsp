@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
     
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>JSP</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath }/memWritePro.do" method="get" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath }/memWritePro.do" method="post" enctype="multipart/form-data">
 	아이디 : <input type="text" name="mem_id"><br>
 	비밀번호 : <input type="password" name="mem_pwd"><br>
 	전화번호 : <input type="text" name="mem_ph"><br>
