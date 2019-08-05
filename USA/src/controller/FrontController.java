@@ -39,17 +39,9 @@ public class FrontController extends HttpServlet implements Process{
 			// 예시입니다.
 			nextPage = "/index.jsp";
 		}else if(com.equals("view/tra/list.do")) {
-			try {
-				
 				new TradeBoardListAction().execute(request, response);
-				RequestDispatcher rd=request.getRequestDispatcher("/view/tra/list.jsp");
+				nextPage="/view/tra/list.jsp";
 				
-				rd.forward(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			
 		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);

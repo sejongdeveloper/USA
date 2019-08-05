@@ -20,23 +20,26 @@ public class TradeBoardListAction implements Command {
 		
 		
 //		ActionForward forward = new ActionForward();
-	        //�ѹ��� ������ ������
+	       
 		  int pageSize=2;
 		  
-	        // ���� ������ ��ȣ �����
-	        int spage = 1;
+
+		  //시작페이지 spage와 page값이 널이 아니면 page값을 시작페이지로 지정.
+		  int spage = 1;
 	        String page = request.getParameter("page");
 	        
 	        if(page != null)
 	            spage = Integer.parseInt(page);
 	        
-	        // �˻����ǰ� �˻������� �����´�.
 	        
-
+	        
+	        //검색 조건 opt 검색내용 condition
 	        String opt = request.getParameter("opt");
 	        
 	        String condition=request.getParameter("condition");
 	        
+	        
+	        //한글 검색시 오류가 떠서 어쩔수없이 추가함. server.xml에서 urlencoding etc-kr로 바꿀것
 	        if(condition!=null) {
 	        	
 	        	condition=URLDecoder.decode(request.getParameter("condition"),"euc-kr");
@@ -47,8 +50,8 @@ public class TradeBoardListAction implements Command {
 	        
 	        
 	        
-	        // �˻����ǰ� ������ Map�� ��´�.
-	        HashMap<String, Object> listOpt = new HashMap<String, Object>();
+//	       listOpt에 검색조건 검색 내용 시작페이지 start를 저장 
+	       HashMap<String, Object> listOpt = new HashMap<String, Object>();
 	        listOpt.put("opt", opt);
 	        listOpt.put("condition", condition);
 	        listOpt.put("start", spage*5-4);
@@ -57,15 +60,17 @@ public class TradeBoardListAction implements Command {
 	        int listCount = dao.getBoardListCount(listOpt);
 	        ArrayList<TradeBoardVO> list =  dao.getBoardList(listOpt);
 	        
-	        // �� ȭ�鿡 3���� �Խñ��� ����������
-	        // ������ ��ȣ�� �� 2��, ���ķδ� [����]���� ǥ��
+
 	        
-	        // ��ü ������ ��
+	        //총 페이지 수를 구하는 방법.
 	        int maxPage = (int)(listCount/5.0 + 0.2);
-	        //���� ������ ��ȣ
+
+	        //시작 페이지수를 구하는방법
 	        int startPage = (int)(spage/5.0 + 0.8) * 2 - 1;
-	        //������ ������ ��ȣ
+	        //한번에 보여질 마지막 페이지
 	        int endPage = startPage + 1;
+	        
+	        //보여지는 페이지가 마지막 페이지일경우 마지막페이지는 maxpage이다.
 	        if(endPage > maxPage)    endPage = maxPage;
 	        
 	        
@@ -79,25 +84,28 @@ public class TradeBoardListAction implements Command {
 	        
 	        
 	        
-	        //�ѹ��� ������ ������ 
+	        //보여줄 게시글 수를 정함
 	        request.setAttribute("pageSize", pageSize);
-	        // 4�� ��������ȣ ����
+	        
+	        
+	        //페이지 숫자에대한 설정
 	        request.setAttribute("spage", spage);
 	        request.setAttribute("maxPage", maxPage);
 	        request.setAttribute("startPage", startPage);
 	        request.setAttribute("endPage", endPage);
 	        
-	        // ���� �� ���� �۸�� ����
+
+	        //총 게시물수,게시물내용을 담고있음.
 	        request.setAttribute("listCount", listCount);
 	        request.setAttribute("list", list);
 	        
-	        //�˻����� ������ ���� �˻����ǰ� �˻������� �ٽ� ������.
-	       if(opt!=null) {
+
+	        //검색시 검색조건을 유지하기위해 설정함.
+	        if(opt!=null) {
 	        request.setAttribute("opt", opt);
 	        request.setAttribute("condition", condition);
 	       }
 	        
-	        // �ܼ� ��ȸ�̹Ƿ� forward()��� (= DB�� ���º�ȭ �����Ƿ�) 
 	      
 	        
 	        
