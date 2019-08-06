@@ -9,17 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import action.mem.MemDelProAction;
-import action.mem.MemIdProAction;
-import action.mem.MemIdValidateAction;
-import action.mem.MemLoginFormAction;
+import action.Command;
 import action.mem.MemLoginProAction;
 import action.mem.MemPwdProAction;
 import action.mem.MemUpdateFromAction;
 import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
 
-@WebServlet("*.do")
+@WebServlet("gg")
 public class FrontController extends HttpServlet implements Process{
 	private static final long serialVersionUID = 1L;
 
