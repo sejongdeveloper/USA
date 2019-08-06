@@ -3,14 +3,13 @@ package model.loc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class RevDAO {
 
@@ -132,4 +131,105 @@ public class RevDAO {
 		return map;
 	}
 	
+	// 관광명소 리뷰 등록
+	public int insert(RevVO vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO REV(REV_NUM, REV_DATE, REV_WRITER, REV_CONTENTS, REV_ALIVE, REV_SCORE, REV_LOCNAME) VALUES(REV_NUM.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+		
+		Timestamp rev_date = vo.getRev_date();
+		String rev_writer = vo.getRev_writer();
+		String rev_contents = vo.getRev_contents();
+		int rev_alive = vo.getRev_alive();
+		int rev_score = vo.getRev_score();
+		String rev_locname = vo.getRev_locname();
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setTimestamp(1, rev_date);
+			pstmt.setString(2, rev_writer);
+			pstmt.setString(3, rev_contents);
+			pstmt.setInt(4, rev_alive);
+			pstmt.setInt(5, rev_score);
+			pstmt.setString(6, rev_locname);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	// 관광명소 리뷰 수정할 정보 읽기
+	public RevVO getUpdateVO(int rev_num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		RevVO vo = null;
+		String sql = "select rev_contents, rev_score from rev where rev_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rev_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new RevVO();
+				vo.setRev_contents(rs.getString("rev_contents"));
+				vo.setRev_score(rs.getInt("rev_score"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
+	// 관광명소 리뷰 수정
+	public int update(RevVO vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update rev set rev_contents = ?, rev_score = ? where rev_num = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getRev_contents());
+			pstmt.setString(2, vo.getRev_contents());
+			pstmt.setInt(3, vo.getRev_num());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	// 관광명소 리뷰 삭제
+	public int delete(int rev_num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from rev where rev_num = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rev_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

@@ -9,6 +9,11 @@
 <title>JSP</title>
 </head>
 <body>
-	메인영역입니다.
+아이디 : ${mem_id }
+<form action="${pageContext.request.contextPath }/memIdPro.do">
+	이름 <input type="text" name="mem_name"><br>
+	주소 <input type="text" name="mem_addr"><br>
+	<input type="submit" value="찾기">
+</form>
 </body>
 </html>
