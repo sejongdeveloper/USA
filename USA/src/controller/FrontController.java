@@ -3,6 +3,7 @@
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,7 @@ public class FrontController extends HttpServlet implements Process{
 	@Override
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("컨트롤러에 오신걸 환영합니다 ^^");
+		request.setCharacterEncoding("utf-8");
 		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
