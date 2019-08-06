@@ -1,4 +1,4 @@
-package action.loc;
+package action.mem;
 
 public class test {
 

@@ -14,6 +14,10 @@
 <div class="regMain_info regMain_div"><div class="regMain_infotitle">날씨</div><div class="regMain_infocontents">내용</div></div>
 <div class="regMain_info regMain_div"><div class="regMain_infotitle">시차</div><div class="regMain_infocontents">내용</div></div>
 <div class="regMain_info regMain_div"><div class="regMain_infotitle ">비행시간</div><div class="regMain_infocontents">내용</div></div>
-<div class="regMain_moreinfo regMain_div"><div class="regMain_infotitle">더 많은 정보</div><div class="regMain_one">기본정보</div><div class="regMain_two">관람명소</div></div>
+<div class="regMain_moreinfo regMain_div">
+	<div class="regMain_infotitle">더 많은 정보</div>
+	<div class="regMain_one"><a href="regView.do">기본정보</a></div>
+	<div class="regMain_two"><a href="locView.do">관람명소</a></div>
+</div>
 </body>
 </html>

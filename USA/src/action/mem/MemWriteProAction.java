@@ -1,7 +1,6 @@
 package action.mem;
 
 import java.io.IOException;
-import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +35,8 @@ public class MemWriteProAction implements Command {
 			e.printStackTrace();
 		}
 		
-		return saveDirectory;
+		return "/index.jsp";
+		
 	} // execute() end
 
 }

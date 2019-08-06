@@ -9,7 +9,10 @@
 <title>Index</title>
 </head>
 <body>
-
+<c:if test="${not empty member }">
+	${member }님 환영합니다^^
+</c:if> 
+<a href="test.html">테스트 이동</a>
 <header>
 	<jsp:include page="view/main/header.jsp" flush="false" />
 </header>

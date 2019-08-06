@@ -21,7 +21,7 @@ public class RegViewAction implements Command {
 		
 		request.setAttribute("reg_list", reg_list);
 		
-		return "/view/reg/regView.jsp";
+		return "/view/reg/regView.do";
 	}
 
 }
