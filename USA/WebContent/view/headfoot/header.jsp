@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 	<table class=header>
 		<tr>
