@@ -1,7 +1,6 @@
 package action.mem;
 
 import java.io.IOException;
-import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import model.mem.MemVO;
 public class MemWriteProAction implements Command {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String saveDirectory = request.getRealPath("/view/mem/upload");
 		int maxPostSize = 5*1024*1024;
 		
@@ -35,6 +34,8 @@ public class MemWriteProAction implements Command {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return "/index.jsp";
 		
 	} // execute() end
 
