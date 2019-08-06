@@ -218,4 +218,26 @@ public class MemDAO {
 		
 		return result;
 	} // delete() end
+	
+	// 아이디 중복검사
+	public boolean idValidate(String mem_id) {
+		boolean isId = false;
+		try {
+			conn = getConnection();
+			String sql = "select mem_id from mem where mem_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				isId = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		} 
+		
+		return isId;
+	} // idValidate() end
 }

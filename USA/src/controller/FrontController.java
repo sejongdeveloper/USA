@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import action.Command;
 import action.mem.MemDelProAction;
 import action.mem.MemIdProAction;
+import action.mem.MemIdValidateAction;
 import action.mem.MemLoginFormAction;
 import action.mem.MemLoginProAction;
 import action.mem.MemPwdProAction;
@@ -96,8 +96,14 @@ public class FrontController extends HttpServlet implements Process{
 		// 회원탈퇴
 		} else if(com.equals("memDelPro.do")) {
 			nextPage = new MemDelProAction().execute(request, response);
-		}
-				
+			
+		// 로그인 유효성 검사
+		} else if(com.equals("memIdValidate.do")) {
+			new MemIdValidateAction().execute(request, response);
+		} 
+	
+		String path = request.getContextPath();
+		System.out.println("path:" + path);
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
 		 
