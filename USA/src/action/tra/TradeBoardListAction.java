@@ -15,63 +15,65 @@ import model.tra.TradeBoardVO;
 public class TradeBoardListAction implements Command {
 
 	@Override
-	public void execute(HttpServletRequest request,
+	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		
 		
 //		ActionForward forward = new ActionForward();
 	       
-		  int pageSize=2;
+		  int pageSize=5;
+		  int pageSizeref=pageSize-1;
 		  
 
-		  //시작페이지 spage와 page값이 널이 아니면 page값을 시작페이지로 지정.
-		  int spage = 1;
+		  //시작 페이지
+		    int TradeBoardCurrentPage = 1;
 	        String page = request.getParameter("page");
 	        
-	        if(page != null)
-	            spage = Integer.parseInt(page);
+	        //가져온페이지가 널이아니면 시작페이지를 가져온 페이지로
+	        if(page != null)  TradeBoardCurrentPage = Integer.parseInt(page);
+	        int tradeStartNum=TradeBoardCurrentPage*pageSize-pageSizeref; //시작 글번호
+	        int tradeEndNum=5; //끝번호
 	        
-	        
-	        
-	        //검색 조건 opt 검색내용 condition
+	        //검색 옵션
 	        String opt = request.getParameter("opt");
-	        
+	        //검색조건
 	        String condition=request.getParameter("condition");
 	        
-	        
-	        //한글 검색시 오류가 떠서 어쩔수없이 추가함. server.xml에서 urlencoding etc-kr로 바꿀것
+	        //한글검색씨 꺠짐떄문에 처리
 	        if(condition!=null) {
 	        	
 	        	condition=URLDecoder.decode(request.getParameter("condition"),"UTF-8");
 	        }
 	        
-	       System.out.println(condition);
 	        
 	        
 	        
-	        
-//	       listOpt에 검색조건 검색 내용 시작페이지 start를 저장 
+	        //검색조건,검색내용,시작페이지 글번호 hashmap에 담음
 	       HashMap<String, Object> listOpt = new HashMap<String, Object>();
 	        listOpt.put("opt", opt);
 	        listOpt.put("condition", condition);
-	        listOpt.put("start", spage*5-4);
-	        
+	        //첫 시작 글번호 
+	        listOpt.put("start", tradeStartNum);
+	        listOpt.put("end",tradeEndNum);
 	        TradeBoardDAO dao = TradeBoardDAO.getInstance();
+	        
+	        //전체 게시물숫자 조회,한번에 보여줄 페이지 수 구하기.
 	        int listCount = dao.getBoardListCount(listOpt);
+	        int TradeBoardNumberSize=listCount-(TradeBoardCurrentPage-1) *pageSize;
+	        //게시물 내용 담음
 	        ArrayList<TradeBoardVO> list =  dao.getBoardList(listOpt);
 	        
 
 	        
-	        //총 페이지 수를 구하는 방법.
-	        int maxPage = (int)(listCount/5.0 + 0.2);
-
-	        //시작 페이지수를 구하는방법
-	        int startPage = (int)(spage/5.0 + 0.8) * 2 - 1;
-	        //한번에 보여질 마지막 페이지
-	        int endPage = startPage + 1;
+	        int pageBlock=5;
+	        int pageCount = listCount / pageSize + ( listCount % pageSize == 0 ? 0 : 1 );
+	       
 	        
-	        //보여지는 페이지가 마지막 페이지일경우 마지막페이지는 maxpage이다.
-	        if(endPage > maxPage)    endPage = maxPage;
+	        int startPage = (int)(TradeBoardCurrentPage/pageBlock) * pageBlock + 1;
+	        int endPage = startPage +pageBlock- 1;
+	        
+	        //蹂댁뿬吏��뒗 �럹�씠吏�媛� 留덉�留� �럹�씠吏��씪寃쎌슦 留덉�留됲럹�씠吏��뒗 maxpage�씠�떎.
+	        if(endPage > pageCount)    endPage = pageCount;
 	        
 	        
 	        
@@ -84,27 +86,28 @@ public class TradeBoardListAction implements Command {
 	        
 	        
 	        
-	        //보여줄 게시글 수를 정함
 	        request.setAttribute("pageSize", pageSize);
 	        
 	        
-	        //페이지 숫자에대한 설정
-	        request.setAttribute("spage", spage);
-	        request.setAttribute("maxPage", maxPage);
+	        //�럹�씠吏� �닽�옄�뿉���븳 �꽕�젙
+	        request.setAttribute("TradeBoardCurrentPage", TradeBoardCurrentPage);
+	        request.setAttribute("pageCount", pageCount);
 	        request.setAttribute("startPage", startPage);
 	        request.setAttribute("endPage", endPage);
+	        request.setAttribute("pageBlock", pageBlock);
 	        
 
-	        //총 게시물수,게시물내용을 담고있음.
+	        //珥� 寃뚯떆臾쇱닔,寃뚯떆臾쇰궡�슜�쓣 �떞怨좎엳�쓬.
 	        request.setAttribute("listCount", listCount);
 	        request.setAttribute("list", list);
 	        
 
-	        //검색시 검색조건을 유지하기위해 설정함.
+	        //寃��깋�떆 寃��깋議곌굔�쓣 �쑀吏��븯湲곗쐞�빐 �꽕�젙�븿.
 	        if(opt!=null) {
 	        request.setAttribute("opt", opt);
 	        request.setAttribute("condition", condition);
 	       }
+			return "/view/tra/list.jsp";
 	        
 	      
 	        
