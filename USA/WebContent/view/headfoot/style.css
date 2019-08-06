@@ -1,0 +1,35 @@
+@charset "UTF-8";
+.footer {
+	width: 100%;
+	position: relative;
+}
+.headcenter>a {
+	text-decoration: none;
+	color: white;
+}
+.header {
+	background-color: black;
+	height: 30px;
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	position: relative;
+}
+.headcontent {
+	font-size: 10px;
+}
+
+.headside {
+	width: 20%;
+}
+.headcenter {
+	width: 15%;
+}
+.signin {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	font-size: 10px;
+	text-decoration: none;
+	color: gray;
+}
