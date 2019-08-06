@@ -92,7 +92,6 @@ ${condition } 컨디션있니
 
 
  <c:if test="${ listCount > 0 }"> <!--  전체 페이지의 수를 연산 -->
-		<c:set  var="pageBlock"  value="${ 2 }" />
 		
 		
 		

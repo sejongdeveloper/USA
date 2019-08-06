@@ -9,24 +9,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
 import action.Command;
 import model.tra.TradeBoardDAO;
 import model.tra.TradeBoardVO;
 
-public class TradeBoardWriteAction implements Command {
+public class TradeBoardModifyProAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String num=request.getParameter("num");
+		
+		String num=request.getParameter("board_num");
+		
+		String existFile=request.getParameter("existing_file");
 		int fileSize= 5*1024*1024;
-				
+		
 		String uploadPath = request.getServletContext().getRealPath("/UploadFolder");
 
 		System.out.println(uploadPath +"//업로드폴더?");
-		
+		TradeBoardDAO dao = TradeBoardDAO.getInstance();
+		TradeBoardVO border = new TradeBoardVO();
 		
 		try {
 			
@@ -39,12 +42,18 @@ public class TradeBoardWriteAction implements Command {
 			{
 				String name = names.nextElement();
 				fileName = multi.getFilesystemName(name);
+				if(fileName == null)	// ������ ���ο� ������ ÷�� ���ߴٸ� ���� ���ϸ��� ����
+					border.setBoard_file(existFile);
+				else	// ���ο� ������ ÷������ ���
+					border.setBoard_file(fileName);
 			}
 			
-			TradeBoardDAO dao = TradeBoardDAO.getInstance();
-			TradeBoardVO border = new TradeBoardVO();
 			
-			border.setBoard_num(Integer.parseInt(num)); 
+			
+			
+	
+			
+			border.setBoard_num(dao.getSeq()); 
 			border.setBoard_id(multi.getParameter("board_id")); // ���簪
 			border.setBoard_subject(multi.getParameter("board_subject"));
 			border.setBoard_content(multi.getParameter("board_content"));
@@ -55,17 +64,18 @@ public class TradeBoardWriteAction implements Command {
 			System.out.println("view/tra/Content.do?num="+border.getBoard_num());
 			request.setAttribute("num", num);
 			if(result){
-				return "/view/tra/content.do";
+				System.out.println("컨텐츠로 넘어가기위한 단계");
+				return "/view/tra/content.do?num="+num;
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("파일 등록 실패 " + e.getMessage());
 		}
-		 
 		
 		
-		return "/view/tra/list.do";
+		
+		return "/view/tra/content.do";
 	}
 
 }

@@ -1,9 +1,6 @@
 package model.tra;
 
-
-
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +11,7 @@ import java.util.HashMap;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
 
 
 
@@ -321,10 +319,155 @@ public class TradeBoardDAO {
 	        return list;
 	    } // end getBoardList
 
-		public int getSeq() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
+	    
+	    //updatecount
+	    public boolean updateCount(int boardNum) throws SQLException
+		{
+			boolean result = false;
+			
+			try {
+				conn = getConnection();
+				
+				conn.setAutoCommit(false);
+				
+				StringBuffer sql = new StringBuffer();
+				sql.append("update MEMBER_BOARD set BOARD_COUNT = BOARD_COUNT+1 ");
+				sql.append("where BOARD_NUM = ?");
+				
+				pstmt = conn.prepareStatement(sql.toString());
+				pstmt.setInt(1, boardNum);
+				
+				int flag = pstmt.executeUpdate();
+				if(flag > 0){
+					result = true;
+					conn.commit(); // �Ϸ�� Ŀ��
+				}	
+			} catch (Exception e) {
+				try {
+					conn.rollback(); // ������ �ѹ�
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+				throw new RuntimeException(e.getMessage());
+			}
+			pstmt.close();
+			conn.close();
+			return result;
+		} // end updateCount
+	    
+	    public TradeBoardVO getDetail(int boardNum) throws SQLException
+		{	
+	    	TradeBoardVO board = null;
+			
+			try {
+				conn = getConnection();
+				
+				StringBuffer sql = new StringBuffer();
+				sql.append("select * from MEMBER_BOARD where BOARD_NUM = ?");
+				
+				pstmt = conn.prepareStatement(sql.toString());
+				pstmt.setInt(1, boardNum);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next())
+				{
+					board = new TradeBoardVO();
+					board.setBoard_num(boardNum);
+					board.setBoard_id(rs.getString("BOARD_ID"));
+					board.setBoard_subject(rs.getString("BOARD_SUBJECT"));
+					board.setBoard_content(rs.getString("BOARD_CONTENT"));
+					board.setBoard_file(rs.getString("BOARD_FILE"));
+					board.setBoard_count(rs.getInt("BOARD_COUNT"));
+					board.setBoard_re_ref(rs.getInt("BOARD_RE_REF"));
+					board.setBoard_date(rs.getDate("BOARD_DATE"));
+					board.setBoard_parent(rs.getInt("BOARD_PARENT"));
+				}
+				
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+			return board;
+		} // end getDetail()
+	    
+	    public boolean updateBoard(TradeBoardVO vo) 
+		{
+			boolean result = false;
+			
+			try{
+				conn = getConnection();
+				conn.setAutoCommit(false); // �ڵ� Ŀ���� false�� �Ѵ�.
+				
+				StringBuffer sql = new StringBuffer();
+				sql.append("UPDATE MEMBER_BOARD SET");
+				sql.append(" BOARD_SUBJECT=?");
+				sql.append(" ,BOARD_CONTENT=?");
+				sql.append(" ,BOARD_FILE=?");
+				sql.append(" ,BOARD_DATE=SYSDATE ");
+				sql.append("WHERE BOARD_NUM=?");
+
+				pstmt = conn.prepareStatement(sql.toString());
+				pstmt.setString(1, vo.getBoard_subject());
+				pstmt.setString(2, vo.getBoard_content());
+				pstmt.setString(3, vo.getBoard_file());
+				pstmt.setInt(4, vo.getBoard_num());
+				
+				int flag = pstmt.executeUpdate();
+				if(flag > 0){
+					result = true;
+					conn.commit(); // �Ϸ�� Ŀ��
+				}
+				
+			} catch (Exception e) {
+				try {
+					conn.rollback(); // ������ �ѹ�
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+				throw new RuntimeException(e.getMessage());
+			}
+		
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return result;
+		} // end updateBoard
+	    
+	    
+	    
+	    public int getSeq() throws SQLException
+		{
+			int result = 1;
+			
+			try {
+				conn = getConnection();
+				
+				// ������ ���� �����´�. (DUAL : ������ ���� ������������ �ӽ� ���̺�)
+				StringBuffer sql = new StringBuffer();
+				sql.append("SELECT BOARD_NUM.NEXTVAL FROM DUAL");
+				
+				pstmt = conn.prepareStatement(sql.toString());
+				// ���� ����
+				rs = pstmt.executeQuery();
+				
+				if(rs.next())	result = rs.getInt(1);
+
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+			
+			rs.close();
+			pstmt.close();
+			conn.close();
+			return result;	
+		} // end getSeq
 	    
 	
 

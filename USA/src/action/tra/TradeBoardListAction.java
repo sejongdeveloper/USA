@@ -69,7 +69,7 @@ public class TradeBoardListAction implements Command {
 	        int pageCount = listCount / pageSize + ( listCount % pageSize == 0 ? 0 : 1 );
 	       
 	        
-	        int startPage = (int)(TradeBoardCurrentPage/pageBlock) * pageBlock + 1;
+	        int startPage = (int)((TradeBoardCurrentPage-1)/pageBlock) * pageBlock + 1;
 	        int endPage = startPage +pageBlock- 1;
 	        
 	        //蹂댁뿬吏��뒗 �럹�씠吏�媛� 留덉�留� �럹�씠吏��씪寃쎌슦 留덉�留됲럹�씠吏��뒗 maxpage�씠�떎.

@@ -15,6 +15,7 @@
 	
 	<form method="post" action="TradeBoardWriteAction.do" name="TradeBoardForm" enctype="multipart/form-data">
 	<input type="hidden" name="board_id" value="${sessionScope.sessionID}">
+	
 	<table width="700" border="3" bordercolor="lightgray" align="center">
 		<tr>
 			<td id="title">작성자</td>

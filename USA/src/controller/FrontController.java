@@ -13,7 +13,11 @@ import action.Command;
 
 import action.mem.MemLoginProAction;
 import action.mem.MemWriteProAction;
+import action.tra.TradeBoardDetailAction;
+import action.tra.TradeBoardDownloadAction;
 import action.tra.TradeBoardListAction;
+import action.tra.TradeBoardModifyFormAction;
+import action.tra.TradeBoardModifyProAction;
 import action.tra.TradeBoardWriteAction;
 
 @WebServlet("*.do")
@@ -35,11 +39,12 @@ public class FrontController extends HttpServlet implements Process{
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
 		
+		
 
 		String nextPage = "";
 
 		Command command = null;
-		System.out.println(com);
+		System.out.println(com +"이퀄 비교");
 
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
 		if(com == null && com.length() <= 0) {
@@ -76,15 +81,41 @@ public class FrontController extends HttpServlet implements Process{
 		
 		//글쓰기 완료 누르면 실행
 		}else if(com.equals("view/tra/TradeBoardWriteAction.do")) {
-			
-			
 			nextPage=new TradeBoardWriteAction().execute(request, response);
+		
+		//글 자세히 보기
+		}else if(com.equals("view/tra/content.do")) {
+			
+			
+			
+			
+			nextPage=new TradeBoardDetailAction().execute(request, response);
+		//다운로드 처리
+		}else if(com.equals("view/tra/FileDownload.do")) {
+			
+			new TradeBoardDownloadAction().execute(request, response);
+			
+			
+			System.out.println("들르나요?");
+		
+			
+			//수정 눌렀을떄
+		}else if(com.equals("view/tra/TradeBoardModifyFormAction.do")) {
+			nextPage=new TradeBoardModifyFormAction().execute(request, response);
+			
+			
+			//수정 완료할떄
+		}else if(com.equals("view/tra/TradeBoardModifyProAction.do")) {
+			
+			nextPage=new TradeBoardModifyProAction().execute(request, response);
+			
 		}
 
-		
+		if(nextPage!=null&&nextPage!="") {
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
+		
 		dis.forward(request, response);
-		 
+		}
 
 
 	}
