@@ -27,12 +27,12 @@
 		
 		
 		$.ajax({
-			type : "post",
+			type : "get",
 			async : false,
-			datatype : "xml",
-			url:"https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=20190806&data=AP01",
+			datatype : "text",
+			url:"../../money.do",
 			success : function(data) {
-				alert("aaaaa");
+				alert(data);
 				
 			}
 		});

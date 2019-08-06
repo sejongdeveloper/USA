@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import action.main.MoneyAction;
 import action.mem.MemDelProAction;
 import action.mem.MemIdProAction;
 import action.mem.MemIdValidateAction;
@@ -103,7 +104,11 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("memIdValidate.do")) {
 			new MemIdValidateAction().execute(request, response);
 			return;
-		} 
+		// 환율 	
+		} else if(com.equals("money.do")) {
+			MoneyAction.execute(request, response);
+			return;
+		}
 		
 		System.out.println("view로 이동합니다.");
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
