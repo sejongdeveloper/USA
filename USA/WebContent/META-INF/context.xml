@@ -6,7 +6,7 @@
     		description="Employees Database for HR Applications"
 
 
-    		username="usa"
+    		username="kim"
 
     		password="oracle"
     		driverClassName="oracle.jdbc.driver.OracleDriver"

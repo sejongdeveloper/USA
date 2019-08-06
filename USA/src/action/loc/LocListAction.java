@@ -13,13 +13,15 @@ import model.loc.LocDAO;
 public class LocListAction implements Command {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LocDAO dao = LocDAO.getInstance();
 		
 		String loc_regName = request.getParameter("loc_regname");
 		HashMap<String, String> loc_nameFileList = dao.getLocName(loc_regName);
 		
 		request.setAttribute("loc_nameFileList", loc_nameFileList);
+		
+		return "view/loc/locList.jsp";
 	}
 	
 }

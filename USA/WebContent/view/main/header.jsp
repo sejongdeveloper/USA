@@ -8,37 +8,52 @@
 <meta charset="	UTF-8">
 <title>Header</title>
 <style type="text/css">
-    .header {   
-        width: 680px;
-        height: 500px;
-        position: absolute;
-        top: 0px;
-        left: 210px; 
-        text-decoration: none;
-    }
+	a {
+		text-decoration: none;
+	}
+	td > a {
+		color: white;
+	}
+	.headcontent {
+		font-size: 10px;
+	}
+	.header {
+		background-color: black;
+		height: 10px;
+		width: 100%;
+		margin: auto;
+		text-align: center;
+	}
+	.headside {
+		width: 20%;
+	}
+	.headcenter {
+		width: 15%;
+	}
+	.signin {
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		font-size: 10px;
+		text-decoration: none;
+		color: gray;
+	}
 </style>
 </head>
 <body>
-	<!-- 헤더 영역입니다. -->
-	<div class="header">
-
-	<table align="center" bgcolor="black" width="680">
-	
-	<tr>
-		<td><a href=""><font color="white" size="4"><span style="font-weight:bold" />
-			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; site title</font></a></td>
-		<td><a href=""><font color="white" size="2">&nbsp; Information &nbsp;</font></a></td>
-		<td><a href=""><font color="white" size="2">&nbsp; Community &nbsp;</font></a></td>
-		<td><a href=""><font color="white" size="2">&nbsp; Event &nbsp;</font></a></td>
-		<td><a href=""><font color="gray" size="1.5">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-		 &nbsp; Sign In</font></a></td>
-	</tr>
-	
+	<table class=header>
+		<tr>
+			<td class="headside">&nbsp;</td>
+			<td class="headcenter"><a href="">site title</a></td>
+			<td class="headcenter"><a href="" class="headcontent">Information</a></td>
+			<td class="headcenter"><a href="" class="headcontent">Community</a></td>
+			<td class="headcenter"><a href="" class="headcontent">Event</a></td>
+			<td class="headside">&nbsp;</td>
+		</tr>
 	</table>
-	</div>
+	<div><a href="" class="signin">Sign In</a></div>
 </body>
 </html>
-
 
 
 
