@@ -80,17 +80,24 @@ create table regName(
     regName varchar2(120) constraint regName_pk primary key -- 지역이름PK
 );
 
+-----------------
+--지역이름 테이블
+-----------------
+create table regName(
+    regName varchar2(120) constraint regName_pk primary key -- 지역이름PK
+);
+
 ----------------
 --지역(주) 테이블
 ----------------
 create table reg(
     reg_num number constraint reg_num_pk primary key, -- 번호PK
-
     reg_name varchar2(120) constraint reg_reg_Name_fk references regName(regName), -- 지역이름
     reg_subject varchar2(300), -- 제목
     reg_contents varchar2(4000), -- 내용
     reg_filename varchar2(520) -- 파일이름
 );
+CREATE SEQUENCE reg_num;
 
 ------------
 --관광 테이블
@@ -99,10 +106,8 @@ create table loc(
     loc_name varchar2(120) constraint loc_name_pk primary key, -- 관광이름
     loc_contents varchar2(4000), -- 내용
     loc_filename varchar2(520), -- 파일이름
-
-    loc_regname number constraint loc_regname_fk references reg(regName) -- 지역이름FK
+    loc_regname varchar2(120) constraint loc_regname_fk references regName(regName) -- 지역이름FK
 );
-
 
 ------------
 --리뷰 테이블
@@ -116,3 +121,4 @@ create table rev(
     rev_score number, -- 평점
     rev_locname varchar2(120) references loc(loc_name) -- 관광이름FK
 );
+CREATE SEQUENCE rev_num;

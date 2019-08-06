@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dbclose.util.CloseUtil;
+
 public class RevDAO {
 
 	private static RevDAO instance = new RevDAO();
@@ -23,7 +25,7 @@ public class RevDAO {
 	
 	public Connection getConnection() throws Exception {
 		Context initCtx = new InitialContext();
-		DataSource ds = (DataSource)initCtx.lookup("java:comp/env/jdbc/BoardDB");
+		DataSource ds = (DataSource)initCtx.lookup("java:comp/env/jdbc/USADB");
 		
 		return ds.getConnection();
 	}
@@ -34,7 +36,7 @@ public class RevDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<RevVO> list = new ArrayList<RevVO>();
-		String sql = "SELECT REV_NUM, REV_DATE, REV_WRITER, CONTENTS, REV_SCORE FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1";
+		String sql = "SELECT REV_NUM, REV_DATE, REV_WRITER, REV_CONTENTS, REV_SCORE FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1";
 		
 		try {
 			conn = getConnection();
@@ -54,6 +56,8 @@ public class RevDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return list;
@@ -70,12 +74,15 @@ public class RevDAO {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rev_locname);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) count = rs.getInt(1);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return count;
@@ -101,6 +108,8 @@ public class RevDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return avg;
@@ -112,7 +121,7 @@ public class RevDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-		String sql = "SELECT REV_SCORE, COUNT(*) FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1";
+		String sql = "SELECT REV_SCORE, COUNT(*) FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1 GROUP BY REV_SCORE";
 		
 		try {
 			conn = getConnection();
@@ -126,6 +135,8 @@ public class RevDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return map;
@@ -159,6 +170,8 @@ public class RevDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return result;
@@ -186,6 +199,8 @@ public class RevDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return vo;
@@ -208,6 +223,8 @@ public class RevDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return result;
@@ -228,6 +245,8 @@ public class RevDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return result;

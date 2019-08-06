@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import action.loc.LocListAction;
 import action.loc.LocViewAction;
 import action.mem.MemDelProAction;
 import action.mem.MemIdProAction;
@@ -19,6 +20,7 @@ import action.mem.MemPwdProAction;
 import action.mem.MemUpdateFromAction;
 import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
+import action.reg.RegMainAction;
 import action.reg.RegViewAction;
 
 @WebServlet("*.do")
@@ -39,7 +41,9 @@ public class FrontController extends HttpServlet implements Process{
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
-		System.out.println("com : " + com);
+		
+		System.out.println("com: "+com);
+		
 		String nextPage = "";
 
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
@@ -47,18 +51,20 @@ public class FrontController extends HttpServlet implements Process{
 			// 예시입니다.
 			nextPage = "/index.jsp";
 		
-		} if(com.equals("view/reg/regView.do")) {
+		} 
+		if(com.equals("view/reg/regMain.do")) {
+			nextPage = new RegMainAction().execute(request, response);
+		} else if(com.equals("view/reg/regView.do")) {
 			nextPage = new RegViewAction().execute(request, response);
+		} else if(com.equals("view/reg/locList.do")) {
+			nextPage = new LocListAction().execute(request, response);
 		} else if(com.equals("view/loc/locView.do")) {
 			nextPage = new LocViewAction().execute(request, response);
 		}
-	
-		String path = request.getContextPath();
-		System.out.println("path:" + path);
-		System.out.println("nextPage : " + nextPage);
+		System.out.println("nextPage: "+nextPage);
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
-		 
+		
 	}
 
 }

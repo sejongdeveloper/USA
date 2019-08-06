@@ -9,11 +9,9 @@
 <title>JSP</title>
 </head>
 <body>
-<div class="locView_loc">
-	<div class="locView_picture">사진</div>
-	<div class="locView_locname">관광명소</div>
-	<div class="locView_contents">설명</div>
-</div>
-<div class="locView_rev">리뷰영역</div>
+<div class="loclist locList_reg">${ loc_regname }</div>
+<c:forEach items="loc_nameFileList" var="picture">
+<div class="loclist locList_list">사진<div class="locList_locname">내용</div></div>
+</c:forEach>
 </body>
 </html>

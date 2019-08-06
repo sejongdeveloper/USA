@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import dbclose.util.CloseUtil;
 
 public class LocDAO {
 	
@@ -22,17 +23,17 @@ public class LocDAO {
 	
 	public Connection getConnection() throws Exception {
 		Context initCtx = new InitialContext();
-		DataSource ds = (DataSource)initCtx.lookup("java:comp/env/jdbc/BoardDB");
+		DataSource ds = (DataSource)initCtx.lookup("java:comp/env/jdbc/USADB");
 		
 		return ds.getConnection();
 	}
 	
 	// 관광명소 이름, 사진 가져오기
-	public HashMap<String, String> getLocName(String loc_regname) {
+	public ArrayList<LocVO> getLocName(String loc_regname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		HashMap<String, String> map = new HashMap<String, String>();
+		ArrayList<LocVO> list = new ArrayList<LocVO>();
 		String sql = "SELECT LOC_NAME, LOC_FILENAME FROM LOC WHERE LOC_REGNAME = ?";
 		
 		try {
@@ -42,16 +43,19 @@ public class LocDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String loc_name = rs.getString(rs.getString("LOC_NAME"));
-				String loc_filename = rs.getString(rs.getString("LOC_FILENAME"));
-				map.put(loc_name, loc_filename);
+				LocVO vo = new LocVO();
+				vo.setLoc_name((rs.getString("LOC_NAME")));
+				vo.setLoc_filename((rs.getString("LOC_FILENAME")));
+				list.add(vo);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
-		return map;
+		return list;
 	}
 	
 	// 관광명소 데이터 가져오기
@@ -60,7 +64,7 @@ public class LocDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<LocVO> list = new ArrayList<LocVO>();
-		String sql = "SELECT lOC_NAME, LOC_CONTENTS, LOC_FILENAME FROM REG WHERE LOC_NAME = ?";
+		String sql = "SELECT LOC_NAME, LOC_CONTENTS, LOC_FILENAME FROM LOC WHERE LOC_NAME = ?";
 		
 		try {
 			conn = getConnection();
@@ -78,6 +82,8 @@ public class LocDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return list;
