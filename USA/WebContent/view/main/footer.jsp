@@ -9,15 +9,17 @@
 <title>Footer</title>
 <style type="text/css">
 	.footer {
-		width: 100%;
-		/* height: 300px; */
+		width: 680px;
+		height: 300px;
 		position: absolute;
 		top: 900px;
-		left: 0px;
+		left: 210px;
 	}
 </style>
 </head>
 <body>
+
+	<!-- 풋터영역입니다. -->
 	<div class="footer">
 
 		<table align="center" bgcolor="gray" width="680">
@@ -36,7 +38,7 @@
 						69 서울YMCA건물 7층</font></td>
 			</tr>
 			<tr>
-				<td><font color="white" size="2">@ 전화번호 : 02) 722 - 1481<br></font></td>
+				<td><font color="white" size="2">@ 전화번호 : 02) 722 - 1481</font></td>
 			</tr>
 
 		</table>

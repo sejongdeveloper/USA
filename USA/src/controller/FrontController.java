@@ -18,10 +18,8 @@ import action.mem.MemPwdProAction;
 import action.mem.MemUpdateFromAction;
 import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
-import action.tra.TradeBoardListAction;
-import action.tra.TradeBoardWriteAction;
 
-@WebServlet("gg")
+@WebServlet("*.do")
 public class FrontController extends HttpServlet implements Process{
 	private static final long serialVersionUID = 1L;
 
@@ -36,7 +34,6 @@ public class FrontController extends HttpServlet implements Process{
 	@Override
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("컨트롤러에 오신걸 환영합니다 ^^");
-		request.setCharacterEncoding("utf-8");
 		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
@@ -103,26 +100,10 @@ public class FrontController extends HttpServlet implements Process{
 		// 로그인 유효성 검사
 		} else if(com.equals("memIdValidate.do")) {
 			new MemIdValidateAction().execute(request, response);
+		} 
 	
-			String path = request.getContextPath();
-			System.out.println("path:" + path);
-			//리스트
-		}else if(com.equals("view/tra/list.do")) {
-		nextPage=new TradeBoardListAction().execute(request, response);
-		System.out.println("list");
-		
-		//글쓰기 누르면 글쓰기폼이 나옴
-		}else if (com.equals("view/tra/writeForm.do")) {
-			nextPage= "/view/tra/WriteForm.jsp";
-		
-		//글쓰기 완료 누르면 실행
-		}else if(com.equals("view/tra/TradeBoardWriteAction.do")) {
-			
-			
-			nextPage=new TradeBoardWriteAction().execute(request, response);
-		}
-
-		
+		String path = request.getContextPath();
+		System.out.println("path:" + path);
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
 		 

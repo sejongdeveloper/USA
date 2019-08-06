@@ -55,17 +55,17 @@ public class LocDAO {
 	}
 	
 	// 관광명소 데이터 가져오기
-	public ArrayList<LocVO> getLocContents(String loc_name){
+	public ArrayList<LocVO> getLocContents(String loc_regname){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<LocVO> list = new ArrayList<LocVO>();
-		String sql = "SELECT lOC_NAME, LOC_CONTENTS, LOC_FILENAME FROM REG WHERE LOC_NAME = ?";
+		String sql = "SELECT lOC_NAME, LOC_CONTENTS, LOC_FILENAME FROM REG WHERE LOC_REGNAME = ?";
 		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, loc_name);
+			pstmt.setString(1, loc_regname);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -83,4 +83,14 @@ public class LocDAO {
 		return list;
 	}
 	
+	// 관광명소 리뷰 등록
+	public int insert(LocVO vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT lOC_NAME, LOC_CONTENTS, LOC_FILENAME FROM REG WHERE LOC_REGNAME = ?";
+		
+		
+		return 0;
+	}
 }

@@ -44,7 +44,7 @@ public class TradeBoardDAO {
 	public int getBoardListCount(HashMap<String, Object> listOpt)
     {
         int result = 0;
-        String opt = (String)listOpt.get("opt"); // 검색조건
+        String opt = (String)listOpt.get("opt"); // 검색옵션(제목, 내용, 글쓴이 등..)
         String condition = (String)listOpt.get("condition"); // 검색내용
         
         
@@ -52,15 +52,15 @@ public class TradeBoardDAO {
             conn = getConnection();
             StringBuffer sql = new StringBuffer();
             
-            if(opt == null)   //일반검색
+            if(opt == null)    // 전체글의 개수
             {
                 sql.append("select count(*) from MEMBER_BOARD");
                 pstmt = conn.prepareStatement(sql.toString());
                 
-                //스트링버퍼 비워주는 명령어.
+                // StringBuffer를 비운다.
                 sql.delete(0, sql.toString().length());
             }
-            else if(opt.equals("0")) // 제목검색
+            else if(opt.equals("0")) // 제목으로 검색한 글의 개수
             {
                 sql.append("select count(*) from MEMBER_BOARD where BOARD_SUBJECT like ?");
                 pstmt = conn.prepareStatement(sql.toString());
@@ -68,7 +68,7 @@ public class TradeBoardDAO {
                 
                 sql.delete(0, sql.toString().length());
             }
-            else if(opt.equals("1")) // 내용검색
+            else if(opt.equals("1")) // 내용으로 검색한 글의 개수
             {
                 sql.append("select count(*) from MEMBER_BOARD where BOARD_CONTENT like ?");
                 pstmt = conn.prepareStatement(sql.toString());
@@ -76,7 +76,7 @@ public class TradeBoardDAO {
                 
                 sql.delete(0, sql.toString().length());
             }
-            else if(opt.equals("2")) // 제목+내용검색
+            else if(opt.equals("2")) // 제목+내용으로 검색한 글의 개수
             {
                 sql.append("select count(*) from MEMBER_BOARD ");
                 sql.append("where BOARD_SUBJECT like ? or BOARD_CONTENT like ?");
@@ -86,7 +86,7 @@ public class TradeBoardDAO {
                 
                 sql.delete(0, sql.toString().length());
             }
-            else if(opt.equals("3")) // 글쓴이 검색
+            else if(opt.equals("3")) // 글쓴이로 검색한 글의 개수
             {
                 sql.append("select count(*) from MEMBER_BOARD where BOARD_ID like ?");
                 pstmt = conn.prepareStatement(sql.toString());
@@ -123,7 +123,7 @@ public class TradeBoardDAO {
 	        try {
 	            conn = getConnection();
 	            
-	            // �옄�룞 而ㅻ컠�쓣 false濡� �븳�떎.
+	            // 자동 커밋을 false로 한다.
 	            conn.setAutoCommit(false);
 	            
 	            StringBuffer sql = new StringBuffer();
@@ -132,6 +132,7 @@ public class TradeBoardDAO {
 	            sql.append(", BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_COUNT, BOARD_DATE)");
 	            sql.append(" VALUES(?,?,?,?,?,?,?,?,?,sysdate)");
 	 
+	            // 시퀀스 값을 글번호와 그룹번호로 사용
 	            int num = vo.getBoard_num();
 	 
 	            pstmt = conn.prepareStatement(sql.toString());
@@ -148,7 +149,7 @@ public class TradeBoardDAO {
 	            int flag = pstmt.executeUpdate();
 	            if(flag > 0){
 	                result = true;
-	                //값이 참일떄만 저장후 커밋
+	                // 완료시 커밋
 	                conn.commit(); 
 	            }
 	            
@@ -175,28 +176,27 @@ public class TradeBoardDAO {
 	    } // end boardInsert();
 	    
 	    
-	    // 湲�紐⑸줉 媛��졇�삤湲�
+	    // 글목록 가져오기
 	    public ArrayList<TradeBoardVO> getBoardList(HashMap<String, Object> listOpt) throws UnsupportedEncodingException
 	    {
 	        ArrayList<TradeBoardVO> list = new ArrayList<TradeBoardVO>();
 	        
-	        String opt = (String)listOpt.get("opt"); // 조건
-	        String condition = (String)listOpt.get("condition"); // 내용
-	        int start = (Integer)listOpt.get("start"); // 시작글번호
-	        int end=5;         //한번에 보여줄  글번호
-	        int endNum=start+end-1;
-	        System.out.println(condition+"而⑤뵒�뀡 �엯�땲�떎.");
+	        String opt = (String)listOpt.get("opt"); // 검색옵션(제목, 내용, 글쓴이 등..)
+	        String condition = (String)listOpt.get("condition"); // 검색내용
+	        int start = (Integer)listOpt.get("start"); // 현재 페이지번호
+	        int end=4;         //한번에 보여줄 페이지
+	        System.out.println(condition+"컨디션 입니다.");
 	         try {
 	            conn = getConnection();
 	            StringBuffer sql = new StringBuffer();
 	            
-	            // 湲�紐⑸줉 �쟾泥대�� 蹂댁뿬以� �븣
+	            // 글목록 전체를 보여줄 때
 	            if(opt == null)
 	            {
-	                // BOARD_RE_REF(洹몃９踰덊샇)�쓽 �궡由쇱감�닚 �젙�젹 �썑 �룞�씪�븳 洹몃９踰덊샇�씪 �븣�뒗
-	                // BOARD_RE_SEQ(�떟蹂�湲� �닚�꽌)�쓽 �삤由꾩감�닚�쑝濡� �젙�젹 �븳 �썑�뿉
-	                // 10媛쒖쓽 湲��쓣 �븳 �솕硫댁뿉 蹂댁뿬二쇰뒗(start踰덉㎏ 遺��꽣 start+9源뚯�) 荑쇰━
-	                // desc : �궡由쇱감�닚, asc : �삤由꾩감�닚 ( �깮�왂 媛��뒫 )
+	                // BOARD_RE_REF(그룹번호)의 내림차순 정렬 후 동일한 그룹번호일 때는
+	                // BOARD_RE_SEQ(답변글 순서)의 오름차순으로 정렬 한 후에
+	                // 10개의 글을 한 화면에 보여주는(start번째 부터 start+9까지) 쿼리
+	                // desc : 내림차순, asc : 오름차순 ( 생략 가능 )
 	                sql.append("select * from ");
 	                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
 	                sql.append(", BOARD_CONTENT, BOARD_FILE, BOARD_COUNT, BOARD_RE_REF");
@@ -207,12 +207,12 @@ public class TradeBoardDAO {
 	                
 	                pstmt = conn.prepareStatement(sql.toString());
 	                pstmt.setInt(1, start);
-	                pstmt.setInt(2, endNum);
+	                pstmt.setInt(2, start+end);
 	                
-	                // StringBuffer瑜� 鍮꾩슫�떎.
+	                // StringBuffer를 비운다.
 	                sql.delete(0, sql.toString().length());
 	            }
-	            else if(opt.equals("0")) // �젣紐⑹쑝濡� 寃��깋
+	            else if(opt.equals("0")) // 제목으로 검색
 	            {
 	                sql.append("select * from ");
 	                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
@@ -226,11 +226,11 @@ public class TradeBoardDAO {
 	                pstmt = conn.prepareStatement(sql.toString());
 	                pstmt.setString(1, "%"+condition+"%");
 	                pstmt.setInt(2, start);
-	                pstmt.setInt(3, endNum);
+	                pstmt.setInt(3, start+end);
 	                
 	                sql.delete(0, sql.toString().length());
 	            }
-	            else if(opt.equals("1")) // �궡�슜�쑝濡� 寃��깋
+	            else if(opt.equals("1")) // 내용으로 검색
 	            {
 	                sql.append("select * from ");
 	                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
@@ -244,11 +244,11 @@ public class TradeBoardDAO {
 	                pstmt = conn.prepareStatement(sql.toString());
 	                pstmt.setString(1, "%"+condition+"%");
 	                pstmt.setInt(2, start);
-	                pstmt.setInt(3, endNum);
+	                pstmt.setInt(3, start+end);
 	                
 	                sql.delete(0, sql.toString().length());
 	            }
-	            else if(opt.equals("2")) // �젣紐�+�궡�슜�쑝濡� 寃��깋
+	            else if(opt.equals("2")) // 제목+내용으로 검색
 	            {
 	                sql.append("select * from ");
 	                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
@@ -263,11 +263,11 @@ public class TradeBoardDAO {
 	                pstmt.setString(1, "%"+condition+"%");
 	                pstmt.setString(2, "%"+condition+"%");
 	                pstmt.setInt(3, start);
-	                pstmt.setInt(4, endNum);
+	                pstmt.setInt(4, start+end);
 	                
 	                sql.delete(0, sql.toString().length());
 	            }
-	            else if(opt.equals("3")) // 湲��벖�씠濡� 寃��깋
+	            else if(opt.equals("3")) // 글쓴이로 검색
 	            {
 	                sql.append("select * from ");
 	                sql.append("(select rownum rnum, BOARD_NUM, BOARD_ID, BOARD_SUBJECT");
@@ -281,7 +281,7 @@ public class TradeBoardDAO {
 	                pstmt = conn.prepareStatement(sql.toString());
 	                pstmt.setString(1, "%"+condition+"%");
 	                pstmt.setInt(2, start);
-	                pstmt.setInt(3, endNum);
+	                pstmt.setInt(3, start+end);
 	                
 	                sql.delete(0, sql.toString().length());
 	            }
@@ -302,7 +302,7 @@ public class TradeBoardDAO {
 	                vo.setBoard_date(rs.getDate("BOARD_DATE"));
 	                list.add(vo);
 	            }
-	            System.out.println("daO�뱾由щ땲");
+	            System.out.println("daO들리니");
 	            
 	        } catch (Exception e) {
 	            throw new RuntimeException(e.getMessage());
@@ -320,11 +320,6 @@ public class TradeBoardDAO {
 	        
 	        return list;
 	    } // end getBoardList
-
-		public int getSeq() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
 	    
 	
 

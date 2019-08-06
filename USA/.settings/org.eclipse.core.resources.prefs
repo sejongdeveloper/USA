@@ -1,4 +1,3 @@
 eclipse.preferences.version=1
+
 encoding//WebContent/db/USA_travel_site.sql=UTF-8
-encoding//src/action/tra/TradeBoardListAction.java=UTF-8
-encoding//src/model/tra/TradeBoardDAO.java=UTF-8

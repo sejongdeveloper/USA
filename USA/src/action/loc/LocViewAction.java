@@ -17,10 +17,10 @@ import model.loc.RevVO;
 public class LocViewAction implements Command {
 
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String loc_name = request.getParameter("loc_name");
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String loc_regname = request.getParameter("loc_regname");
 		LocDAO locdao = LocDAO.getInstance();
-		ArrayList<LocVO> loc_list = locdao.getLocContents(loc_name);
+		ArrayList<LocVO> loc_list = locdao.getLocContents(loc_regname);
 		
 		request.setAttribute("loc_list", loc_list);
 		
@@ -39,8 +39,6 @@ public class LocViewAction implements Command {
 		request.setAttribute("rev_count2", rev_eachCount.get(2));
 		request.setAttribute("rev_count1", rev_eachCount.get(1));
 		request.setAttribute("rev_list", rev_list);
-		
-		return "view/loc/locView?loc_name=" + loc_name;
 	}
 
 }
