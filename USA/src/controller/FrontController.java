@@ -48,7 +48,9 @@ public class FrontController extends HttpServlet implements Process{
 			
 		// 회원가입 폼
 		} else if(com.equals("memWriterForm.do")) {
-			nextPage = "/view/mem/memWrite.jsp";
+			nextPage = "view/mem/memWrite.jsp";
+			response.sendRedirect(nextPage);
+			return;
 			
 		// 회원가입 실행	
 		} else if(com.equals("memWritePro.do")) {
@@ -100,10 +102,10 @@ public class FrontController extends HttpServlet implements Process{
 		// 로그인 유효성 검사
 		} else if(com.equals("memIdValidate.do")) {
 			new MemIdValidateAction().execute(request, response);
+			return;
 		} 
-	
-		String path = request.getContextPath();
-		System.out.println("path:" + path);
+		
+		System.out.println("view로 이동합니다.");
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
 		 
