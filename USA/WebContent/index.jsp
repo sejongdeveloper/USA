@@ -9,15 +9,14 @@
 <title>Index</title>
 </head>
 <body>
-
+<c:set var="path" value=""/>
 <header>
 	<jsp:include page="view/headfoot/header.jsp" flush="false" />
 </header>
-
 <section>
 <c:choose>
 	<c:when test="${empty contents }">
-		<jsp:include page="view/main/main.jsp" flush="false" />
+		<jsp:include page="/view/main/main.jsp" flush="false" />
 	</c:when>
 	
 	<c:otherwise>
