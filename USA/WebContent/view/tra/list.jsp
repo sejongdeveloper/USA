@@ -51,7 +51,6 @@ ${condition } 컨디션있니
 		<tr height="30">
 			<td align="center" width="50">
 				<c:out value="${ list.board_num }" />
-				<c:set  var="number"   value="${ listCount - 1 }" />
 			</td>
 			<td width="250">
 			
@@ -75,22 +74,29 @@ ${condition } 컨디션있니
 </c:if>  
   
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <c:if test="${ listCount > 0 }"> <!--  전체 페이지의 수를 연산 -->
-	    <c:set  var="pageCount"  value="${ listCount / pageSize + (listCount % pageSize ==0 ? 0 : 1) }" />
-		<c:set  var="startPage"  value="${ 1 }" />  <!-- 차후 수정!! -->
 		<c:set  var="pageBlock"  value="${ 2 }" />
 		
 		
-	 	<fmt:parseNumber var="result"  value="${ spage / pageBlock }" integerOnly="true" />
-		<c:if  test="${ spage % pageBlock != 0 }" > 
-			<c:set var="startPage" value="${ result * pageBlock + 1 }" />
-		</c:if>
 		
-		<c:if  test="${ spage % pageBlock == 0 }" > 
-			<c:set var="startPage" value="${ (result - 1) * pageBlock + 1 }" />
-		</c:if>
 		
-		<c:set  var="endPage"  value="${ startPage + pageBlock -1 }" />
 
 		<c:if test="${ endPage > pageCount }" >
 			<c:set  var="endPage"  value="${ pageCount }" />
@@ -98,7 +104,7 @@ ${condition } 컨디션있니
 		
 		<c:choose>
 		<c:when test="${opt!=null }">
-		<c:if test="${startPage >2 }" >
+		<c:if test="${startPage >5 }" >
 			<a href="list.do?page=${ startPage-1  }&condition=${condition}&opt=${opt}">[이전] </a>
 		</c:if>
 
@@ -107,11 +113,11 @@ ${condition } 컨디션있니
 	   </c:forEach>
 	
 	<c:if test="${ endPage < pageCount }" >
-		<a href="list.do?page=${ startPage+2 }&condition=${condition}&opt=${opt}">[다음] </a>
+		<a href="list.do?page=${ startPage+pageBlock }&condition=${condition}&opt=${opt}">[다음] </a>
 	</c:if>
 	</c:when>
 	<c:when test="${opt==null }">
-		<c:if test="${startPage >2 }" >
+		<c:if test="${startPage >5 }" >
 			<a href="list.do?page=${ startPage-1  }">[이전] </a>
 		</c:if>
 
@@ -120,7 +126,7 @@ ${condition } 컨디션있니
 	   </c:forEach>
 	
 	<c:if test="${ endPage < pageCount }" >
-		<a href="list.do?page=${ startPage+2 }">[다음] </a>
+		<a href="list.do?page=${ startPage+pageBlock }">[다음] </a>
 	</c:if>
 	
 	
