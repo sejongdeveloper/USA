@@ -96,7 +96,7 @@
 		</div>
 	</div>
 	<div data-obj-type="group" data-obj-id="ZuBAc" class=""
-		style="position: absolute; left: 805px; top: 75px; width: 100px; height: 200px;">
+		style="position: absolute; left: 800px; top: 60px; width: 100px; height: 200px;">
 		<div data-obj-id="oXdsL" data-obj-type="element"
 			data-text-editable="true" class=""
 			style="position: absolute; top: 0px; left: 0px; width: 70px; height: 70px;">

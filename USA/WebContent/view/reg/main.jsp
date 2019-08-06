@@ -33,9 +33,9 @@
 			</div>
 			<div data-obj-id="A5pgR" data-obj-type="element"
 				data-text-editable="true" class=""
-				style="position: absolute; top: 5px; left: 120px; width: 150px; height: 120px;">
+				style="position: absolute; top: 7px; left: 120px; width: 150px; height: 120px;">
 				<div data-text-content="true"
-					style="font-size: 9.5px; text-align: center;" class="">
+					style="font-size: 9px; text-align: center;" class="">
 					<p>날씨</p>
 					<p>날씨 정보</p>
 				</div>
@@ -51,9 +51,9 @@
 			</div>
 			<div data-obj-id="z0kjB" data-obj-type="element"
 				data-text-editable="true" class=""
-				style="position: absolute; top: 5px; left: 175px; width: 150px; height: 120px;">
+				style="position: absolute; top: 7px; left: 175px; width: 150px; height: 120px;">
 				<div data-text-content="true"
-					style="font-size: 9.5px; text-align: center;" class="">
+					style="font-size: 9px; text-align: center;" class="">
 					<p>시차</p>
 					<p>시차 정보</p>
 				</div>
@@ -69,9 +69,9 @@
 			</div>
 			<div data-obj-id="BlTVL" data-obj-type="element"
 				data-text-editable="true" class=""
-				style="position: absolute; top: 5px; left: 230px; width: 150px; height: 120px;">
+				style="position: absolute; top: 7px; left: 230px; width: 150px; height: 120px;">
 				<div data-text-content="true"
-					style="font-size: 9.5px; text-align: center;" class="">
+					style="font-size: 9px; text-align: center;" class="">
 					<p>비행시간</p>
 					<p>비행 정보</p>
 				</div>
@@ -101,14 +101,14 @@
 			</div>
 			<div data-obj-id="lHW8N" data-obj-type="element"
 				data-text-editable="true" class=""
-				style="position: absolute; top: 23px; left: 46.5px; width: 111px; height: 30px;">
+				style="position: absolute; top: 2px; left: 1px; width: 80px; height: 20px;">
 				<div data-text-content="true"
-					style="font-weight: bold; font-size: 20px; text-align: center; line-height: 1.4em;"
+					style="font-weight: bold; font-size: 10px; text-align: center; line-height: 1.4em;"
 					class="">더 많은 정보</div>
 			</div>
 			<div data-obj-id="i0Saf" data-obj-type="element"
 				data-text-editable="true" class=""
-				style="position: absolute; top: 0px; left: 0px; width: 204px; height: 210px;">
+				style="position: absolute; top: 0px; left: 0px; width: 15px; height: 200px;">
 				<div data-text-content="true"
 					style="border-radius: 25%; background-color: rgba(224, 224, 224, 0.27);"></div>
 			</div>
@@ -124,9 +124,9 @@
 				</div>
 				<div data-obj-id="hW0T2" data-obj-type="element"
 					data-text-editable="true" class=""
-					style="position: absolute; top: 200px; left: 5px; width: 615px; height: 42px;">
+					style="position: absolute; top: 78px; left: 14.5px; width: 600px; height: 40px;">
 					<div data-text-content="true"
-						style="font-size: 14px; line-height: 1.5em; text-align: center;"
+						style="font-size: 8px; line-height: 1.5em; text-align: center;"
 						class="" spellcheck="false">
 						뉴욕
 						<div>
@@ -169,7 +169,7 @@
 		</div>
 		<!--  -->
 		<div data-obj-type="group" data-obj-id="ZuBAc" class=""
-		style="position: absolute; left: 805px; top: 60px; width: 100px; height: 200px;">
+		style="position: absolute; left: 800px; top: 60px; width: 100px; height: 200px;">
 		<div data-obj-id="oXdsL" data-obj-type="element"
 			data-text-editable="true" class=""
 			style="position: absolute; top: 0px; left: 0px; width: 70px; height: 70px;">
