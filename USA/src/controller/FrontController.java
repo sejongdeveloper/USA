@@ -3,14 +3,16 @@
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import action.Command;
+import action.mem.MemDelProAction;
+import action.mem.MemIdProAction;
+import action.mem.MemIdValidateAction;
+import action.mem.MemLoginFormAction;
 import action.mem.MemLoginProAction;
 import action.mem.MemPwdProAction;
 import action.mem.MemUpdateFromAction;
@@ -101,10 +103,9 @@ public class FrontController extends HttpServlet implements Process{
 		// 로그인 유효성 검사
 		} else if(com.equals("memIdValidate.do")) {
 			new MemIdValidateAction().execute(request, response);
-		} 
 	
-		String path = request.getContextPath();
-		System.out.println("path:" + path);
+			String path = request.getContextPath();
+			System.out.println("path:" + path);
 			//리스트
 		}else if(com.equals("view/tra/list.do")) {
 		nextPage=new TradeBoardListAction().execute(request, response);
