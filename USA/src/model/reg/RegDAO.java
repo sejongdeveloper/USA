@@ -62,21 +62,24 @@ public class RegDAO {
 	}
 	
 	// 해당하는 지역테이블 파일명 가져오기
-	public ArrayList<String> getRegFileName(String reg_name) {
+	public ArrayList<RegVO> getRegFileName(String regname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<String> list = new ArrayList<String>();
-		String sql = "SELECT REG_FILENAME FROM REG WHERE REG_NAME = ?";
+		ArrayList<RegVO> list = new ArrayList<RegVO>();
+		String sql = "SELECT REG_FILENAME, REG_NAME FROM REG WHERE REG_NAME = ?";
 		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, reg_name);
+			pstmt.setString(1, regname);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				list.add(rs.getString("reg_filename"));
+				RegVO vo = new RegVO();
+				vo.setReg_name(rs.getString("REG_NAME"));
+				vo.setReg_filename(rs.getString("REG_FILENAME"));
+				list.add(vo);
 			}
 			
 		} catch (Exception e) {

@@ -14,26 +14,15 @@ public class LocDeleteProAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String loc_name = request.getParameter("loc_name");
 		RevDAO dao = RevDAO.getInstance();
 		int rev_num = Integer.parseInt(request.getParameter("rev_num"));
 		
 		int result = dao.delete(rev_num);
-		if(result > 0) {
-			PrintWriter out=response.getWriter();
-	   		out.println("<script>");
-	   		out.println("alert('삭제 성공');");
-	   		out.println("</script>");
-	   		out.close();
-		} else {
-			PrintWriter out=response.getWriter();
-	   		out.println("<script>");
-	   		out.println("alert('삭제 실패');");
-	   		out.println("</script>");
-	   		out.close();
-		}
 		
-		return "view/loc/locView.do?loc_name="+loc_name;
+		String rev_locname = request.getParameter("loc_name");
+		request.setAttribute("loc_name", rev_locname);
+		
+		return "/view/reg/locView.do";
 	}
 
 }

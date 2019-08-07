@@ -17,39 +17,30 @@ public class LocWriteProAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String loc_name = request.getParameter("loc_name");
+		request.setCharacterEncoding("UTF-8");
+		String path = request.getContextPath();
 		RevDAO dao = RevDAO.getInstance();
 		RevVO vo = new RevVO();
-		
+
 		HttpSession session = request.getSession();
-		String rev_writer = (String)session.getAttribute("member");
-		String loc_contents = request.getParameter("loc_contents");
+		String rev_writer = "조규민";
+//				(String)session.getAttribute("member");
+		String rev_contents = request.getParameter("rev_contents");
 		int rev_score = Integer.parseInt(request.getParameter("rev_score"));
-		String rev_locname = request.getParameter("rev_locname");
+		String rev_locname = request.getParameter("loc_name");
 		
 		vo.setRev_date(new Timestamp(System.currentTimeMillis()));
 		vo.setRev_writer(rev_writer);
-		vo.setRev_contents(loc_contents);
+		vo.setRev_contents(rev_contents);
 		vo.setRev_alive(1);
 		vo.setRev_score(rev_score);
 		vo.setRev_locname(rev_locname);
 		
 		int result = dao.insert(vo);
-		if(result > 0) {
-			PrintWriter out=response.getWriter();
-	   		out.println("<script>");
-	   		out.println("alert('등록 성공');");
-	   		out.println("</script>");
-	   		out.close();
-		} else {
-			PrintWriter out=response.getWriter();
-	   		out.println("<script>");
-	   		out.println("alert('등록 실패');");
-	   		out.println("</script>");
-	   		out.close();
-		}
 		
-		return "view/loc/locView.do?loc_name="+loc_name;
+		request.setAttribute("loc_name", rev_locname);
+		
+		return "/view/loc/locView.do";
 	}
 
 }

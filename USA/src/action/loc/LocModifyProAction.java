@@ -15,27 +15,16 @@ public class LocModifyProAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String loc_name = request.getParameter("loc_name");
 		RevDAO dao = RevDAO.getInstance();
 		int rev_num = Integer.parseInt(request.getParameter("rev_num"));
 		RevVO vo = dao.getUpdateVO(rev_num);
 		
 		int result = dao.update(vo);
-		if(result > 0) {
-			PrintWriter out=response.getWriter();
-	   		out.println("<script>");
-	   		out.println("alert('수정 성공');");
-	   		out.println("</script>");
-	   		out.close();
-		} else {
-			PrintWriter out=response.getWriter();
-	   		out.println("<script>");
-	   		out.println("alert('수정 실패');");
-	   		out.println("</script>");
-	   		out.close();
-		}
 		
-		return "view/loc/locView.do?loc_name="+loc_name;
+		String rev_locname = request.getParameter("loc_name");
+		request.setAttribute("loc_name", rev_locname);
+		
+		return "/view/reg/locView.do";
 	}
 
 }

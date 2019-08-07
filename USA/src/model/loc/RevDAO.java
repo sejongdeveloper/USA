@@ -49,7 +49,7 @@ public class RevDAO {
 				vo.setRev_num(rs.getInt("REV_NUM"));
 				vo.setRev_date(rs.getTimestamp("REV_DATE"));
 				vo.setRev_writer(rs.getString("REV_WRITER"));
-				vo.setRev_contents(rs.getString("CONTENTS"));
+				vo.setRev_contents(rs.getString("REV_CONTENTS"));
 				vo.setRev_score(rs.getInt("REV_SCORE"));
 				list.add(vo);
 			}
@@ -88,12 +88,12 @@ public class RevDAO {
 		return count;
 	}
 	
-	// 관광명소 삭제 안된 리뷰 총 평점
+	// 관광명소 삭제 안된 리뷰 총 평점 가져오기
 	public double getAllScore(String rev_locname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT AVG(*) FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1";
+		String sql = "SELECT AVG(REV_SCORE) FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1";
 		double avg = 0;
 		
 		try {
@@ -113,6 +113,32 @@ public class RevDAO {
 		}
 		
 		return avg;
+	}
+	
+	// 지역의 모든 관광명소 삭제 안된 리뷰 총 평점 가져오기
+	public ArrayList<Double> getAllLocScore() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Double> list = new ArrayList<Double>();
+		String sql = "SELECT AVG(REV_SCORE) FROM REV GROUP BY REV_LOCNAME";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getDouble(1));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		}
+		
+		return list;
 	}
 	
 	// 관광명소 삭제 안된 리뷰 각 점수 개수

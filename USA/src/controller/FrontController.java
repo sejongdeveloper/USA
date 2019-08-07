@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import action.loc.LocDeleteProAction;
 import action.loc.LocListAction;
+import action.loc.LocModifyProAction;
 import action.loc.LocViewAction;
+import action.loc.LocWriteProAction;
 import action.mem.MemDelProAction;
 import action.mem.MemIdProAction;
 import action.mem.MemIdValidateAction;
@@ -58,8 +61,14 @@ public class FrontController extends HttpServlet implements Process{
 			nextPage = new RegViewAction().execute(request, response);
 		} else if(com.equals("view/reg/locList.do")) {
 			nextPage = new LocListAction().execute(request, response);
-		} else if(com.equals("view/loc/locView.do")) {
+		} else if(com.equals("view/reg/locView.do")) {
 			nextPage = new LocViewAction().execute(request, response);
+		} else if(com.equals("view/reg/locWritePro.do")) {
+			nextPage = new LocWriteProAction().execute(request, response);
+		} else if(com.equals("view/reg/locModifyPro.do")) {
+			nextPage = new LocModifyProAction().execute(request, response);
+		} else if(com.equals("view/reg/locDeletePro.do")) {
+			nextPage = new LocDeleteProAction().execute(request, response);
 		}
 		System.out.println("nextPage: "+nextPage);
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);

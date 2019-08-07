@@ -20,11 +20,11 @@ public class LocViewAction implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String loc_name = request.getParameter("loc_name");
 		LocDAO locdao = LocDAO.getInstance();
-		ArrayList<LocVO> loc_list = locdao.getLocContents(loc_name);
+		LocVO loc_data = locdao.getLocContents(loc_name);
+
+		request.setAttribute("loc_data", loc_data);
 		
-		request.setAttribute("loc_list", loc_list);
-		
-		String rev_locname = request.getParameter("rev_locname");
+		String rev_locname = request.getParameter("loc_name");
 		RevDAO revdao = RevDAO.getInstance();
 		int rev_allCount = revdao.getAllCount(rev_locname);
 		double rev_allScore = revdao.getAllScore(rev_locname);

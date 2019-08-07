@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<link rel="stylesheet" href="regstyle.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/view/reg/regstyle.css">
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 
 <!DOCTYPE html>
