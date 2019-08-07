@@ -17,7 +17,7 @@ import model.loc.RevVO;
 public class LocViewAction implements Command {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String loc_regname = request.getParameter("loc_regname");
 		LocDAO locdao = LocDAO.getInstance();
 		ArrayList<LocVO> loc_list = locdao.getLocContents(loc_regname);

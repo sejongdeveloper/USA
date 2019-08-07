@@ -14,7 +14,7 @@
 </c:if> 
 <a href="test.html">테스트 이동</a>
 <header>
-	<jsp:include page="view/headfoot/header.jsp" flush="false" />
+	<jsp:include page="view/main/header.jsp" flush="false" />
 </header>
 
 <section>
