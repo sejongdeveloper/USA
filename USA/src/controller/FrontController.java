@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.main.MoneyAction;
+import action.loc.LocListAction;
+import action.loc.LocViewAction;
 import action.mem.MemDelProAction;
 import action.mem.MemIdProAction;
 import action.mem.MemIdValidateAction;
@@ -19,6 +21,8 @@ import action.mem.MemPwdProAction;
 import action.mem.MemUpdateFromAction;
 import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
+import action.reg.RegMainAction;
+import action.reg.RegViewAction;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet implements Process{
@@ -108,12 +112,20 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("money.do")) {
 			MoneyAction.execute(request, response);
 			return;
+		// 규민	
+		} else if(com.equals("view/reg/regMain.do")) {
+			nextPage = new RegMainAction().execute(request, response);
+		} else if(com.equals("view/reg/regView.do")) {
+			nextPage = new RegViewAction().execute(request, response);
+		} else if(com.equals("view/reg/locList.do")) {
+			nextPage = new LocListAction().execute(request, response);
+		} else if(com.equals("view/loc/locView.do")) {
+			nextPage = new LocViewAction().execute(request, response);
 		}
-		
-		System.out.println("view로 이동합니다.");
+		System.out.println("nextPage: "+nextPage);
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
-		 
+		
 	}
 
 }

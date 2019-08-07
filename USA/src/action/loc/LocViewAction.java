@@ -39,6 +39,8 @@ public class LocViewAction implements Command {
 		request.setAttribute("rev_count2", rev_eachCount.get(2));
 		request.setAttribute("rev_count1", rev_eachCount.get(1));
 		request.setAttribute("rev_list", rev_list);
+		
+		return "/view/loc/locView.jsp";
 	}
 
 }

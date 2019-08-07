@@ -1,0 +1,112 @@
+a {
+	text-decoration: none;
+}
+body {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	width: 1100px;
+	margin-top: 100px;
+	margin-bottom: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.regMain_div {
+	display: inline-block;
+	text-align: center;
+}
+.regMain_picture {
+	height: 300px;
+	width: 700px;
+	position: relative;
+	top: 50px;
+	left: 70px;
+}
+.reg_img {
+	height: 100%;
+	width: 100%;
+}
+.regMain_regname {
+	height: 30px;
+	width: 700px;
+	position: relative;
+	top: 60px;
+	left: 70px;
+	font-size: 20px;
+}
+.regMain_map {
+	height: 250px;
+	width: 250px;
+	position: relative;
+	top: -230px;
+	left: 100px;
+	border: 1px solid black;
+}
+.regMain_info {
+	height: 200px;
+	width: 200px;
+	position: relative;
+	top: -170px;
+	left: 80px;
+	margin-right: 30px;
+	background-color: #D8D8D8;
+}
+.regMain_moreinfo {
+	height: 250px;
+	width: 230px;
+	position: relative;
+	top: -140px;
+	left: 110px;
+	background-color: #D8D8D8;
+}
+.regMain_infotitle {
+	margin-top: 15%;
+	margin-bottom: 10%;
+}
+.regMain_infocontents {
+	margin-top: 30%;
+}
+.regMain_one, .regMain_two {
+	margin-top: 15%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 20%;
+	width: 70%;
+}
+
+
+
+
+.regView_regname {
+	display: inline-block;
+	position: relative;
+	margin-top: 30px;
+	margin-left: 50px;
+	font-size: 20px;
+}
+.regView_picture {
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+	position: relative;
+	height: 300px;
+	width: 1000px;
+}
+.regView_posts {
+	position: relative;
+	margin-bottom: 30px;
+}
+.regView_title {
+	position: relative;
+	height: 100px;
+	width: 150px;
+	left: 40px;
+	top: 20px;
+	text-align: center;
+}
+.regView_contents {
+	position: relative;
+	width: 800px;
+	top: -80px;
+	left: 250px;
+}

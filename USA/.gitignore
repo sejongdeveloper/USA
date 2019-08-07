@@ -1,1 +1,4 @@
 /build/
+*.class
+context.xml
+web.xml
