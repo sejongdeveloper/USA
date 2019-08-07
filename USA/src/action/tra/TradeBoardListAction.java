@@ -62,13 +62,12 @@ public class TradeBoardListAction implements Command {
 	        
 
 	        
-	        //총 페이지 수를 구하는 방법.
-	        int maxPage = (int)(listCount/5.0 + 0.2);
-
-	        //시작 페이지수를 구하는방법
-	        int startPage = (int)(spage/5.0 + 0.8) * 2 - 1;
-	        //한번에 보여질 마지막 페이지
-	        int endPage = startPage + 1;
+	        int pageBlock=5;
+	        int pageCount = listCount / pageSize + ( listCount % pageSize == 0 ? 0 : 1 );
+	       
+	        
+	        int startPage = (int)((TradeBoardCurrentPage-1)/pageBlock) * pageBlock + 1;
+	        int endPage = startPage +pageBlock- 1;
 	        
 	        //보여지는 페이지가 마지막 페이지일경우 마지막페이지는 maxpage이다.
 	        if(endPage > maxPage)    endPage = maxPage;

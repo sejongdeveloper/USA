@@ -76,9 +76,6 @@ ${condition } 컨디션있니
   
 
  <c:if test="${ listCount > 0 }"> <!--  전체 페이지의 수를 연산 -->
-	    <c:set  var="pageCount"  value="${ listCount / pageSize + (listCount % pageSize ==0 ? 0 : 1) }" />
-		<c:set  var="startPage"  value="${ 1 }" />  <!-- 차후 수정!! -->
-		<c:set  var="pageBlock"  value="${ 2 }" />
 		
 		
 	 	<fmt:parseNumber var="result"  value="${ spage / pageBlock }" integerOnly="true" />

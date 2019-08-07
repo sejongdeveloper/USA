@@ -23,6 +23,12 @@ import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
 import action.reg.RegMainAction;
 import action.reg.RegViewAction;
+import action.tra.TradeBoardDetailAction;
+import action.tra.TradeBoardDownloadAction;
+import action.tra.TradeBoardListAction;
+import action.tra.TradeBoardModifyFormAction;
+import action.tra.TradeBoardModifyProAction;
+import action.tra.TradeBoardWriteAction;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet implements Process{
@@ -43,8 +49,13 @@ public class FrontController extends HttpServlet implements Process{
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
-		
+
+		System.out.println("여기까지는 도나??");
+
 		String nextPage = "";
+
+		Command command = null;
+		System.out.println(com +"이퀄 비교");
 
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
 		if(com == null && com.length() <= 0) {
@@ -122,10 +133,55 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("view/loc/locView.do")) {
 			nextPage = new LocViewAction().execute(request, response);
 		}
-		System.out.println("nextPage: "+nextPage);
-		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
-		dis.forward(request, response);
 		
+		
+			//리스트
+		}else if(com.equals("view/tra/list.do")) {
+		nextPage=new TradeBoardListAction().execute(request, response);
+		System.out.println("list");
+		
+		//글쓰기 누르면 글쓰기폼이 나옴
+		}else if (com.equals("view/tra/writeForm.do")) {
+			nextPage= "/view/tra/WriteForm.jsp";
+		
+		//글쓰기 완료 누르면 실행
+		}else if(com.equals("view/tra/TradeBoardWriteAction.do")) {
+			nextPage=new TradeBoardWriteAction().execute(request, response);
+			System.out.println("여기는 글쓰기 완료 실행"+nextPage);
+		//글 자세히 보기
+		}else if(com.equals("view/tra/content.do")) {
+			System.out.println("여기는 컨텐츠 컨트롤러");
+			nextPage=new TradeBoardDetailAction().execute(request, response);
+			
+		//다운로드 처리
+		}else if(com.equals("view/tra/FileDownload.do")) {
+			
+			new TradeBoardDownloadAction().execute(request, response);
+			
+			
+			System.out.println("들르나요?");
+		
+			
+			//수정 눌렀을떄
+		}else if(com.equals("view/tra/TradeBoardModifyFormAction.do")) {
+			nextPage=new TradeBoardModifyFormAction().execute(request, response);
+			
+			
+			//수정 완료할떄
+		}else if(com.equals("view/tra/TradeBoardModifyProAction.do")) {
+			System.out.println("수정완료 돌기는 하나요?");
+			nextPage=new TradeBoardModifyProAction().execute(request, response);
+			
+		}
+
+		if(nextPage!=null&&nextPage!="") {
+			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
+			System.out.println("여기로 돌기는 하나요?");
+			dis.forward(request, response);
+			
+		}
+
+
 	}
 
 }
