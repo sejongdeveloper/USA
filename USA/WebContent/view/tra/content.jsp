@@ -37,7 +37,9 @@
 			<table border=0 width=490 height=250 style="table-layout:fixed">
 				<tr>
 					<td valign=top style="font-family:돋음; font-size:12">
+					<c:if test="${vo.board_file!=null}">
 					<img src="${pageContext.request.contextPath}/UploadFolder/${vo.board_file}" />
+					</c:if>
 					${vo.board_content }
 					</td>
 				</tr>
@@ -62,8 +64,8 @@
 		<td colspan="2" style="height:1px;"></td>
 	</tr>
 	<tr><td colspan="2">&nbsp;</td></tr>
-	
-	<tr align="center" valign="middle">
+	<
+	<tr align="right" valign="middle">
 		<td colspan="5">
 			<font size=2>
 			
@@ -80,7 +82,40 @@
 			</font>
 		</td>
 	</tr>
-</table>
-<!-- 게시판 수정 -->
+
+<br><br><br>
+
+
+<!-- 로그인 했을 경우만 댓글 작성가능 -->
+		<%-- 	<c:if test="${sessionScope.sessionID !=null}"> --%>
+			<tr bgcolor="#F5F5F5">
+			<form id="writeCommentForm">
+				<input type="hidden" name="comment_board" value="${board.board_num}">
+				<input type="hidden" name="comment_id" value="${sessionScope.sessionID}">
+				<!-- 아이디-->
+				<td width="150">
+					<div>
+						${sessionScope.sessionID}
+					</div>
+				</td>
+				<!-- 본문 작성-->
+				<td width="550">
+					<div>
+						<textarea name="comment_content" rows="4" cols="70" ></textarea>
+					</div>
+				</td>
+				<!-- 댓글 등록 버튼 -->
+				<td width="100">
+					<div id="btn">
+						
+						<p><a href="#" onclick="writeCmt()">[댓글등록]</a></p>	
+					</div>
+				</td>
+			</form>
+			</tr>
+			<%-- </c:if> --%>
+	
+		</table>
+
 </body>
 </html>

@@ -38,8 +38,8 @@ public class FrontController extends HttpServlet implements Process{
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
-		
-		
+
+		System.out.println("여기까지는 도나??");
 
 		String nextPage = "";
 
@@ -82,14 +82,12 @@ public class FrontController extends HttpServlet implements Process{
 		//글쓰기 완료 누르면 실행
 		}else if(com.equals("view/tra/TradeBoardWriteAction.do")) {
 			nextPage=new TradeBoardWriteAction().execute(request, response);
-		
+			System.out.println("여기는 글쓰기 완료 실행"+nextPage);
 		//글 자세히 보기
 		}else if(com.equals("view/tra/content.do")) {
-			
-			
-			
-			
+			System.out.println("여기는 컨텐츠 컨트롤러");
 			nextPage=new TradeBoardDetailAction().execute(request, response);
+			
 		//다운로드 처리
 		}else if(com.equals("view/tra/FileDownload.do")) {
 			
@@ -106,15 +104,16 @@ public class FrontController extends HttpServlet implements Process{
 			
 			//수정 완료할떄
 		}else if(com.equals("view/tra/TradeBoardModifyProAction.do")) {
-			
+			System.out.println("수정완료 돌기는 하나요?");
 			nextPage=new TradeBoardModifyProAction().execute(request, response);
 			
 		}
 
 		if(nextPage!=null&&nextPage!="") {
-		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
-		
-		dis.forward(request, response);
+			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
+			System.out.println("여기로 돌기는 하나요?");
+			dis.forward(request, response);
+			
 		}
 
 

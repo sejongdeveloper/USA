@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
 import action.Command;
 import model.tra.TradeBoardDAO;
@@ -20,18 +19,17 @@ public class TradeBoardWriteAction implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String num=request.getParameter("num");
 		int fileSize= 5*1024*1024;
 				
 		String uploadPath = request.getServletContext().getRealPath("/UploadFolder");
-
+		int num=0;
 		System.out.println(uploadPath +"//업로드폴더?");
 		
 		
 		try {
 			
 			MultipartRequest multi = new MultipartRequest
-					(request, uploadPath, fileSize, "euc-kr", new DefaultFileRenamePolicy());
+					(request, uploadPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 
 			String fileName = "";
 			Enumeration<String> names = multi.getFileNames();
@@ -43,8 +41,8 @@ public class TradeBoardWriteAction implements Command {
 			
 			TradeBoardDAO dao = TradeBoardDAO.getInstance();
 			TradeBoardVO border = new TradeBoardVO();
-			
-			border.setBoard_num(Integer.parseInt(num)); 
+			num=dao.getSeq();
+			border.setBoard_num(num); 
 			border.setBoard_id(multi.getParameter("board_id")); // ���簪
 			border.setBoard_subject(multi.getParameter("board_subject"));
 			border.setBoard_content(multi.getParameter("board_content"));
@@ -52,10 +50,9 @@ public class TradeBoardWriteAction implements Command {
 			
 			boolean result = dao.boardInsert(border);
 			
-			System.out.println("view/tra/Content.do?num="+border.getBoard_num());
-			request.setAttribute("num", num);
 			if(result){
-				return "/view/tra/content.do";
+				System.out.println("글등록은 성공?");
+				return "/view/tra/content.do?num="+num;
 			}
 			
 		} catch (Exception e) {

@@ -20,10 +20,7 @@ public class TradeBoardDetailAction  implements Command{
 				request.setCharacterEncoding("UTF-8");
 				TradeBoardDAO dao= new TradeBoardDAO();
 				TradeBoardVO vo=new TradeBoardVO();
-				
-				//지울것
-//				int num2=(int)request.getAttribute("num");
-				
+				System.out.println(request.getParameter("num"));
 				int num=Integer.parseInt(request.getParameter("num"));
 			
 				System.out.println("오나요"+num);
@@ -42,7 +39,7 @@ public class TradeBoardDetailAction  implements Command{
 			}
 	   		
 		   	
-	   		return "/view/tra/Content.jsp";
+	   		return "/view/tra/content.jsp";
 
 		 }
 	}

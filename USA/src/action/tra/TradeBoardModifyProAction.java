@@ -20,9 +20,8 @@ public class TradeBoardModifyProAction implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String num=request.getParameter("board_num");
-		
-		String existFile=request.getParameter("existing_file");
+		int num=Integer.parseInt(request.getParameter("num"));
+		System.out.println("여기는 모디파이 프로 액션"+num);
 		int fileSize= 5*1024*1024;
 		
 		String uploadPath = request.getServletContext().getRealPath("/UploadFolder");
@@ -42,6 +41,7 @@ public class TradeBoardModifyProAction implements Command {
 			{
 				String name = names.nextElement();
 				fileName = multi.getFilesystemName(name);
+				String existFile=request.getParameter("board.board_file");
 				if(fileName == null)	// ������ ���ο� ������ ÷�� ���ߴٸ� ���� ���ϸ��� ����
 					border.setBoard_file(existFile);
 				else	// ���ο� ������ ÷������ ���
@@ -53,20 +53,19 @@ public class TradeBoardModifyProAction implements Command {
 			
 	
 			
-			border.setBoard_num(dao.getSeq()); 
+			border.setBoard_num(num); 
 			border.setBoard_id(multi.getParameter("board_id")); // ���簪
 			border.setBoard_subject(multi.getParameter("board_subject"));
 			border.setBoard_content(multi.getParameter("board_content"));
 			border.setBoard_file(fileName);
 			
-			boolean result = dao.boardInsert(border);
+			boolean result = dao.updateBoard(border);
 			
-			System.out.println("view/tra/Content.do?num="+border.getBoard_num());
-			request.setAttribute("num", num);
 			if(result){
 				System.out.println("컨텐츠로 넘어가기위한 단계");
 				return "/view/tra/content.do?num="+num;
 			}
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,7 +74,7 @@ public class TradeBoardModifyProAction implements Command {
 		
 		
 		
-		return "/view/tra/content.do";
+		return "/view/tra/content.do?num="+num;
 	}
 
 }

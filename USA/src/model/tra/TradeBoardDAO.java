@@ -470,8 +470,7 @@ public class TradeBoardDAO {
 		} // end getSeq
 	    
 	
-
-
+	
 	
 	
 }
