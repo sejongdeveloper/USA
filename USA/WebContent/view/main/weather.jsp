@@ -25,9 +25,14 @@
 			crossOrigin : true, // 크로스 도메인 이슈해결
 			url: url,
 			success : function(data) {
+				alert("옵니까?");
 				var resp = JSON.parse(data);
 				$("#result").html("도시이름 : " + resp.name + "<br>현재온도 : " + (resp.main.temp- 273.15).toFixed(1) + "<br>날씨 : " + resp.weather[0].main);
+			},
+			error : function(err){
+				alert("에러");
 			}
+			
 		});
 	});
 	
