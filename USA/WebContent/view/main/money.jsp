@@ -9,11 +9,12 @@
 <title>JSP</title>
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.ajax-cross-origin.min.js"></script> <!-- 크로스 도메인 이슈해결 -->
 <script type="text/javascript">
 	$(document).ready(function(){
 		var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth()+1; //January is 0!
+		var dd = today.getDate() - 1; // 현재 날짜 못 얻는 경우 있음
+		var mm = today.getMonth() + 1; 
 		var yyyy = today.getFullYear();
 		if(dd<10) {
 		    dd='0'+dd
@@ -23,17 +24,17 @@
 		    mm='0'+mm
 		} 
 
-		today = yyyy+mm+dd;
-		
-		
+		var tt = yyyy+mm+dd;
+		var url = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=" + tt + "&data=AP01";
 		$.ajax({
-			type : "post",
+			type : "get",
 			async : false,
-			datatype : "xml",
-			url:"https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=20190806&data=AP01",
+			datatype : "json",
+			crossOrigin : true, // 크로스 도메인 이슈해결
+			url: url,
 			success : function(data) {
-				alert("aaaaa");
-				
+				var info = JSON.parse(data);
+				$("#result").html("미국 환율 : " + info[21].bkpr);
 			}
 		});
 	});
@@ -42,6 +43,5 @@
 </head>
 <body>
 <span id="result"></span>
-<a href="https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=20190806&data=AP01">환율</a>
 </body>
 </html>
