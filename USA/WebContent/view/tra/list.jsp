@@ -10,7 +10,8 @@
 <title>게시판</title>
 </head>
 <body >
-ddddddddddddddddddddddd
+
+<a href="http://localhost:8080/USA/test.html"> 로그인 </a>
 ${listCount } 카운트있니<br>
 ${condition } 컨디션있니
 	<center>
@@ -20,9 +21,11 @@ ${condition } 컨디션있니
 
 	 <table width="700">
 		<tr>
+		<c:if test="${sessionScope.member!=null }">
 			<td  align="right">
 				<a href="writeForm.do">글쓰기</a>
 			</td>
+			</c:if>
 		</tr>
 	</table>
 <c:if test="${ listCount == 0 }">	

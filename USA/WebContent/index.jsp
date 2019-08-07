@@ -25,7 +25,7 @@
 	</c:otherwise>
 </c:choose>
 </section>
-
+<a href="view/tra/list.do">리스트로가자</a>
 <footer>
 	<jsp:include page="view/main/footer.jsp" flush="false" />
 </footer>

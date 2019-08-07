@@ -69,37 +69,41 @@
 		<td colspan="5">
 			<font size=2>
 			
-			<%-- <c:if test="${sessionScope.id!=null }"> --%>
+			 <c:if test="${sessionScope.member!=null }"> 
 			<a href="./TradeBoardModifyFormAction.do?num=${vo.board_num }">
 			[수정]
 			</a>&nbsp;&nbsp;
 			<a href="./BoardDelete.do?num=${vo.board_num }">
 			[삭제]
-			<%-- </c:if> --%>
+			 </c:if>
 			
 			</a>&nbsp;&nbsp;
 			<a href="./list.do">[목록]</a>&nbsp;&nbsp;
 			</font>
 		</td>
 	</tr>
-
+	</table>
 <br><br><br>
 
 
 <!-- 로그인 했을 경우만 댓글 작성가능 -->
+		<table>
 		<%-- 	<c:if test="${sessionScope.sessionID !=null}"> --%>
+		<c:if test="${sessionScope.member!=null }">
+
 			<tr bgcolor="#F5F5F5">
 			<form id="writeCommentForm">
 				<input type="hidden" name="comment_board" value="${board.board_num}">
 				<input type="hidden" name="comment_id" value="${sessionScope.sessionID}">
 				<!-- 아이디-->
-				<td width="150">
+				<td width="100">
 					<div>
-						${sessionScope.sessionID}
+						${sessionScope.member}
 					</div>
 				</td>
 				<!-- 본문 작성-->
 				<td width="550">
+				
 					<div>
 						<textarea name="comment_content" rows="4" cols="70" ></textarea>
 					</div>
@@ -108,12 +112,14 @@
 				<td width="100">
 					<div id="btn">
 						
-						<p><a href="#" onclick="writeCmt()">[댓글등록]</a></p>	
+						<a href="#" onclick="writeCmt()">[댓글등록]</a></p>	
 					</div>
 				</td>
+				</c:if>
+				
 			</form>
 			</tr>
-			<%-- </c:if> --%>
+			
 	
 		</table>
 

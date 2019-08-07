@@ -10,8 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Command;
-
+import action.mem.MemDelProAction;
+import action.mem.MemIdProAction;
+import action.mem.MemIdValidateAction;
+import action.mem.MemLoginFormAction;
 import action.mem.MemLoginProAction;
+import action.mem.MemPwdProAction;
+import action.mem.MemUpdateFromAction;
+import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
 import action.tra.TradeBoardDetailAction;
 import action.tra.TradeBoardDownloadAction;
@@ -51,24 +57,66 @@ public class FrontController extends HttpServlet implements Process{
 			// 예시입니다.
 			nextPage = "/index.jsp";
 
-			
-		// 회원가입 폼
-		} else if(com.equals("memWriterForm.do")) {
-			nextPage = "/view/mem/memWrite.jsp";
-			
-		// 회원가입 실행	
-		} else if(com.equals("memWritePro.do")) {
-			new MemWriteProAction().execute(request, response);
-			nextPage = "/index.jsp";
-			
-		// 로그인 폼
-		} else if(com.equals("memLoginForm.do")) {
-			nextPage = "/view/mem/memLogin.jsp";
-			
-		// 로그인 실행
-		} else if(com.equals("memWritePro.do")) {
-			new MemLoginProAction().execute(request, response);;
-			nextPage = "/index.jsp";
+			// 회원가입 폼
+					} else if(com.equals("memWriterForm.do")) {
+						nextPage = "view/mem/memWrite.jsp";
+						response.sendRedirect(nextPage);
+						return;
+						
+					// 회원가입 실행	
+					} else if(com.equals("memWritePro.do")) {
+						nextPage = new MemWriteProAction().execute(request, response);
+						
+					// 로그인 폼
+					} else if(com.equals("memLoginForm.do")) {
+						nextPage = new MemLoginFormAction().execute(request, response);
+						
+					// 로그인 실행
+					} else if(com.equals("memLoginPro.do")) {
+						nextPage = new MemLoginProAction().execute(request, response);
+					
+					// 로그아웃
+					} else if(com.equals("memLogout.do")) {
+						System.out.println("로그아웃");
+						request.getSession().invalidate();
+						nextPage = "/index.jsp";
+						
+					// 업데이트 폼
+					} else if(com.equals("memUpdateForm.do")) {
+						nextPage = new MemUpdateFromAction().execute(request, response);
+						
+					// 업데이트 실행
+					} else if(com.equals("memUpdatePro.do")) {
+						nextPage = new MemUpdatePro().execute(request, response);
+						
+					// 아이디 찾기 폼
+					} else if(com.equals("memIdForm.do")) {
+						System.out.println("아이디 찾기 폼");
+						nextPage = "/view/mem/memId.jsp";
+						
+					// 아이디 찾기 실행
+					} else if(com.equals("memIdPro.do")) {
+						nextPage = new MemIdProAction().execute(request, response);
+						
+					// 비밀번호 찾기 폼
+					} else if(com.equals("memPwdForm.do")) {
+						nextPage = "/view/mem/memPwd.jsp";
+						
+					// 비밀번호 찾기 실행
+					} else if(com.equals("memPwdPro.do")) {
+						nextPage = new MemPwdProAction().execute(request, response);
+						
+					// 회원탈퇴
+					} else if(com.equals("memDelPro.do")) {
+						nextPage = new MemDelProAction().execute(request, response);
+						
+					// 로그인 유효성 검사
+					} else if(com.equals("memIdValidate.do")) {
+						new MemIdValidateAction().execute(request, response);
+						return;
+					// 환율 	
+				
+					
 			
 			//리스트
 		}else if(com.equals("view/tra/list.do")) {

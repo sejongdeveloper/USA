@@ -7,12 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>JSP</title>
+<link rel="stylesheet" href="test.css">
 </head>
 <body>
-	<form action="${pageContext.request.contextPath }/memLoginPro.do">
-	아이디 <input type="text" name="mem_id" value="${cookie_id }"><br>
-	비밀번호 <input type="password" name="mem_pwd"><br>
-	<input type="submit" value="로그인">
-	</form>
+<span id="test">안녕하세요 테스트입니다.</span>
+<img alt="보노보노 사진" src="upload/보노보노.jpg">
 </body>
 </html>

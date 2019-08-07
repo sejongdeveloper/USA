@@ -9,10 +9,11 @@
 <title>JSP</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath }/memLoginPro.do">
-	아이디 <input type="text" name="mem_id" value="${cookie_id }"><br>
-	비밀번호 <input type="password" name="mem_pwd"><br>
-	<input type="submit" value="로그인">
-	</form>
+아이디 : ${mem_id }
+<form action="${pageContext.request.contextPath }/memIdPro.do">
+	이름 <input type="text" name="mem_name"><br>
+	주소 <input type="text" name="mem_addr"><br>
+	<input type="submit" value="찾기">
+</form>
 </body>
 </html>
