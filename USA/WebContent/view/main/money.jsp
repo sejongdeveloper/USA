@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>JSP</title>
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.ajax-cross-origin.min.js"></script> <!-- 크로스 도메인 이슈해결 -->
 <script type="text/javascript">
