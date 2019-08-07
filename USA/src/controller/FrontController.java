@@ -54,7 +54,6 @@ public class FrontController extends HttpServlet implements Process{
 
 		String nextPage = "";
 
-		Command command = null;
 		System.out.println(com +"이퀄 비교");
 
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
@@ -132,7 +131,6 @@ public class FrontController extends HttpServlet implements Process{
 			nextPage = new LocListAction().execute(request, response);
 		} else if(com.equals("view/loc/locView.do")) {
 			nextPage = new LocViewAction().execute(request, response);
-		}
 		
 		
 			//리스트

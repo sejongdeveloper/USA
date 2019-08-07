@@ -15,7 +15,7 @@ import model.tra.TradeBoardVO;
 public class TradeBoardListAction implements Command {
 
 	@Override
-	public void execute(HttpServletRequest request,
+	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		
 		
@@ -108,7 +108,7 @@ public class TradeBoardListAction implements Command {
 	      
 	        
 	        
-	       
+	       return "";
 	    }
 
 

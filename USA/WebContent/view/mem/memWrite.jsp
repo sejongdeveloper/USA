@@ -174,21 +174,21 @@
 
 	<div class="subject"><label for="mem_name">이름</label></div>
 	<div class="inputBack" id="nameDiv">
-		<input type="text" name="mem_name" class="inputReal" id="mem_name" onfocusout="basicValidate(this.id, 'nameDiv', 'outNameMsg')" onfocusin="basic('#pwdChkDiv')">
+		<input type="text" name="mem_name" class="inputReal" id="mem_name" onfocusout="basicValidate(this.id, 'nameDiv', 'outNameMsg')" onfocusin="basic('#nameDiv')">
 		<div class="imgDiv"><img src="upload/test.svg"></div>
 	</div>
 	<span class="outmsg" id="outNameMsg"></span>
 
 	<div class="subject"><label for="mem_ph">전화번호</label></div>
 	<div class="inputBack" id="phDiv">
-		<input type="text" name="mem_ph" class="inputReal" id="mem_ph" onfocusout="basicValidate(this.id,'phDiv', 'outPhMsg')" onfocusin="basic('#pwdChkDiv')">
+		<input type="text" name="mem_ph" class="inputReal" id="mem_ph" onfocusout="basicValidate(this.id,'phDiv', 'outPhMsg')" onfocusin="basic('#phDiv')">
 		<div class="imgDiv"><img src="upload/test.svg"></div>
 	</div>
 	<span class="outmsg" id="outPhMsg"></span>
 
 	<div class="subject"><label for="mem_addr">주소</label></div>
 	<div class="inputBack" id="addrDiv">
-		<input type="text" name="mem_addr" class="inputReal" id="mem_addr" onfocusout="basicValidate(this.id,'addrDiv', 'outAddrMsg')" onfocusin="basic('#pwdChkDiv')">
+		<input type="text" name="mem_addr" class="inputReal" id="mem_addr" onfocusout="basicValidate(this.id,'addrDiv', 'outAddrMsg')" onfocusin="basic('#addrDiv')">
 		<div class="imgDiv"><img src="upload/test.svg"></div>
 	</div>
 	<span class="outmsg" id="outAddrMsg"></span>
