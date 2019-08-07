@@ -9,7 +9,7 @@
 <title>JSP</title>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.ajax-cross-origin.min.js"></script> <!-- 크로스 도메인 이슈해결 -->
+<script type="text/javascript" src="${contextPath }/view/main/js/jquery.ajax-cross-origin.min.js"></script> <!-- 크로스 도메인 이슈해결 -->
 <script type="text/javascript">
 
 
@@ -28,25 +28,17 @@
 
 		var tt = yyyy+mm+dd;
 		//var url = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=" + tt + "&data=AP01";
-		var url = "../../money.do";
-		$.ajax({
-			type : "get",
-			async : false,
-			datatype : "json",
-			//crossOrigin : true, // 크로스 도메인 이슈해결
-			url: url,
-			success : function(data) {
-				alert(data);
-				var info = JSON.parse(data);
-				$("#result").html("미국 환율 : " + info[21].bkpr);
-			}
+		var url = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=20190807&data=AP01";
+		$.getJSON(url+"&callback=?", function(data) {
+			alert("aa");
+			$("#result").html(data[21].cur_nm + " : " + data[21].bkpr);
 		});
+		
 	});
 	
 </script>
 </head>
 <body>
 <span id="result"></span>
-<a href="https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=20190807&data=AP01">환율</a>
 </body>
 </html>
