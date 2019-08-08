@@ -2,20 +2,38 @@
 .main {
 	border: 1px solid #dadada;
 	width: 430px;
-	padding:  15px 50px 50px 70px;
+	padding:  35px 50px 35px 105px;
 }
+
 hr {
 	display: inline-block;
 	width: 464px;
 }
+
+.main hr {
+	display: inline-black;
+	width: 130px;
+	border: none;
+}
+
 #id hr {
-	width: 85px;
+	width: 120px;
 	border: 1px solid black;
+}
+
+#idDetail {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 20px;
 }
 
 .name {
 	font-weight: bold;
 	width: 80px;
+}
+
+.data {
+	font-size: 15px;
 }
 
 .name, .data {
@@ -37,8 +55,17 @@ input[type=submit] {
 	margin-left: 248px;
 }
 
-#idDetail {
-	font-size: 14px;
-	color: #666;
-	margin-bottom: 20px;
+input[type=button] {
+	margin-top: 15px;
+	padding: 5px 17px 8px 17px;
+	background-color: white;
+	border: 1px solid #dadada;
+	margin-right: 3px;
+	width: 120px;
+}
+
+#login {
+	margin-left: 167px;
+	background-color: #04B404;
+	color: white;
 }

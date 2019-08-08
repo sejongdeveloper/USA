@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -151,18 +152,22 @@ public class MemDAO {
 	} // update() end
 	
 	// 아이디 찾기
-	public String id(String mem_name, String mem_addr) {
-		String mem_id = null;
+	public ArrayList<MemVO> id(String mem_name, String mem_addr) {
+		ArrayList<MemVO> list = new ArrayList<>();
 		try {
 			conn = getConnection();
-			String sql = "select mem_id from mem where mem_name = ? and mem_addr = ?";
+			String sql = "select mem_id, mem_cdate from mem where mem_name = ? and mem_addr = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mem_name);
 			pstmt.setString(2, mem_addr);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				mem_id = rs.getString("mem_id");
+			MemVO vo = null;
+			while(rs.next()) {
+				vo = new MemVO();
+				vo.setMem_id(rs.getString("mem_id"));
+				vo.setMem_cdate(rs.getTimestamp("mem_cdate"));
+				list.add(vo);
 			}
 			
 		} catch (Exception e) {
@@ -171,7 +176,7 @@ public class MemDAO {
 			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		} // try end
 		
-		return mem_id;
+		return list;
 	} // id() end
 	
 	// 비밀번호 찾기 
