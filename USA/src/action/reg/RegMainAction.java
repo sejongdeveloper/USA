@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Command;
 import model.reg.RegDAO;
+import model.reg.RegNameDAO;
+import model.reg.RegNameVO;
 import model.reg.RegVO;
 
 public class RegMainAction implements Command {
@@ -20,6 +22,10 @@ public class RegMainAction implements Command {
 		ArrayList<RegVO> reg_filenameList = dao.getRegFileName(regname);
 		
 		request.setAttribute("reg_filenameList", reg_filenameList);
+		
+		RegNameDAO regnamedao = RegNameDAO.getInstance();
+		RegNameVO regname_vo = regnamedao.getRegNameContents(regname);
+		request.setAttribute("regname_vo", regname_vo);
 		
 		return "/view/reg/regMain.jsp";
 	}

@@ -103,7 +103,7 @@ public class RevDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				avg = rs.getInt(1);
+				avg = rs.getDouble(1);
 			}
 			
 		} catch (Exception e) {

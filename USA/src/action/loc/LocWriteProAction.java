@@ -2,6 +2,7 @@ package action.loc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
@@ -23,8 +24,7 @@ public class LocWriteProAction implements Command {
 		RevVO vo = new RevVO();
 
 		HttpSession session = request.getSession();
-		String rev_writer = "조규민";
-//				(String)session.getAttribute("member");
+		String rev_writer = (String)session.getAttribute("member");
 		String rev_contents = request.getParameter("rev_contents");
 		int rev_score = Integer.parseInt(request.getParameter("rev_score"));
 		String rev_locname = request.getParameter("loc_name");
@@ -38,9 +38,7 @@ public class LocWriteProAction implements Command {
 		
 		int result = dao.insert(vo);
 		
-		request.setAttribute("loc_name", rev_locname);
-		
-		return "/view/loc/locView.do";
+		return request.getContextPath() + "/view/reg/locView.do?loc_name="+URLEncoder.encode(rev_locname, "utf-8")+"&result="+result;
 	}
 
 }

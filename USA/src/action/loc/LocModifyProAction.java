@@ -2,6 +2,7 @@ package action.loc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +23,8 @@ public class LocModifyProAction implements Command {
 		int result = dao.update(vo);
 		
 		String rev_locname = request.getParameter("loc_name");
-		request.setAttribute("loc_name", rev_locname);
 		
-		return "/view/reg/locView.do";
+		return request.getContextPath() + "/view/reg/locView.do?loc_name="+URLEncoder.encode(rev_locname, "utf-8")+"&result="+result;
 	}
 
 }

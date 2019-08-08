@@ -1,5 +1,6 @@
 a {
 	text-decoration: none;
+	color: white;
 }
 body {
 	border-left: 1px solid black;
@@ -32,6 +33,7 @@ body {
 	top: -170px;
 	left: 10px;
 	font-size: 25px;
+	font: bold;
 }
 .locList_locscore {
 	display: inline-block;
@@ -90,6 +92,9 @@ body {
 	top: 70px;
 	margin: auto;
 	width: 90%;
+	border-radius: 20px;
+	padding: 5px;
+	border: 1px solid #808080;
 }
 .locView_rev {
 	margin-top: 30px;
@@ -100,8 +105,11 @@ body {
 }
 .locView_allScore {
 	position: relative;
-	left: 420px;
-	top: 70px;
+	display: inline-block;
+	left: 300px;
+	top: 90px;
+	font-size: 50px;
+	font: bold;
 }
 .locView_count {
 	position: relative;
@@ -111,12 +119,16 @@ body {
 .locView_count5, .locView_count4, .locView_count3, .locView_count2, .locView_count1 {
 	margin-top: 10px;
 }
+.locView_faceimg {
+	height: 100x;
+	width: 100px;
+}
 .locView_revTitle {
 	display: inline-block;
 	margin-left: 450px;
 }
 .locView_revWriteScoreFrame {
-	margin-left: 430px;
+	margin-left: 380px;
 	margin-bottom: 30px;
 }
 .locView_revWriteScore {
@@ -131,9 +143,8 @@ body {
 .locView_revWriteImg {
 	position: relative;
 	display: inline-block;
-	margin-right: 100px;
-	top: -80px;
-	left: 20px;
+	top: -50px;
+	left: -20px;
 }
 .locView_revWriteContents {
 	display: inline-block;
@@ -154,6 +165,7 @@ body {
 	margin-top: 30px;
 	margin-left: 50px;
 	height: 200px;
+	border-radius: 20px;
 	background-color: #D8D8D8;
 	width: 90%;
 }
@@ -175,22 +187,46 @@ body {
 	display: inline-block;
 	left: 160px;
 	top: -70px;
+	color: gray;
 }
 .locView_revScore {
 	position: relative;
 	display: inline-block;
-	left: 700px;
+	left: 750px;
 	top: -150px;
+	background-color: red;
+	border-radius: 20px;
+	height: 50px;
+	width: 50px;
+}
+.locView_revScore2 {
+	position: relative;
+	display: inline-block;
+	top: 13px;
+	left: 20px;
+	height: 50px;
+	width: 50px;
+	color: white;
 }
 .locView_revModify {
 	position: relative;
 	display: inline-block;
-	left: 600px;
-	top: -70px;
+	left: 760px;
+	top: -160px;
 }
 .locView_revDelete {
 	position: relative;
 	display: inline-block;
-	left: 600px;
-	top: -70px;
+	left: 711px;
+	top: -120px;
+}
+.radio {
+	display: none;
+}
+.laimg {
+	cursor: pointer;
+	opacity: 0.5;
+}
+input:checked +.laimg {
+	opacity: 1.0;
 }

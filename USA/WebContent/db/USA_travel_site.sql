@@ -76,15 +76,23 @@ create table trarep(
 -----------------
 --지역이름 테이블
 -----------------
-create table regName(
-    regName varchar2(120) constraint regName_pk primary key -- 지역이름PK
+create table reg(
+    reg_num number constraint reg_num_pk primary key, -- 번호PK
+    reg_name varchar2(120) constraint reg_reg_Name_fk references regName(regName), -- 지역이름
+    reg_subject varchar2(300), -- 제목
+    reg_contents varchar2(4000), -- 내용
+    reg_filename varchar2(520) -- 파일이름
 );
+CREATE SEQUENCE reg_num;
 
 -----------------
 --지역이름 테이블
 -----------------
 create table regName(
-    regName varchar2(120) constraint regName_pk primary key -- 지역이름PK
+    regName varchar2(120) constraint regName_pk primary key, -- 지역이름PK
+    regNameEng varchar2(50),
+    regGmt varchar2(20),
+    regflight number
 );
 
 ----------------

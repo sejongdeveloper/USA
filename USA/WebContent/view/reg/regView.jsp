@@ -11,7 +11,7 @@
 <title>RegView</title>
 </head>
 <body>
-<div class="regView_regname">${ reg_list[0].reg_name }</div>
+<div class="regView_regname">&lt;&nbsp;${ reg_list[0].reg_name }&nbsp;&gt;</div>
 <div class="regView_picture">
 <c:forEach var="picture" items="${ reg_list }">
 <img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }">

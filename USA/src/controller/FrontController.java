@@ -54,8 +54,10 @@ public class FrontController extends HttpServlet implements Process{
 			// 예시입니다.
 			nextPage = "/index.jsp";
 		
-		} 
-		if(com.equals("view/reg/regMain.do")) {
+		}
+		if(com.equals("view/reg/regMap.do")) {
+			nextPage = "/view/reg/regMap.jsp";
+		} else if(com.equals("view/reg/regMain.do")) {
 			nextPage = new RegMainAction().execute(request, response);
 		} else if(com.equals("view/reg/regView.do")) {
 			nextPage = new RegViewAction().execute(request, response);
@@ -65,10 +67,16 @@ public class FrontController extends HttpServlet implements Process{
 			nextPage = new LocViewAction().execute(request, response);
 		} else if(com.equals("view/reg/locWritePro.do")) {
 			nextPage = new LocWriteProAction().execute(request, response);
+			response.sendRedirect(nextPage);
+			return;
 		} else if(com.equals("view/reg/locModifyPro.do")) {
 			nextPage = new LocModifyProAction().execute(request, response);
+			response.sendRedirect(nextPage);
+			return;
 		} else if(com.equals("view/reg/locDeletePro.do")) {
 			nextPage = new LocDeleteProAction().execute(request, response);
+			response.sendRedirect(nextPage);
+			return;
 		}
 		System.out.println("nextPage: "+nextPage);
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
