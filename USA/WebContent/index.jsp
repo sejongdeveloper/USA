@@ -7,26 +7,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
+
+<style type="text/css">
+section {
+	margin-top: 10px;
+}
+</style>
+
 </head>
 <body>
-<c:if test="${not empty member }">
-	${member }님 환영합니다^^
-</c:if> 
-<a href="test.html">테스트 이동</a>
 <header>
 	<jsp:include page="view/main/header.jsp" flush="false" />
 </header>
 
 <section>
-<c:choose>
-	<c:when test="${empty contents }">
-		<jsp:include page="view/main/main.jsp" flush="false" />
-	</c:when>
-	
-	<c:otherwise>
+
+	<c:if test="${not empty param.contents }">
+		<jsp:include page="${param.contents }" flush="false" />
+	</c:if>
+	<c:if test="${not empty contents }">
 		<jsp:include page="${contents }" flush="false" />	
-	</c:otherwise>
-</c:choose>
+	</c:if>
+	<c:if test="${empty contents && empty param.contents }">
+		<jsp:include page="view/main/main.jsp" flush="false" />
+	</c:if>
+
 </section>
 
 <footer>

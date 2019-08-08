@@ -1,61 +1,58 @@
 @charset "UTF-8";
-.main {
+#memIdPro {
+	margin-top: 50px;
+	margin-left: 240px;
+}
+
+#memIdPro .main {
 	border: 1px solid #dadada;
 	width: 430px;
 	padding:  35px 50px 35px 105px;
 }
 
-hr {
+#memIdPro hr {
 	display: inline-block;
-	width: 464px;
+	width: 498px;
 }
 
-.main hr {
+#memIdPro .main hr {
 	display: inline-black;
 	width: 130px;
 	border: none;
 }
 
-#id hr {
-	width: 120px;
+#memIdPro #id hr {
+	width: 85px;
 	border: 1px solid black;
 }
 
-#idDetail {
+#memIdPro #idDetail {
 	font-size: 14px;
 	color: #666;
 	margin-bottom: 20px;
 }
 
-.name {
+#memIdPro .name {
 	font-weight: bold;
 	width: 80px;
 }
 
-.data {
+#memIdPro .data {
 	font-size: 15px;
 }
 
-.name, .data {
+#memIdPro .name, .data {
 	display: inline-block;
 }
 
-input[type=text] {
+#memIdPro input[type=text] {
 	width: 217px;
 	height: 23px;
 	border: 1px solid #ccc;
 	margin-bottom: 5px;
 }
 
-input[type=submit] {
-	padding: 5px 17px 8px 17px;
-	background-color: white;
-	border: 1px solid #dadada;
-	margin-top: 20px;
-	margin-left: 248px;
-}
-
-input[type=button] {
+#memIdPro input[type=button] {
 	margin-top: 15px;
 	padding: 5px 17px 8px 17px;
 	background-color: white;
@@ -64,7 +61,11 @@ input[type=button] {
 	width: 120px;
 }
 
-#login {
+#memIdPro input[type=button]:hover {
+	cursor: pointer;
+}
+
+#memIdPro #login {
 	margin-left: 167px;
 	background-color: #04B404;
 	color: white;

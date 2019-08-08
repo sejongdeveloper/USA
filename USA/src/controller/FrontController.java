@@ -17,10 +17,12 @@ import action.mem.MemIdProAction;
 import action.mem.MemIdValidateAction;
 import action.mem.MemLoginFormAction;
 import action.mem.MemLoginProAction;
+import action.mem.MemPwdNamePhAction;
 import action.mem.MemPwdProAction;
 import action.mem.MemUpdateFromAction;
 import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
+import action.mem.MemWriterFormAction;
 import action.reg.RegMainAction;
 import action.reg.RegViewAction;
 import action.tra.TradeBoardDetailAction;
@@ -60,12 +62,14 @@ public class FrontController extends HttpServlet implements Process{
 		if(com == null && com.length() <= 0) {
 			// 예시입니다.
 			nextPage = "/index.jsp";
+		
+		// index로 이동하기
+		} else if(com.equals("index.do")) {
+			response.sendRedirect("index.jsp");
 			
 		// 회원가입 폼
 		} else if(com.equals("memWriterForm.do")) {
-			nextPage = "view/mem/memWrite.jsp";
-			response.sendRedirect(nextPage);
-			return;
+			nextPage = new MemWriterFormAction().execute(request, response);
 			
 		// 회원가입 실행	
 		} else if(com.equals("memWritePro.do")) {
@@ -102,11 +106,19 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("memIdPro.do")) {
 			nextPage = new MemIdProAction().execute(request, response);
 			
-		// 비밀번호 찾기 폼
+		// 비밀번호 찾기 폼(아이디)
 		} else if(com.equals("memPwdForm.do")) {
 			nextPage = "/view/mem/memPwd.jsp";
+		
+		// 비밀번호 찾기 폼(이름, 주소)
+		} else if(com.equals("memPwdForm2.do")) {
+			nextPage = "/view/mem/memPwd2.jsp";
+		
+		// 비밀번호 변경 폼
+		} else if(com.equals("memPwdForm3.do")) {
+			nextPage = new MemPwdNamePhAction().execute(request, response);
 			
-		// 비밀번호 찾기 실행
+		// 비밀번호 변경 실행
 		} else if(com.equals("memPwdPro.do")) {
 			nextPage = new MemPwdProAction().execute(request, response);
 			
@@ -122,6 +134,8 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("money.do")) {
 			MoneyAction.execute(request, response);
 			return;
+			
+			
 		// 규민	
 		} else if(com.equals("view/reg/regMain.do")) {
 			nextPage = new RegMainAction().execute(request, response);
@@ -171,14 +185,21 @@ public class FrontController extends HttpServlet implements Process{
 			nextPage=new TradeBoardModifyProAction().execute(request, response);
 			
 		}
-
+		
+		/*
 		if(nextPage!=null&&nextPage!="") {
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 			System.out.println("여기로 돌기는 하나요?");
 			dis.forward(request, response);
-			
 		}
-
+		*/
+		
+		if(nextPage!=null&&nextPage!="") {
+			System.out.println("여기로 돌기는 하나요?");
+			RequestDispatcher dis = request.getRequestDispatcher("/index.jsp");
+			if(!nextPage.equals("/index.jsp")) request.setAttribute("contents", nextPage);
+			dis.forward(request, response);
+		}
 
 	}
 

@@ -9,12 +9,12 @@
 <title>JSP</title>
 <link rel="stylesheet" href="${contextPath }/view/mem/css/memWrite.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
 <script type="text/javascript">
 	var chk = false;
 	function idValidate() {
 		var mem_id = $("#mem_id").val();
-		
-		if(mem_id == "") {
+		if(mem_id == "" || mem_id == null) {
 			$("#outIdMsg").html("필수 정보입니다.");
 			$("#outIdMsg").attr("style","color: red;");
 			$("#idDiv").attr("style","border: 1px solid red;");
@@ -74,7 +74,9 @@
 			$("#outPwdMsg").html("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 			$("#outPwdMsg").attr("style","color: red;");
 			$("#pwdDiv").attr("style","border: 1px solid red;");
+			return;
 		}
+		pwdChkValidate();
 	}
 	
 	
@@ -150,8 +152,8 @@
 </head>
 <body>
 
+<div id="memWrite">
 
-<div id="main">
 <form action="${pageContext.request.contextPath }/memWritePro.do" method="post" enctype="multipart/form-data" onsubmit="return check()">
 	<div class="subject"><label for="mem_id">아이디</label></div>
 	<div class="inputBack" id="idDiv">
@@ -200,6 +202,7 @@
 	
 	<input type="submit" value="회원가입" >
 </form>
+
 </div>
 </body>
 </html>

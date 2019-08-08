@@ -1,5 +1,5 @@
 @charset "UTF-8";
-#memId{
+#memPwd2 {
 	margin-top: 50px;
 	margin-left: 240px;
 }
@@ -11,10 +11,10 @@
 }
 hr {
 	display: inline-block;
-	width: 464px;
+	width: 450px;
 }
 #id hr {
-	width: 85px;
+	width: 99px;
 	border: 1px solid black;
 }
 
@@ -40,6 +40,7 @@ input[type=submit] {
 	border: 1px solid #dadada;
 	margin-top: 20px;
 	margin-left: 248px;
+	
 }
 
 input[type=submit]:hover {
@@ -51,4 +52,3 @@ input[type=submit]:hover {
 	color: #666;
 	margin-bottom: 20px;
 }
-

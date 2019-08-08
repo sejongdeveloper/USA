@@ -16,6 +16,9 @@
 
 </head>
 <body>
+
+<div id="memIdPro">
+
 <div class="subject">아이디 찾기</div>
 <span id="id"><hr></span><span><hr></span>
 <div id="idDetail">고객님의 정보와 일치하는 아이디 목록입니다.</div>
@@ -30,6 +33,8 @@
 
 <input type="button" id="login" value="로그인하기" onclick="window.location.href='${contextPath}/memLoginForm.do'">
 <input type="button" value="비밀번호 찾기" onclick="window.location.href='${contextPath}/memPwdForm.do'">
+
+</div>
 
 </body>
 </html>

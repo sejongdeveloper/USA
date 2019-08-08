@@ -205,6 +205,26 @@ public class MemDAO {
 		return mem_pwd;
 	} // pwd() end
 	
+	// 비밀번호 변경
+	public int update(String mem_id, String mem_pwd) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			String sql = "update mem set mem_pwd = ? where mem_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem_pwd);
+			pstmt.setString(2, mem_id);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt); CloseUtil.close(conn);
+		} 
+		
+		return result;
+	} //update() end
+	
 	// 회원탈퇴
 	public int delete(String mem_id) {
 		int result = 0;

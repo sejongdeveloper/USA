@@ -1,5 +1,5 @@
 @charset "UTF-8";
-#memId{
+#memPwd {
 	margin-top: 50px;
 	margin-left: 240px;
 }
@@ -7,31 +7,44 @@
 .main {
 	border: 1px solid #dadada;
 	width: 430px;
-	padding:  15px 50px 50px 70px;
+	height: 111;
+	padding:  0px 50px 0px 100px;
+	
 }
+
+.subject {
+	font-weight: bold;
+}
+
 hr {
 	display: inline-block;
-	width: 464px;
+	width: 478px;
 }
 #id hr {
-	width: 85px;
+	width: 100px;
 	border: 1px solid black;
 }
 
-.name {
-	font-weight: bold;
-	width: 80px;
+.data {
+	width: 288px;
+	height: 32px;
+	border: 1px solid #dadada;
+	margin-top: 35px;
+	margin-bottom: 40px;
+	margin-left: 35px;
 }
 
-.name, .data {
-	display: inline-block;
-}
-
-input[type=text] {
-	width: 217px;
-	height: 23px;
-	border: 1px solid #ccc;
+#mem_id {
+	margin-left: 5px;
 	margin-bottom: 5px;
+	width: 270px;
+	height: 25px;
+	border: 1px solid #ffffff;
+	background-color: #ffffff;
+}
+
+#mem_id:focus {
+	outline: none;
 }
 
 input[type=submit] {
@@ -51,4 +64,3 @@ input[type=submit]:hover {
 	color: #666;
 	margin-bottom: 20px;
 }
-

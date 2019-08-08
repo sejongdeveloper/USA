@@ -12,6 +12,9 @@
 
 </head>
 <body>
+
+<div id="memId">
+
 <div class="subject">아이디 찾기</div>
 <span id="id"><hr></span><span><hr></span>
 <div id="idDetail">회원 정보를 입력해 주세요.</div>
@@ -27,5 +30,8 @@
 </div>
 	<input type="submit" value="다음">
 </form>
+
+</div>
+
 </body>
 </html>
