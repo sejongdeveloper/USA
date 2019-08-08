@@ -18,11 +18,10 @@ public class LocModifyProAction implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RevDAO dao = RevDAO.getInstance();
 		int rev_num = Integer.parseInt(request.getParameter("rev_num"));
-		RevVO vo = dao.getUpdateVO(rev_num);
-		
+		String rev_contents = request.getParameter("rev_contents");
 		int result = dao.update(vo);
 		
-		String rev_locname = request.getParameter("loc_name");
+		String rev_locname = request.getParameter("rev_locname");
 		
 		return request.getContextPath() + "/view/reg/locView.do?loc_name="+URLEncoder.encode(rev_locname, "utf-8")+"&result="+result;
 	}

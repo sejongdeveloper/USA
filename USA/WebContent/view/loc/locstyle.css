@@ -161,65 +161,6 @@ body {
 .locView_loginwant {
 	text-align: center;
 }
-.locView_revFrame {
-	margin-top: 30px;
-	margin-left: 50px;
-	height: 200px;
-	border-radius: 20px;
-	background-color: #D8D8D8;
-	width: 90%;
-}
-.locView_revWriter {
-	display: inline-block;
-	margin-top: 100px;
-	margin-left: 50px;
-}
-.locView_revContents {
-	position: relative;
-	display: inline-block;
-	top: -50px;
-	margin-left: 50px;
-	width: 750px;
-	height: 130px;
-}
-.locView_revDate {
-	position: relative;
-	display: inline-block;
-	left: 160px;
-	top: -70px;
-	color: gray;
-}
-.locView_revScore {
-	position: relative;
-	display: inline-block;
-	left: 750px;
-	top: -150px;
-	background-color: red;
-	border-radius: 20px;
-	height: 50px;
-	width: 50px;
-}
-.locView_revScore2 {
-	position: relative;
-	display: inline-block;
-	top: 13px;
-	left: 20px;
-	height: 50px;
-	width: 50px;
-	color: white;
-}
-.locView_revModify {
-	position: relative;
-	display: inline-block;
-	left: 760px;
-	top: -160px;
-}
-.locView_revDelete {
-	position: relative;
-	display: inline-block;
-	left: 711px;
-	top: -120px;
-}
 .radio {
 	display: none;
 }
@@ -229,4 +170,49 @@ body {
 }
 input:checked +.laimg {
 	opacity: 1.0;
+}
+.locView_revDelete {
+	position: relative;
+	display: inline-block;
+}
+table {
+	margin: auto;
+	margin-top: 30px;
+	width: 90%;
+	text-align: center;
+}
+.locView_revWriter {
+	width: 150px;
+}
+.locView_revContents {
+	height: 150px;
+	width: 600px;
+	text-align: left;
+}
+.locView_revScore {
+	width: 100px;
+}
+.locView_revScorein {
+	border-radius: 20px;
+	background-color: red;
+	color: white;
+	width: 50px;
+	height: 50px;
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	left: 25px;
+}
+.locView_revDate {
+	text-align: left;
+	padding-left: 20px;
+}
+.revView_contentsmodiform {
+	display: none;
+}
+.modifyend {
+	display: none;
+}
+.locView_revScoreinmodiform {
+	display: none;
 }

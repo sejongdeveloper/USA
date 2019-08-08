@@ -33,7 +33,7 @@
 
 <c:if test="${ sessionScope.member != null }" >
 <form action="locWritePro.do" method="post" onsubmit="return revWrite()">
-<input type="hidden" value="${ loc_data.loc_name }" name="loc_name">
+<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname">
 <div class="locView_revTitle">평점을 선택해주세요.</div>
 <div class="locView_revWriteScoreFrame">
 <div class="locView_revWriteScore"><label><input type="radio" value="1" name="rev_score" class="radio" id="rev_score"><img alt="1" src="${ pageContext.request.contextPath }/upload/1.jpg" class="laimg"></label></div>
@@ -55,33 +55,42 @@
 리뷰를 원하시면 회원가입해주세요.
 </div>
 </c:if>
-
 <c:forEach items="${ rev_list }" var="list">
-<div class="locView_revFrame">
-<div class="locView_revWriter">${ list.rev_writer }</div>
-<div class="locView_revContents">${ list.rev_contents }</div>
-<fmt:formatDate value="${ list.rev_date }" pattern="yyyy / MM / dd" var="date"/>
-<div class="locView_revDate">${ date }</div>
-<div class="locView_revScore">
-<div class="locView_revScore2">${ list.rev_score }</div>
-</div>
-<c:if test="${ list.rev_writer == sessionScope.member }">
-<div class="locView_revModify">
-<form action="locModifyPro.do">
-<input type="hidden" value="${ list.rev_num }" name="rev_num">
-<input type="hidden" value="${ loc_data.loc_name }" name="loc_name">
-<input type="submit" value="수정">
-</form>
-</div>
-<div class="locView_revDelete">
-<form action="locDeletePro.do">
-<input type="hidden" value="${ list.rev_num }" name="rev_num">
-<input type="hidden" value="${ loc_data.loc_name }" name="loc_name">
-<input type="submit" value="삭제">
-</form>
-</div>
-</c:if>
-</div>
+<table border="1">
+	<tr>
+		<td rowspan="2" class="locView_revWriter">
+		${ list.rev_writer }
+		</td>
+		<td class="locView_revContents">
+		<form>
+		<input type="hidden" value="${ list.rev_num }" name="rev_num">
+		<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname">
+		<div id="revView_contents${ list.rev_num }" class="revView_contents">${ list.rev_contents }</div>
+		<div id="revView_contentsmodiform${ list.rev_num }" class="revView_contentsmodiform"><textarea cols="80" rows="8" name="rev_contents">${ list.rev_contents }</textarea></div>
+		</td>
+		<td rowspan="2" class="locView_revScore">
+		<div id="locView_revScorein${ list.rev_num }" class="locView_revScorein">${ list.rev_score }</div>
+		<div id="locView_revScoreinmodiform${ list.rev_num }" class="locView_revScoreinmodiform">여기에 정보추가언ㅁㄹ;ㅏㅣ어리ㅏ멍ㄴㄹ;ㅣ</div>
+		</td>
+		<td rowspan="2">
+		<input type="submit" value="완료" class="modifyend" id="modifyend${ list.rev_num }">
+		</form>
+		<c:if test="${ list.rev_writer != sessionScope.member }">
+			<input type="button" name="modifystart" class="modifystart" value="수정" onclick="modify('${ list.rev_num }', this)" id="modifystart${ list.rev_num }">
+			<form action="locDeletePro.do">
+			<input type="hidden" value="${ list.rev_num }" name="rev_num">
+			<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname">
+			<input type="submit" value="삭제">
+			</form></c:if>
+		</td>
+	</tr>
+	<tr>
+		<td class="locView_revDate">
+		<fmt:formatDate value="${ list.rev_date }" pattern="yyyy / MM / dd" var="date"/>
+		${ date }
+		</td>
+	</tr>
+</table>
 </c:forEach>
 
 </div>
@@ -112,5 +121,30 @@
 			alert("실패");
 		}
 	});
+	
+	function modify(writer, a){	    
+
+	        var obj = document.getElementsByName("modifystart");
+			
+	        for(var i=0; i<obj.length; i++){
+	            if(obj[i] != a){
+	            	<c:forEach items="${ rev_list }" var="list">
+	    	        if('${ list.rev_num }' != writer) {
+	    	        	document.getElementById('revView_contentsmodiform'+'${ list.rev_num }').style.display='none';
+	            	    document.getElementById('modifyend'+'${ list.rev_num }').style.display='none';
+	            	    document.getElementById('revView_contents'+'${ list.rev_num }').style.display='inline';
+		        	    document.getElementById('modifystart'+'${ list.rev_num }').style.display='inline';
+	    	        } 
+	    	        </c:forEach>
+	            } else {
+	        		document.getElementById('revView_contentsmodiform'+writer).value=document.getElementById('revView_contents'+writer).innerHTML;
+	        	    document.getElementById('revView_contents'+writer).style.display='none';
+	        	    document.getElementById('modifystart'+writer).style.display='none';
+	        	    document.getElementById('revView_contentsmodiform'+writer).style.display='inline';
+	        	    document.getElementById('modifyend'+writer).style.display='inline';
+	            }
+	        }
+	        
+	}
 </script>
 </html>
