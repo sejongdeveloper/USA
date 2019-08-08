@@ -56,28 +56,34 @@
 </div>
 </c:if>
 <c:forEach items="${ rev_list }" var="list">
-<table border="1">
+<table>
 	<tr>
 		<td rowspan="2" class="locView_revWriter">
 		${ list.rev_writer }
 		</td>
 		<td class="locView_revContents">
-		<form>
+		<form action="locModifyPro.do" method="post" onsubmit="return revModi()">
 		<input type="hidden" value="${ list.rev_num }" name="rev_num">
 		<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname">
 		<div id="revView_contents${ list.rev_num }" class="revView_contents">${ list.rev_contents }</div>
-		<div id="revView_contentsmodiform${ list.rev_num }" class="revView_contentsmodiform"><textarea cols="80" rows="8" name="rev_contents">${ list.rev_contents }</textarea></div>
+		<div id="revView_contentsmodiform${ list.rev_num }" class="revView_contentsmodiform"><textarea cols="80" rows="8" name="rev_contents" id="rev_modicontents">${ list.rev_contents }</textarea></div>
 		</td>
 		<td rowspan="2" class="locView_revScore">
 		<div id="locView_revScorein${ list.rev_num }" class="locView_revScorein">${ list.rev_score }</div>
-		<div id="locView_revScoreinmodiform${ list.rev_num }" class="locView_revScoreinmodiform">여기에 정보추가언ㅁㄹ;ㅏㅣ어리ㅏ멍ㄴㄹ;ㅣ</div>
+		<div id="locView_revScoreinmodiform${ list.rev_num }" class="locView_revScoreinmodiform">
+			<div class="locView_revScoremodi"><label><input type="radio" value="1" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/1.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="2" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/2.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="3" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/3.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="4" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/4.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="5" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/5.jpg" class="laimg modiimg"></label></div>
+		</div>
 		</td>
 		<td rowspan="2">
 		<input type="submit" value="완료" class="modifyend" id="modifyend${ list.rev_num }">
 		</form>
-		<c:if test="${ list.rev_writer != sessionScope.member }">
+		<c:if test="${ list.rev_writer == sessionScope.member }">
 			<input type="button" name="modifystart" class="modifystart" value="수정" onclick="modify('${ list.rev_num }', this)" id="modifystart${ list.rev_num }">
-			<form action="locDeletePro.do">
+			<form action="locDeletePro.do" method="post">
 			<input type="hidden" value="${ list.rev_num }" name="rev_num">
 			<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname">
 			<input type="submit" value="삭제">
@@ -105,8 +111,25 @@
 			return false;
 		}
 		if(score == null){
-			alert("내용을 입력해주세요.");
+			alert("평점을 선택해주세요.");
 			$("#rev_score").focus();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	function revModi(){
+		var contents = $("#rev_modicontents").val()
+		var score = $("#rev_modiscore").val()
+		if(contents == null || contents == ""){
+			alert("내용을 입력해주세요.");
+			$("#rev_modicontents").focus();
+			return false;
+		}
+		if(score == null){
+			alert("평점을 선택주세요.");
+			$("#rev_modiscore").focus();
 			return false;
 		}
 		
@@ -132,16 +155,20 @@
 	    	        if('${ list.rev_num }' != writer) {
 	    	        	document.getElementById('revView_contentsmodiform'+'${ list.rev_num }').style.display='none';
 	            	    document.getElementById('modifyend'+'${ list.rev_num }').style.display='none';
+	            	    document.getElementById('locView_revScoreinmodiform'+'${ list.rev_num }').style.display='none';
 	            	    document.getElementById('revView_contents'+'${ list.rev_num }').style.display='inline';
 		        	    document.getElementById('modifystart'+'${ list.rev_num }').style.display='inline';
+		        	    document.getElementById('locView_revScorein'+'${ list.rev_num }').style.display='table-cell';
 	    	        } 
 	    	        </c:forEach>
 	            } else {
 	        		document.getElementById('revView_contentsmodiform'+writer).value=document.getElementById('revView_contents'+writer).innerHTML;
 	        	    document.getElementById('revView_contents'+writer).style.display='none';
 	        	    document.getElementById('modifystart'+writer).style.display='none';
+	        	    document.getElementById('locView_revScorein'+writer).style.display='none';
 	        	    document.getElementById('revView_contentsmodiform'+writer).style.display='inline';
 	        	    document.getElementById('modifyend'+writer).style.display='inline';
+	        	    document.getElementById('locView_revScoreinmodiform'+writer).style.display='inline';
 	            }
 	        }
 	        

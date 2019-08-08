@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<jsp:include page="/view/main/header.html" />
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/view/reg/regstyle.css">
 <!DOCTYPE html>
 <html><head>
@@ -14,3 +16,4 @@
 </div>
 </body>
 </html>
+<jsp:include page="/view/main/footer.html" />

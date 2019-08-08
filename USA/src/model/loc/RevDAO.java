@@ -203,35 +203,6 @@ public class RevDAO {
 		return result;
 	}
 	
-	// 관광명소 리뷰 수정할 정보 읽기
-	public RevVO getUpdateVO(int rev_num) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		RevVO vo = null;
-		String sql = "select rev_contents, rev_score from rev where rev_num = ?";
-		
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, rev_num);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				vo = new RevVO();
-				vo.setRev_contents(rs.getString("rev_contents"));
-				vo.setRev_score(rs.getInt("rev_score"));
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
-		}
-		
-		return vo;
-	}
-	
 	// 관광명소 리뷰 수정
 	public int update(RevVO vo) {
 		Connection conn = null;
@@ -243,7 +214,7 @@ public class RevDAO {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getRev_contents());
-			pstmt.setString(2, vo.getRev_contents());
+			pstmt.setInt(2, vo.getRev_score());
 			pstmt.setInt(3, vo.getRev_num());
 			result = pstmt.executeUpdate();
 			
@@ -260,7 +231,7 @@ public class RevDAO {
 	public int delete(int rev_num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "delete from rev where rev_num = ?";
+		String sql = "update rev set rev_alive = 0 where rev_num = ?";
 		int result = 0;
 		
 		try {

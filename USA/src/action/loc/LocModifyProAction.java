@@ -16,9 +16,17 @@ public class LocModifyProAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		RevDAO dao = RevDAO.getInstance();
+		RevVO vo = new RevVO();
 		int rev_num = Integer.parseInt(request.getParameter("rev_num"));
 		String rev_contents = request.getParameter("rev_contents");
+		int rev_score = Integer.parseInt(request.getParameter("rev_score"));
+		
+		vo.setRev_num(rev_num);
+		vo.setRev_contents(rev_contents);
+		vo.setRev_score(rev_score);
+		
 		int result = dao.update(vo);
 		
 		String rev_locname = request.getParameter("rev_locname");

@@ -39,7 +39,8 @@
     $(document).ready(function(){
         slideShow();
         calcTime();
-    })
+        weatherShow();
+    });
     
     function slideShow() {
     var i;
@@ -77,7 +78,7 @@
         setTimeout(calcTime, 1000);
     }
     
-    $(document).ready(function(){
+    function weatherShow(){
         var city = "${ regname_vo.regNameEng }";
         var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=03b991ee6df0d0733ada010a51bacf08";
         $.getJSON(url+"&callback=?", function(data) {
@@ -85,7 +86,7 @@
            $("#reg_weather2").html("<br>"+(data.main.temp- 273.15).toFixed(1)+"ºC");
         });
      
-     });
+    }
     
     function initMap() { 
       var reg = '${ reg_filenameList[0].reg_name }';
