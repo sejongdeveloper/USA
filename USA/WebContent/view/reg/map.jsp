@@ -7,22 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>RegMap</title>
-<style type="text/css">
-/*     .section {
-        width: 700px;
-        height: 500px;
-        position: relative;
-        top: 55px;
-        left: 210px;  
-    } */
-</style>
 </head>
 <body>
 
-<%-- <jsp:include page="/view/headfoot/header.jsp" flush="false" />
+	<jsp:include page="/view/headfoot/header.jsp" flush="false" />
 
-	<div class="section" align="center">section</div>
- --%>
 		<div data-obj-id="hwjRv" data-obj-type="element"
 			data-text-editable="true" class=""
 			style="position: absolute; top: 35px; left: 491px; width: 120px; height: 10px;">
@@ -62,9 +51,9 @@
 				날씨<br><br><br><br><br><br><br>
 			</div>
 		</div>
-	</div>
+		</div>
 
-<%-- <jsp:include page="/view/headfoot/footer.jsp" flush="false" /> --%>
+	<jsp:include page="/view/headfoot/footer.jsp" flush="false" />
 
 </body>
 </html>
