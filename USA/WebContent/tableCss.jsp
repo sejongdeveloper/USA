@@ -9,14 +9,7 @@
 <title>JSP</title>
 </head>
 <body>
-<table>
-	
-	<tr>
-		<td >sdfsfsdf<td>
-	</tr>
-	<tr>
-		<td >sdfsfsdf<td>
-	</tr>
-</table>
+
+<jsp:include page="view/main/header.html"></jsp:include>
 </body>
 </html>

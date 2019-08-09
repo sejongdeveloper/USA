@@ -35,7 +35,7 @@
 		<input type="password" name="mem_pwd" placeholder="비밀번호" class="inputReal" id="mem_pwd" onfocusout="pwdValidate()" onfocusin="basic('#pwdDiv')">
 		<div class="imgDiv"><img src="${contextPath }/view/mem/upload/test.svg"></div>
 	</div>
-	
+
 	<c:if test="${not empty param.outmsg }">
 	<div id="idPwdMsg">
 		아이디 또는 비밀번호를 다시 확인하세요.<div id="br"></div>
@@ -46,11 +46,11 @@
 		<span id="idChkSpan"><input type="checkbox" name="idChk" id="idChk" onclick="test()"></span><span id="idChkName">아이디 저장</span>
 		<a href="${contextPath }/memIdForm.do">아이디 찾기</a> | <a href="${contextPath }/memPwdForm.do">비밀번호 찾기</a> | <a href="${contextPath }/memWriterForm.do">회원가입</a>
 	</div>
-	
+
 	<input type="submit" value="로그인">
-	
+
 	</form>
-	
+
 </div>
 
 </body>

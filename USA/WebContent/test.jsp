@@ -30,5 +30,6 @@ function calcTime(city, offset) {
 setInterval(calcTime('NewYork', '-4'),1000);
 </script>
 <span id="time"></span>
+
 </body>
 </html>
