@@ -13,8 +13,8 @@ import action.loc.LocDeleteProAction;
 import action.loc.LocListAction;
 import action.loc.LocModifyProAction;
 import action.loc.LocViewAction;
-import action.main.MoneyAction;
 import action.loc.LocWriteProAction;
+import action.main.MoneyAction;
 import action.mem.MemDelProAction;
 import action.mem.MemIdProAction;
 import action.mem.MemIdValidateAction;
@@ -30,7 +30,6 @@ import action.reg.RegMainAction;
 import action.reg.RegViewAction;
 import action.tra.TradeBoardDetailAction;
 import action.tra.TradeBoardDownloadAction;
-import action.tra.TradeBoardListAction;
 import action.tra.TradeBoardModifyFormAction;
 import action.tra.TradeBoardModifyProAction;
 import action.tra.TradeBoardWriteAction;
@@ -167,9 +166,9 @@ public class FrontController extends HttpServlet implements Process{
 
 
 		//리스트
-		}else if(com.equals("view/tra/list.do")) {
-		nextPage=new TradeBoardListAction().execute(request, response);
-		System.out.println("list");
+//		}else if(com.equals("view/tra/list.do")) {
+//		nextPage=new TradeBoardListAction().execute(request, response);
+//		System.out.println("list");
 		
 		//글쓰기 누르면 글쓰기폼이 나옴
 		}else if (com.equals("view/tra/writeForm.do")) {

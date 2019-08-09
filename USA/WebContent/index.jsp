@@ -17,7 +17,7 @@ section {
 </head>
 <body>
 <header>
-	<jsp:include page="view/main/header.jsp" flush="false" />
+	<jsp:include page="/view/main/header.jsp" flush="false" />
 </header>
 
 <section>
@@ -35,7 +35,7 @@ section {
 </section>
 
 <footer>
-	<jsp:include page="view/main/footer.jsp" flush="false" />
+	<jsp:include page="view/main/footer.html" flush="false" />
 </footer>
 </body>
 </html>
