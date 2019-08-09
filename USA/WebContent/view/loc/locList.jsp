@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<link rel="stylesheet" href="locstyle.css">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/view/loc/locstyle.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,14 @@
 <title>JSP</title>
 </head>
 <body>
-<div class="loclist locList_reg">${ loc_regname }</div>
-<c:forEach items="loc_nameFileList" var="picture">
-<div class="loclist locList_list">사진<div class="locList_locname">내용</div></div>
+<div class="locList_reg">${ loc_nameFileList[0].loc_regname }</div>
+
+<c:set value="${ loc_scoreList }" var="score" />
+<c:forEach items="${ loc_nameFileList }" var="list" varStatus="status">
+<a href="locView.do?loc_name=${ list.loc_name }"><div class="locList_list">
+<img class="locList_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ list.loc_filename }">
+<div class="locList_locname">${ list.loc_name }</div><div class="locList_locscore"><fmt:formatNumber value="${ score[status.index] }" pattern=".0" /></div>
+</div></a>
 </c:forEach>
 </body>
 </html>

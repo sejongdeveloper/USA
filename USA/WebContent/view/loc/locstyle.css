@@ -1,17 +1,13 @@
 a {
 	text-decoration: none;
+	color: white;
 }
 body {
 	border-left: 1px solid black;
 	border-right: 1px solid black;
 	width: 1100px;
-	margin-top: 100px;
-	margin-bottom: auto;
-	margin-left: auto;
-	margin-right: auto;
-}
-div{
-	border: 1px solid black;
+	left: 10%;
+	margin: auto;
 }
 .locList_reg {
 	position: relative;
@@ -23,19 +19,42 @@ div{
 	text-align: center;
 }
 .locList_list {
-	position: relative;
 	display: inline-block;
 	text-align: center;
-	top: 30px;
-	left: 60px;
+	margin-left: 30px;
 	height: 300px; 
 	width: 300px;
 	margin-right: 30px;
-	margin-top: 30px;
+	margin-top: 50px;
 }
 .locList_locname {
-	margin-top: 40%;
+	display: inline-block;
+	position: relative;
+	top: -170px;
+	left: 10px;
 	font-size: 25px;
+	font: bold;
+}
+.locList_locscore {
+	display: inline-block;
+	position: relative;
+	top: -130px;
+	left: -80px;
+	font-size: 20px;
+}
+.locList_img {
+	height: 100%;
+	width: 100%;
+	opacity: 0.7;
+}
+.locList_list:hover .locList_img {
+	opacity: 1.0;
+}
+.locList_list:hover .locList_locname {
+	opacity: 0;
+}
+.locList_list:hover .locList_locscore {
+	opacity: 0;
 }
 
 
@@ -45,7 +64,7 @@ div{
 
 .locView_loc {
 	position: relative;
-	height: 600px;
+	height: 500px;
 	border-bottom: 1px solid gray;
 }
 .locView_picture {
@@ -53,23 +72,156 @@ div{
 	top: 30px;
 	margin: auto;
 	width: 90%;
-	height: 35%;
+	height: 40%;
+	text-align: center;
+}
+.locView_img {
+	height: 100%;
+	width: 80%;
 }
 .locView_locname {
 	position: relative;
 	top: 40px;
 	text-align: center;
-	width: 100px;
+	width: 200px;
 	margin: auto;
+	font-size: 20px;
 }
 .locView_contents {
 	position: relative;
-	top: 50px;
+	top: 70px;
 	margin: auto;
 	width: 90%;
-	height: 50%;
+	border-radius: 20px;
+	padding: 5px;
+	border: 1px solid #808080;
 }
 .locView_rev {
+	margin-top: 30px;
+}
+.locView_allCount {
 	position: relative;
-	top: 30px;
+	left: 50px;
+}
+.locView_allScore {
+	position: relative;
+	display: inline-block;
+	left: 300px;
+	top: 90px;
+	font-size: 50px;
+	font: bold;
+}
+.locView_count {
+	position: relative;
+	left: 520px;
+	top: -20px;
+}
+.locView_count5, .locView_count4, .locView_count3, .locView_count2, .locView_count1 {
+	margin-top: 10px;
+}
+.locView_faceimg {
+	height: 100x;
+	width: 100px;
+}
+.locView_revTitle {
+	display: inline-block;
+	margin-left: 450px;
+}
+.locView_revWriteScoreFrame {
+	margin-left: 380px;
+	margin-bottom: 30px;
+}
+.locView_revWriteScore {
+	position: relative;
+	display: inline-block;
+	margin-right: 15px;
+}
+.locView_revWrite {
+	display: inline-block;
+	padding-left: 80px;
+}
+.locView_revWriteImg {
+	position: relative;
+	display: inline-block;
+	top: -50px;
+	left: -20px;
+}
+.locView_revWriteContents {
+	display: inline-block;
+	top: -50px;
+}
+.locView_revWriteSubmit {
+	position: relative;
+	display: inline-block;
+	left: -3px;
+	top: -36px;
+	height: 155px;
+	width: 80px;
+}
+.locView_loginwant {
+	text-align: center;
+}
+.radio {
+	display: none;
+}
+.laimg {
+	cursor: pointer;
+	opacity: 0.5;
+}
+input:checked +.laimg {
+	opacity: 1.0;
+}
+.locView_revDelete {
+	position: relative;
+	display: inline-block;
+}
+table {
+	margin: auto;
+	margin-top: 30px;
+	width: 90%;
+	text-align: center;
+	border-radius: 20px;
+	padding: 5px;
+	border: 1px solid #808080;
+}
+.locView_revWriter {
+	width: 150px;
+}
+.locView_revContents {
+	height: 150px;
+	width: 600px;
+	text-align: left;
+}
+.locView_revScore {
+	width: 100px;
+}
+.locView_revScorein {
+	border-radius: 20px;
+	background-color: red;
+	color: white;
+	width: 50px;
+	height: 50px;
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	left: 25px;
+}
+.locView_revDate {
+	text-align: left;
+}
+.revView_contentsmodiform {
+	display: none;
+}
+.modifyend {
+	display: none;
+}
+.locView_revScoreinmodiform {
+	display: none;
+}
+.modiradio {
+	display: none;
+}
+.modiimg {
+	height: 20px;
+	width: 20px;
 }

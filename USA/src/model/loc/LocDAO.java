@@ -29,12 +29,12 @@ public class LocDAO {
 	}
 	
 	// 관광명소 이름, 사진 가져오기
-	public ArrayList<LocVO> getLocName(String loc_regname) {
+	public ArrayList<LocVO> getLocFileName(String loc_regname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<LocVO> list = new ArrayList<LocVO>();
-		String sql = "SELECT LOC_NAME, LOC_FILENAME FROM LOC WHERE LOC_REGNAME = ?";
+		String sql = "SELECT LOC_NAME, LOC_FILENAME, LOC_REGNAME FROM LOC WHERE LOC_REGNAME = ?";
 		
 		try {
 			conn = getConnection();
@@ -46,6 +46,7 @@ public class LocDAO {
 				LocVO vo = new LocVO();
 				vo.setLoc_name((rs.getString("LOC_NAME")));
 				vo.setLoc_filename((rs.getString("LOC_FILENAME")));
+				vo.setLoc_regname(rs.getString("LOC_REGNAME"));
 				list.add(vo);
 			}
 			
@@ -59,12 +60,12 @@ public class LocDAO {
 	}
 	
 	// 관광명소 데이터 가져오기
-	public ArrayList<LocVO> getLocContents(String loc_regname){
+	public LocVO getLocContents(String loc_name){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<LocVO> list = new ArrayList<LocVO>();
-		String sql = "SELECT LOC_NAME, LOC_CONTENTS, LOC_FILENAME FROM LOC WHERE LOC_NAME = ?";
+		LocVO vo = null;
+		String sql = "SELECT * FROM LOC WHERE LOC_NAME = ?";
 		
 		try {
 			conn = getConnection();
@@ -73,11 +74,11 @@ public class LocDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				LocVO vo = new LocVO();
+				vo = new LocVO();
 				vo.setLoc_name(rs.getString("LOC_NAME"));
 				vo.setLoc_contents(rs.getString("LOC_CONTENTS"));
 				vo.setLoc_filename(rs.getString("LOC_FILENAME"));
-				list.add(vo);
+				vo.setLoc_regname(rs.getString("LOC_REGNAME"));
 			}
 			
 		} catch (Exception e) {
@@ -86,7 +87,7 @@ public class LocDAO {
 			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
-		return list;
+		return vo;
 	}
 	
 	// 관광명소 리뷰 등록

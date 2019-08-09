@@ -48,7 +48,7 @@ public class RevDAO {
 				vo.setRev_num(rs.getInt("REV_NUM"));
 				vo.setRev_date(rs.getTimestamp("REV_DATE"));
 				vo.setRev_writer(rs.getString("REV_WRITER"));
-				vo.setRev_contents(rs.getString("CONTENTS"));
+				vo.setRev_contents(rs.getString("REV_CONTENTS"));
 				vo.setRev_score(rs.getInt("REV_SCORE"));
 				list.add(vo);
 			}
@@ -87,12 +87,12 @@ public class RevDAO {
 		return count;
 	}
 	
-	// 관광명소 삭제 안된 리뷰 총 평점
+	// 관광명소 삭제 안된 리뷰 총 평점 가져오기
 	public double getAllScore(String rev_locname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT AVG(*) FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1";
+		String sql = "SELECT AVG(REV_SCORE) FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1";
 		double avg = 0;
 		
 		try {
@@ -102,7 +102,7 @@ public class RevDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				avg = rs.getInt(1);
+				avg = rs.getDouble(1);
 			}
 			
 		} catch (Exception e) {
@@ -112,6 +112,32 @@ public class RevDAO {
 		}
 		
 		return avg;
+	}
+	
+	// 지역의 모든 관광명소 삭제 안된 리뷰 총 평점 가져오기
+	public ArrayList<Double> getAllLocScore() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Double> list = new ArrayList<Double>();
+		String sql = "SELECT AVG(REV_SCORE) FROM REV GROUP BY REV_LOCNAME";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getDouble(1));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		}
+		
+		return list;
 	}
 	
 	// 관광명소 삭제 안된 리뷰 각 점수 개수
@@ -176,35 +202,6 @@ public class RevDAO {
 		return result;
 	}
 	
-	// 관광명소 리뷰 수정할 정보 읽기
-	public RevVO getUpdateVO(int rev_num) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		RevVO vo = null;
-		String sql = "select rev_contents, rev_score from rev where rev_num = ?";
-		
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, rev_num);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				vo = new RevVO();
-				vo.setRev_contents(rs.getString("rev_contents"));
-				vo.setRev_score(rs.getInt("rev_score"));
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
-		}
-		
-		return vo;
-	}
-	
 	// 관광명소 리뷰 수정
 	public int update(RevVO vo) {
 		Connection conn = null;
@@ -216,7 +213,7 @@ public class RevDAO {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getRev_contents());
-			pstmt.setString(2, vo.getRev_contents());
+			pstmt.setInt(2, vo.getRev_score());
 			pstmt.setInt(3, vo.getRev_num());
 			result = pstmt.executeUpdate();
 			
@@ -233,7 +230,7 @@ public class RevDAO {
 	public int delete(int rev_num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "delete from rev where rev_num = ?";
+		String sql = "update rev set rev_alive = 0 where rev_num = ?";
 		int result = 0;
 		
 		try {

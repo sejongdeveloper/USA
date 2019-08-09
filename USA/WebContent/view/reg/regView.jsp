@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<link rel="stylesheet" href="regstyle.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/view/reg/regstyle.css">
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
 <title>RegView</title>
 </head>
 <body>
-<div class="regView_regname">${ reg_list[0].reg_name }</div>
+<div class="regView_regname">&lt;&nbsp;${ reg_list[0].reg_name }&nbsp;&gt;</div>
 <div class="regView_picture">
 <c:forEach var="picture" items="${ reg_list }">
 <img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }">

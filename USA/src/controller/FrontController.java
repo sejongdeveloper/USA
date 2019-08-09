@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import action.loc.LocDeleteProAction;
 import action.loc.LocListAction;
+import action.loc.LocModifyProAction;
 import action.loc.LocViewAction;
 import action.main.MoneyAction;
+import action.loc.LocWriteProAction;
 import action.mem.MemDelProAction;
 import action.mem.MemIdProAction;
 import action.mem.MemIdValidateAction;
@@ -137,17 +140,33 @@ public class FrontController extends HttpServlet implements Process{
 			
 			
 		// 규민	
+		}
+		if(com.equals("view/reg/regMap.do")) {
+			nextPage = "/view/reg/regMap.jsp";
 		} else if(com.equals("view/reg/regMain.do")) {
 			nextPage = new RegMainAction().execute(request, response);
 		} else if(com.equals("view/reg/regView.do")) {
 			nextPage = new RegViewAction().execute(request, response);
 		} else if(com.equals("view/reg/locList.do")) {
 			nextPage = new LocListAction().execute(request, response);
-		} else if(com.equals("view/loc/locView.do")) {
+		} else if(com.equals("view/reg/locView.do")) {
 			nextPage = new LocViewAction().execute(request, response);
+		} else if(com.equals("view/reg/locWritePro.do")) {
+			nextPage = new LocWriteProAction().execute(request, response);
+			response.sendRedirect(nextPage);
+			return;
+		} else if(com.equals("view/reg/locModifyPro.do")) {
+			nextPage = new LocModifyProAction().execute(request, response);
+			response.sendRedirect(nextPage);
+			return;
+		} else if(com.equals("view/reg/locDeletePro.do")) {
+			nextPage = new LocDeleteProAction().execute(request, response);
+			response.sendRedirect(nextPage);
+			return;
 		
-		
-			//리스트
+
+
+		//리스트
 		}else if(com.equals("view/tra/list.do")) {
 		nextPage=new TradeBoardListAction().execute(request, response);
 		System.out.println("list");
@@ -183,15 +202,16 @@ public class FrontController extends HttpServlet implements Process{
 		}else if(com.equals("view/tra/TradeBoardModifyProAction.do")) {
 			System.out.println("수정완료 돌기는 하나요?");
 			nextPage=new TradeBoardModifyProAction().execute(request, response);
-			
-		}
+		}	
+		
+		
+		
 		
 		/*
 		if(nextPage!=null&&nextPage!="") {
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 			System.out.println("여기로 돌기는 하나요?");
 			dis.forward(request, response);
-		}
 		*/
 		
 		if(nextPage!=null&&nextPage!="") {
