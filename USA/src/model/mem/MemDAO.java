@@ -121,27 +121,17 @@ public class MemDAO {
 	} // update() end
 	
 	// 회원수정 실행
-	public int update(MemVO vo) {
+	public int update(String mem_id, String mem_pwd, String calc, String mem_value) {
 		int result = 0;
 		
 		try {
 			conn = getConnection();
-			String sql = "update mem set mem_name = ?, mem_ph = ?, mem_addr = ?, mem_filename = ? where mem_id = ? and mem_pwd = ?";
+			String sql = "update mem set " + calc + " = ? where mem_id = ? and mem_pwd = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getMem_name());
-			pstmt.setString(2, vo.getMem_ph());
-			pstmt.setString(3, vo.getMem_addr());
-			pstmt.setString(4, vo.getMem_filename());
-			pstmt.setString(5, vo.getMem_id());
-			pstmt.setString(6, vo.getMem_pwd());
-			System.out.println("1:" + vo.getMem_name());
-			System.out.println("2:" + vo.getMem_ph());
-			System.out.println("3:" + vo.getMem_addr());
-			System.out.println("4:" + vo.getMem_filename());
-			System.out.println("5:" + vo.getMem_id());
-			System.out.println("6:" + vo.getMem_pwd());
+			pstmt.setString(1, mem_value);
+			pstmt.setString(2, mem_id);
+			pstmt.setString(3, mem_pwd);
 			result = pstmt.executeUpdate();
-			System.out.println("result: " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

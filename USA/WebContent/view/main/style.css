@@ -1,14 +1,18 @@
 @charset "UTF-8";
 .footer {
-   position: absolute;
-   bottom: 0px;
+   position: relative;
    width: 1920px;
    background-color: black;
+   bottom: 0px;
+   text-align: center;
 }
 .footer_table {
+   width: 1000px;
    text-align: left;
    margin: auto;
    color: white;
+   padding: 20px;
+   border: 0px;
 }
 .header {
    position: absolute;
@@ -16,6 +20,7 @@
    width: 1920px;
    background-color: black;
    height: 70px;
+   z-index: 10;
 }
 a {
    text-decoration: none;
@@ -25,7 +30,7 @@ a {
    width: 1000px;
    text-align: center;
    margin-top: 0px;
-   z-index: 100;
+   margin-left: 400px;
 }
 .headertitle {
    font-size: 50px;
@@ -72,4 +77,9 @@ li:hover > a {
 }
 .headerSignin:hover > a {
    color: gray;
+}
+
+.member {
+	color: white;
+    margin-right: 30px;
 }

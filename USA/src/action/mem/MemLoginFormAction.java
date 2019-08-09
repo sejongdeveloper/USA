@@ -17,7 +17,7 @@ public class MemLoginFormAction implements Command {
 		if(cookies != null) {
 			for(Cookie cookie : cookies) {
 				if(cookie.getName().equals("mem_id")) {
-					request.setAttribute("cookie_id", cookie.getValue());
+					request.setAttribute("cookie_mem_id", cookie.getValue());
 					break;
 				}
 			}

@@ -15,7 +15,7 @@
 
 	$(document).ready(function(){
 		var today = new Date();
-		var dd = today.getDate() - 1; // 현재 날짜 못 얻는 경우 있음
+		var dd = today.getDate(); // 현재 날짜 못 얻는 경우 있음
 		var mm = today.getMonth() + 1; 
 		var yyyy = today.getFullYear();
 		if(dd<10) {
@@ -36,9 +36,9 @@
 			//crossOrigin : true, // 크로스 도메인 이슈해결
 			url: url,
 			success : function(data) {
-				alert(data);
-				var info = JSON.parse(data);
-				$("#result").html("미국 환율 : " + info[21].bkpr);
+				var obj = $.parseJSON(data.mem_id);
+				$("#result").html(obj[21].cur_nm + " : " + obj[21].bkpr);
+				
 			}
 		});
 	});
@@ -47,6 +47,9 @@
 </head>
 <body>
 <span id="result"></span>
+
 <a href="https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=20190807&data=AP01">환율</a>
-</body>
+
+
+ </body>
 </html>

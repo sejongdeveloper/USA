@@ -70,8 +70,8 @@ public class FrontController extends HttpServlet implements Process{
 			response.sendRedirect("index.jsp");
 			
 		// 회원가입 폼
-//		} else if(com.equals("memWriterForm.do")) {
-//			nextPage = new MemWriterFormAction().execute(request, response);
+		} else if(com.equals("memWriterForm.do")) {
+			nextPage = new MemWriterFormAction().execute(request, response);
 			
 		// 회원가입 실행	
 		} else if(com.equals("memWritePro.do")) {
@@ -80,14 +80,12 @@ public class FrontController extends HttpServlet implements Process{
 		// 로그인 폼
 		} else if(com.equals("memLoginForm.do")) {
 			nextPage = new MemLoginFormAction().execute(request, response);
-			System.out.println(nextPage+"gggggggggggg");
 		// 로그인 실행
 		} else if(com.equals("memLoginPro.do")) {
 			nextPage = new MemLoginProAction().execute(request, response);
 		
 		// 로그아웃
 		} else if(com.equals("memLogout.do")) {
-			System.out.println("로그아웃");
 			request.getSession().invalidate();
 			nextPage = "/index.jsp";
 			
@@ -101,7 +99,6 @@ public class FrontController extends HttpServlet implements Process{
 			
 		// 아이디 찾기 폼
 		} else if(com.equals("memIdForm.do")) {
-			System.out.println("아이디 찾기 폼");
 			nextPage = "/view/mem/memId.jsp";
 			
 		// 아이디 찾기 실행
@@ -133,9 +130,9 @@ public class FrontController extends HttpServlet implements Process{
 			new MemIdValidateAction().execute(request, response);
 			return;
 		// 환율 	
-//		} else if(com.equals("money.do")) {
-//			MoneyAction.execute(request, response);
-//			return;
+		} else if(com.equals("money.do")) {
+			MoneyAction.execute(request, response);
+			return;
 			
 			
 		// 규민	

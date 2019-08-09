@@ -9,6 +9,7 @@
 <title>JSP</title>
 <link rel="stylesheet" href="${contextPath }/view/mem/css/memLogin.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<c:set var="coo" value="${cookie_mem_id }"/>
 <script type="text/javascript">
 	function test() {
 		if($("#idChk").prop("checked")){
@@ -22,12 +23,12 @@
 </head>
 <body>
 
-<div id="memLogin">
-
+<div class="body">
+<div>
 	<form action="${pageContext.request.contextPath }/memLoginPro.do">
 	<input type="hidden" name="idChk" id="idHidden" value="${false }">
 	<div class="inputBack" id="idDiv">
-		<input type="text" name="mem_id" placeholder="아이디" value="${cookie_id }" class="inputReal" id="mem_id" onfocusout="idValidate()" onfocusin="basic('#idDiv')">
+		<input type="text" name="mem_id" placeholder="아이디" value="${cookie_mem_id }" class="inputReal" id="mem_id" onfocusout="idValidate()" onfocusin="basic('#idDiv')">
 		<div class="imgDiv"><img src="${contextPath }/view/mem/upload/test.svg"></div>
 	</div>
 	<br>
@@ -43,14 +44,21 @@
 	</div>
 	</c:if>
 	<div id="menu">
-		<span id="idChkSpan"><input type="checkbox" name="idChk" id="idChk" onclick="test()"></span><span id="idChkName">아이디 저장</span>
+		<span id="idChkSpan">
+		<c:if test="${empty cookie_mem_id }">
+			<input type="checkbox" name="idChk" id="idChk" onclick="test()">		
+		</c:if>
+		<c:if test="${not empty cookie_mem_id }">
+			<input type="checkbox" name="idChk" id="idChk" onclick="test()" checked="checked">		
+		</c:if>
+		</span><span id="idChkName">아이디 저장</span>
 		<a href="${contextPath }/memIdForm.do">아이디 찾기</a> | <a href="${contextPath }/memPwdForm.do">비밀번호 찾기</a> | <a href="${contextPath }/memWriterForm.do">회원가입</a>
 	</div>
 
 	<input type="submit" value="로그인">
 
 	</form>
-
+</div>
 </div>
 
 </body>

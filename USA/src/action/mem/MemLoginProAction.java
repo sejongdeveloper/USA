@@ -22,16 +22,31 @@ public class MemLoginProAction implements Command {
 		boolean check = MemDAO.getInstance().login(mem_id, mem_pwd);
 		
 		if(check) {
-			Cookie cookie = new Cookie("mem_id", mem_id);
-			cookie.setMaxAge(60*60);
-			if(idChk.equals("true")) response.addCookie(cookie);
+			if(idChk.equals("true")) {
+				Cookie cookie = new Cookie("mem_id", mem_id);
+				cookie.setMaxAge(60*60);
+				response.addCookie(cookie);
+			} else {
+				Cookie[] cookies = request.getCookies();
+				if(cookies != null) {
+					for(Cookie cookie : cookies) {
+						String name = cookie.getName();
+						if(name.equals("mem_id")) {
+							System.out.println(name + "삭제!!!!");
+							cookie.setMaxAge(0);
+							response.addCookie(cookie);
+							break;
+						}
+					} // for end
+				} // if(cookies) end
+			}
 			request.getSession().setAttribute("member", mem_id);
+			return "/index.jsp";
 		} else {
-			response.sendRedirect("index.jsp?contents=/view/mem/memLogin.jsp&outmsg=true");
+			response.sendRedirect(request.getHeader("referer") + "?outmsg=true");
 			return null;
 		}
 		
-		return "/index.jsp";
 	}
 
 }

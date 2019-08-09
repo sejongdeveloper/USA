@@ -7,17 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
-
-<style type="text/css">
-section {
-	margin-top: 10px;
-}
-</style>
-
 </head>
 <body>
 <header>
-	<jsp:include page="view/main/header.html" flush="false" />
+	<jsp:include page="view/main/header.jsp" flush="false" />
 </header>
 
 <section>
