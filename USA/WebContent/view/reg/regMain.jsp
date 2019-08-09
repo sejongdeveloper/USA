@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/view/reg/regstyle.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/regstyle.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,9 @@
 <title>RegMain</title>
 </head>
 <body>
+<jsp:include page="/view/main/header.jsp" />
+<div class="body">
+<div class="bodyin">
 <div class="regMain_picture regMain_div">
 <c:forEach var="picture" items="${ reg_filenameList }" >
 <img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }">
@@ -18,6 +22,7 @@
 </div>
 
 <div class="regMain_map regMain_div" id="map">지도</div>
+
 <div class="regMain_info regMain_div"><div class="regMain_infotitle">날씨</div>
 <div class="regMain_infocontents" id="reg_weather">내용</div>
 <div class="regMain_infocontents" id="reg_weather2">내용</div></div>
@@ -31,9 +36,10 @@
 	<a href="regView.do?reg_name=${ reg_filenameList[0].reg_name }"><div class="regMain_one">기본정보</div></a>
 	<a href="locList.do?loc_regname=${ reg_filenameList[0].reg_name }"><div class="regMain_two">관람명소</div></a>
 </div>
-
+</div>
+</div>
+<jsp:include page="/view/main/footer.html" />
 </body>
-
 <script type="text/javascript">
     var index = 0;   //이미지에 접근하는 인덱스
     $(document).ready(function(){

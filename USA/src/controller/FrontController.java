@@ -14,6 +14,8 @@ import action.loc.LocListAction;
 import action.loc.LocModifyProAction;
 import action.loc.LocViewAction;
 import action.loc.LocWriteProAction;
+import action.main.MainAction;
+import action.main.MoneyAction;
 import action.mem.MemDelProAction;
 import action.mem.MemIdProAction;
 import action.mem.MemIdValidateAction;
@@ -44,9 +46,7 @@ public class FrontController extends HttpServlet implements Process{
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
-		
-		System.out.println("com: "+com);
-		
+		com = com.substring(com.lastIndexOf("/")+1);
 		String nextPage = "";
 
 		// 각자 알아서 매핑을 이용하여 사용하세요. 
@@ -55,30 +55,40 @@ public class FrontController extends HttpServlet implements Process{
 			nextPage = "/index.jsp";
 		
 		}
-		if(com.equals("view/reg/regMap.do")) {
+		if(com.equals("regMap.do")) {
 			nextPage = "/view/reg/regMap.jsp";
-		} else if(com.equals("view/reg/regMain.do")) {
+		} else if(com.equals("regMain.do")) {
 			nextPage = new RegMainAction().execute(request, response);
-		} else if(com.equals("view/reg/regView.do")) {
+		} else if(com.equals("regView.do")) {
 			nextPage = new RegViewAction().execute(request, response);
-		} else if(com.equals("view/reg/locList.do")) {
+		} else if(com.equals("locList.do")) {
 			nextPage = new LocListAction().execute(request, response);
-		} else if(com.equals("view/reg/locView.do")) {
+		} else if(com.equals("locView.do")) {
 			nextPage = new LocViewAction().execute(request, response);
-		} else if(com.equals("view/reg/locWritePro.do")) {
+		} else if(com.equals("locWritePro.do")) {
 			nextPage = new LocWriteProAction().execute(request, response);
 			response.sendRedirect(nextPage);
 			return;
-		} else if(com.equals("view/reg/locModifyPro.do")) {
+		} else if(com.equals("locModifyPro.do")) {
 			nextPage = new LocModifyProAction().execute(request, response);
 			response.sendRedirect(nextPage);
 			return;
-		} else if(com.equals("view/reg/locDeletePro.do")) {
+		} else if(com.equals("locDeletePro.do")) {
 			nextPage = new LocDeleteProAction().execute(request, response);
 			response.sendRedirect(nextPage);
 			return;
+		} else if(com.equals("event.do")) {
+			nextPage = "/view/event/event.jsp";
+		} else if(com.equals("main.do")) {
+			nextPage = new MainAction().execute(request, response);
+		} else if(com.equals("money.do")) { // 환율
+	        MoneyAction.execute(request, response);
+	        return;
 		}
+		
+		System.out.println("com: "+com);
 		System.out.println("nextPage: "+nextPage);
+		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
 		

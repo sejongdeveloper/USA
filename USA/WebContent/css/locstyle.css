@@ -2,17 +2,19 @@ a {
 	text-decoration: none;
 	color: white;
 }
-body {
+.body {
 	border-left: 1px solid black;
 	border-right: 1px solid black;
-	width: 1100px;
-	left: 10%;
-	margin: auto;
+	width: 1000px;
+	display: inline-block;
+	margin-left: 350px;
+    width: 1250px;
+    z-index: 0;
 }
 .locList_reg {
-	position: relative;
-	top: 30px;
-	left: 40px;
+	margin-top: 80px;
+	margin-left: 30px;
+	margin-bottom: 30px;
 	font-size: 40px;
 	height: 70px;
 	width: 100px;
@@ -21,11 +23,11 @@ body {
 .locList_list {
 	display: inline-block;
 	text-align: center;
-	margin-left: 30px;
+	margin-left: 70px;
 	height: 300px; 
 	width: 300px;
 	margin-right: 30px;
-	margin-top: 50px;
+	margin-bottom: 50px;
 }
 .locList_locname {
 	display: inline-block;
@@ -63,16 +65,13 @@ body {
 
 
 .locView_loc {
-	position: relative;
+	margin-top: 100px;
 	height: 500px;
-	border-bottom: 1px solid gray;
 }
 .locView_picture {
-	position: relative;
-	top: 30px;
 	margin: auto;
 	width: 90%;
-	height: 40%;
+	height: 300px;
 	text-align: center;
 }
 .locView_img {
@@ -80,41 +79,39 @@ body {
 	width: 80%;
 }
 .locView_locname {
-	position: relative;
-	top: 40px;
 	text-align: center;
 	width: 200px;
 	margin: auto;
+	margin-top: 20px;
 	font-size: 20px;
 }
 .locView_contents {
-	position: relative;
-	top: 70px;
 	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 50px;
 	width: 90%;
 	border-radius: 20px;
 	padding: 5px;
 	border: 1px solid #808080;
 }
 .locView_rev {
-	margin-top: 30px;
+	margin-top: 50px;
 }
 .locView_allCount {
-	position: relative;
-	left: 50px;
+	margin-left: 150px;
 }
 .locView_allScore {
 	position: relative;
-	display: inline-block;
-	left: 300px;
-	top: 90px;
+	display: block;
+	margin-left: 380px;
+	margin-top: 90px;
 	font-size: 50px;
 	font: bold;
 }
 .locView_count {
 	position: relative;
-	left: 520px;
-	top: -20px;
+	left: 630px;
+	top: -110px;
 }
 .locView_count5, .locView_count4, .locView_count3, .locView_count2, .locView_count1 {
 	margin-top: 10px;
@@ -124,8 +121,14 @@ body {
 	width: 100px;
 }
 .locView_revTitle {
-	display: inline-block;
 	margin-left: 450px;
+}
+.locView_revWriteForm {
+	margin-bottom: 30px;
+}
+.locView_revWriteframe {
+	display: inline-block;
+	margin-left: 80px;
 }
 .locView_revWriteScoreFrame {
 	margin-left: 380px;
@@ -159,7 +162,13 @@ body {
 	width: 80px;
 }
 .locView_loginwant {
+	margin-left: 400px;
+	display: inline-block;
 	text-align: center;
+	margin-bottom: 30px;
+	border-radius: 20px;
+	padding: 5px;
+	border: 1px solid #808080;
 }
 .radio {
 	display: none;
@@ -177,7 +186,7 @@ input:checked +.laimg {
 }
 table {
 	margin: auto;
-	margin-top: 30px;
+	margin-bottom: 30px;
 	width: 90%;
 	text-align: center;
 	border-radius: 20px;
@@ -189,7 +198,7 @@ table {
 }
 .locView_revContents {
 	height: 150px;
-	width: 600px;
+	width: 750px;
 	text-align: left;
 }
 .locView_revScore {

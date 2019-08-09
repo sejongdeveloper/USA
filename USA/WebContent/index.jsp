@@ -1,3 +1,3 @@
 <script type="text/javascript">
-	location.href="/USA/view/main/main.jsp";
+	location.href="/USA/view/main/main.do";
 </script>

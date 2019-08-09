@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<link rel="stylesheet" href="${ pageContext.request.contextPath }/view/reg/regstyle.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/css/regstyle.css">
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 
 <!DOCTYPE html>
@@ -11,7 +11,10 @@
 <title>RegView</title>
 </head>
 <body>
-<div class="regView_regname">&lt;&nbsp;${ reg_list[0].reg_name }&nbsp;&gt;</div>
+<jsp:include page="/view/main/header.jsp" />
+<div>
+<div class="body">
+<div class="regView_regname">&nbsp;${ reg_list[0].reg_name }&nbsp;</div>
 <div class="regView_picture">
 <c:forEach var="picture" items="${ reg_list }">
 <img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }">
@@ -23,6 +26,9 @@
 	<div class="regView_contents">${ post.reg_contents }</div>
 	</div>
 </c:forEach>
+</div>
+<jsp:include page="/view/main/footer.html" />
+</div>
 </body>
 <script>
     var index = 0;   //이미지에 접근하는 인덱스

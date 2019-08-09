@@ -27,7 +27,7 @@ public class LocWriteProAction implements Command {
 		String rev_writer = (String)session.getAttribute("member");
 		String rev_contents = request.getParameter("rev_contents");
 		int rev_score = Integer.parseInt(request.getParameter("rev_score"));
-		String rev_locname = request.getParameter("loc_name");
+		String rev_locname = request.getParameter("rev_locname");
 		
 		vo.setRev_date(new Timestamp(System.currentTimeMillis()));
 		vo.setRev_writer(rev_writer);
