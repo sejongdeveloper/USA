@@ -18,10 +18,11 @@ public class MemIdProAction implements Command {
 		String mem_name = request.getParameter("mem_name");
 		String mem_addr = request.getParameter("mem_addr");
 		ArrayList<MemVO> list = MemDAO.getInstance().id(mem_name, mem_addr);
-		if(list != null) {
+		if(list.size() > 0) {
 			request.setAttribute("mem_list", list);
 			return "/view/mem/memIdPro.jsp";
 		} else {
+			response.sendRedirect(request.getHeader("referer") + "?err=true");
 			return "";
 		}
 	}

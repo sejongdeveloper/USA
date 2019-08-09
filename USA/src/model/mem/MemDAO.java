@@ -175,7 +175,6 @@ public class MemDAO {
 		} finally {
 			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		} // try end
-		
 		return list;
 	} // id() end
 	

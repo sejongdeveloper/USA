@@ -13,6 +13,12 @@
 </head>
 <body>
 
+<c:if test="${not empty param.err }">
+<script type="text/javascript">
+	alert("입력한 회원정보와 일치하는 아이디가 없습니다")
+</script>
+</c:if>
+
 <div id="memId">
 
 <div class="subject">아이디 찾기</div>
