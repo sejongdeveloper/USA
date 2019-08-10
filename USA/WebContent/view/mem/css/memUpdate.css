@@ -1,4 +1,10 @@
 @charset "UTF-8";
+#memUpdate {
+	margin-top: 100px;
+    margin-bottom: 20px;
+    margin-left: 630px;
+}
+
 #memUpdate table {
 
   border: 1px solid #e5e5e5;

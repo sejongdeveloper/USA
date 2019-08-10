@@ -20,12 +20,7 @@ public class MemIdValidateAction {
 		  String mem_id = request.getParameter("idInfo"); 
 		  boolean isId = MemDAO.getInstance().idValidate(mem_id);
 		  
-		  JSONObject obj = new JSONObject(); 
-		  obj.put("result", isId);
-		  
-		  String info = obj.toJSONString(); //
-		  
-		  response.getWriter().print(info);
+		  response.getWriter().print(isId);
 	}
 
 }

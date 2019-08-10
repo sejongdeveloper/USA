@@ -121,16 +121,15 @@ public class MemDAO {
 	} // update() end
 	
 	// 회원수정 실행
-	public int update(String mem_id, String mem_pwd, String calc, String mem_value) {
+	public int update(String mem_id, String calc, String mem_value) {
 		int result = 0;
 		
 		try {
 			conn = getConnection();
-			String sql = "update mem set " + calc + " = ? where mem_id = ? and mem_pwd = ?";
+			String sql = "update mem set " + calc + " = ? where mem_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mem_value);
 			pstmt.setString(2, mem_id);
-			pstmt.setString(3, mem_pwd);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

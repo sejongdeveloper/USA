@@ -22,14 +22,13 @@ public class MemUpdatePro implements Command{
 //		int maxPostSize = 8*1024*1024;
 //		MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxPostSize, "utf-8", new DefaultFileRenamePolicy());
 		String mem_id = request.getParameter("mem_id");
-		String mem_pwd = request.getParameter("mem_pwd");
 		String calc = request.getParameter("colc");
 		String mem_value = request.getParameter("mem_value");
 		
 //		String mem_filename = multi.getFilesystemName((String)multi.getFileNames().nextElement());
-		int check = MemDAO.getInstance().update(mem_id, mem_pwd, calc, mem_value);
+		int check = MemDAO.getInstance().update(mem_id, calc, mem_value);
 		System.out.println(check);
-		response.getWriter().print("<result><t>true</t></result>");
+		response.getWriter().print("<result>" + check + "</result>");
 //		if(check > 0) {
 //			return "/memUpdateForm.do";
 //		} else {

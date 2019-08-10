@@ -32,15 +32,13 @@
 		$.ajax({
 			type : "post",
 			async : false,
-			datatype : "json",
+			datatype : "text",
 			url : "../../memIdValidate.do",
 			data : {
 				idInfo : mem_id
 			},
 			success : function(data) {
-				var info = JSON.parse(data);
-				if(info.result === false){
-					$("#idBtn").prop("disabled",true);
+				if(data == "false"){
 					$("#outIdMsg").html("멋진 아이디네요!");
 					$("#outIdMsg").attr("style","color: green;");
 					$("#idDiv").attr("style","border: 1px solid #dadada;");

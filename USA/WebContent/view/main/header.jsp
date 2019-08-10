@@ -45,7 +45,7 @@
 	   <div class="headerSignin"><a href="/USA/memLoginForm.do" class="signin">Sign In</a></div>
     </c:if>
     <c:if test="${not empty member }">
-	   <div class="headerSignin"><span class="signin"><span class="member">${member }님 환영합니다^^</span><a href="/USA/memLogout.do" class="signin">Sign Out</a></div>
+	   <div class="headerSignin"><span class="signin"><span class="member">${member }님 환영합니다^^ <a id="me" href="${contextPath }/memUpdateForm.do">내정보</a></span><a href="/USA/memLogout.do" class="signin">Sign Out</a></div>
     </c:if>
     </ul>
    </div>

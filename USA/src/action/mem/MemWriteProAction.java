@@ -17,7 +17,7 @@ public class MemWriteProAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String saveDirectory = request.getRealPath("/view/mem/upload");
+		String saveDirectory = request.getSession().getServletContext().getRealPath("/view/mem/upload");
 		int maxPostSize = 5*1024*1024;
 		
 		try {

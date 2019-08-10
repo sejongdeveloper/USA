@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>JSP</title>
 <link rel="stylesheet" href="${contextPath }/view/mem/css/memLogin.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <c:set var="coo" value="${cookie_mem_id }"/>
 <script type="text/javascript">
@@ -23,8 +24,8 @@
 </head>
 <body>
 
-<div class="body">
-<div>
+<div id="memLogin">
+
 	<form action="${pageContext.request.contextPath }/memLoginPro.do">
 	<input type="hidden" name="idChk" id="idHidden" value="${false }">
 	<div class="inputBack" id="idDiv">
@@ -59,7 +60,7 @@
 
 	</form>
 </div>
-</div>
+
 
 </body>
 </html>

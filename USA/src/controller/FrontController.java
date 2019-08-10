@@ -16,6 +16,7 @@ import action.loc.LocViewAction;
 import action.loc.LocWriteProAction;
 import action.main.MoneyAction;
 import action.mem.MemDelProAction;
+import action.mem.MemFilenameProAction;
 import action.mem.MemIdProAction;
 import action.mem.MemIdValidateAction;
 import action.mem.MemLoginFormAction;
@@ -116,7 +117,11 @@ public class FrontController extends HttpServlet implements Process{
 		// 비밀번호 변경 폼
 		} else if(com.equals("memPwdForm3.do")) {
 			nextPage = new MemPwdNamePhAction().execute(request, response);
-			
+		
+		// 회원사진 변경 실행
+		} else if(com.equals("memFilenamePro.do")) {
+			nextPage = new MemFilenameProAction().execute(request, response);
+
 		// 비밀번호 변경 실행
 		} else if(com.equals("memPwdPro.do")) {
 			nextPage = new MemPwdProAction().execute(request, response);
