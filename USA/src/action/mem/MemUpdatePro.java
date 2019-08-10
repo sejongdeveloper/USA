@@ -17,23 +17,13 @@ public class MemUpdatePro implements Command{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//		String saveDirectory = request.getRealPath("/view/mem/upload");
-//		int maxPostSize = 8*1024*1024;
-//		MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxPostSize, "utf-8", new DefaultFileRenamePolicy());
+		System.out.println("회원정보 업데이트 ajax");
 		String mem_id = request.getParameter("mem_id");
 		String calc = request.getParameter("colc");
 		String mem_value = request.getParameter("mem_value");
 		
-//		String mem_filename = multi.getFilesystemName((String)multi.getFileNames().nextElement());
 		int check = MemDAO.getInstance().update(mem_id, calc, mem_value);
-		System.out.println(check);
 		response.getWriter().print("<result>" + check + "</result>");
-//		if(check > 0) {
-//			return "/memUpdateForm.do";
-//		} else {
-//			return "";
-//		}
 		
 		return null;
 	}

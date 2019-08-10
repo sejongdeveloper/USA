@@ -2,14 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP</title>
+<meta name="author" content="sejongDeveloper">
+<meta name="description" content="비밀번호 찾기 위해 회원정보를 입력하는 페이지">
+<title>비밀번호 찾기</title>
 
-<link rel="stylesheet" href="${contextPath }/view/mem/css/memPwd2.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="${contextPath }/css/memPwd2.css">
 
 </head>
 <body>
@@ -27,7 +29,7 @@
 <span id="id"><hr></span><span><hr></span>
 <div id="idDetail">비밀번호를 찾고자 하는 회원정보를 입력해 주세요.</div>
 
-<form action="${pageContext.request.contextPath }/memPwdForm3.do">
+<form action="${contextPath }/memPwdForm3.do">
 <input type="hidden" name="mem_id" value="${param.mem_id }">
 <div class="main">
 	<h4>본인 확인 후 비밀번호를 변경해드립니다.</h4>

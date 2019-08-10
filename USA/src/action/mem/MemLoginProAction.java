@@ -26,7 +26,7 @@ public class MemLoginProAction implements Command {
 				Cookie cookie = new Cookie("mem_id", mem_id);
 				cookie.setMaxAge(60*60);
 				response.addCookie(cookie);
-			} else {
+			} else if(idChk.equals("false")){
 				Cookie[] cookies = request.getCookies();
 				if(cookies != null) {
 					for(Cookie cookie : cookies) {

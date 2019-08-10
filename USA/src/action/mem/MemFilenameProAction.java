@@ -18,7 +18,7 @@ public class MemFilenameProAction implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String saveDirectory = request.getSession().getServletContext().getRealPath("/view/mem/upload");
 		int maxPostSize = 1024*1024*8;
-		MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxPostSize, new DefaultFileRenamePolicy());
+		MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxPostSize, "utf-8", new DefaultFileRenamePolicy());
 		String mem_id = (String)request.getSession().getAttribute("member");
 		String mem_filename = multi.getFilesystemName((String)multi.getFileNames().nextElement());
 		System.out.println("id:" + mem_id + " filename:" + mem_filename);

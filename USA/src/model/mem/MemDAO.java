@@ -70,7 +70,7 @@ public class MemDAO {
 		boolean isLogin = false;
 		try {
 			conn = getConnection();
-			String sql = "select mem_id from mem where mem_id = ? and mem_pwd = ?";
+			String sql = "select mem_id from mem where mem_id = ? and mem_pwd = ? and mem_alive = 1";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mem_id);
 			pstmt.setString(2, mem_pwd);
@@ -218,7 +218,7 @@ public class MemDAO {
 		int result = 0;
 		try {
 			conn = getConnection();
-			String sql = "update set mem_alive = 0 where mem_id = ?";
+			String sql = "update mem set mem_alive = 0 where mem_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mem_id);
 			result = pstmt.executeUpdate();

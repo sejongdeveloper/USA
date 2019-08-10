@@ -2,17 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP</title>
+<meta name="author" content="sejongDeveloper">
+<meta name="description" content="아이디  찾은 결과를 보여주는 페이지">
+<title>아이디 목록 : 아이디 찾기</title>
 
-
-
-<link rel="stylesheet" href="${contextPath }/view/mem/css/memIdPro.css">
+<link rel="stylesheet" href="${contextPath }/css/memIdPro.css">
 
 </head>
 <body>

@@ -16,6 +16,7 @@ public class MemDelProAction implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String mem_id = (String)session.getAttribute("member");
+		
 		int check = MemDAO.getInstance().delete(mem_id);
 		if(check > 0) {
 			session.invalidate();

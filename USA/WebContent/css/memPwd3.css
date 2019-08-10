@@ -1,11 +1,10 @@
 @charset "UTF-8";
-	@charset "UTF-8";
 #memPwd3 {
 	margin-top: 100px;
     margin-left: 630px;
 }
 
-.main {
+.dataLine {
 	border: 1px solid #dadada;
 	width: 430px;
 	height: 300px;
@@ -66,12 +65,12 @@ h4 {
 		color: green;
 }
 
-.main .idDetail  {
+.dataLine .idDetail  {
 	font-size: 13px;
 	margin-left: -25px;
 }
 
-.main .idDetail h4 {
+.dataLine .idDetail h4 {
 	font-size: 13px;
 }
 

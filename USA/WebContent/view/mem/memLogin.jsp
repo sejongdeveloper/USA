@@ -2,32 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP</title>
-<link rel="stylesheet" href="${contextPath }/view/mem/css/memLogin.css">
+<meta name="author" content="sejongDeveloper">
+<meta name="description" content="로그인하는 페이지">
+<title>로그인</title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<c:set var="coo" value="${cookie_mem_id }"/>
-<script type="text/javascript">
-	function test() {
-		if($("#idChk").prop("checked")){
-			$("#idHidden").val(true);
-		} else {
-			$("#idHidden").val(false);
-		}
-	}
-</script>
+<link rel="stylesheet" href="${contextPath }/css/memLogin.css">
 
 </head>
 <body>
 
 <div id="memLogin">
 
-	<form action="${pageContext.request.contextPath }/memLoginPro.do">
-	<input type="hidden" name="idChk" id="idHidden" value="${false }">
+	<form action="${contextPath }/memLoginPro.do">
+	<input type="hidden" name="idChk" id="idHidden">
 	<div class="inputBack" id="idDiv">
 		<input type="text" name="mem_id" placeholder="아이디" value="${cookie_mem_id }" class="inputReal" id="mem_id" onfocusout="idValidate()" onfocusin="basic('#idDiv')">
 		<div class="imgDiv"><img src="${contextPath }/view/mem/upload/test.svg"></div>
@@ -47,10 +39,10 @@
 	<div id="menu">
 		<span id="idChkSpan">
 		<c:if test="${empty cookie_mem_id }">
-			<input type="checkbox" name="idChk" id="idChk" onclick="test()">		
+			<input type="checkbox" name="idChk" id="idChk" onclick="isCookie()">		
 		</c:if>
 		<c:if test="${not empty cookie_mem_id }">
-			<input type="checkbox" name="idChk" id="idChk" onclick="test()" checked="checked">		
+			<input type="checkbox" name="idChk" id="idChk" onclick="isCookie()" checked="checked">		
 		</c:if>
 		</span><span id="idChkName">아이디 저장</span>
 		<a href="${contextPath }/memIdForm.do">아이디 찾기</a> | <a href="${contextPath }/memPwdForm.do">비밀번호 찾기</a> | <a href="${contextPath }/memWriterForm.do">회원가입</a>
@@ -61,6 +53,8 @@
 	</form>
 </div>
 
-
 </body>
+
+<script type="text/javascript" src="${contextPath }/view/mem/js/memLogin.js"></script>
+
 </html>

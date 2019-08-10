@@ -9,7 +9,7 @@
 
   border: 1px solid #e5e5e5;
   border-collapse: collapse;
-	overflow: hidden;
+  margin-bottom: 15px;
 }
 
 #memUpdate th, td {
@@ -20,6 +20,7 @@
 #memUpdate .inputName {
 	text-align: initial;
 	font-size: 14px;
+	margin-left: 50px;
 }
 
 #memUpdate th {
@@ -34,8 +35,13 @@
 	padding: 10px 0 13px 28px;
 }
 
-.#memUpdate inputData {
+#memUpdate .inputData {
 	font-size: 15px;
+}
+
+#memUpdate .inputData img{
+	max-width: 200px;
+    max-height: 200px;
 }
 
 #memUpdate .explanation {
@@ -82,4 +88,23 @@
 	margin-top: 12px;
 	margin-right: 10px;
 	color:#08a600;
+}
+
+#memUpdate #del {
+	color: #899197;
+	font-size: 13px;
+	font-family: Dotum,sans-serif;
+}
+
+#memUpdate #delLink {
+	color: #390;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 5px;
+	font-family: Dotum,sans-serif;
+	text-decoration: underline;
+}
+
+#memUpdate #delLink:hover {
+	cursor: pointer;
 }

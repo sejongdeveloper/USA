@@ -19,8 +19,7 @@ public class MemIdValidateAction {
 		  System.out.println("유효성 검사 스타트"); 
 		  String mem_id = request.getParameter("idInfo"); 
 		  boolean isId = MemDAO.getInstance().idValidate(mem_id);
-		  
-		  response.getWriter().print(isId);
+		  response.getWriter().print("{\"result\":" + isId + "}");
 	}
 
 }
