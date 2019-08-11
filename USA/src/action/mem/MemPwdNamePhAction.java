@@ -23,7 +23,7 @@ public class MemPwdNamePhAction implements Command {
 			request.setAttribute("mem_pwd", mem_pwd);
 			return "/view/mem/memPwd3.jsp";
 		} else {
-			response.sendRedirect(request.getHeader("referer") + "&err=" + URLEncoder.encode("회원정보를 정확하게 입력해 주세요", "utf-8"));
+			response.sendRedirect(request.getHeader("referer") + "&err=true");
 			return null;
 		}
 	}

@@ -16,10 +16,9 @@
 </head>
 <body>
 
-<input type="hidden" id="err" value="${param.err }">
 <c:if test="${not empty param.err }">
 <script type="text/javascript">
-	alert($("#err").val());
+	alert("회원정보를 정확하게 입력해 주세요");
 </script>
 </c:if>
 

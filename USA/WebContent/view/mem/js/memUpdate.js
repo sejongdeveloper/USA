@@ -61,3 +61,36 @@ function del() {
 		window.location.href="/USA/memDelPro.do?mem_id=" + mem_id;
 	}
 }
+
+function pwdUpdate() {
+	function getXMLHttpRequest() {
+		if(window.XMLHttpRequest) {
+			return new XMLHttpRequest();
+		} else if(window.ActiveXObject) {
+			return new ActiveXObject("Microsoft.XMLHTTP");
+		} else {
+			return null;
+		}
+	}
+	
+	var httpRequest = getXMLHttpRequest();
+	var url = "/USA/memIdPwdForm.do";
+	var mem_id = document.getElementById("mem_id").value;
+	var mem_pwd = document.getElementById("mem_pwd").value;
+	
+	httpRequest.onreadystatechange = function callback() {
+		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+			var json = JSON.parse(httpRequest.responseText);
+			if(json.result) {
+				window.location.href = "/USA/memPwd3Form.do?mem_id=" + mem_id;
+			} else {
+				alert("비밀번호를 정확하게 입력해 주세요.");
+			}
+		}
+	};
+	
+	httpRequest.open("post", url, true);
+	httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	httpRequest.send("mem_pwd=" + mem_pwd);
+	
+}

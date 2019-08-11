@@ -66,6 +66,7 @@
 			</div>
 		</td>
 	</tr>
+	
 	<tr>
 		<th><div class="inputName">파일명</div></th>
 		<td>
@@ -80,6 +81,22 @@
 				<input type="file" class="update" name="mem_filename" id="mem_filename" value="${vo.mem_filename }"><br>
 				<input type="button" class="btn" value="수정취소" onclick="fileUpdateFormCancel()"><input type="submit" class="btnOk" value="수정완료">
 				</form>
+			</div>
+			</div>
+		</td>
+	</tr>
+	
+	<tr>
+		<th><div class="inputName">비밀번호 변경</div></th>
+		<td>
+			<div class="inputDiv">
+			<p class="inputData" id="calcmem_pwd">${vo.mem_addr }</p>
+			<p class="explanation">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 사이트로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
+			<p><input type="button" class="btn" id="pwdBtn" value="수정" onclick="updateForm(this,'pwdInput')"></p>
+			<div class="inputNone" id="pwdInput">
+				<h4>변경할 비밀번호</h4>
+				<input type="text" class="update" name="mem_pwd" id="mem_pwd"><br>
+				<input type="button" class="btn" value="수정취소" onclick="updateFormCancel(this,'pwdBtn')"><input type="button" class="btnOk" value="수정하기" onclick="pwdUpdate()">
 			</div>
 			</div>
 		</td>

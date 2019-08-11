@@ -30,9 +30,9 @@
 <div class="dataLine">
 	<div id="top"></div>
 	<h4>네이버 아이디&nbsp; &nbsp;:&nbsp; &nbsp;</h4><span id="mem_id">${param.mem_id }</span>
-	<div class="data" id="pwdDiv"><input type="text" name="mem_pwd" id="mem_pwd" placeholder="새 비밀번호" onfocusout="pwdValidate()" onfocusin="pwdIn('pwdDiv')"></div>
+	<div class="data" id="pwdDiv"><input type="password" name="mem_pwd" id="mem_pwd" placeholder="새 비밀번호" onfocusout="pwdValidate()" onfocusin="pwdIn('pwdDiv')"></div>
 	<div class="idPwdMsg" id="pwdMsg"></div>
-	<div class="data" id="pwdChkDiv"><input type="text" name="mem_pwdChk" id="mem_pwdChk" placeholder="새 비밀번호 확인" onfocusout="pwdChkValidate()" onfocusin="pwdIn('pwdChkDiv')"></div>
+	<div class="data" id="pwdChkDiv"><input type="password" name="mem_pwdChk" id="mem_pwdChk" placeholder="새 비밀번호 확인" onfocusout="pwdChkValidate()" onfocusin="pwdIn('pwdChkDiv')"></div>
 	<div class="idPwdMsg" id="pwdChkMsg"></div>
 	<div id="data_bottom">
 	<hr>

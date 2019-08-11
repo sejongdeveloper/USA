@@ -18,6 +18,7 @@ import action.main.MoneyAction;
 import action.mem.MemDelProAction;
 import action.mem.MemFilenameProAction;
 import action.mem.MemIdProAction;
+import action.mem.MemIdPwdAction;
 import action.mem.MemIdValidateAction;
 import action.mem.MemLoginFormAction;
 import action.mem.MemLoginProAction;
@@ -50,6 +51,7 @@ public class FrontController extends HttpServlet implements Process{
 	@Override
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("컨트롤러에 오신걸 환영합니다 ^^");
+		System.out.println(request.getSession().getAttribute("member"));
 		
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
@@ -114,10 +116,21 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("memPwdForm2.do")) {
 			nextPage = "/view/mem/memPwd2.jsp";
 		
-		// 비밀번호 변경 폼
+		// 비밀번호 변경 폼(아이디, 이름, 주소)
 		} else if(com.equals("memPwdForm3.do")) {
 			nextPage = new MemPwdNamePhAction().execute(request, response);
 		
+		// 비밀번호 변경 폼(아이디, 비밀번호)
+		} else if(com.equals("memIdPwdForm.do")) {
+			nextPage = new MemIdPwdAction().execute(request, response);
+		
+		// 비밀번호 재설정 폼
+		} else if(com.equals("memPwd3Form.do")) {
+//			System.out.println("session : " + (String)request.getAttribute("member"));
+//			System.out.println("param : " + (String)request.getAttribute("member"));
+//			request.setAttribute("member", (String)request.getAttribute("member"));
+			nextPage = "/view/mem/memPwd3.jsp";
+			
 		// 회원사진 변경 실행
 		} else if(com.equals("memFilenamePro.do")) {
 			nextPage = new MemFilenameProAction().execute(request, response);
