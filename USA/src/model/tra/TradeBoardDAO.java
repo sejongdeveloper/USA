@@ -238,7 +238,7 @@ public class TradeBoardDAO {
 	            			pstmt.setInt(2, endNum);
 	            		}else {
 	            			
-	            			sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents,tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 order by tra_num desc))where ?<=rnum and rnum<=? and tra_head = ? ";
+	            			sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents,tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 and tra_head = ? order by tra_num desc))where ?<=rnum and rnum<=? ";
 	            			pstmt = conn.prepareStatement(sql);
 	            			pstmt.setInt(1, start);
 	            			pstmt.setInt(2, endNum);
@@ -253,6 +253,7 @@ public class TradeBoardDAO {
 	            }
 	            else if(opt.equals("0")) // �젣紐⑹쑝濡� 寃��깋 where tra_alive=0
 	            {
+	            	if(tra_head.equals("전체")) {
 	            	sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
 	                		"    tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 and tra_subject like ? order by tra_num desc))where ?<=rnum and rnum<=? ";
 	                
@@ -260,6 +261,16 @@ public class TradeBoardDAO {
 	                pstmt.setString(1, "%"+condition+"%");
 	                pstmt.setInt(2, start);
 	                pstmt.setInt(3, endNum);
+	            	}else {
+	            		sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
+		                		"    tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 and tra_subject like ? order by tra_num desc))where ?<=rnum and rnum<=? ";
+		                
+		                pstmt = conn.prepareStatement(sql);
+		                pstmt.setString(1, "%"+condition+"%");
+		                pstmt.setInt(2, start);
+		                pstmt.setInt(3, endNum);
+	            	}
+	            	
 	                
 	            }
 	            else if(opt.equals("1")) // �궡�슜�쑝濡� 寃��깋

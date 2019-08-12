@@ -166,18 +166,18 @@ insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_scor
 insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-03-27', '조규민', '재밌어', '1', 2, '자유의 여신상');
 insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-03-30', '조규민', '행복해', '1', 1, '자유의 여신상');
 insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-03-06', '조규민', '캐꿀잼', '1', 5, '타임스퀘어');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-04-07', '조규민', '캐존잼', '1', 4, '타임스퀘어');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-04-08', '조규민', '좋아요', '1', 3, '타임스퀘어');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-04-09', '조규민', '재밌어', '1', 2, '타임스퀘어');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-04-07', '조규민', '캐존잼', '1', 5, '타임스퀘어');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-04-08', '조규민', '좋아요', '1', 5, '타임스퀘어');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-04-09', '조규민', '재밌어', '1', 5, '타임스퀘어');
 insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-04-13', '조규민', '행복해', '1', 1, '타임스퀘어');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-05-01', '조규민', '캐꿀잼', '1', 5, '브로드웨이');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-05-07', '조규민', '캐존잼', '1', 4, '브로드웨이');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-05-01', '조규민', '캐꿀잼', '1', 3, '브로드웨이');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-05-07', '조규민', '캐존잼', '1', 3, '브로드웨이');
 insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-05-17', '조규민', '좋아요', '1', 3, '브로드웨이');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-06-21', '조규민', '재밌어', '1', 2, '브로드웨이');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-06-21', '조규민', '재밌어', '1', 3, '브로드웨이');
 insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-07-10', '조규민', '행복해', '1', 1, '브로드웨이');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-07-13', '조규민', '캐꿀잼', '1', 5, '뉴욕 증권거래소');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-07-21', '조규민', '캐존잼', '1', 4, '뉴욕 증권거래소');
-insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-08-01', '조규민', '좋아요', '1', 3, '뉴욕 증권거래소');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-07-13', '조규민', '캐꿀잼', '1', 1, '뉴욕 증권거래소');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-07-21', '조규민', '캐존잼', '1', 1, '뉴욕 증권거래소');
+insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-08-01', '조규민', '좋아요', '1', 1, '뉴욕 증권거래소');
 insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-08-07', '조규민', '재밌어', '1', 2, '뉴욕 증권거래소');
 insert into rev(rev_num, rev_date, rev_writer, rev_contents, rev_alive, rev_score, rev_locname) values(REV_NUM.nextval, '2019-08-09', '조규민', '행복해', '1', 1, '뉴욕 증권거래소');
 

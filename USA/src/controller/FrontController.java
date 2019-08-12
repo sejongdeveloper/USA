@@ -63,7 +63,9 @@ public class FrontController extends HttpServlet implements Process{
 		String com = requestURI.substring(contextPath.length() + 1);
 		com = com.substring(com.lastIndexOf("/")+1);
 		String nextPage = "";
-
+		
+		System.out.println("com: "+com);
+		
 		if(com.equals("regMap.do")) {
 			nextPage = "/view/reg/regMap.jsp";
 		} else if(com.equals("regMain.do")) {
@@ -75,16 +77,13 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("locView.do")) {
 			nextPage = new LocViewAction().execute(request, response);
 		} else if(com.equals("locWritePro.do")) {
-			nextPage = new LocWriteProAction().execute(request, response);
-			response.sendRedirect(nextPage);
+			new LocWriteProAction().execute(request, response);
 			return;
 		} else if(com.equals("locModifyPro.do")) {
-			nextPage = new LocModifyProAction().execute(request, response);
-			response.sendRedirect(nextPage);
+			new LocModifyProAction().execute(request, response);
 			return;
 		} else if(com.equals("locDeletePro.do")) {
-			nextPage = new LocDeleteProAction().execute(request, response);
-			response.sendRedirect(nextPage);
+			new LocDeleteProAction().execute(request, response);
 			return;
 		} else if(com.equals("event.do")) {
 			nextPage = "/view/event/event.jsp";
@@ -236,7 +235,6 @@ public class FrontController extends HttpServlet implements Process{
 			 nextPage=new MainAction().execute(request, response);
 		}
 		
-		System.out.println("com: "+com);
 		System.out.println("nextPage: "+nextPage);
 		if(nextPage!=null&&nextPage!="") {
 	         System.out.println("여기로 돌기는 하나요?");

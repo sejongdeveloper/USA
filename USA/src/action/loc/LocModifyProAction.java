@@ -31,7 +31,16 @@ public class LocModifyProAction implements Command {
 		
 		String rev_locname = request.getParameter("rev_locname");
 		
-		return request.getContextPath() + "/view/reg/locView.do?loc_name="+URLEncoder.encode(rev_locname, "utf-8")+"&result="+result;
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print("<script>");
+		if(result == 1) out.print("alert('수정 성공');");
+		else out.print("alert('수정 실패');");
+		out.print("location.href = 'locView.do?loc_name=" + rev_locname + "'");
+		out.print("</script>");
+		out.flush();
+		
+		return null;
 	}
 
 }

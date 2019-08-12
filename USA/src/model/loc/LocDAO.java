@@ -88,6 +88,35 @@ public class LocDAO {
 		return list;
 	}
 	
+	// 인기 관광명소 이름, 사진 가져오기
+	public ArrayList<LocVO> getBestLocFileName() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<LocVO> list = new ArrayList<LocVO>();
+		String sql = "SELECT LOC_NAME, LOC_FILENAME FROM LOC where loc_name = (SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME)";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				LocVO vo = new LocVO();
+				vo.setLoc_name((rs.getString("LOC_NAME")));
+				vo.setLoc_filename((rs.getString("LOC_FILENAME")));
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		}
+		
+		return list;
+	}
+	
 	// 관광명소 데이터 가져오기
 	public LocVO getLocContents(String loc_name){
 		Connection conn = null;

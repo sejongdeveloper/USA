@@ -133,26 +133,16 @@
 			$("#rev_modicontents").focus();
 			return false;
 		}
-		if($(':radio[name="rev_modiscore"]:checked').length < 1){
+		if($(':radio[name="rev_score"]:checked').length < 1){
 			alert("평점을 선택주세요.");
-			$("#rev_modiscore").focus();
+			$("#rev_score").focus();
 			return false;
 		}
 		
 		return true;
 	}
 	
-	$(document).ready(function(){
-		var result = ${ result };
-		if(result == 1) {
-			alert("성공");
-		} else if(result == 0) {
-			alert("실패");
-		}
-	});
-	
 	function modify(writer, a){	    
-
 	        var obj = document.getElementsByName("modifystart");
 			
 	        for(var i=0; i<obj.length; i++){

@@ -121,7 +121,7 @@ public class RevDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Double> list = new ArrayList<Double>();
-		String sql = "SELECT AVG(REV_SCORE) FROM REV GROUP BY REV_LOCNAME";
+		String sql = "SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME";
 		
 		try {
 			conn = getConnection();
@@ -248,4 +248,6 @@ public class RevDAO {
 		
 		return result;
 	}
+	
+	
 }

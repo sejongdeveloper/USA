@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import action.Command;
 import model.loc.RevDAO;
 import model.loc.RevVO;
+import model.mem.MemDAO;
 
 public class LocWriteProAction implements Command {
 
@@ -29,6 +30,8 @@ public class LocWriteProAction implements Command {
 		int rev_score = Integer.parseInt(request.getParameter("rev_score"));
 		String rev_locname = request.getParameter("rev_locname");
 		
+		MemDAO.getInstance().getPoint(rev_writer);
+		
 		vo.setRev_date(new Timestamp(System.currentTimeMillis()));
 		vo.setRev_writer(rev_writer);
 		vo.setRev_contents(rev_contents);
@@ -38,7 +41,16 @@ public class LocWriteProAction implements Command {
 		
 		int result = dao.insert(vo);
 		
-		return request.getContextPath() + "/view/reg/locView.do?loc_name="+URLEncoder.encode(rev_locname, "utf-8")+"&result="+result;
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print("<script>");
+		if(result == 1) out.print("alert('작성 성공');");
+		else out.print("alert('작성 실패');");
+		out.print("location.href = 'locView.do?loc_name=" + rev_locname + "'");
+		out.print("</script>");
+		out.flush();
+		
+		return null;
 	}
 
 }
