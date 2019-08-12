@@ -18,11 +18,11 @@ public class MoneyAction {
       Calendar cal = Calendar.getInstance();
       int year = cal.get(Calendar.YEAR);
       int month = cal.get(Calendar.MONTH) + 1;
-      int day = cal.get(Calendar.DAY_OF_MONTH) - 1;
+      int day = cal.get(Calendar.DAY_OF_MONTH);
       String m = String.valueOf(month);
       if(month < 10) m = "0" + month;
       String d = String.valueOf(day);
-      if(month < 10) d = "0" + day;
+      if(day < 10) d = "0" + day;
       String today = year + "" + m + "" + d;
       
       String path = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=kRIhErX5mXekrgcMNZecYnVvmluclGMM&searchdate=" + today + "&data=AP01";

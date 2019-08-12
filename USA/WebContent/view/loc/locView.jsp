@@ -86,7 +86,7 @@
 		<td rowspan="2">
 		<input type="submit" value="완료" class="modifyend" id="modifyend${ list.rev_num }">
 		</form>
-		<c:if test="${ list.rev_writer != sessionScope.member }">
+		<c:if test="${ list.rev_writer == sessionScope.member }">
 			<input type="button" name="modifystart" class="modifystart" value="수정" onclick="modify('${ list.rev_num }', this)" id="modifystart${ list.rev_num }">
 			<form action="locDeletePro.do" method="post">
 			<input type="hidden" value="${ list.rev_num }" name="rev_num">

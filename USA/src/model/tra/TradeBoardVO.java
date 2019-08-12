@@ -2,84 +2,72 @@ package model.tra;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class TradeBoardVO {
-	private int board_num;  		// �۹�ȣ  
-	private String board_id; 		// �� �ۼ���
-	private String board_subject; 	// �� ����   
-	private String board_content; 	// �� ����
-	private String board_file; 		// ÷������ �̸�
-	private int board_re_ref; 		// �� �׷��ȣ
-	private int board_re_lev; 		// �亯�� ����
-	private int board_re_seq; 		// �亯�� ����
-	private int board_count; 		// �� ��ȸ��
-	private Date board_date; 		// �� �ۼ���
-	private int board_parent; 		// �θ�� ��ȣ
+	public int tra_num;
+	public String tra_subject;
+	public int tra_readcount;
+	public String tra_writer;
+	public String tra_filename;
+	public String tra_contents;
+	public int tra_alive;
+	public String tra_sysdate;
+	public String tra_head;
 	
-	public int getBoard_num() {
-		return board_num;
+	public String getTra_sysdate() {
+		return tra_sysdate;
 	}
-	public void setBoard_num(int board_num) {
-		this.board_num = board_num;
+	public void setTra_sysdate(String timestamp) {
+		this.tra_sysdate = timestamp;
 	}
-	public String getBoard_id() {
-		return board_id;
+	public int getTra_alive() {
+		return tra_alive;
 	}
-	public void setBoard_id(String board_id) {
-		this.board_id = board_id;
+	public void setTra_alive(int tra_alive) {
+		this.tra_alive = tra_alive;
 	}
-	public String getBoard_subject() {
-		return board_subject;
+	public int getTra_num() {
+		return tra_num;
 	}
-	public void setBoard_subject(String board_subject) {
-		this.board_subject = board_subject;
+	public void setTra_num(int tra_num) {
+		this.tra_num = tra_num;
 	}
-	public String getBoard_content() {
-		return board_content;
+	public String getTra_subject() {
+		return tra_subject;
 	}
-	public void setBoard_content(String board_content) {
-		this.board_content = board_content;
+	public void setTra_subject(String tra_subject) {
+		this.tra_subject = tra_subject;
 	}
-	public String getBoard_file() {
-		return board_file;
+	public int getTra_readcount() {
+		return tra_readcount;
 	}
-	public void setBoard_file(String board_file) {
-		this.board_file = board_file;
+	public void setTra_readcount(int tra_readcount) {
+		this.tra_readcount = tra_readcount;
 	}
-	public int getBoard_re_ref() {
-		return board_re_ref;
+	public String getTra_writer() {
+		return tra_writer;
 	}
-	public void setBoard_re_ref(int board_re_ref) {
-		this.board_re_ref = board_re_ref;
+	public void setTra_writer(String tra_writer) {
+		this.tra_writer = tra_writer;
 	}
-	public int getBoard_re_lev() {
-		return board_re_lev;
+	public String getTra_filename() {
+		return tra_filename;
 	}
-	public void setBoard_re_lev(int board_re_lev) {
-		this.board_re_lev = board_re_lev;
+	public void setTra_filename(String tra_filename) {
+		this.tra_filename = tra_filename;
 	}
-	public int getBoard_re_seq() {
-		return board_re_seq;
+	public String getTra_contents() {
+		return tra_contents;
 	}
-	public void setBoard_re_seq(int board_re_seq) {
-		this.board_re_seq = board_re_seq;
+	public void setTra_contents(String tra_contents) {
+		this.tra_contents = tra_contents;
 	}
-	public int getBoard_count() {
-		return board_count;
+	
+	public String getTra_head() {
+		return tra_head;
 	}
-	public void setBoard_count(int board_count) {
-		this.board_count = board_count;
-	}
-	public Date getBoard_date() {
-		return board_date;
-	}
-	public void setBoard_date(Date board_date) {
-		this.board_date = board_date;
-	}
-	public int getBoard_parent() {
-		return board_parent;
-	}
-	public void setBoard_parent(int board_parent) {
-		this.board_parent = board_parent;
+	public void setTra_head(String tra_head) {
+		this.tra_head = tra_head;
 	}
 }

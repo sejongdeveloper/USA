@@ -1,0 +1,55 @@
+@charset "UTF-8";
+#memId{
+	margin-top: 100px;
+    margin-bottom: 20px;
+    margin-left: 630px;
+}
+
+.main {
+	border: 1px solid #dadada;
+	width: 430px;
+	padding:  15px 50px 50px 70px;
+}
+hr {
+	display: inline-block;
+	width: 464px;
+}
+#id hr {
+	width: 85px;
+	border: 1px solid black;
+}
+
+.name {
+	font-weight: bold;
+	width: 80px;
+}
+
+.name, .data {
+	display: inline-block;
+}
+
+input[type=text] {
+	width: 217px;
+	height: 23px;
+	border: 1px solid #ccc;
+	margin-bottom: 5px;
+}
+
+input[type=submit] {
+	padding: 5px 17px 8px 17px;
+	background-color: white;
+	border: 1px solid #dadada;
+	margin-top: 20px;
+	margin-left: 248px;
+}
+
+input[type=submit]:hover {
+	cursor: pointer;
+}
+
+#idDetail {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 20px;
+}
+

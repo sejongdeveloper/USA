@@ -35,16 +35,16 @@
       <li class="headercenter"><a href="#" class="headercontent">Community</a>
           <ul>
            <a href="#" class="headercontentqa"><li><p>Q & A</p></li></a>
-           <a href="#" class="headercontenttra"><li><p>거래</p></li></a>
+           <a href="list.do" class="headercontenttra"><li><p>거래</p></li></a>
          </ul>
       </li>
       <a href="event.do" class="headercontent"><li class="headercenter"><p>Event</p></li></a>
     </ul>
-	<c:if test="${ empty member }">
+	<c:if test="${empty member }">
       <div class="headerSignin"><a href="/USA/memLoginForm.do" class="signin">Sign In</a></div>
     </c:if>
-    <c:if test="${ not empty member }">
-      <div class="headerSignin"><span class="signin"><span class="member">${ member }님 환영합니다^^</span><a href="/USA/memLogout.do" class="signin">Sign Out</a></div>
+    <c:if test="${not empty member }">
+      <div class="headerSignin"><span class="signin"><span class="member">${member }님 환영합니다^^ <a id="me" href="memUpdateForm.do">내정보</a></span><a href="/USA/memLogout.do" class="signin">Sign Out</a></div>
     </c:if>
 	</div>
 	

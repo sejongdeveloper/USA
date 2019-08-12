@@ -15,11 +15,10 @@ public class MemUpdateFromAction implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mem_id = (String)request.getSession().getAttribute("member");
-		System.out.println("업데이트 아이디: " + mem_id);
 		MemVO vo = MemDAO.getInstance().update(mem_id);
 		if(vo != null) {
 			request.setAttribute("vo", vo);
-			return "/view/mem/update.jsp";
+			return "/view/mem/memUpdate.jsp";
 		} else {
 			return "";
 		}

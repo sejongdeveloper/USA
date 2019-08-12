@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -69,7 +70,7 @@ public class MemDAO {
 		boolean isLogin = false;
 		try {
 			conn = getConnection();
-			String sql = "select mem_id from mem where mem_id = ? and mem_pwd = ?";
+			String sql = "select mem_id from mem where mem_id = ? and mem_pwd = ? and mem_alive = 1";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mem_id);
 			pstmt.setString(2, mem_pwd);
@@ -120,27 +121,16 @@ public class MemDAO {
 	} // update() end
 	
 	// 회원수정 실행
-	public int update(MemVO vo) {
+	public int update(String mem_id, String calc, String mem_value) {
 		int result = 0;
 		
 		try {
 			conn = getConnection();
-			String sql = "update mem set mem_name = ?, mem_ph = ?, mem_addr = ?, mem_filename = ? where mem_id = ? and mem_pwd = ?";
+			String sql = "update mem set " + calc + " = ? where mem_id = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getMem_name());
-			pstmt.setString(2, vo.getMem_ph());
-			pstmt.setString(3, vo.getMem_addr());
-			pstmt.setString(4, vo.getMem_filename());
-			pstmt.setString(5, vo.getMem_id());
-			pstmt.setString(6, vo.getMem_pwd());
-			System.out.println("1:" + vo.getMem_name());
-			System.out.println("2:" + vo.getMem_ph());
-			System.out.println("3:" + vo.getMem_addr());
-			System.out.println("4:" + vo.getMem_filename());
-			System.out.println("5:" + vo.getMem_id());
-			System.out.println("6:" + vo.getMem_pwd());
+			pstmt.setString(1, mem_value);
+			pstmt.setString(2, mem_id);
 			result = pstmt.executeUpdate();
-			System.out.println("result: " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -151,18 +141,22 @@ public class MemDAO {
 	} // update() end
 	
 	// 아이디 찾기
-	public String id(String mem_name, String mem_addr) {
-		String mem_id = null;
+	public ArrayList<MemVO> id(String mem_name, String mem_addr) {
+		ArrayList<MemVO> list = new ArrayList<>();
 		try {
 			conn = getConnection();
-			String sql = "select mem_id from mem where mem_name = ? and mem_addr = ?";
+			String sql = "select mem_id, mem_cdate from mem where mem_name = ? and mem_addr = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mem_name);
 			pstmt.setString(2, mem_addr);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				mem_id = rs.getString("mem_id");
+			MemVO vo = null;
+			while(rs.next()) {
+				vo = new MemVO();
+				vo.setMem_id(rs.getString("mem_id"));
+				vo.setMem_cdate(rs.getTimestamp("mem_cdate"));
+				list.add(vo);
 			}
 			
 		} catch (Exception e) {
@@ -170,8 +164,7 @@ public class MemDAO {
 		} finally {
 			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
 		} // try end
-		
-		return mem_id;
+		return list;
 	} // id() end
 	
 	// 비밀번호 찾기 
@@ -200,12 +193,32 @@ public class MemDAO {
 		return mem_pwd;
 	} // pwd() end
 	
+	// 비밀번호 변경
+	public int update(String mem_id, String mem_pwd) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			String sql = "update mem set mem_pwd = ? where mem_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem_pwd);
+			pstmt.setString(2, mem_id);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt); CloseUtil.close(conn);
+		} 
+		
+		return result;
+	} //update() end
+	
 	// 회원탈퇴
 	public int delete(String mem_id) {
 		int result = 0;
 		try {
 			conn = getConnection();
-			String sql = "delete from mem where mem_id = ?";
+			String sql = "update mem set mem_alive = 0 where mem_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mem_id);
 			result = pstmt.executeUpdate();

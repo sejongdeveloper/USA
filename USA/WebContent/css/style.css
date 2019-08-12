@@ -22,7 +22,7 @@
 	height: 60px;
 	z-index: 10;
 }
-a {
+.header a {
 	text-decoration: none;
 	color: white;
 }
@@ -147,26 +147,38 @@ p {
 	margin-bottom: 20px;
 }
 .tablezone {
-	display: inline-block;
-	margin-left: 450px;
+	margin-left: 100px;
 	margin-top: 50px;
-	border: 1px solid black;
-	width: 1000px;
-	height: 500px;
-	text-align: center;
+	width: 1100px;
+	height: 300px;
 	margin-bottom: 30px;
 }
 .buytable {
+	position: relative;
 	display: inline-block;
 	border: 1px solid black;
 	width: 450px;
+	height: 300px;
+	margin-left: 50px;
 }
 .celltable {
+	position: relative;
 	display: inline-block;
 	border: 1px solid black;
 	width: 450px;
+	margin-left: 30px;
+	height: 300px;
 }
 .reg_img {
 	height: 100%;
 	width: 100%;
+}
+.tabletitle {
+	margin-left: 200px;
+	margin-right: 130px;
+}
+.tablecontents {
+	margin-left: 20px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
