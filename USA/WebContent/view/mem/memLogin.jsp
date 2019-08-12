@@ -52,12 +52,12 @@
 			<input type="checkbox" name="idChk" id="idChk" onclick="isCookie()" checked="checked">		
 		</c:if>
 		</span><span id="idChkName">아이디 저장</span>
-		<a href="${apiURL }">아이디 찾기</a> | <a href="${contextPath }/memPwdForm.do">비밀번호 찾기</a> | <a href="${contextPath }/memWriterForm.do">회원가입</a>
+		<a href="">아이디 찾기</a> | <a href="${contextPath }/memPwdForm.do">비밀번호 찾기</a> | <a href="${contextPath }/memWriterForm.do">회원가입</a>
 	</div>
 
 	<input type="submit" value="로그인">
 	<br>
-	<a href="${contextPath }/naver.do"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+	<a href="${apiURL }"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 
 	</form>
 </div>

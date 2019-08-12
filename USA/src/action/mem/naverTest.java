@@ -1,48 +1,46 @@
 package action.mem;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import action.Command;
-
-public class memNaverAction implements Command {
-
-	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String str = null;
+public class naverTest {
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		String clientId = "fRezVk5_Htz8SWJjSj7d";//애플리케이션 클라이언트 아이디값";
+	    String redirectURI = URLEncoder.encode("http://localhost:8080/USA/view/mem/naver2.jsp", "UTF-8");
+	    SecureRandom random = new SecureRandom();
+	    String state = new BigInteger(130, random).toString();
+	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+	    apiURL += "&client_id=" + clientId;
+	    apiURL += "&redirect_uri=" + redirectURI;
+	    apiURL += "&state=" + state;
+	   // session.setAttribute("state", state);
+	    
+	    String str = null;
 		  
-	    String clientId = "fRezVk5_Htz8SWJjSj7d";//애플리케이션 클라이언트 아이디값";
+	    //String clientId = "fRezVk5_Htz8SWJjSj7d";//애플리케이션 클라이언트 아이디값";
 	    String clientSecret = "2tckaN8GEV";//애플리케이션 클라이언트 시크릿값";
-	    String code = request.getParameter("code");
-	    String state = request.getParameter("state");
-	    System.out.println("==========================");
-	    System.out.println("1111111111111111" + code);
-	    System.out.println("2222222222222222" + state);
-	    System.out.println("==========================");
-	    String redirectURI = URLEncoder.encode("http://localhost:8080/USA/naver.do", "UTF-8");
-	    String apiURL;
+	   //String code = request.getParameter("code");
+	   // String state = request.getParameter("state");
+	  //  String redirectURI = URLEncoder.encode("http://localhost:8080/USA/naver.do", "UTF-8");
+	   // String apiURL;
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 	    apiURL += "client_id=" + clientId;
 	    apiURL += "&client_secret=" + clientSecret;
 	    apiURL += "&redirect_uri=" + redirectURI;
-	    apiURL += "&code=" + code;
+	    //apiURLapiURL += "&code=" + code;
 	    apiURL += "&state=" + state;
 	    String access_token = "";
 	    String refresh_token = "";
-	    System.out.println("apiURL="+apiURL);
+	    //System.out.println("apiURL="+apiURL);
 	    try {
 	      URL url = new URL(apiURL);
 	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -115,7 +113,6 @@ public class memNaverAction implements Command {
 	     } catch (Exception e2) {
 	         System.out.println(e2);
 	     }
-		return null;
-	}
 
+	}
 }

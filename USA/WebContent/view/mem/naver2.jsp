@@ -1,21 +1,5 @@
-<%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
-<%@page import="java.io.InputStreamReader"%>
-<%@page import="java.io.BufferedReader"%>
-<%@page import="java.net.HttpURLConnection"%>
-<%@page import="java.net.URL"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>JSP</title>
-</head>
-<body>
-
+<%@page import="org.json.simple.JSONObject"%>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.net.URL" %>
 <%@ page import="java.net.HttpURLConnection" %>
@@ -34,7 +18,7 @@
     String clientSecret = "2tckaN8GEV";//애플리케이션 클라이언트 시크릿값";
     String code = request.getParameter("code");
     String state = request.getParameter("state");
-    String redirectURI = URLEncoder.encode("http://localhost:8080/USA/view/mem/naver.jsp", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://localhost:8080/USA/view/mem/naver2.jsp", "UTF-8");
     String apiURL;
     apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
     apiURL += "client_id=" + clientId;
@@ -44,7 +28,7 @@
     apiURL += "&state=" + state;
     String access_token = "";
     String refresh_token = "";
-    System.out.println("apiURL="+apiURL);
+    //System.out.println("apiURL="+apiURL);
     try {
       URL url = new URL(apiURL);
       HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -93,19 +77,28 @@
          String inputLine;
          StringBuffer response2 = new StringBuffer();
          while ((inputLine = br.readLine()) != null) {
-             response2.append(inputLine);
+             response2.append(inputLine);           
          }
          br.close();
+         
+         JSONObject json2 = (JSONObject)parser.parse(response2.toString());
+         JSONObject info = (JSONObject)json2.get("response");
+         String id = (String)info.get("id");
+         String email = (String)info.get("email");
+         String profile_image = (String)info.get("profile_image");
+         String name = (String)info.get("name");
+         System.out.println("==============================");
+         System.out.println("id : " + id);
+         System.out.println("email : " + email);
+         System.out.println("profile_image : " + profile_image);
+         System.out.println("name : " + name);
+         System.out.println("==============================");
+         
          System.out.println(response2.toString());
      } catch (Exception e2) {
          System.out.println(e2);
      }
-    
-    
-    
-    
-    
-  %>
 
-</body>
+  %>
+  </body>
 </html>
