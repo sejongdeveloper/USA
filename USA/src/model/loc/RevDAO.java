@@ -30,7 +30,7 @@ public class RevDAO {
 		return ds.getConnection();
 	}
 	
-	// 관광명소 삭제 안된 리뷰 데이터 가져오기
+	// 관광지 삭제 안된 리뷰 데이터 가져오기
 	public ArrayList<RevVO> getRevContents(String rev_locname){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -63,7 +63,7 @@ public class RevDAO {
 		return list;
 	}
 	
-	// 관광명소 삭제 안된 리뷰 총 개수
+	// 관광지 삭제 안된 리뷰 총 개수
 	public int getAllCount(String rev_locname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -88,7 +88,7 @@ public class RevDAO {
 		return count;
 	}
 	
-	// 관광명소 삭제 안된 리뷰 총 평점 가져오기
+	// 관광지 삭제 안된 리뷰 총 평점 가져오기
 	public double getAllScore(String rev_locname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -115,13 +115,13 @@ public class RevDAO {
 		return avg;
 	}
 	
-	// 지역의 모든 관광명소 삭제 안된 리뷰 총 평점 가져오기
+	// 지역의 모든 관광지 삭제 안된 리뷰 총 평점 가져오기
 	public ArrayList<Double> getAllLocScore() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Double> list = new ArrayList<Double>();
-		String sql = "SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME";
+		String sql = "SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME ORDER BY REV_LOCNAME desc";
 		
 		try {
 			conn = getConnection();
@@ -141,7 +141,7 @@ public class RevDAO {
 		return list;
 	}
 	
-	// 관광명소 삭제 안된 리뷰 각 점수 개수
+	// 관광지 삭제 안된 리뷰 각 점수 개수
 	public HashMap<Integer, Integer> getEachCount(String rev_locname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -168,7 +168,7 @@ public class RevDAO {
 		return map;
 	}
 	
-	// 관광명소 리뷰 등록
+	// 관광지 리뷰 등록
 	public int insert(RevVO vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -203,11 +203,11 @@ public class RevDAO {
 		return result;
 	}
 	
-	// 관광명소 리뷰 수정
+	// 관광지 리뷰 수정
 	public int update(RevVO vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "update rev set rev_contents = ?, rev_score = ? where rev_num = ?";
+		String sql = "UPDATE REV SET REV_CONTENTS = ?, REV_SCORE = ? WHERE REV_NUM = ?";
 		int result = 0;
 		
 		try {
@@ -227,11 +227,11 @@ public class RevDAO {
 		return result;
 	}
 	
-	// 관광명소 리뷰 삭제
+	// 관광지 리뷰 삭제
 	public int delete(int rev_num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "update rev set rev_alive = 0 where rev_num = ?";
+		String sql = "UPDATE REV SET REV_ALIVE = 0 WHERE REV_NUM = ?";
 		int result = 0;
 		
 		try {

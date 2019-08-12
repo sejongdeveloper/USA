@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.loc.LocDeleteProAction;
 import action.loc.LocListAction;
+import action.loc.LocListDeletePro;
+import action.loc.LocListWriteForm;
+import action.loc.LocListWritePro;
 import action.loc.LocModifyProAction;
 import action.loc.LocViewAction;
 import action.loc.LocWriteProAction;
@@ -65,34 +68,79 @@ public class FrontController extends HttpServlet implements Process{
 		com = com.substring(com.lastIndexOf("/")+1);
 		String nextPage = "";
 		
+		// 지도
 		if(com.equals("regMap.do")) {
 			nextPage = "/view/reg/regMap.jsp";
+			
+		// 지역메인
 		} else if(com.equals("regMain.do")) {
 			nextPage = new RegMainAction().execute(request, response);
+			
+		// 지역정보
 		} else if(com.equals("regView.do")) {
 			nextPage = new RegViewAction().execute(request, response);
+			
+		// 관광지 리스트
 		} else if(com.equals("locList.do")) {
 			nextPage = new LocListAction().execute(request, response);
+		
+		// 관광지 세부정보
 		} else if(com.equals("locView.do")) {
 			nextPage = new LocViewAction().execute(request, response);
+		
+		// 리뷰 작성
 		} else if(com.equals("locWritePro.do")) {
 			new LocWriteProAction().execute(request, response);
 			return;
+		
+		// 리뷰 수정
 		} else if(com.equals("locModifyPro.do")) {
 			new LocModifyProAction().execute(request, response);
 			return;
+			
+		// 리뷰 삭제
 		} else if(com.equals("locDeletePro.do")) {
 			new LocDeleteProAction().execute(request, response);
 			return;
+			
+		// 이벤트 응모
 		} else if(com.equals("event.do")) {
 			nextPage = "/view/event/event.jsp";
+		
+		// 메인 페이지
 		} else if(com.equals("main.do")) {
 			nextPage = new MainAction().execute(request, response);
+		
+		// 환율
 		} else if(com.equals("money.do")) {
 	        MoneyAction.execute(request, response);
 	        return;
+	        
+	    // 인덱스
 		} else if(com.equals("index.do")) {
 			response.sendRedirect("index.jsp");
+			return;
+			
+		// 관광지 리스트 등록 폼
+		} else if(com.equals("locListWriteForm.do")) {
+			nextPage = new LocListWriteForm().execute(request, response);
+			
+		// 관광지 리스트 등록 실행
+		} else if(com.equals("locListWritePro.do")) {
+			new LocListWritePro().execute(request, response);
+			return;
+		
+		// 관광지 리스트 삭제
+		} else if(com.equals("locListDeletePro.do")) {
+			new LocListDeletePro().execute(request, response);
+		
+		// 관광지 수정 폼
+		} else if(com.equals("locListModifyForm.do")) {
+		
+			
+		// 관광지 수정 실행
+		} else if(com.equals("locListModifyPro.do")) {
+			
 			
 		// 회원가입 폼
 		} else if(com.equals("memWriterForm.do")) {

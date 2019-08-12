@@ -6,6 +6,7 @@ public class LocVO {
 	private String loc_contents;
 	private String loc_filename;
 	private String loc_regname;
+	private String loc_writer;
 	
 	public String getLoc_name() {
 		return loc_name;
@@ -30,6 +31,12 @@ public class LocVO {
 	}
 	public void setLoc_regname(String loc_regname) {
 		this.loc_regname = loc_regname;
+	}
+	public String getLoc_writer() {
+		return loc_writer;
+	}
+	public void setLoc_writer(String loc_writer) {
+		this.loc_writer = loc_writer;
 	}
 	
 }

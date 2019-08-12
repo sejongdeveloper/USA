@@ -35,8 +35,8 @@
 <div class="regMain_info3 regMain_div"><div class="regMain_infotitle ">비행시간</div><div class="regMain_infocontents3">(직항)${ regname_vo.regFlight }시간</div></div>
 <div class="regMain_moreinfo regMain_div">
 	<div class="regMain_infotitle">더 많은 정보</div>
-	<a href="regView.do?reg_name=${ reg_filenameList[0].reg_name }"><div class="regMain_one">기본정보</div></a>
-	<a href="locList.do?loc_regname=${ reg_filenameList[0].reg_name }"><div class="regMain_two">관람명소</div></a>
+	<a href="regView.do?reg_name=${ reg_filenameList[0].reg_name }"><div class="regMain_one">기본 정보</div></a>
+	<a href="locList.do?loc_regname=${ reg_filenameList[0].reg_name }"><div class="regMain_two">관광지 정보</div></a>
 </div>
 </div>
 </div>
