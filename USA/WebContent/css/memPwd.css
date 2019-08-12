@@ -1,0 +1,67 @@
+@charset "UTF-8";
+#memPwd {
+	margin-top: 100px;
+    margin-bottom: 20px;
+    margin-left: 630px;
+}
+
+.main {
+	border: 1px solid #dadada;
+	width: 430px;
+	height: 111;
+	padding:  0px 50px 0px 100px;
+	
+}
+
+.subject {
+	font-weight: bold;
+}
+
+hr {
+	display: inline-block;
+	width: 478px;
+}
+#id hr {
+	width: 100px;
+	border: 1px solid black;
+}
+
+.data {
+	width: 288px;
+	height: 32px;
+	border: 1px solid #dadada;
+	margin-top: 35px;
+	margin-bottom: 40px;
+	margin-left: 35px;
+}
+
+#mem_id {
+	margin-left: 5px;
+	margin-bottom: 5px;
+	width: 270px;
+	height: 25px;
+	border: 1px solid #ffffff;
+	background-color: #ffffff;
+}
+
+#mem_id:focus {
+	outline: none;
+}
+
+input[type=submit] {
+	padding: 5px 17px 8px 17px;
+	background-color: white;
+	border: 1px solid #dadada;
+	margin-top: 20px;
+	margin-left: 248px;
+}
+
+input[type=submit]:hover {
+	cursor: pointer;
+}
+
+#idDetail {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 20px;
+}

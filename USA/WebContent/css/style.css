@@ -1,0 +1,184 @@
+@charset "UTF-8";
+.footer {
+	position: relative;
+	width: 1920px;
+	background-color: black;
+	bottom: 0px;
+	text-align: center;
+}
+.footer_table {
+	width: 1000px;
+	text-align: left;
+	margin: auto;
+	color: white;
+	padding: 20px;
+	border: 0px;
+}
+.header {
+	position: absolute;
+	top: 0;
+	width: 1920px;
+	background-color: black;
+	height: 60px;
+	z-index: 10;
+}
+.header a {
+	text-decoration: none;
+	color: white;
+}
+.dropmenu {
+	width: 1000px;
+	text-align: center;
+	margin-top: 0px;
+	margin-left: 400px;
+	padding: 0;
+}
+.headertitle {
+	font-size: 50px;
+	padding: 0px;
+}
+.headercontent {
+	font-size: 25px;
+	padding: 0px;
+}
+.headercontentin {
+	font-size: 15px;
+}
+.headercenter {
+	display: inline-block;
+	font-size: 30px;
+	margin-right: 100px;
+	padding-top: 0px;
+	margin-bottom: 10px;
+}
+.dropmenu ul {
+	background: rgb(109,109,109);
+	display:none;
+	padding:0px;
+	padding-top: 0px;
+	width:200px;
+	position: absolute;
+}
+ul li:hover > ul{
+	display: block;
+	list-style: none;
+	top: 60px;
+	width: 140px;
+	opacity: 0.8;
+	z-index: 0;
+}
+.headerSignin {
+	position: absolute;
+	right: 30px;
+	top: 5px;
+}
+.dropmenu3 {
+	left: 140px;
+	width: 180px;
+}
+li:hover > a {
+	color: gray;
+}
+li:hover > p {
+	color: gray;
+}
+p {
+	margin: 10px;
+}
+.headerSignin:hover > a {
+	color: gray;
+}
+.member {
+   color: white;
+    margin-right: 30px;
+}
+.exchangeframe {
+	position: fixed;
+	top: 300px;
+	left: 1670px;
+	height: 100px;
+	width: 180px;
+	border: 1px solid black;
+	border-radius: 20px;
+}
+.title {
+	text-align: center;
+	margin-top: 5px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.country {
+	text-align: center;
+	margin-bottom: 5px;
+	margin-top: 10px;
+}
+.exchangeRate {
+	position: absolute;
+	display: inline-block;
+	text-align: right;
+	left: 45px;
+}
+.unit {
+	position: absolute;
+	display: inline-block;
+	right: 20px;
+	margin-left: 10px;
+}
+.body {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	width: 1000px;
+	display: inline-block;
+	margin-left: 350px;
+    width: 1250px;
+}
+.locpictureframe {
+	margin-top: 100px;
+	text-align: center;
+}
+.locpicture {
+	width: 800px;
+	border: 1px solid black;
+	margin: auto;
+	height: 350px;
+}
+.regMain_regname {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.tablezone {
+	margin-left: 100px;
+	margin-top: 50px;
+	width: 1100px;
+	height: 300px;
+	margin-bottom: 30px;
+}
+.buytable {
+	position: relative;
+	display: inline-block;
+	border: 1px solid black;
+	width: 450px;
+	height: 300px;
+	margin-left: 50px;
+}
+.celltable {
+	position: relative;
+	display: inline-block;
+	border: 1px solid black;
+	width: 450px;
+	margin-left: 30px;
+	height: 300px;
+}
+.reg_img {
+	height: 100%;
+	width: 100%;
+}
+.tabletitle {
+	margin-left: 200px;
+	margin-right: 130px;
+}
+.tablecontents {
+	margin-left: 20px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
