@@ -15,7 +15,6 @@
 <Br><Br><Br>
 <div>
 
-
 	<center>
 
 	  <a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}&opt=${opt}">전체 </a>

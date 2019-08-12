@@ -81,7 +81,10 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-	    slideShow();
+	var i='${member}';
+	console.log(i);
+		
+		slideShow();
 	});
 	
 	function slideShow() {

@@ -17,7 +17,7 @@ public class TradeBoardListAction implements Command {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
-		
+		System.out.println("아아아아아아아아아앙아아아아앜!!!!!!!!");
 		
 //		ActionForward forward = new ActionForward();
 	       
@@ -37,8 +37,10 @@ public class TradeBoardListAction implements Command {
 	        //가져온페이지가 널이아니면 시작페이지를 가져온 페이지로
 	        if(page != null&&page!="")  TradeBoardCurrentPage = Integer.parseInt(page);
 	        int tradeStartNum=TradeBoardCurrentPage*pageSize-pageSizeref; //시작 글번호
+	        System.out.println("여기는 시작번호"+tradeStartNum);
+	       
 	        int tradeEndNum=pageSize; //끝번호 사실상 의미없음. pageSize와 같은값.
-	        
+	        System.out.println("여기는 끝번호"+tradeEndNum);
 	        //검색 옵션
 	        String opt = request.getParameter("opt");
 	        //검색조건
@@ -65,6 +67,7 @@ public class TradeBoardListAction implements Command {
 	        
 	        //전체 게시물숫자 조회
 	        int listCount = dao.getBoardListCount(listOpt,tra_header);
+	        System.out.println("여기는 LISTCOUNT"+listCount);
 	        //,시작 글 번호 사용안하고있음? 왜냐하면 위의 쿼리에서 알아서 걸러버림. 지울것.
 	        int TradeBoardNumberSize=listCount-(TradeBoardCurrentPage-1) *pageSize;
 	        
@@ -72,7 +75,7 @@ public class TradeBoardListAction implements Command {
 	        
 	        //게시물 내용 담음
 	        ArrayList<TradeBoardVO> list =  dao.getBoardList(listOpt);
-
+	        System.out.println("여기는 게시물 사이즈 "+list.size());
 	        
 
 	        
@@ -98,9 +101,9 @@ public class TradeBoardListAction implements Command {
 	        
 	        
 	        
-	        
-	        
-	        
+	        System.out.println(list.size());
+	        System.out.println(pageSize+"여기는 페이지 사이즈");
+	        System.out.println("여기는 페이지 사이즈");
 	        request.setAttribute("pageSize", pageSize);
 	        
 	        

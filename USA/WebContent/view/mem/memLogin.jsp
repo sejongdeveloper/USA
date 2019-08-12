@@ -20,7 +20,13 @@
 <div id="memLogin">
 
 	<form action="${contextPath }/memLoginPro.do">
-	<input type="hidden" name="idChk" id="idHidden">
+	<c:if test="${empty cookie_mem_id }">
+		<input type="hidden" name="idChk" id="idHidden" value="false">		
+	</c:if>
+	<c:if test="${not empty cookie_mem_id }">
+		<input type="hidden" name="idChk" id="idHidden" value="true">	
+	</c:if>
+	
 	<div class="inputBack" id="idDiv">
 		<input type="text" name="mem_id" placeholder="아이디" value="${cookie_mem_id }" class="inputReal" id="mem_id" onfocusout="idValidate()" onfocusin="basic('#idDiv')">
 		<div class="imgDiv"><img src="${contextPath }/view/mem/upload/test.svg"></div>
@@ -46,10 +52,12 @@
 			<input type="checkbox" name="idChk" id="idChk" onclick="isCookie()" checked="checked">		
 		</c:if>
 		</span><span id="idChkName">아이디 저장</span>
-		<a href="${contextPath }/memIdForm.do">아이디 찾기</a> | <a href="${contextPath }/memPwdForm.do">비밀번호 찾기</a> | <a href="${contextPath }/memWriterForm.do">회원가입</a>
+		<a href="${apiURL }">아이디 찾기</a> | <a href="${contextPath }/memPwdForm.do">비밀번호 찾기</a> | <a href="${contextPath }/memWriterForm.do">회원가입</a>
 	</div>
 
 	<input type="submit" value="로그인">
+	<br>
+	<a href="${contextPath }/naver.do"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 
 	</form>
 </div>
@@ -57,5 +65,9 @@
 </body>
 
 <script type="text/javascript" src="${contextPath }/view/mem/js/memLogin.js"></script>
+
+<script type="text/javascript">
+
+</script>
 
 </html>

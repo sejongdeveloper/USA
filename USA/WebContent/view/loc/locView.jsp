@@ -133,7 +133,9 @@
 			$("#rev_modicontents").focus();
 			return false;
 		}
-		if($(':radio[name="rev_modiscore"]:checked').length < 1){
+		
+		
+		if($(':radio[name="rev_score"]:checked').length < 1){
 			alert("평점을 선택주세요.");
 			$("#rev_modiscore").focus();
 			return false;
@@ -151,15 +153,15 @@
 		}
 	});
 	
-	function modify(writer, a){	    
+	function modify(writer, a){	    //a = this
 
 	        var obj = document.getElementsByName("modifystart");
 			
 	        for(var i=0; i<obj.length; i++){
-	            if(obj[i] != a){
+	            if(obj[i] != a){ // 선택안한
 	            	<c:forEach items="${ rev_list }" var="list">
 	    	        if('${ list.rev_num }' != writer) {
-	    	        	document.getElementById('revView_contentsmodiform'+'${ list.rev_num }').style.display='none';
+	    	        	document.getElementById('revView_contentsmodiform${ list.rev_num }').style.display='none';
 	            	    document.getElementById('modifyend'+'${ list.rev_num }').style.display='none';
 	            	    document.getElementById('locView_revScoreinmodiform'+'${ list.rev_num }').style.display='none';
 	            	    document.getElementById('revView_contents'+'${ list.rev_num }').style.display='inline';
@@ -167,7 +169,7 @@
 		        	    document.getElementById('locView_revScorein'+'${ list.rev_num }').style.display='table-cell';
 	    	        } 
 	    	        </c:forEach>
-	            } else {
+	            } else { // 선
 	        		document.getElementById('revView_contentsmodiform'+writer).value=document.getElementById('revView_contents'+writer).innerHTML;
 	        	    document.getElementById('revView_contents'+writer).style.display='none';
 	        	    document.getElementById('modifystart'+writer).style.display='none';

@@ -29,6 +29,7 @@ import action.mem.MemUpdateFromAction;
 import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
 import action.mem.MemWriterFormAction;
+import action.mem.memNaverAction;
 import action.reg.RegMainAction;
 import action.reg.RegViewAction;
 import action.tra.TradeBoardDeleteAction;
@@ -172,9 +173,14 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("money.do")) {
 			MoneyAction.execute(request, response);
 			return;
-		}
+		
+		// 네이버 로그인
+		} else if(com.equals("naver.do")) {
+			nextPage = new memNaverAction().execute(request, response);
+		
+		
 		//리스트
-		else if(com.equals("list.do")) {
+		} else if(com.equals("list.do")) {
 		nextPage=new TradeBoardListAction().execute(request, response);
 		System.out.println("list");
 		

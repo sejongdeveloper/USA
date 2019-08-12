@@ -217,8 +217,8 @@ public class TradeBoardDAO {
 	        String opt = (String)listOpt.get("opt"); // 조건
 	        String condition = (String)listOpt.get("condition"); // 내용
 	        String tra_head=(String)listOpt.get("tra_head");
-	        int start = (Integer)listOpt.get("start"); // 시작글번호
-	        int end=(Integer)listOpt.get("end");       //한번에 보여줄  글번호
+	        int start = (Integer)listOpt.get("start"); // 시작글번호  1
+	        int end=(Integer)listOpt.get("end");       //한번에 보여줄  글번호  10
 	        int endNum=start+end-1;
 	        System.out.println(condition+"而⑤뵒�뀡 �엯�땲�떎.");
 	        System.out.println("여기는 헤더이름"+tra_head);
@@ -237,7 +237,7 @@ public class TradeBoardDAO {
 	            			pstmt.setInt(1, start);
 	            			pstmt.setInt(2, endNum);
 	            		}else {
-	            			
+	            			System.out.println("검색조건 널 팝니다 삽니다 컨디션");
 	            			sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents,tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 order by tra_num desc))where ?<=rnum and rnum<=? and tra_head = ? ";
 	            			pstmt = conn.prepareStatement(sql);
 	            			pstmt.setInt(1, start);
