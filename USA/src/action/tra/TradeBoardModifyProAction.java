@@ -21,12 +21,10 @@ public class TradeBoardModifyProAction implements Command {
 			throws ServletException, IOException {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
-		System.out.println("여기는 모디파이 프로 액션"+num);
 		int fileSize= 5*1024*1024;
 		
 		String uploadPath = request.getServletContext().getRealPath("/upload");
 
-		System.out.println(uploadPath +"//업로드폴더?");
 		TradeBoardDAO dao = TradeBoardDAO.getInstance();
 		TradeBoardVO vo = new TradeBoardVO();
 		
@@ -62,7 +60,6 @@ public class TradeBoardModifyProAction implements Command {
 			boolean result = dao.updateBoard(vo);
 			
 			if(result){
-				System.out.println("컨텐츠로 넘어가기위한 단계");
 				return "/view/tra/content.do?num="+num;
 			}
 			

@@ -21,7 +21,7 @@ public class LocModifyProAction implements Command {
 		RevVO vo = new RevVO();
 		int rev_num = Integer.parseInt(request.getParameter("rev_num"));
 		String rev_contents = request.getParameter("rev_contents");
-		int rev_score = Integer.parseInt(request.getParameter("rev_score"));
+		int rev_score = Integer.parseInt(request.getParameter("rev_modiscore"));
 		
 		vo.setRev_num(rev_num);
 		vo.setRev_contents(rev_contents);

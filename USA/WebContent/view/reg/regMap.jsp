@@ -10,6 +10,7 @@
 <body>
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 <div class="body">
 <div class="reg_mapframe">
 <div class="reg_maptop">§ 미국 지도 §</div>

@@ -17,6 +17,7 @@ import action.loc.LocWriteProAction;
 import action.main.MainAction;
 import action.main.MoneyAction;
 import action.mem.MemDelProAction;
+import action.mem.MemEvent;
 import action.mem.MemFilenameProAction;
 import action.mem.MemIdProAction;
 import action.mem.MemIdPwdAction;
@@ -63,8 +64,6 @@ public class FrontController extends HttpServlet implements Process{
 		String com = requestURI.substring(contextPath.length() + 1);
 		com = com.substring(com.lastIndexOf("/")+1);
 		String nextPage = "";
-		
-		System.out.println("com: "+com);
 		
 		if(com.equals("regMap.do")) {
 			nextPage = "/view/reg/regMap.jsp";
@@ -175,7 +174,6 @@ public class FrontController extends HttpServlet implements Process{
 		//리스트
 		else if(com.equals("list.do")) {
 		nextPage=new TradeBoardListAction().execute(request, response);
-		System.out.println("list");
 		
 		//글쓰기 누르면 글쓰기폼이 나옴
 		}else if (com.equals("writeForm.do")) {
@@ -184,35 +182,27 @@ public class FrontController extends HttpServlet implements Process{
 		//글쓰기 완료 누르면 실행
 		}else if(com.equals("TradeBoardWriteAction.do")) {
 			nextPage=new TradeBoardWriteAction().execute(request, response);
-			System.out.println("여기는 글쓰기 완료 실행"+nextPage);
+			
 		//글 자세히 보기
 		}else if(com.equals("content.do")) {
-			System.out.println("여기는 컨텐츠 컨트롤러");
 			nextPage=new TradeBoardDetailAction().execute(request, response);
 			
 		//다운로드 처리
 		}else if(com.equals("FileDownload.do")) {
 			
 			new TradeBoardDownloadAction().execute(request, response);
-			
-			
-			System.out.println("들르나요?");
-		
-			
+
 			//글쓰기수정 눌렀을떄
 		}else if(com.equals("TradeBoardModifyFormAction.do")) {
 			nextPage=new TradeBoardModifyFormAction().execute(request, response);
 			
-			
 			//글쓰기수정 완료할떄
 		}else if(com.equals("TradeBoardModifyProAction.do")) {
-			System.out.println("수정완료 돌기는 하나요?");
 			nextPage=new TradeBoardModifyProAction().execute(request, response);
 			
 			//삭제 눌렀을떄
 		}else if(com.equals("TradeBoardDeleteAction.do")) {
 			nextPage=new TradeBoardDeleteAction().execute(request, response);
-
 			
 			//댓글 글쓰기 눌렀을떄
 		}else if(com.equals("TradeBoardReplyWriteAction.do")) {
@@ -233,11 +223,12 @@ public class FrontController extends HttpServlet implements Process{
 		}
 		else if(com.equals("main.do")){
 			 nextPage=new MainAction().execute(request, response);
+		} else if(com.equals("Eventcheck.do")){
+			new MemEvent().execute(request, response);
+			return ;
 		}
 		
-		System.out.println("nextPage: "+nextPage);
 		if(nextPage!=null&&nextPage!="") {
-	         System.out.println("여기로 돌기는 하나요?");
 	         RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 	         if(!nextPage.equals("/index.jsp")) request.setAttribute("contents", nextPage);
 	         dis.forward(request, response);

@@ -12,6 +12,8 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
+<jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 <div>
 <div class="body">
 <div class="locList_reg">${ loc_nameFileList[0].loc_regname }</div>

@@ -13,6 +13,8 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
+<jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 <div class="body">
 <c:if test="${ result == null }">
 	<c:set value="-1" var="result"/>
@@ -76,11 +78,11 @@
 		<td rowspan="2" class="locView_revScore">
 		<div id="locView_revScorein${ list.rev_num }" class="locView_revScorein">${ list.rev_score }</div>
 		<div id="locView_revScoreinmodiform${ list.rev_num }" class="locView_revScoreinmodiform">
-			<div class="locView_revScoremodi"><label><input type="radio" value="1" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/1.jpg" class="laimg modiimg"></label></div>
-			<div class="locView_revScoremodi"><label><input type="radio" value="2" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/2.jpg" class="laimg modiimg"></label></div>
-			<div class="locView_revScoremodi"><label><input type="radio" value="3" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/3.jpg" class="laimg modiimg"></label></div>
-			<div class="locView_revScoremodi"><label><input type="radio" value="4" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/4.jpg" class="laimg modiimg"></label></div>
-			<div class="locView_revScoremodi"><label><input type="radio" value="5" name="rev_score" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/5.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="1" name="rev_modiscore" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/1.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="2" name="rev_modiscore" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/2.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="3" name="rev_modiscore" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/3.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="4" name="rev_modiscore" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/4.jpg" class="laimg modiimg"></label></div>
+			<div class="locView_revScoremodi"><label><input type="radio" value="5" name="rev_modiscore" class="modiradio" id="rev_modiscore"><img alt="1" src="${ pageContext.request.contextPath }/upload/5.jpg" class="laimg modiimg"></label></div>
 		</div>
 		</td>
 		<td rowspan="2">
@@ -130,12 +132,10 @@
 		
 		if(contents == null || contents == ""){
 			alert("내용을 입력해주세요.");
-			$("#rev_modicontents").focus();
 			return false;
 		}
-		if($(':radio[name="rev_score"]:checked').length < 1){
+		if($(':radio[name="rev_modiscore"]:checked').length < 1){
 			alert("평점을 선택주세요.");
-			$("#rev_score").focus();
 			return false;
 		}
 		

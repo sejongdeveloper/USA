@@ -28,7 +28,7 @@
 	   
 	   function slideExchage() {
 		      var today = new Date();
-		      var dd = today.getDate() - 1; // 현재 날짜 못 얻는 경우 있음
+		      var dd = today.getDate(); // 현재 날짜 못 얻는 경우 있음
 		      var mm = today.getMonth() + 1; 
 		      var yyyy = today.getFullYear();
 		      if(dd<10) {
@@ -49,16 +49,17 @@
 		         url: url,
 		         success : function(data) {
 		            var info = $.parseJSON(data);
-		            console.log(decodeURIComponent(info[index].cur_nm));
+		            
 		            $(".country").html(info[index].cur_nm);
 		            $(".exchangeRate").html(info[index].bkpr);
 		            $(".unit").html(info[index].cur_unit);
 		            
+		            index++;
+		            
 					if (index > data.length) {
 						index = 0;
 					}
-						
-					index++;
+					
 					}
 				});
 		      	

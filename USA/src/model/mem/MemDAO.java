@@ -1,4 +1,4 @@
-package model.mem;
+﻿package model.mem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -109,7 +109,6 @@ public class MemDAO {
 				vo.setMem_addr(rs.getString("mem_addr"));
 				vo.setMem_filename(rs.getString("mem_filename"));
 				vo.setMem_point(rs.getInt("mem_point"));
-				System.out.println("회원수정 정보갖고옴");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -253,21 +252,43 @@ public class MemDAO {
 		
 		return isId;
 	} // idValidate() end
-	
-	public void getPoint(String mem_id) {
-		try {
-			conn = getConnection();
-			String sql = "update mem set mem_point = (select mem_point from mem where mem_id = ?) + 10 where mem_id = ?";
-			pstmt = conn.prepareStatement(sql);
+	   public void getPoint(String mem_id) {
+		      try {
+		         conn = getConnection();
+		         String sql = "update mem set mem_point = mem_point - 10 where mem_id=?";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, mem_id);
+		         pstmt.executeQuery();
+		         
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		      } 
+		      
+		   }
+	   
+	   
+	   public boolean lostPoint(String mem_id) {
+		   boolean result=false;
+		   try {
+			conn=getConnection();
+			String sql="update mem set mem_point =(select mem_point from mem where mem_id=?)- 10 where mem_id= ?";
+			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, mem_id);
 			pstmt.setString(2, mem_id);
-			pstmt.executeQuery();
-			
-		} catch (Exception e) {
+			int result2=pstmt.executeUpdate();
+		   if(result2==1) {
+			   result=true;
+		   }
+		   
+		   } catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
-		} 
-		
-	}
+		}finally {
+	         CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+	  }
+		   return result;
+		   
+	  }
 }
+

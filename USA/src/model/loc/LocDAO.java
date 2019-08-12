@@ -88,13 +88,13 @@ public class LocDAO {
 		return list;
 	}
 	
-	// 인기 관광명소 이름, 사진 가져오기
+	// 인기 관광명소 3개 이름, 사진 가져오기
 	public ArrayList<LocVO> getBestLocFileName() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<LocVO> list = new ArrayList<LocVO>();
-		String sql = "SELECT LOC_NAME, LOC_FILENAME FROM LOC where loc_name = (SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME)";
+		String sql = "select loc_name, loc_filename from loc where LOC_NAME in (select rev_locname from ( select rownum rnum, r.* from ( SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME) r ) where rnum >= 1 and rnum <=3)";
 		
 		try {
 			conn = getConnection();

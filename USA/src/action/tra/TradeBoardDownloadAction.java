@@ -26,7 +26,7 @@ public class TradeBoardDownloadAction implements Command {
 		
 		
 		String filePath = folder + "/" + fileName;
-		System.out.println(filePath);
+
 		try {
 			File file = new File(filePath);
 			byte b[] = new byte[(int) file.length()];
@@ -54,7 +54,7 @@ public class TradeBoardDownloadAction implements Command {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Download Exception : " + e.getMessage());
+			e.printStackTrace();
 		}
 
 	

@@ -11,9 +11,11 @@
 </head>
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 <body>
 	<div class="body">
 	<div class="locpictureframe">
+		<p class="loctitle">&lt; 인기관광지 TOP3 &gt;</p>
 		<c:forEach var="picture" items="${ loc_allNameFileList }" >
 		<div class="locpicture">
 			<a href="locView.do?loc_name=${ picture.loc_name }">
@@ -24,7 +26,7 @@
 		</c:forEach>
 		</div>
 
-	<br>
+	<br><br>
 	<div class="tablezone">
 		<div class="buytable">
 			<table>
@@ -80,24 +82,27 @@
 <jsp:include page="/view/main/footer.html" />
 </body>
 <script type="text/javascript">
+	var abc = 0;
 	$(document).ready(function(){
 	    slideShow();
 	});
 	
 	function slideShow() {
-	var i;
-	var x = document.getElementsByClassName("locpicture");
-	for (i = 0; i < x.length; i++) {
-	   x[i].style.display = "none";
-	}
-	index++;
-	if (index > x.length) {
-	    index = 1;
-	}   
-	x[index-1].style.display = "inline-block";
-	setTimeout(slideShow, 2000);
+		var x = document.getElementsByClassName("locpicture");
 		
+		for (i = 0; i < x.length; i++) {
+		   x[i].style.display = "none";
+		   
+		}
+		
+		x[abc].style.display = "inline-block";
+		abc++;
+		
+		if (abc == x.length) {
+			abc = 0;
+		}
+		
+		setTimeout(slideShow, 2000);	
 	}
-	
 </script>
 </html>

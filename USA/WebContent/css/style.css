@@ -95,7 +95,7 @@ p {
 .exchangeframe {
 	position: fixed;
 	top: 300px;
-	left: 1670px;
+	left: 1650px;
 	height: 100px;
 	width: 180px;
 	border: 1px solid black;
@@ -113,16 +113,46 @@ p {
 	margin-top: 10px;
 }
 .exchangeRate {
-	position: absolute;
+	position: relative;
 	display: inline-block;
 	text-align: right;
 	left: 45px;
 }
 .unit {
-	position: absolute;
+	position: relative;
 	display: inline-block;
-	right: 20px;
-	margin-left: 10px;
+	left: 75px;
+}
+.weatherframe {
+	position: fixed;
+	top: 180px;
+	left: 1650px;
+	height: 100px;
+	width: 180px;
+	border: 1px solid black;
+	border-radius: 20px;
+}
+.weatitle {
+	text-align: center;
+	margin-top: 5px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.weacountry {
+	text-align: center;
+	margin-bottom: 5px;
+	margin-top: 10px;
+}
+.weatemp {
+	position: relative;
+	display: inline-block;
+	text-align: right;
+	left: 45px;
+}
+.weaweather {
+	position: relative;
+	display: inline-block;
+	left: 75px;
 }
 .body {
 	border-left: 1px solid black;
@@ -135,6 +165,9 @@ p {
 .locpictureframe {
 	margin-top: 100px;
 	text-align: center;
+}
+.loctitle {
+	font-size: 25px;
 }
 .locpicture {
 	width: 800px;
@@ -174,8 +207,9 @@ p {
 	width: 100%;
 }
 .tabletitle {
-	margin-left: 200px;
+	margin-left: 180px;
 	margin-right: 130px;
+	font-size: 25px;
 }
 .tablecontents {
 	margin-left: 20px;
