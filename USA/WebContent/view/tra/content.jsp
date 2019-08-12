@@ -229,7 +229,7 @@ function alink(currentpagemove){
 	$.ajax({
          type:"post",
         async:false, 
-        url:"http://localhost:8080/USA/view/tra/TradeBoardReplyWriteAction.do",
+        url:"./TradeBoardReplyWriteAction.do",
         data:{data : JSON.stringify(obj)},
         success:function(data2){
        // var json=	JSON.parse(data2);
@@ -281,7 +281,7 @@ function alink(currentpagemove){
  		$.ajax({
  	         type:"post",
  	        async:false, 
- 	        url:"http://localhost:8080/USA/view/tra/TradeBoardReplyWriteAction.do",
+ 	        url:"./TradeBoardReplyWriteAction.do",
  	        data:{data : JSON.stringify(obj)},
  	        success:function(data2){
  	       // var json=	JSON.parse(data2);
@@ -307,7 +307,7 @@ function alink(currentpagemove){
  		 		$.ajax({
  		 	         type:"post",
  		 	        async:false, 
- 		 	        url:"http://localhost:8080/USA/view/tra/TradeBoardReplyDeleteAction.do",
+ 		 	        url:"./TradeBoardReplyDeleteAction.do",
  		 	        data:{data : JSON.stringify(obj)},
  		 	        success:function(data2){
  		 	       // var json=	JSON.parse(data2);
@@ -345,7 +345,7 @@ function alink(currentpagemove){
 		$.ajax({
 	         type:"post",
 	        async:false, 
-	        url:"http://localhost:8080/USA/view/tra/TradeBoardReplyModifyAction.do",
+	        url:"./TradeBoardReplyModifyAction.do",
 	        data:{data : JSON.stringify(obj)},
 	        success:function(data2){
 	       // var json=	JSON.parse(data2);
@@ -506,7 +506,7 @@ function sessioncheck(){
 	$.ajax({
          type:"post",
         async:false, 
-        url:"http://localhost:8080/USA/view/tra/TradeBoardReplyListAction.do",
+        url:"./TradeBoardReplyListAction.do",
         data:{data:JSON.stringify(obj)},
         success:function(data2){
         var json=	JSON.parse(data2);

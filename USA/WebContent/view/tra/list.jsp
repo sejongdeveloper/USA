@@ -18,8 +18,7 @@
 
 	<center>
 
-<a href="http://localhost:8080/USA/test.html"> 로그인 </a>
-	   <a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}&opt=${opt}">전체 </a>
+	  <a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}&opt=${opt}">전체 </a>
 	  <a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}&opt=${opt}">팝니다. </a>
 	  <a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}&opt=${opt}">삽니다 </a>  
 <br>
