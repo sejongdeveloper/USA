@@ -18,7 +18,7 @@ import action.Command;
 import model.mem.MemDAO;
 import model.mem.MemVO;
 
-public class memNaverAction implements Command {
+public class MemNaverAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -119,7 +119,8 @@ public class memNaverAction implements Command {
 	         }
 	         
 	         request.getSession().setAttribute("member", id);
-	         System.out.println(response2.toString());
+	         request.getSession().setAttribute("nickname", nickname);
+	         
 	     } catch (Exception e2) {
 	         System.out.println(e2);
 	     }

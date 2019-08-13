@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
   <Resource name="jdbc/USADB" 
-           auth="Container"
+  			auth="Container"
             type="javax.sql.DataSource"
-          description="Employees Database for HR Applications"
+    		description="Employees Database for HR Applications"
 
 
-          username="usa"
+    		username="usa"
 
     		password="oracle"
     		driverClassName="oracle.jdbc.driver.OracleDriver"

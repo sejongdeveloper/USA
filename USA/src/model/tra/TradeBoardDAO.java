@@ -47,7 +47,6 @@ public class TradeBoardDAO {
         int result = 0;
         String opt = (String)listOpt.get("opt"); // 검색조건
         String condition = (String)listOpt.get("condition"); // 검색내용
-        System.out.println(tra_head+"여기는 리스트카운트dao안");
         
         try {
             conn = getConnection();
@@ -217,16 +216,13 @@ public class TradeBoardDAO {
 	        String opt = (String)listOpt.get("opt"); // 조건
 	        String condition = (String)listOpt.get("condition"); // 내용
 	        String tra_head=(String)listOpt.get("tra_head");
-	        int start = (Integer)listOpt.get("start"); // 시작글번호  1
-	        int end=(Integer)listOpt.get("end");       //한번에 보여줄  글번호  10
+	        int start = (Integer)listOpt.get("start"); // 시작글번호
+	        int end=(Integer)listOpt.get("end");       //한번에 보여줄  글번호
 	        int endNum=start+end-1;
-	        System.out.println(condition+"而⑤뵒�뀡 �엯�땲�떎.");
-	        System.out.println("여기는 헤더이름"+tra_head);
-	         try {
+
+	        try {
 	            conn = getConnection();
 	            String sql = null;
-	            System.out.println(opt+"여기는 dao안 opt");
-	            System.out.println(condition+"여기는 dao안 컨디션");
 	            // 湲�紐⑸줉 �쟾泥대�� 蹂댁뿬以� �븣
 	            if(opt == null||opt=="")
 	            {
@@ -237,22 +233,22 @@ public class TradeBoardDAO {
 	            			pstmt.setInt(1, start);
 	            			pstmt.setInt(2, endNum);
 	            		}else {
-	            			System.out.println("검색조건 널 팝니다 삽니다 컨디션");
-	            			sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents,tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 order by tra_num desc))where ?<=rnum and rnum<=? and tra_head = ? ";
+	            			
+	            			sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents,tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 and tra_head = ? order by tra_num desc))where ?<=rnum and rnum<=? ";
 	            			pstmt = conn.prepareStatement(sql);
-	            			pstmt.setInt(1, start);
-	            			pstmt.setInt(2, endNum);
-	            			pstmt.setString(3, tra_head);
+	            			pstmt.setString(1, tra_head);
+	            			pstmt.setInt(2, start);
+	            			pstmt.setInt(3, endNum);
 	            		}
 	                
 	                
 	                
 	                
-	                System.out.println(sql);
 
 	            }
 	            else if(opt.equals("0")) // �젣紐⑹쑝濡� 寃��깋 where tra_alive=0
 	            {
+	            	if(tra_head.equals("전체")) {
 	            	sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
 	                		"    tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 and tra_subject like ? order by tra_num desc))where ?<=rnum and rnum<=? ";
 	                
@@ -260,21 +256,46 @@ public class TradeBoardDAO {
 	                pstmt.setString(1, "%"+condition+"%");
 	                pstmt.setInt(2, start);
 	                pstmt.setInt(3, endNum);
+	            	}else {
+	            		sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
+		                		"    tra_head,tra_alive ,tra_sysdate from(select * from tra where tra_alive=0 and tra_subject like ? and tra_head=? order by tra_num desc))where ?<=rnum and rnum<=? ";
+		                
+		                pstmt = conn.prepareStatement(sql);
+		                pstmt.setString(1, "%"+condition+"%");
+		                pstmt.setString(2, tra_head);
+		                pstmt.setInt(3, start);
+		                pstmt.setInt(4, endNum);
+	            	}
+	            	
 	                
 	            }
 	            else if(opt.equals("1")) // �궡�슜�쑝濡� 寃��깋
 	            {
+	            	if(tra_head.equals("전체")) {
 	            	sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
-	                		"    tra_head,tra_alive,tra_sysdate  from(select * from tra where tra_alive=0 and tra_contents like ? order by tra_num desc))where ?<=rnum and rnum<=? and ";
+	                		"    tra_head,tra_alive,tra_sysdate  from(select * from tra where tra_alive=0 and tra_contents like ? order by tra_num desc))where ?<=rnum and rnum<=?  ";
 	                
 	                pstmt = conn.prepareStatement(sql);
 	                pstmt.setString(1, "%"+condition+"%");
 	                pstmt.setInt(2, start);
 	                pstmt.setInt(3, endNum);
-	                
+	            	}else {
+	            		
+	            		sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
+		                		"    tra_head,tra_alive,tra_sysdate  from(select * from tra where tra_alive=0 and tra_contents like ? and tra_head=? order by tra_num desc))where ?<=rnum and rnum<=? ";
+		                
+		                pstmt = conn.prepareStatement(sql);
+		                pstmt.setString(1, "%"+condition+"%");
+		                pstmt.setString(2, tra_head);
+		                pstmt.setInt(3, start);
+		                pstmt.setInt(4, endNum);
+	            		
+	            		
+	            	}
 	            }
 	            else if(opt.equals("2")) // �젣紐�+�궡�슜�쑝濡� 寃��깋
 	            {
+	            	if(tra_head.equals("전체")) {
 	            	sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
 	                		"    tra_head,tra_alive,tra_sysdate from(select * from tra where  tra_alive=0 and tra_contents like ? or tra_subject like ? order by tra_num desc))where ?<=rnum and rnum<=?";
 	                
@@ -283,10 +304,25 @@ public class TradeBoardDAO {
 	                pstmt.setString(2, "%"+condition+"%");
 	                pstmt.setInt(3, start);
 	                pstmt.setInt(4, endNum);
+	            	}
+	            	else {
+	            		sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
+		                		"    tra_head,tra_alive,tra_sysdate from(select * from tra where  tra_alive=0 and tra_contents like ? or tra_subject like ? and tra_head=? order by tra_num desc))where ?<=rnum and rnum<=?";
+		                
+		                pstmt = conn.prepareStatement(sql);
+		                pstmt.setString(1, "%"+condition+"%");
+		                pstmt.setString(2, "%"+condition+"%");
+		                pstmt.setString(3, tra_head);
+		                pstmt.setInt(4, start);
+		                pstmt.setInt(5, endNum);
+	            		
+	            		
+	            	}
 	                
 	            }
 	            else if(opt.equals("3")) // 湲��벖�씠濡� 寃��깋
 	            {
+	            	if(tra_head.equals("전체")) {
 	            	sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
 	                		"    tra_head ,tra_alive,tra_sysdate from(select * from tra where  tra_alive=0 and tra_writer like ? order by tra_num desc))where ?<=rnum and rnum<=? ";
 	                
@@ -294,13 +330,24 @@ public class TradeBoardDAO {
 	                pstmt.setString(1, "%"+condition+"%");
 	                pstmt.setInt(2, start);
 	                pstmt.setInt(3, endNum);
+	            	}else {
+	            		sql="select *  from  (select rownum rnum,tra_num,tra_subject,tra_readcount,tra_writer , tra_filename,tra_contents," + 
+		                		"    tra_head ,tra_alive,tra_sysdate from(select * from tra where  tra_alive=0 and tra_writer like ? and tra_head=? order by tra_num desc))where ?<=rnum and rnum<=? ";
+		                
+		                pstmt = conn.prepareStatement(sql);
+		                pstmt.setString(1, "%"+condition+"%");
+		                pstmt.setString(2, tra_head);
+		                pstmt.setInt(3, start);
+		                pstmt.setInt(4, endNum);	
+	            		
+	            		
+	            	}
 	                
 	            }
 	            
 	            rs=pstmt.executeQuery();
 	            while(rs.next())
 	            {
-	            	System.out.println("rs안여기 타긴 타나여?");
 	                TradeBoardVO vo= new TradeBoardVO();
 	                vo.setTra_num(rs.getInt("tra_num"));
 	                vo.setTra_writer(rs.getString("tra_writer"));
@@ -312,7 +359,6 @@ public class TradeBoardDAO {
 	                vo.setTra_alive(rs.getInt("tra_alive"));
 	                
 	                vo.setTra_sysdate(sdf.format(rs.getTimestamp("tra_sysdate")));
-	                System.out.println("적합함?");
 	                list.add(vo);
 	            }
 	            

@@ -25,7 +25,6 @@ public class TradeBoardWriteModify implements Command {
 				
 		String uploadPath=request.getServletContext().getContextPath();
 			request.getServletContext().getContextPath();
-		System.out.println(uploadPath +"//업로드폴더?");
 		request.setAttribute("uploadPath", uploadPath);
 		
 		try {

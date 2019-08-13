@@ -19,7 +19,7 @@ public class MainAction implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		LocDAO locdao = LocDAO.getInstance();
 		
-		ArrayList<LocVO> loc_allNameFileList = locdao.getAllLocFileName();
+		ArrayList<LocVO> loc_allNameFileList = locdao.getBestLocFileName();
 		
 		
 		//아래부터는 리스트 처리

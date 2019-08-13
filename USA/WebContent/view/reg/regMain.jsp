@@ -12,6 +12,8 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
+<jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 <div class="body">
 <div class="bodyin">
 <div class="regMain_picture regMain_div">
@@ -33,15 +35,15 @@
 <div class="regMain_info3 regMain_div"><div class="regMain_infotitle ">비행시간</div><div class="regMain_infocontents3">(직항)${ regname_vo.regFlight }시간</div></div>
 <div class="regMain_moreinfo regMain_div">
 	<div class="regMain_infotitle">더 많은 정보</div>
-	<a href="regView.do?reg_name=${ reg_filenameList[0].reg_name }"><div class="regMain_one">기본정보</div></a>
-	<a href="locList.do?loc_regname=${ reg_filenameList[0].reg_name }"><div class="regMain_two">관람명소</div></a>
+	<a href="regView.do?reg_name=${ reg_filenameList[0].reg_name }"><div class="regMain_one">기본 정보</div></a>
+	<a href="locList.do?loc_regname=${ reg_filenameList[0].reg_name }"><div class="regMain_two">관광지 정보</div></a>
 </div>
 </div>
 </div>
 <jsp:include page="/view/main/footer.html" />
 </body>
 <script type="text/javascript">
-    var index = 0;   //이미지에 접근하는 인덱스
+    var pic = 0;   //이미지에 접근하는 인덱스
     $(document).ready(function(){
         slideShow();
         calcTime();
@@ -49,17 +51,21 @@
     });
     
     function slideShow() {
-    var i;
-    var x = document.getElementsByClassName("reg_img");  //slide1에 대한 dom 참조
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
-    }
-    index++;
-    if (index > x.length) {
-        index = 1;  //인덱스가 초과되면 1로 변경
-    }   
-    x[index-1].style.display = "block";  //해당 인덱스는 block으로
-    setTimeout(slideShow, 2000);   //함수를 2초마다 호출
+
+	    var x = document.getElementsByClassName("reg_img");  //slide1에 대한 dom 참조
+	    for (i = 0; i < x.length; i++) {
+	       x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
+	    }
+	    
+	    x[pic].style.display = "block";  //해당 인덱스는 block으로
+	    
+	    pic++;
+	    
+	    if (pic == x.length) {
+	        pic = 0;  //인덱스가 초과되면 1로 변경
+	    }
+	    
+	    setTimeout(slideShow, 2000);   //함수를 2초마다 호출
  	
 	}
     

@@ -10,16 +10,19 @@
 <title>게시판</title>
 </head>
 
-<body id='54321'>
+<body id='54321' onload="tra_headcheck()">
 <jsp:include page="/view/main/header.jsp" />
+<jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 <Br><Br><Br>
 <div>
 
-	<center>
 
-	  <a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}&opt=${opt}">전체 </a>
-	  <a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}&opt=${opt}">팝니다. </a>
-	  <a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}&opt=${opt}">삽니다 </a>  
+	<center>
+	  
+	  <a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}">전체 </a>
+	  <a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}">팝니다. </a>
+	  <a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}">삽니다 </a>  
 <br>
 	<a href="list.do?pagesize=10&condition=${condition}&opt=${opt}&tra_head=${tra_head}">10개씩보기 </a>
 	<a href="list.do?pagesize=20&condition=${condition}&opt=${opt}&tra_head=${tra_head}">20개씩보기 </a>
@@ -75,8 +78,8 @@
 	
 	
 			</td>
-			<td align="center" width="100">${list.tra_writer} </td>
-			<td align="center" width="150">${list.tra_sysdate }</td>
+			<td align="center" width="100">${ list.tra_writer } </td>
+			<td align="center" width="150">${ list.tra_sysdate }</td>
 			<td align="center" width="150">${ list.tra_readcount}</td>
 			<td align="center" width="150">${ list.tra_head}</td>
 		</tr>
@@ -146,6 +149,11 @@
 </c:if> 
 <br>
 <form>
+	<select id="tra_head" >
+				<option value="전체">전체</option>
+				<option value="팝니다">팝니다</option>
+				<option value="삽니다">삽니다</option>
+	</select>
 			<select name="opt">
 				<option value="0">제목</option>
 				<option value="1">내용</option>
@@ -159,4 +167,20 @@
 </center>
 <jsp:include page="/view/main/footer.html" />
 </body>
+<script>
+function tra_headcheck(){
+	var check= "${tra_head}";
+	if(check=="전체"){
+		 document.getElementById("tra_head").options[0].selected = true;
+	}else if(check=="팝니다"){
+		document.getElementById("tra_head").options[1].selected = true;
+		
+	}else if(check=="삽니다"){
+		document.getElementById("tra_head").options[2].selected = true;
+		
+	}
+	console.log(check);
+	
+}
+</script>
 </html>

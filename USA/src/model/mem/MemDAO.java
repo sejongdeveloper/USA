@@ -253,4 +253,43 @@ public class MemDAO {
 		
 		return isId;
 	} // idValidate() end
+	
+	   public void getPoint(String mem_id) {
+		      try {
+		         conn = getConnection();
+		         String sql = "update mem set mem_point = mem_point - 10 where mem_id=?";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, mem_id);
+		         pstmt.executeQuery();
+		         
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		      } 
+		      
+		   }
+	   
+	   
+	   public boolean lostPoint(String mem_id) {
+		   boolean result=false;
+		   try {
+			conn=getConnection();
+			String sql="update mem set mem_point =(select mem_point from mem where mem_id=?)- 10 where mem_id= ?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mem_id);
+			pstmt.setString(2, mem_id);
+			int result2=pstmt.executeUpdate();
+		   if(result2==1) {
+			   result=true;
+		   }
+		   
+		   } catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+	         CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+	  }
+		   return result;
+		   
+	  }
 }

@@ -31,14 +31,12 @@ public class TradeBoardReplyWriteAction extends HttpServlet {
 		//받을떄
 		
 		String jsoninfo=request.getParameter("data");
-		System.out.println(jsoninfo);
 		JSONParser jsonParser=new JSONParser();
 	
 		try {
 			
 				
 				JSONObject jsonObject = (JSONObject) jsonParser.parse(jsoninfo);
-				System.out.println(jsonObject);
 				//json값 가져올떄 long형으로 가져옴
 				/*
 				 contet 글 내용
@@ -56,7 +54,8 @@ public class TradeBoardReplyWriteAction extends HttpServlet {
 			//원게시판번호
 			int trarepTranum=(int)(long)jsonObject.get("tranum");
 			String trarepContent=  (String) jsonObject.get("content");
-			String trarepWriter=(String) jsonObject.get("writer");
+			String trarepWriter=(String)request.getSession().getAttribute("nickname");
+//			String trarepWriter=(String) jsonObject.get("writer");
 			int ref= Integer.parseInt((String) jsonObject.get("ref"));
 			int trarepWriternum=trarepnum; //부모그룹을 만들어주는데 그것은 자기자신의 고유번호로 지정
 			if(ref==0) trarepWriternum=trarepnum;
@@ -69,7 +68,6 @@ public class TradeBoardReplyWriteAction extends HttpServlet {
 				
 			}
 //		
-		System.out.println("등록전 여기는 test4"+trarepTranum);
 			//1댓글 고유번호
 			vo.setTrarep_num(trarepnum);
 			//2게시판 번호
@@ -107,7 +105,6 @@ public class TradeBoardReplyWriteAction extends HttpServlet {
 		totalObject.put("result",msg);
 //		
 //		String jsonInfo = totalObject.toJSONString();
-//		System.out.print(jsonInfo);
 		writer.print(totalObject);
 //		
 //		
