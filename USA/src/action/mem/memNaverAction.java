@@ -57,6 +57,12 @@ public class memNaverAction implements Command {
 	        res.append(inputLine);
 	      }
 	      str = res.toString();
+	      
+	      JSONParser parser = new JSONParser();
+	      JSONObject json = (JSONObject) parser.parse(str);
+	      access_token = (String) json.get("access_token");
+	      request.getSession().setAttribute("access_token", access_token);
+	      
 	      br.close();
 	      if(responseCode==200) {
 	        //out.println(res.toString());
@@ -70,6 +76,7 @@ public class memNaverAction implements Command {
 	    JSONObject json = null;
 	    String header = null;
 	    String token = null;
+	    String email = null;
 	     try {
 	    	 json = (JSONObject)parser.parse(str);
 	    	 token = (String)json.get("access_token");// 네이버 로그인 접근 토큰; 여기에 복사한 토큰값을 넣어줍니다.
@@ -97,30 +104,27 @@ public class memNaverAction implements Command {
 	         JSONObject json2 = (JSONObject)parser.parse(response2.toString());
 	         JSONObject info = (JSONObject)json2.get("response");
 	         String id = (String)info.get("id");
-	         String email = (String)info.get("email");
+	         email = (String)info.get("email");
 	         String profile_image = (String)info.get("profile_image");
-	         String name = (String)info.get("name");
-	         System.out.println("\n==============================");
-	         System.out.println("id : " + id);
-	         System.out.println("email : " + email);
-	         System.out.println("profile_image : " + profile_image);
-	         System.out.println("name : " + name);
-	         System.out.println("==============================");
-	         
+	         String nickname = (String)info.get("nickname");
 	         
 	         boolean isId = MemDAO.getInstance().idValidate(id);
 	         if(!isId) {
 	        	 MemVO vo = new MemVO();
-	        	 vo.setMem_id(email);
+	        	 vo.setMem_pwd(email);
+	        	 vo.setMem_id(id);
+	        	 vo.setMem_name(nickname);
+	        	 vo.setMem_filename(profile_image);
 	        	 MemDAO.getInstance().insert(vo);
 	         }
 	         
-	         request.getSession().setAttribute("member", email);
+	         request.getSession().setAttribute("member", id);
 	         System.out.println(response2.toString());
 	     } catch (Exception e2) {
 	         System.out.println(e2);
 	     }
-		return "/index.do";
+	     
+	     return "/index.do";
 	}
 
 }
