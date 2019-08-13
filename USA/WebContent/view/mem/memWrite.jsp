@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<!-- 컨텍스트 패스(절대위치) 값 변수에 저장 -->
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>    
 
 <!DOCTYPE html>
@@ -11,17 +12,21 @@
 <meta name="description" content="회원정보를 입력하여 회원가입하는 페이지">
 <title>회원가입</title>
 
+<!-- css파일 읽어오기 -->
 <link rel="stylesheet" href="${contextPath }/css/memWrite.css">
 	
 </head>
 <body>
+<!-- jstl include -->
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
 <div id="memWrite">
 
+<!-- 파일전송을 위해 post방식과 multipart/form-data 타입을 적용 -->
 <form action="${contextPath }/memWritePro.do" method="post" enctype="multipart/form-data" onsubmit="return check()">
 	<div class="subject"><label for="mem_id">아이디</label></div>
 	<div class="inputBack" id="idDiv">
+		<!--  -->
 		<input type="text" name="mem_id" class="inputReal" id="mem_id" onfocusout="idValidate()" onfocusin="basic('idDiv')">
 		<div class="imgDiv"><img src="${contextPath }/view/mem/upload/test.svg"></div>
 	</div>
@@ -69,9 +74,13 @@
 </form>
 
 </div>
+
+<!-- jstl include -->
 <jsp:include page="/view/main/footer.html" />
+
 </body>
 
+<!-- javascript 실행 -->
 <script type="text/javascript" src="${contextPath }/view/mem/js/memWrite.js"></script>
 
 </html>
