@@ -20,15 +20,16 @@
            			<a href="regMain.do?regname=뉴욕" class="headercontentin"><li><p>뉴욕</p></li></a>
            			<a href="regMain.do?regname=하와이" class="headercontentin"><li><p>하와이</p></li></a>
            			<a href="regMain.do?regname=캘리포니아" class="headercontentin"><li><p>캘리포니아</p></li></a>
+           			<a href="regMain.do?regname=델라웨어" class="headercontentin"><li><p>델라웨어</p></li></a>
+           			<a href="regMain.do?regname=펜실베이니아" class="headercontentin"><li><p>펜실베이니아</p></li></a>
+           			<a href="regMain.do?regname=워싱턴" class="headercontentin"><li><p>워싱턴</p></li></a>
+           			<a href="regMain.do?regname=뉴저지" class="headercontentin"><li><p>뉴저지</p></li></a>
+           			<a href="regMain.do?regname=조지아" class="headercontentin"><li><p>조지아</p></li></a>
+           			<a href="regMain.do?regname=코네티컷" class="headercontentin"><li><p>코네티컷</p></li></a>
+           			<a href="regMain.do?regname=매사추세츠" class="headercontentin"><li><p>매사추세츠</p></li></a>
+           			<a href="regMain.do?regname=메릴랜드" class="headercontentin"><li><p>메릴랜드</p></li></a>
+           			<a href="regMain.do?regname=사우스캐롤라이나" class="headercontentin"><li><p>사우스캐롤라이나</p></li></a>
            		</ul>
-           </li></a>
-           <a href="#" class="headercontentloc"><li><p>관광지</p>
-	           <ul class="dropmenu3">
-         			<a href="locView.do?loc_name=자유의 여신상" class="headercontentin"><li><p>자유의 여신상</p></li></a>
-         			<a href="locView.do?loc_name=타임스퀘어" class="headercontentin"><li><p>타임스퀘어</p></li></a>
-         			<a href="locView.do?loc_name=브로드웨이" class="headercontentin"><li><p>브로드웨이</p></li></a>
-         			<a href="locView.do?loc_name=뉴욕 증권거래소" class="headercontentin"><li><p>뉴욕 증권거래소</p></li></a>
-	           </ul>
            </li></a>
          </ul>
       </li>
@@ -44,7 +45,7 @@
       <div class="headerSignin"><a href="/USA/memLoginForm.do" class="signin">Sign In</a></div>
     </c:if>
     <c:if test="${not empty member }">
-      <div class="headerSignin"><span class="signin"><span class="member">${member }님 환영합니다^^ <a id="me" href="memUpdateForm.do">내정보</a></span><a href="/USA/memLogout.do" class="signin">Sign Out</a></div>
+      <div class="headerSignin"><span class="signin"><span class="member">${nickname }님 환영합니다^^ <a id="me" href="memUpdateForm.do">내정보</a></span><a href="/USA/memLogout.do" class="signin">Sign Out</a></div>
     </c:if>
 	</div>
 	

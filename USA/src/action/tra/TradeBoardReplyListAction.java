@@ -27,7 +27,6 @@ public class TradeBoardReplyListAction extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		//받을떄
 		String jsoninfo=request.getParameter("data");
-		System.out.println(jsoninfo);
 		JSONParser jsonParser=new JSONParser();
 		int tranum=0;//초기화
 		int currentpage=1;
@@ -46,7 +45,6 @@ public class TradeBoardReplyListAction extends HttpServlet {
 			 
 			 //최근페이지
 			currentpage=Integer.parseInt((String) jsonObject.get("currentpage")); 
-			 System.out.println(jsonObject.get("currentpage"));
 
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -129,7 +127,6 @@ public class TradeBoardReplyListAction extends HttpServlet {
 
 		for(int i=0;i<replylist.size();i++) {
 			replyinfo=new JSONObject();
-			System.out.println(i+"번쨰 for문");
 			replyinfo.put("num", replylist.get(i).getTrarep_num());
 			replyinfo.put("tranum", replylist.get(i).getTrarep_tranum());
 			replyinfo.put("content", replylist.get(i).getTrarep_contents());
@@ -141,7 +138,6 @@ public class TradeBoardReplyListAction extends HttpServlet {
 			replyinfo.put("trarep_writerrepwriter",replylist.get(i).getTrarep_writerrepwriter());
 			replyinfo.put("trarep_date",replylist.get(i).getTrarep_date());
 			replyarray.add(replyinfo);
-			System.out.println(replyarray.get(i));
 		
 	}		
 		
@@ -152,7 +148,7 @@ public class TradeBoardReplyListAction extends HttpServlet {
 
 		
 		
-		String session =(String) request.getSession().getAttribute("member");
+		String session =(String) request.getSession().getAttribute("nickname");
 		JSONArray jsonsession=new JSONArray();
 		JSONObject jsonobject=new JSONObject();
 		jsonobject.put("session",session);
@@ -160,7 +156,6 @@ public class TradeBoardReplyListAction extends HttpServlet {
 		totalObject.put("session",jsonsession);
 		
 		String jsonInfo = totalObject.toJSONString();
-		System.out.print(jsonInfo);
 		writer.print(jsonInfo);
 		
 		

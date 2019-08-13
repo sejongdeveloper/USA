@@ -30,14 +30,12 @@ public class TradeBoardReplyModifyAction extends HttpServlet {
 		//받을떄
 		
 		String jsoninfo=request.getParameter("data");
-		System.out.println(jsoninfo);
 		JSONParser jsonParser=new JSONParser();
 	
 		try {
 			
 				
 				JSONObject jsonObject = (JSONObject) jsonParser.parse(jsoninfo);
-				System.out.println(jsonObject);
 				//json값 가져올떄 long형으로 가져옴
 				
 				

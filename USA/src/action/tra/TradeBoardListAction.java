@@ -32,8 +32,8 @@ public class TradeBoardListAction implements Command {
 		    int TradeBoardCurrentPage = 1;
 	        String page = request.getParameter("page");
 	        String tra_header=request.getParameter("tra_head");
-	        System.out.println(tra_header);
-	        if(tra_header==null||tra_header=="") tra_header="전체";
+
+	        if(tra_header==null||tra_header==""||tra_header.equals("전체")) tra_header="전체";
 	        //가져온페이지가 널이아니면 시작페이지를 가져온 페이지로
 	        if(page != null&&page!="")  TradeBoardCurrentPage = Integer.parseInt(page);
 	        int tradeStartNum=TradeBoardCurrentPage*pageSize-pageSizeref; //시작 글번호
@@ -50,7 +50,6 @@ public class TradeBoardListAction implements Command {
 	        }
 	        
 	        
-	        System.out.println("검색조건 되나여~~~~"+condition);
 	        
 	        
 	        //검색조건,검색내용,시작페이지 글번호 hashmap에 담음

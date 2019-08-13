@@ -9,7 +9,8 @@
 	
 </head>
 <body>
-
+<jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 	<br>
 	<b><font size="6" color="gray">±Û ¼öÁ¤</font></b>
 	<br>

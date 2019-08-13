@@ -34,15 +34,12 @@ public class TradeBoardDetailAction  implements Command{
 				
 				dao.updateCount(num);
 				vo=dao.getDetail(num);
-				System.out.println(vo.getTra_writer()+"여기찍히면 이상없는건데.");
-				System.out.println(num+"보드넘버 찍히긴하나여?");
 				replylist=dao2.getreplylist(num);
 
 				if(vo==null){
-					System.out.println("상세보기 실패");
 					return "/view/tra/list.jsp";
 				}
-				System.out.println("상세보기 성공");
+
 				request.setAttribute("vo", vo);
 				request.setAttribute("replylist", replylist);
 			} catch (Exception e) {

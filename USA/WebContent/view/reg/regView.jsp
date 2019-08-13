@@ -12,6 +12,8 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
+<jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 <div>
 <div class="body">
 <div class="regView_regname">&nbsp;${ reg_list[0].reg_name }&nbsp;</div>

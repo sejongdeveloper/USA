@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -16,6 +16,8 @@
 
 <body onload="sessioncheck()">
 <jsp:include page="/view/main/header.jsp" />
+<jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 <br><br>
 <center>
 
@@ -88,7 +90,7 @@
 		<td colspan="5">
 			<font size=2>
 			
-			 <c:if test="${sessionScope.member ==vo.tra_writer }"> 
+			 <c:if test="${sessionScope.nickname ==vo.tra_writer }"> 
 			<a href="./TradeBoardModifyFormAction.do?num=${vo.tra_num }">
 			[수정]
 			</a>&nbsp;&nbsp;
@@ -610,7 +612,7 @@ function tableinsert(data){
 	i+=data.replyinfo[j].writer+'</td>';
 	i+='<td width="10px;"">:</td>';	
     i+='<td width="330px;"><span id="'+data.replyinfo[j].num+'">'+data.replyinfo[j].content   +'</span> <font style="font-size:5px;" >'+data.replyinfo[j].trarep_date+'</font>&nbsp;&nbsp;</td>'
-    	if(data.replyinfo[j].writer==data.session[0].session)	{
+    	if(data.replyinfo[j].writer==data.session[0].session){
     i+='<td width="40px;"><span id="MODBTN" style="cursor:hand;" onclick="fncModi('+data.replyinfo[j].num+',this)">수정</span></td>'
     	if(data.session[0].session!=null){
     i+='<td width="40px;"><span id="write_form" onclick="javascript:fncWriteform('+ data.replyinfo[j].num +',this)">답글</span></td>';
