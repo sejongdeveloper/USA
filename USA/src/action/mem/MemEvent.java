@@ -23,7 +23,7 @@ public void execute(HttpServletRequest request, HttpServletResponse response) th
 		PrintWriter writer = response.getWriter();
 		//받을떄
 		String jsoninfo=request.getParameter("data");
-		System.out.println(jsoninfo);
+		
 		JSONParser jsonParser=new JSONParser();
 
 		try {

@@ -18,18 +18,18 @@
 <div class="bodyin">
 <div class="regMain_picture regMain_div">
 <c:forEach var="picture" items="${ reg_filenameList }" >
-<img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }">
+<img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }"><!-- 사진 파일 가져오기 -->
 </c:forEach>
-<div class="regMain_regname">${ reg_filenameList[0].reg_name }</div>
+<div class="regMain_regname">${ reg_filenameList[0].reg_name }</div><!-- 지역이름 -->
 </div>
 
-<div class="regMain_map regMain_div" id="map">지도</div>
+<div class="regMain_map regMain_div" id="map">지도</div><!-- 구글지도 -->
 
-<div class="regMain_info regMain_div"><div class="regMain_infotitle">날씨</div>
+<div class="regMain_info regMain_div"><div class="regMain_infotitle">날씨</div><!-- 날씨 -->
 <div class="regMain_infocontents" id="reg_weather">내용</div>
 <div class="regMain_infocontents" id="reg_weather2">내용</div></div>
 
-<div class="regMain_info2 regMain_div"><div class="regMain_infotitle">현재시간</div>
+<div class="regMain_info2 regMain_div"><div class="regMain_infotitle">현재시간</div><!-- 시간 -->
 <div class="regMain_infocontents" id="reg_time">시간</div></div>
 
 <div class="regMain_info3 regMain_div"><div class="regMain_infotitle ">비행시간</div><div class="regMain_infocontents3">(직항)${ regname_vo.regFlight }시간</div></div>
@@ -50,25 +50,27 @@
         weatherShow();
     });
     
+    // 사진 슬라이드쇼
     function slideShow() {
 
-	    var x = document.getElementsByClassName("reg_img");  //slide1에 대한 dom 참조
+	    var x = document.getElementsByClassName("reg_img");  // class가 reg_img인 것들 가져옴 
 	    for (i = 0; i < x.length; i++) {
-	       x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
+	       x[i].style.display = "none";   // 처음에 전부 display를 none으로
 	    }
 	    
-	    x[pic].style.display = "block";  //해당 인덱스는 block으로
+	    x[pic].style.display = "block";  // 해당 인덱스는 block으로
 	    
-	    pic++;
+	    pic++; // 보여질 사진 순서 증가
 	    
 	    if (pic == x.length) {
-	        pic = 0;  //인덱스가 초과되면 1로 변경
+	        pic = 0;  //인덱스가 초과되면 0로 변경
 	    }
 	    
 	    setTimeout(slideShow, 2000);   //함수를 2초마다 호출
  	
 	}
     
+    // 시차 계산
     function calcTime() {
 		var time = '${ regname_vo.regGmt }';
         var sicha = eval(19 + time);
@@ -90,6 +92,7 @@
         setTimeout(calcTime, 1000);
     }
     
+    // 현재 날씨
     function weatherShow(){
         var city = "${ regname_vo.regNameEng }";
         var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=03b991ee6df0d0733ada010a51bacf08";
@@ -100,9 +103,10 @@
      
     }
     
+    // 구글 지도
     function initMap() { 
       var reg = '${ reg_filenameList[0].reg_name }';
-      var uluru;
+      var uluru; // 위도,경도 값
       if(reg == '뉴욕'){
     	uluru = {lat: 40.713026, lng: -74.006230};
   	  } else if(reg == '하와이') {
@@ -112,10 +116,10 @@
       }
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,
-        center: uluru
+        center: uluru // 지도 시작위치
       });
       var marker = new google.maps.Marker({
-        position: uluru,
+        position: uluru, // 포인트 위치
         map: map
       });
     }

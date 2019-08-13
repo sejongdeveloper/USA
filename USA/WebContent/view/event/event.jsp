@@ -11,8 +11,7 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" flush="false" />
-<jsp:include page="/view/main/money.jsp" />
-<jsp:include page="/view/main/weather.jsp" />
+
 	<table align="center" position="relative">
 		
 		<tr><td align="center"><font color="white" size="1" weight="bold">#</font></td></tr>
@@ -71,15 +70,15 @@
 		</tr>
 		
 		<tr bgcolor="white" top="130px" width="70" height="30">
-			<td align="center"><font color="gray">총 응모 &nbsp; &nbsp; &nbsp; &nbsp; 187 &nbsp; &nbsp;
+			<td align="center"><font color="gray">총 응모 &nbsp; &nbsp; &nbsp; &nbsp; 243 &nbsp; &nbsp;
 													 &nbsp;</font></td>
 			<td align="center"><font color="gray">&nbsp; &nbsp; &nbsp; 총 응모 &nbsp; &nbsp; &nbsp;
 													 &nbsp; 243&nbsp; &nbsp; &nbsp;</font></td>
 		</tr>
 		
 		<tr top="130px" width="70" height="30">
-			 <td align="center" bgcolor="D8D8D8" style="cursor: pointer;" onclick="ajaxevent()")><font size="2" weight="bold">&nbsp; &nbsp;응모하기</font></td>
-			<td align="center" bgcolor="D8D8D8" onClick="ajaxevent()")><font size="2" weight="bold" style="cursor: pointer;">&nbsp; &nbsp;응모하기</font></td>
+			 <td align="center" bgcolor="D8D8D8" onclick="ajaxevent()")><font size="2" weight="bold">&nbsp; &nbsp;응모하기</font></td>
+			<td align="center" bgcolor="D8D8D8" onClick="ajaxevent()")><font size="2" weight="bold">&nbsp; &nbsp;응모하기</font></td>
 		</tr>
 		
 		<tr><td align="center"><font color="white" size="1" weight="bold">#</font></td></tr>

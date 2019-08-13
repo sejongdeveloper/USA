@@ -14,6 +14,7 @@
 <div class="body">
 <div class="reg_mapframe">
 <div class="reg_maptop">§ 미국 지도 §</div>
+<!-- 지도누르면 지역(regMain)으로 이동 -->
 <a href="regMain.do?regname=뉴욕"><img alt="미국지도" src="${ pageContext.request.contextPath }/upload/미국지도.jpg" class="reg_usamapimg"></a>
 <div class="reg_maptitle"><marquee width="300" direction="right" behavior="alternate">보고싶은 지역을 눌러주세요.</marquee></div>
 

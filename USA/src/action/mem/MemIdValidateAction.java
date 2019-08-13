@@ -16,7 +16,6 @@ public class MemIdValidateAction {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		  System.out.println("유효성 검사 스타트"); 
 		  String mem_id = request.getParameter("idInfo"); 
 		  boolean isId = MemDAO.getInstance().idValidate(mem_id);
 		  response.getWriter().print("{\"result\":" + isId + "}");

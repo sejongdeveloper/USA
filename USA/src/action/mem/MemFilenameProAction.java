@@ -21,7 +21,7 @@ public class MemFilenameProAction implements Command {
 		MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxPostSize, "utf-8", new DefaultFileRenamePolicy());
 		String mem_id = (String)request.getSession().getAttribute("member");
 		String mem_filename = multi.getFilesystemName((String)multi.getFileNames().nextElement());
-		System.out.println("id:" + mem_id + " filename:" + mem_filename);
+		
 		MemDAO.getInstance().update(mem_id, "mem_filename", mem_filename);
 		response.sendRedirect("/USA/memUpdateForm.do");
 		return null;
