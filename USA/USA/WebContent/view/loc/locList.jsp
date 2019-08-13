@@ -29,7 +29,7 @@
 <div class="locList_locname">${ list.loc_name }<div class="locList_locscore"><fmt:formatNumber value="${ score[status.index] }" pattern=".0" />&nbsp;</div></div></a>
 
 <c:if test="${ sessionScope.member == list.loc_writer }">
-<div class="locList_modidel"><a href="locListModifyForm.do?loc_regname=${ loc_nameFileList[0].loc_regname }&loc_name=${ list.loc_name }">수정</a></div>
+<div class="locList_modidel"><a href="locListModifyForm.do?loc_name=${ list.loc_name }">수정</a></div>
 <div class="locList_modidel"><a href="locListDeletePro.do?loc_regname=${ loc_nameFileList[0].loc_regname }&loc_name=${ list.loc_name }">삭제</a></div>
 </c:if>
 <c:if test="${ sessionScope.member != list.loc_writer }">

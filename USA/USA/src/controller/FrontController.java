@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import action.loc.LocDeleteProAction;
 import action.loc.LocListAction;
 import action.loc.LocListDeletePro;
+import action.loc.LocListModifyForm;
+import action.loc.LocListModifyPro;
 import action.loc.LocListWriteForm;
 import action.loc.LocListWritePro;
 import action.loc.LocModifyProAction;
@@ -136,12 +138,12 @@ public class FrontController extends HttpServlet implements Process{
 		
 		// 관광지 수정 폼
 		} else if(com.equals("locListModifyForm.do")) {
-		
+			nextPage = new LocListModifyForm().execute(request, response);
 			
 		// 관광지 수정 실행
 		} else if(com.equals("locListModifyPro.do")) {
-			
-			
+			nextPage = new LocListModifyPro().execute(request, response);
+			return;
 		// 회원가입 폼
 		} else if(com.equals("memWriterForm.do")) {
 			nextPage = new MemWriterFormAction().execute(request, response);

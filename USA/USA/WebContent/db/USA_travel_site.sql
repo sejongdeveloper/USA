@@ -103,7 +103,7 @@ create table loc(
     loc_name varchar2(120) constraint loc_name_pk primary key, -- 관광이름
     loc_contents varchar2(4000), -- 내용
     loc_filename varchar2(520), -- 파일이름
-    loc_regname varchar2(120) constraint loc_regname_fk references regName(regName) -- 지역이름FK
+    loc_regname varchar2(120) constraint loc_regname_fk references regName(regName), -- 지역이름FK
     loc_writer varchar2(120) constraint loc_writer_fk references mem(mem_id) -- 작성자FK
 );
 

@@ -92,10 +92,10 @@
 		
 		for (i = 0; i < x.length; i++) {
 		   x[i].style.display = "none";
-		   
 		}
 		
 		x[abc].style.display = "inline-block";
+		
 		abc++;
 		
 		if (abc == x.length) {

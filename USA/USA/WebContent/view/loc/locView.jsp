@@ -21,7 +21,7 @@
 </c:if>
 <div class="locView_loc">
 	<div class="locView_picture"><img class="locView_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ loc_data.loc_filename }"></div>
-	<div class="locView_locname">${ loc_data.loc_name }</div>
+	<div class="locView_locname">${ loc_data.loc_writer }님의 추천 ▷ '${ loc_data.loc_name }'</div>
 	<div class="locView_contents">${ loc_data.loc_contents }</div>
 </div>
 <div class="locView_rev">

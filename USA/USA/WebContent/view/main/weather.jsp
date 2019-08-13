@@ -17,7 +17,7 @@
         while (true) {
           await new Promise(resolve => setTimeout(resolve, 2000));
           var city = [ "Hawaii", "New%20York", "California" ];
-         console.log(city[i]);
+         
          var url = "h";
           $.getJSON(url+"&callback=?", function(data) {
        		$(".weacountry").html(data.name);

@@ -71,6 +71,14 @@ a {
 	display: inline-block;
 	color: black;
 }
+.loc_modipic {
+	height: 200px;
+	width: 300px;
+}
+
+
+
+
 
 
 
@@ -90,7 +98,7 @@ a {
 }
 .locView_locname {
 	text-align: center;
-	width: 200px;
+	width: 500px;
 	margin: auto;
 	margin-top: 20px;
 	font-size: 20px;

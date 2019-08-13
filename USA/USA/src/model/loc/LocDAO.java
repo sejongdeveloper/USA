@@ -124,6 +124,38 @@ public class LocDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		LocVO vo = null;
+		String sql = "SELECT LOC_NAME, LOC_CONTENTS, LOC_FILENAME, LOC_REGNAME, LOC_WRITER FROM LOC WHERE LOC_NAME = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, loc_name);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new LocVO();
+				vo.setLoc_name(rs.getString("LOC_NAME"));
+				vo.setLoc_contents(rs.getString("LOC_CONTENTS"));
+				vo.setLoc_filename(rs.getString("LOC_FILENAME"));
+				vo.setLoc_regname(rs.getString("LOC_REGNAME"));
+				vo.setLoc_writer(rs.getString("LOC_WRITER"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		}
+		
+		return vo;
+	}
+	
+	// 관광지 수정할 데이터 가져오기
+	public LocVO getLocModiContents(String loc_name){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		LocVO vo = null;
 		String sql = "SELECT LOC_NAME, LOC_CONTENTS, LOC_FILENAME, LOC_REGNAME FROM LOC WHERE LOC_NAME = ?";
 		
 		try {
@@ -196,6 +228,34 @@ public class LocDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	// 관광지 수정하기
+	public int updateLocList(LocVO vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String  sql = "UPDATE LOC SET LOC_CONTENTS=?,LOC_FILENAME=? WHERE LOC_NAME=?";
+		
+		String loc_name = vo.getLoc_name();
+		String loc_contents = vo.getLoc_contents();
+		String loc_filename = vo.getLoc_filename();
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, loc_contents);
+			pstmt.setString(2, loc_filename);
+			pstmt.setString(3, loc_name);
+			result = pstmt.executeUpdate();
+						
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(pstmt); CloseUtil.close(conn);
 		}
 		
 		return result;
