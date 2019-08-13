@@ -64,8 +64,6 @@ public class FrontController extends HttpServlet implements Process{
 		com = com.substring(com.lastIndexOf("/")+1);
 		String nextPage = "";
 		
-		System.out.println("Controller Start : " + com);
-
 		if(com.equals("regMap.do")) {
 			nextPage = "/view/reg/regMap.jsp";
 		} else if(com.equals("regMain.do")) {
