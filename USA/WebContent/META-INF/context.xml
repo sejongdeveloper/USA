@@ -10,7 +10,7 @@
 
     		password="oracle"
     		driverClassName="oracle.jdbc.driver.OracleDriver"
-    		url="jdbc:oracle:thin:@localhost:1521:xe"
+    		url="jdbc:oracle:thin:@10.10.10.165:1521:xe"
     		
     		maxActive="20"
     		maxIdle="10"

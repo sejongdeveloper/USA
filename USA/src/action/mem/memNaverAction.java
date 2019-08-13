@@ -3,11 +3,9 @@ package action.mem;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.SecureRandom;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +15,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import action.Command;
+import model.mem.MemDAO;
+import model.mem.MemVO;
 
 public class memNaverAction implements Command {
 
@@ -106,6 +106,15 @@ public class memNaverAction implements Command {
 	         System.out.println("profile_image : " + profile_image);
 	         System.out.println("name : " + name);
 	         System.out.println("==============================");
+	         
+	         
+	         boolean isId = MemDAO.getInstance().idValidate(id);
+	         if(!isId) {
+	        	 MemVO vo = new MemVO();
+	        	 vo.setMem_id(email);
+	        	 MemDAO.getInstance().insert(vo);
+	         }
+	         
 	         request.getSession().setAttribute("member", email);
 	         System.out.println(response2.toString());
 	     } catch (Exception e2) {

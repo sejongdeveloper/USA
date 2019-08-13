@@ -58,12 +58,13 @@ public class FrontController extends HttpServlet implements Process{
 
 	@Override
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		String requestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String com = requestURI.substring(contextPath.length() + 1);
 		com = com.substring(com.lastIndexOf("/")+1);
 		String nextPage = "";
+		
+		System.out.println("Controller Start : " + com);
 
 		if(com.equals("regMap.do")) {
 			nextPage = "/view/reg/regMap.jsp";
