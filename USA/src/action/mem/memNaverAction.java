@@ -28,10 +28,6 @@ public class memNaverAction implements Command {
 	    String clientSecret = "2tckaN8GEV";//애플리케이션 클라이언트 시크릿값";
 	    String code = request.getParameter("code");
 	    String state = request.getParameter("state");
-	    System.out.println("==========================");
-	    System.out.println("1111111111111111" + code);
-	    System.out.println("2222222222222222" + state);
-	    System.out.println("==========================");
 	    String redirectURI = URLEncoder.encode("http://localhost:8080/USA/naver.do", "UTF-8");
 	    String apiURL;
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
@@ -104,18 +100,18 @@ public class memNaverAction implements Command {
 	         String email = (String)info.get("email");
 	         String profile_image = (String)info.get("profile_image");
 	         String name = (String)info.get("name");
-	         System.out.println("==============================");
+	         System.out.println("\n==============================");
 	         System.out.println("id : " + id);
 	         System.out.println("email : " + email);
 	         System.out.println("profile_image : " + profile_image);
 	         System.out.println("name : " + name);
 	         System.out.println("==============================");
-	         
+	         request.getSession().setAttribute("member", email);
 	         System.out.println(response2.toString());
 	     } catch (Exception e2) {
 	         System.out.println(e2);
 	     }
-		return null;
+		return "/index.do";
 	}
 
 }
