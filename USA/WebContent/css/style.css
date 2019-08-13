@@ -69,12 +69,33 @@ ul li:hover > ul{
 }
 .headerSignin {
 	position: absolute;
-	right: 30px;
-	top: 5px;
+	right: 100px;
+	top: 10px;
 }
 .dropmenu3 {
 	left: 140px;
 	width: 180px;
+	height: 300px;
+}
+.dropmenu4 {
+	left: 280px;
+	width: 180px;
+	height: 300px;
+}
+.dropmenu5 {
+	left: 420px;
+	width: 180px;
+	height: 300px;
+}
+.dropmenu6 {
+	left: 560px;
+	width: 180px;
+	height: 300px;
+}
+.dropmenu7 {
+	left: 700px;
+	width: 180px;
+	height: 300px;
 }
 li:hover > a {
 	color: gray;
@@ -147,12 +168,12 @@ p {
 	position: relative;
 	display: inline-block;
 	text-align: right;
-	left: 45px;
+	left: 60px;
 }
 .weaweather {
 	position: relative;
 	display: inline-block;
-	left: 75px;
+	left: 30px;
 }
 .body {
 	border-left: 1px solid black;

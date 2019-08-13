@@ -64,8 +64,8 @@
 		<td>
 		<p class="tablecontents">
 				<c:choose>
-				<c:when test="${fn:length(sellvo.tra_subject) gt 3}">
-				<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: 'block;  ' ">${fn:substring(sellvo.tra_subject, 0, 2)}...</a>
+				<c:when test="${fn:length(sellvo.tra_subject) gt 10}">
+				<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: 'block;  ' ">${fn:substring(sellvo.tra_subject, 0, 9)}...</a>
         		</c:when>
         		<c:otherwise>
         		<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: 'block; ' ">${sellvo.tra_subject}</a>

@@ -16,9 +16,13 @@
      async function slideWeather(i) {
         while (true) {
           await new Promise(resolve => setTimeout(resolve, 2000));
-          var city = [ "Hawaii", "New%20York", "California" ];
+          var city = [ "Hawaii", "New%20York", "California", "Delaware", "Pennsylvania", "New%20Jersey", "Georgia", "Connecticut", "Massachusetts", "Maryland",
+        	 "South Carolina", "New Hampshire", "Virginia", "North Carolina", "Rhode Island", "Vermont", "Kentucky", "	Tennessee", "Ohio", "Louisiana", 
+        	 "Indiana", "Mississippi", "Illinois", "Alabama", "Maine", "Missouri", "Arkansas", "Michigan", "Florida", "Texas", "Iowa", "Wisconsin", "Minnesota",
+        	 "Oregon", "Kansas", "	West Virginia", "Nevada", "Nebraska", "Colorado", "North Dakota", "South Dakota", "Montana", "Washington", "Idaho",
+        	 "Wyoming", "Utah", "Oklahoma", "New Mexico", "Arizona", "	Alaska" ];
          
-         var url = "h";
+         var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city[i] + "&appid=03b991ee6df0d0733ada010a51bacf08";
           $.getJSON(url+"&callback=?", function(data) {
        		$(".weacountry").html(data.name);
        		$(".weatemp").html((data.main.temp- 273.15).toFixed(1)+'˚C');
@@ -44,8 +48,8 @@
 <div class="weatherframe">
 <div class="weatitle">날씨 정보</div>
 <div class="weacountry">국가</div>
-<div class="weatemp">온도</div>
 <div class="weaweather">날씨</div>
+<div class="weatemp">온도</div>
 </div>
 </body>
 </html>
