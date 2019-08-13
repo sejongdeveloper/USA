@@ -16,8 +16,9 @@
 <jsp:include page="/view/main/weather.jsp" />
 <div>
 <div class="body">
+<div class="locList_margin">
 <div>
-<div class="locList_reg">${ loc_nameFileList[0].loc_regname }</div><!-- 지역이름 -->
+<div class="locList_reg">${ loc_regname }</div><!-- 지역이름 -->
 
 <c:if test="${ sessionScope.member != null }"><!-- 로그인 되있다면 -->
 <div class="locList_add"><a href="locListWriteForm.do?loc_regname=${ loc_nameFileList[0].loc_regname }">관광지 추가</a></div><!-- 관광지 추가하기 -->
@@ -40,6 +41,7 @@
 </div>
 </c:forEach>
 
+</div>
 </div>
 <jsp:include page="/view/main/footer.html" />
 </div>

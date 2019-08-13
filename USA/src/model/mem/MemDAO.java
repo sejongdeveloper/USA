@@ -298,7 +298,19 @@ public class MemDAO {
 		   boolean result=false;
 		   try {
 			conn=getConnection();
-			String sql="update mem set mem_point =(select mem_point from mem where mem_id=?)-100 where mem_id= ?";
+			String sql = "select mem_point from mem where mem_id = ?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mem_id);
+			rs = pstmt.executeQuery();
+			int point = 0;
+			
+			while(rs.next()) {
+				point = rs.getInt("mem_point");
+			}
+			
+			if(point < 100) return false;
+			
+			sql="update mem set mem_point =(select mem_point from mem where mem_id=?)-100 where mem_id= ?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, mem_id);
 			pstmt.setString(2, mem_id);

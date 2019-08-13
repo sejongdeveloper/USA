@@ -16,7 +16,6 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
-<jsp:include page="/view/main/money.jsp" />
 <div id="memUpdate">
 
 <table>

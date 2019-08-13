@@ -14,19 +14,18 @@
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
 <jsp:include page="/view/main/weather.jsp" />
-<Br><Br><Br>
-<div>
+<Br><Br><Br><Br>
+<div style="height: 700">
 
 
 	<center>
-	  
-	  <a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}">전체 </a>
-	  <a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}">팝니다. </a>
-	  <a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}">삽니다 </a>  
-<br>
-	<a href="list.do?pagesize=10&condition=${condition}&opt=${opt}&tra_head=${tra_head}">10개씩보기 </a>
-	<a href="list.do?pagesize=20&condition=${condition}&opt=${opt}&tra_head=${tra_head}">20개씩보기 </a>
-<br>
+	  보기 > 
+	  <div style="display: inline-block;"><a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 30;">전체</a></div>
+	  <div style="display: inline-block;"><a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 30;">팝니다 </a></div>
+	  <div style="display: inline-block;"><a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 200;">삽니다 </a></div>
+	  <div style="display: inline-block;"><a href="list.do?pagesize=10&condition=${condition}&opt=${opt}&tra_head=${tra_head}" style="text-decoration: none; font-size: 20; margin-right: 20;">10개씩보기 </a></div>
+	  <div style="display: inline-block;"><a href="list.do?pagesize=20&condition=${condition}&opt=${opt}&tra_head=${tra_head}" style="text-decoration: none; font-size: 20;">20개씩보기 </a></div>
+<br><Br><Br>
 	
 		<b>
 		${tra_head }글 목록(전체 글 : ${ listCount })

@@ -16,7 +16,6 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
-<jsp:include page="/view/main/money.jsp" />
 <div id="memPwd3">
 
 <div class="subject">비밀번호 재설정</div>

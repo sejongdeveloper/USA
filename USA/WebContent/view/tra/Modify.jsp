@@ -9,12 +9,14 @@
 	
 </head>
 <body>
+<jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
 <jsp:include page="/view/main/weather.jsp" />
-	<br>
-	<b><font size="6" color="gray">글 수정</font></b>
-	<br>
-	${vo.tra_num}
+	<br><br><br><br><br>
+	<div style="display: inline-block; margin-left: 350px; width: 1250px; margin-bottom: 130px;">
+	<b style="margin-left: 550px;"><font size="6" color="gray">글 수정</font></b>
+	<br><br><br>
+	
 	<form method="post" action="TradeBoardModifyProAction.do?num=${vo.tra_num}"  enctype="multipart/form-data">
 	
  
@@ -71,6 +73,7 @@
 		</tr>
 	</table>	
 	</form>
-	
+	</div>
+<jsp:include page="/view/main/footer.html" />
 </body>
 </html>

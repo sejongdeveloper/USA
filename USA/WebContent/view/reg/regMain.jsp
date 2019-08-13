@@ -20,7 +20,7 @@
 <c:forEach var="picture" items="${ reg_filenameList }" >
 <img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }"><!-- 사진 파일 가져오기 -->
 </c:forEach>
-<div class="regMain_regname">${ reg_filenameList[0].reg_name }</div><!-- 지역이름 -->
+<div class="regMain_regname">${ regname }</div><!-- 지역이름 -->
 </div>
 
 <div class="regMain_map regMain_div" id="map">지도</div><!-- 구글지도 -->
@@ -35,8 +35,8 @@
 <div class="regMain_info3 regMain_div"><div class="regMain_infotitle ">비행시간</div><div class="regMain_infocontents3">(직항)${ regname_vo.regFlight }시간</div></div>
 <div class="regMain_moreinfo regMain_div">
 	<div class="regMain_infotitle">더 많은 정보</div>
-	<a href="regView.do?reg_name=${ reg_filenameList[0].reg_name }"><div class="regMain_one">기본 정보</div></a>
-	<a href="locList.do?loc_regname=${ reg_filenameList[0].reg_name }"><div class="regMain_two">관광지 정보</div></a>
+	<a href="regView.do?reg_name=${ regname }"><div class="regMain_one">기본 정보</div></a>
+	<a href="locList.do?loc_regname=${ regname }"><div class="regMain_two">관광지 정보</div></a>
 </div>
 </div>
 </div>
@@ -105,7 +105,7 @@
     
     // 구글 지도
     function initMap() { 
-      var reg = '${ reg_filenameList[0].reg_name }';
+      var reg = '${ regname }';
       var uluru; // 위도,경도 값
       if(reg == '뉴욕'){
     	uluru = {lat: 40.713026, lng: -74.006230};

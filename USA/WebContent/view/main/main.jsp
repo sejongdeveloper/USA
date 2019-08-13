@@ -32,7 +32,7 @@
 			<table>
 				<tr>
 					<td><p class="tabletitle">삽니다</p></td>
-					<td>더보기</td>
+					<td><a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none;">더보기</a></td>
 				<c:forEach var="buyvo" items="${buyvo }">
 				<tr>
 				<td>
@@ -57,7 +57,7 @@
 			<table>
 				<tr>
 				<td><p class="tabletitle">팝니다</p></td>
-				<td>더보기</td>
+				<td><a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none;">더보기</a></td>
 				</tr>
 				<c:forEach var="sellvo" items="${sellvo }">
 		<tr>
@@ -68,7 +68,7 @@
 				<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: 'block;  ' ">${fn:substring(sellvo.tra_subject, 0, 2)}...</a>
         		</c:when>
         		<c:otherwise>
-        		<a href="./content.do?num=?${sellvo.tra_num }" style="color:black; display: 'block; ' ">${sellvo.tra_subject}</a>
+        		<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: 'block; ' ">${sellvo.tra_subject}</a>
         		</c:otherwise>
         		</c:choose>
         </p>

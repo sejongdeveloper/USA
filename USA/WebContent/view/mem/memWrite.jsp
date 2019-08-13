@@ -16,7 +16,6 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
-<jsp:include page="/view/main/money.jsp" />
 <div id="memWrite">
 
 <form action="${contextPath }/memWritePro.do" method="post" enctype="multipart/form-data" onsubmit="return check()">

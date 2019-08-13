@@ -11,7 +11,8 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" flush="false" />
-
+<jsp:include page="/view/main/money.jsp" />
+<jsp:include page="/view/main/weather.jsp" />
 	<table align="center" position="relative">
 		
 		<tr><td align="center"><font color="white" size="1" weight="bold">#</font></td></tr>
@@ -100,21 +101,19 @@
  function ajaxevent(){
 	  sessionid="${sessionScope.member}";
 	 if(sessionid==null||sessionid==""){
-		 alert("로그인하셔야이용할수 있어요~");
+		 alert("로그인하셔야 이용할수 있어요~");
 		 return ;
 	 }  
 	 
 	 obj = new Object();
 	 obj.session=sessionid;
 	 $.ajax({ 
-		 type:"post",  
+		type:"post",  
 		url:"./Eventcheck.do",
-		 data:{data : JSON.stringify(obj)},
+		data:{data : JSON.stringify(obj)},
 		success:function(data2){
-			alert("응모가 완료됐습니다.");
-		}
-		,error:function(){
-			alert("응모가 실패하였습니다");
+			var data2 = JSON.parse(data2)
+			alert(data2.result);
 		}
 	 });
   

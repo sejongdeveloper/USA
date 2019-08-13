@@ -38,14 +38,15 @@ public void execute(HttpServletRequest request, HttpServletResponse response) th
 
 		String msg = null;
 		if(!result) {
-			msg="댓글 등록에 실패하셨습니다.";
+			msg="포인트가 부족합니다. 확인해주세요.";
+		} else {
+			msg="응모가 완료되었습니다.";
 		}
 		
-// 댓글 성공인지 적는것
 		JSONObject totalObject =new JSONObject();
 		
-
 		totalObject.put("result",msg);
+		
 		writer.print(totalObject);
 
 	
