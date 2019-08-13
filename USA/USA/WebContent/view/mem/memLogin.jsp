@@ -50,8 +50,8 @@
 		<a href="${contextPath }/memIdForm.do">아이디 찾기</a> | <a href="${contextPath }/memPwdForm.do">비밀번호 찾기</a> | <a href="${contextPath }/memWriterForm.do">회원가입</a>
 	</div>
 
-	<input type="submit" value="로그인">
-
+	<input type="submit" value="로그인"><br>
+	<a href="${apiURL }"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 	</form>
 </div>
 <jsp:include page="/view/main/footer.html" />

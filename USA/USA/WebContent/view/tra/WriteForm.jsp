@@ -15,7 +15,7 @@
 	<br>
 	
 	<form method="post" action="TradeBoardWriteAction.do" name="TradeBoardForm" enctype="multipart/form-data">
-	<input type="hidden" name="board_id" value="${sessionScope.member}">
+	<input type="hidden" name="board_id" value="${sessionScope.nickname}">
 	
 	<table width="700" border="3" bordercolor="lightgray" align="center">
 		<tr>
@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 			<td id="title">작성자</td>
-			<td>${sessionScope.member}</td>
+			<td>${sessionScope.nickname}</td>
 		</tr>
 			<tr>
 			<td id="title">

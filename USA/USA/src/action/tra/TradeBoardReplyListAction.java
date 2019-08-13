@@ -148,7 +148,7 @@ public class TradeBoardReplyListAction extends HttpServlet {
 
 		
 		
-		String session =(String) request.getSession().getAttribute("member");
+		String session =(String) request.getSession().getAttribute("nickname");
 		JSONArray jsonsession=new JSONArray();
 		JSONObject jsonobject=new JSONObject();
 		jsonobject.put("session",session);

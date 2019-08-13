@@ -35,6 +35,7 @@ import action.mem.MemUpdateFromAction;
 import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
 import action.mem.MemWriterFormAction;
+import action.mem.MemNaverAction;
 import action.reg.RegMainAction;
 import action.reg.RegViewAction;
 import action.tra.TradeBoardDeleteAction;
@@ -276,6 +277,8 @@ public class FrontController extends HttpServlet implements Process{
 		} else if(com.equals("Eventcheck.do")){
 			new MemEvent().execute(request, response);
 			return ;
+		}  else if(com.equals("naver.do")) {
+			nextPage = new MemNaverAction().execute(request, response);
 		}
 		
 		if(nextPage!=null&&nextPage!="") {

@@ -54,7 +54,8 @@ public class TradeBoardReplyWriteAction extends HttpServlet {
 			//원게시판번호
 			int trarepTranum=(int)(long)jsonObject.get("tranum");
 			String trarepContent=  (String) jsonObject.get("content");
-			String trarepWriter=(String) jsonObject.get("writer");
+			String trarepWriter=(String)request.getSession().getAttribute("nickname");
+//			String trarepWriter=(String) jsonObject.get("writer");
 			int ref= Integer.parseInt((String) jsonObject.get("ref"));
 			int trarepWriternum=trarepnum; //부모그룹을 만들어주는데 그것은 자기자신의 고유번호로 지정
 			if(ref==0) trarepWriternum=trarepnum;

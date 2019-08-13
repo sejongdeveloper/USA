@@ -17,7 +17,6 @@
 <body>
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
-<jsp:include page="/view/main/weather.jsp" />
 <div id="memUpdate">
 
 <table>

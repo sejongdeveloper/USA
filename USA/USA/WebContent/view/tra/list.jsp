@@ -78,8 +78,8 @@
 	
 	
 			</td>
-			<td align="center" width="100">${list.tra_writer} </td>
-			<td align="center" width="150">${list.tra_sysdate }</td>
+			<td align="center" width="100">${ list.tra_writer } </td>
+			<td align="center" width="150">${ list.tra_sysdate }</td>
 			<td align="center" width="150">${ list.tra_readcount}</td>
 			<td align="center" width="150">${ list.tra_head}</td>
 		</tr>

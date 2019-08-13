@@ -34,7 +34,7 @@ public class LocDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<LocVO> list = new ArrayList<LocVO>();
-		String sql = "SELECT LOC_NAME, LOC_FILENAME, LOC_REGNAME, LOC_WRITER FROM LOC WHERE LOC_REGNAME = ? order by LOC_NAME desc";
+		String sql = "SELECT LOC.LOC_NAME, LOC.LOC_FILENAME, LOC.LOC_REGNAME, LOC.LOC_WRITER, NVL(AVG(REV.REV_SCORE),0) FROM LOC LEFT OUTER JOIN REV ON LOC.LOC_NAME=REV.REV_LOCNAME AND LOC_REGNAME = ? GROUP BY (LOC.LOC_NAME, LOC.LOC_FILENAME, LOC.LOC_REGNAME, LOC.LOC_WRITER) ORDER BY NVL(AVG(REV.REV_SCORE),0) DESC";
 		
 		try {
 			conn = getConnection();
@@ -259,5 +259,32 @@ public class LocDAO {
 		}
 		
 		return result;
+	}
+	
+	// 관광지 사진 가져오기
+	public String getLocFile(String loc_name) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String LOC_FILENAME = null;
+		String sql = "SELECT LOC_FILENAME FROM LOC WHERE LOC_NAME = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, loc_name);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				LOC_FILENAME = rs.getString("LOC_FILENAME");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		}
+		
+		return LOC_FILENAME;
 	}
 }

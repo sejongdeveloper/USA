@@ -1,4 +1,4 @@
-﻿package model.mem;
+package model.mem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -109,6 +109,7 @@ public class MemDAO {
 				vo.setMem_addr(rs.getString("mem_addr"));
 				vo.setMem_filename(rs.getString("mem_filename"));
 				vo.setMem_point(rs.getInt("mem_point"));
+				System.out.println("회원수정 정보갖고옴");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -252,6 +253,7 @@ public class MemDAO {
 		
 		return isId;
 	} // idValidate() end
+	
 	   public void getPoint(String mem_id) {
 		      try {
 		         conn = getConnection();
@@ -291,4 +293,3 @@ public class MemDAO {
 		   
 	  }
 }
-

@@ -29,12 +29,19 @@ public class LocListModifyPro implements Command {
 			String loc_contents = multi.getParameter("loc_contents");
 			String loc_filename = multi.getFilesystemName((String)multi.getFileNames().nextElement());
 			
+			LocDAO dao = LocDAO.getInstance();
+			
 			LocVO vo = new LocVO();
 			vo.setLoc_name(loc_name);
 			vo.setLoc_contents(loc_contents);
-			vo.setLoc_filename(loc_filename);			
+			// null이면 기존 파일명 그대로 넣기
+			if(loc_filename == null) {
+				vo.setLoc_filename(dao.getLocFile(loc_name));
+			} else {
+				vo.setLoc_filename(loc_filename);			
+			}
 			
-			int result = LocDAO.getInstance().updateLocList(vo);
+			int result = dao.updateLocList(vo);
 			
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();

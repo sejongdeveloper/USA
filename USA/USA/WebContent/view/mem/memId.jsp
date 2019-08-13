@@ -23,7 +23,6 @@
 <body>
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
-<jsp:include page="/view/main/weather.jsp" />
 <div id="memId">
 
 <div class="subject">아이디 찾기</div>

@@ -66,7 +66,7 @@ create table trarep(
     trarep_tranum number constraint trarep_tranum_fk references tra(tra_num), -- 질문게시판 번호FK
     trarep_date date default sysdate, -- 작성날짜
     trarep_contents varchar2(4000), -- 내용
-    trarep_writer varchar2(120) constraint trarep_writer_fk references mem(mem_id), -- 아이디FK
+    trarep_writer varchar2(120), -- 아이디FK
     trarep_writerrep number , -- 부모작성자 번호
     trarep_alive number default 0, -- 삭제유무
     trarep_numref number, -- 대댓글 유무
