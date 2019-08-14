@@ -159,7 +159,6 @@ public class FrontController extends HttpServlet implements Process{
 		// 로그인 실행
 		} else if(com.equals("memLoginPro.do")) {
 			nextPage = new MemLoginProAction().execute(request, response);
-		
 		// 로그아웃
 		} else if(com.equals("memLogout.do")) {
 			request.getSession().invalidate();

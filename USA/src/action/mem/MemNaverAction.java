@@ -109,6 +109,7 @@ public class MemNaverAction implements Command {
 	         
 	         // 아이디 존재여부 판단
 	         boolean isId = MemDAO.getInstance().idValidate(id);
+	         System.out.println("idId : " + isId);
 	         if(!isId) {
 	        	 MemVO vo = new MemVO();
 	        	 vo.setMem_pwd(email);
@@ -116,6 +117,10 @@ public class MemNaverAction implements Command {
 	        	 vo.setMem_name(nickname);
 	        	 vo.setMem_filename(profile_image);
 	        	 MemDAO.getInstance().insert(vo);
+	         } else {
+	        	 // 아이디가 존재할 경우 alive = 1로 변경
+	        	 // 탈퇴했다가 다시 가입한 경우
+	        	 MemDAO.getInstance().alive(id);
 	         }
 	         
 	         request.getSession().setAttribute("member", id);

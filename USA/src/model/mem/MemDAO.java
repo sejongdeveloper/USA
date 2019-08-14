@@ -337,4 +337,23 @@ public class MemDAO {
 		   return result;
 		   
 	  }
+	   
+   // alive 수정
+   // 네이버 탈퇴 이후 다시 이용한 경우 alive 변경
+   public int alive(String mem_id) {
+	   int result = 0;
+	   try {
+		   conn = getConnection();
+		   String sql = "update mem set mem_alive = 1 where mem_id = ?";
+		   pstmt = conn.prepareStatement(sql);
+		   pstmt.setString(1, mem_id);
+		   result = pstmt.executeUpdate();
+		   
+	   } catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+		}
+	   return result;
+   }
 }
