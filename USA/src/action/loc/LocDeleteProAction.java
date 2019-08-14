@@ -19,10 +19,12 @@ public class LocDeleteProAction implements Command {
 		RevDAO dao = RevDAO.getInstance();
 		int rev_num = Integer.parseInt(request.getParameter("rev_num"));
 		
+		// 번호에 해당하는 리뷰 삭제
 		int result = dao.delete(rev_num);
 		
 		String rev_locname = request.getParameter("rev_locname");
 		
+		// 결과 출력 후 페이지 이동
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");

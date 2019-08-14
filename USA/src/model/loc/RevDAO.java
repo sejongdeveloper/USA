@@ -115,13 +115,13 @@ public class RevDAO {
 		return avg;
 	}
 	
-	// 지역의 모든 관광지 삭제 안된 리뷰 총 평점 가져오기
+	// 지역의 모든 관광지 삭제 안된 리뷰 총 평점 가져오기(평점순)
 	public ArrayList<Double> getAllLocScore() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Double> list = new ArrayList<Double>();
-		String sql = "SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME ORDER BY REV_LOCNAME desc";
+		String sql = "SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME ORDER BY AVG(REV_SCORE) desc";
 		
 		try {
 			conn = getConnection();

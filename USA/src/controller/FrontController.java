@@ -260,17 +260,17 @@ public class FrontController extends HttpServlet implements Process{
 			new TradeBoardReplyWriteAction().execute(request, response);
 			return ;
 			
-		// 
+		// tra게시판 댓글 수정
 		}else if(com.equals("TradeBoardReplyModifyAction.do")) {
 			new TradeBoardReplyModifyAction().execute(request, response);
 			return ;
 		
-		// 
+		// tra게시판 댓글 삭제
 		}else if(com.equals("TradeBoardReplyDeleteAction.do")) {
 			new TradeBoardReplyDeleteAction().execute(request, response);
 			return ;
 		
-		// 
+		// tra게시판 댓글 보기
 		}else if(com.equals("TradeBoardReplyListAction.do")) {
 			new TradeBoardReplyListAction().execute(request, response);
 			return ;

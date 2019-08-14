@@ -47,9 +47,9 @@
 <body>
 <div class="weatherframe">
 <div class="weatitle">날씨 정보</div>
-<div class="weacountry">국가</div>
-<div class="weaweather">날씨</div>
-<div class="weatemp">온도</div>
+<div class="weacountry">Loading</div>
+<div class="weaweather">Loading</div>
+<div class="weatemp">Loading</div>
 </div>
 </body>
 </html>

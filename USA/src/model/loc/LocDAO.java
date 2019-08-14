@@ -28,7 +28,7 @@ public class LocDAO {
 		return ds.getConnection();
 	}
 	
-	// 관광지 이름, 사진 가져오기
+	// 관광지 이름, 사진, 작성자 가져오기(평점순)
 	public ArrayList<LocVO> getLocFileName(String loc_regname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

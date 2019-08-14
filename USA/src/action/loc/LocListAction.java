@@ -21,10 +21,12 @@ public class LocListAction implements Command {
 		
 		LocDAO locdao = LocDAO.getInstance();
 		
+		// 관광지 이름, 사진, 작성자 가져오기(평점순)
 		ArrayList<LocVO> loc_nameFileList = locdao.getLocFileName(loc_regname);
 		request.setAttribute("loc_nameFileList", loc_nameFileList);
 		
 		RevDAO revdao = RevDAO.getInstance();
+		// 지역의 모든 관광지 삭제 안된 리뷰 총 평점 가져오기(평점순)
 		ArrayList<Double> loc_scoreList =  revdao.getAllLocScore();
 		request.setAttribute("loc_scoreList", loc_scoreList);
 		

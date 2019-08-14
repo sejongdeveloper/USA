@@ -18,20 +18,25 @@
 <div class="bodyin">
 <div class="regMain_picture regMain_div">
 <c:forEach var="picture" items="${ reg_filenameList }" >
-<img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }"><!-- 사진 파일 가져오기 -->
+<!-- 사진 파일 가져오기 -->
+<img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }">
 </c:forEach>
-<div class="regMain_regname">${ regname }</div><!-- 지역이름 -->
+<!-- 지역이름 -->
+<div class="regMain_regname">${ regname }</div>
 </div>
+<!-- 구글지도 API -->
+<div class="regMain_map regMain_div" id="map">지도</div>
 
-<div class="regMain_map regMain_div" id="map">지도</div><!-- 구글지도 -->
-
-<div class="regMain_info regMain_div"><div class="regMain_infotitle">날씨</div><!-- 날씨 -->
+<!-- 현재 날씨 -->
+<div class="regMain_info regMain_div"><div class="regMain_infotitle">날씨</div>
 <div class="regMain_infocontents" id="reg_weather">내용</div>
 <div class="regMain_infocontents" id="reg_weather2">내용</div></div>
 
-<div class="regMain_info2 regMain_div"><div class="regMain_infotitle">현재시간</div><!-- 시간 -->
+<!-- 계산된 시간 -->
+<div class="regMain_info2 regMain_div"><div class="regMain_infotitle">현재시간</div>
 <div class="regMain_infocontents" id="reg_time">시간</div></div>
 
+<!-- 비행시간 -->
 <div class="regMain_info3 regMain_div"><div class="regMain_infotitle ">비행시간</div><div class="regMain_infocontents3">(직항)${ regname_vo.regFlight }시간</div></div>
 <div class="regMain_moreinfo regMain_div">
 	<div class="regMain_infotitle">더 많은 정보</div>

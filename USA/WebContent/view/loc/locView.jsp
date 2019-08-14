@@ -102,7 +102,7 @@
 		</form>
 		<!-- 작성자인지 확인 -->
 		<c:if test="${ list.rev_writer == sessionScope.member }">
-			<input type="button" name="modifystart" class="modifystart" value="수정" onclick="modify('${ list.rev_num }', this)" id="modifystart${ list.rev_num }">
+			<input type="button" name="modifystart" class="modifystart" value="수정" onclick="modify('${ list.rev_num }')" id="modifystart${ list.rev_num }">
 			<form action="locDeletePro.do" method="post">
 			<input type="hidden" value="${ list.rev_num }" name="rev_num">
 			<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname">
@@ -153,32 +153,26 @@
 	}
 	
 	// 수정, 삭제시 변화
-	function modify(writer, a){	    
-	        var obj = document.getElementsByName("modifystart");
-			
-	        for(var i=0; i<obj.length; i++){
-	            if(obj[i] != a){
-	            	<c:forEach items="${ rev_list }" var="list">
-	    	        if('${ list.rev_num }' != writer) {
-	    	        	document.getElementById('revView_contentsmodiform'+'${ list.rev_num }').style.display='none';
-	            	    document.getElementById('modifyend'+'${ list.rev_num }').style.display='none';
-	            	    document.getElementById('locView_revScoreinmodiform'+'${ list.rev_num }').style.display='none';
-	            	    document.getElementById('revView_contents'+'${ list.rev_num }').style.display='inline';
-		        	    document.getElementById('modifystart'+'${ list.rev_num }').style.display='inline';
-		        	    document.getElementById('locView_revScorein'+'${ list.rev_num }').style.display='table-cell';
-	    	        } 
-	    	        </c:forEach>
-	            } else {
-	        		document.getElementById('revView_contentsmodiform'+writer).value=document.getElementById('revView_contents'+writer).innerHTML;
-	        	    document.getElementById('revView_contents'+writer).style.display='none';
-	        	    document.getElementById('modifystart'+writer).style.display='none';
-	        	    document.getElementById('locView_revScorein'+writer).style.display='none';
-	        	    document.getElementById('revView_contentsmodiform'+writer).style.display='inline';
-	        	    document.getElementById('modifyend'+writer).style.display='inline';
-	        	    document.getElementById('locView_revScoreinmodiform'+writer).style.display='inline';
-	            }
-	        }
-	        
+	function modify(num){	    
+		// 해당글이 아니면 원래 수정 폼 없애기
+		<c:forEach items="${ rev_list }" var="list">
+			if('${ list.rev_num }' != num) {
+				document.getElementById('revView_contentsmodiform'+'${ list.rev_num }').style.display='none';
+				document.getElementById('modifyend'+'${ list.rev_num }').style.display='none';
+				document.getElementById('locView_revScoreinmodiform'+'${ list.rev_num }').style.display='none';
+				document.getElementById('revView_contents'+'${ list.rev_num }').style.display='inline';
+				document.getElementById('modifystart'+'${ list.rev_num }').style.display='inline';
+				document.getElementById('locView_revScorein'+'${ list.rev_num }').style.display='table-cell';
+			} 
+		</c:forEach>
+		// 해당글만 수정 형식 폼으로 바꾸기
+		document.getElementById('revView_contentsmodiform'+num).value=document.getElementById('revView_contents'+num).innerHTML;
+		document.getElementById('revView_contents'+num).style.display='none';
+		document.getElementById('modifystart'+num).style.display='none';
+		document.getElementById('locView_revScorein'+num).style.display='none';
+		document.getElementById('revView_contentsmodiform'+num).style.display='inline';
+		document.getElementById('modifyend'+num).style.display='inline';
+		document.getElementById('locView_revScoreinmodiform'+num).style.display='inline';
 	}
 </script>
 </html>

@@ -17,7 +17,7 @@ public class LocListModifyForm implements Command {
 		request.setCharacterEncoding("UTF-8");
 		
 		String loc_name = request.getParameter("loc_name");
-		
+		// 입력된 관광지 정보 가져오기
 		LocVO locListVO = LocDAO.getInstance().getLocModiContents(loc_name);
 		request.setAttribute("locListVO", locListVO);
 		
