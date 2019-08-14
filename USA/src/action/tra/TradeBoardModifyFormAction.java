@@ -11,18 +11,18 @@ import action.Command;
 import model.tra.TradeBoardDAO;
 import model.tra.TradeBoardVO;
 
-public class TradeBoardModifyFormAction implements Command{
+public class TradeBoardModifyFormAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// 게시판번호는 boardnum보기 편하게하기위해서 나눠서올렸음.
 		String num = request.getParameter("num");
 		int boardNum = Integer.parseInt(num);
 
 		TradeBoardDAO dao = TradeBoardDAO.getInstance();
 		TradeBoardVO vo;
-		try {
+		try { // vo에 보드내용을 담고. 보내줌. pagenum은 게시판 밑 게시물 리스트를 위해서 구현.
 			vo = dao.getDetail(boardNum);
 			request.setAttribute("vo", vo);
 			request.setAttribute("pageNum", boardNum);
@@ -30,10 +30,7 @@ public class TradeBoardModifyFormAction implements Command{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
 		return "/view/tra/Modify.jsp";
 	}
 

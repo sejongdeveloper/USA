@@ -62,7 +62,7 @@
 		<tr align="center" valign="middle">
 			<td colspan="5">
 				<input type="submit" value="등록" >
-				<input type="button" value="목록" onclick="location.href='list.do'" >			
+				<input type="button" value="목록" onclick="location.href='Tradelist.do'" >			
 			</td>
 		</tr>
 	</table>	

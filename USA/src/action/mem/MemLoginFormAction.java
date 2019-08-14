@@ -35,6 +35,7 @@ public class MemLoginFormAction implements Command {
 	    // 랜덤한 값으로 state 초기화
 	    SecureRandom random = new SecureRandom();
 	    String state = new BigInteger(130, random).toString();
+	    
 	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
 	    apiURL += "&client_id=" + clientId;
 	    apiURL += "&redirect_uri=" + redirectURI;
@@ -43,6 +44,8 @@ public class MemLoginFormAction implements Command {
 	    request.getSession().setAttribute("state", state);
 	    // 로그인 폼에만 쓰일 apiURL
 		request.setAttribute("apiURL", apiURL);
+		
+		
 		return "/view/mem/memLogin.jsp";
 	}
 

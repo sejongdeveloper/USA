@@ -32,17 +32,17 @@
 			<table>
 				<tr>
 					<td><p class="tabletitle">삽니다</p></td>
-					<td><a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none;">더보기</a></td>
+					<td><a href="Tradelist.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none;">더보기</a></td>
 				<c:forEach var="buyvo" items="${buyvo }">
 				<tr>
 				<td>
 				<p class="tablecontents">
 				<c:choose>
 				<c:when test="${fn:length(buyvo.tra_subject) gt 10}">
-				<a href="./content.do?num=${buyvo.tra_num }" style="color:black; display: block; text-decoration: none;">${fn:substring(buyvo.tra_subject, 0, 9)}...</a>
+				<a href="Tradecontent.do?num=${buyvo.tra_num }" style="color:black; display: block; text-decoration: none;">${fn:substring(buyvo.tra_subject, 0, 9)}...</a>
         		</c:when>
         		<c:otherwise>
-        		<a href="./content.do?num=?${buyvo.tra_num }" style="color:black; display: block; text-decoration: none;">${buyvo.tra_subject}</a>
+        		<a href="Tradecontent.do?num=?${buyvo.tra_num }" style="color:black; display: block; text-decoration: none;">${buyvo.tra_subject}</a>
         		</c:otherwise>
         		</c:choose>
     			</p>
@@ -57,7 +57,7 @@
 			<table>
 				<tr>
 				<td><p class="tabletitle">팝니다</p></td>
-				<td><a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none;">더보기</a></td>
+				<td><a href="Tradelist.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none;">더보기</a></td>
 				</tr>
 				<c:forEach var="sellvo" items="${sellvo }">
 		<tr>
@@ -65,10 +65,10 @@
 		<p class="tablecontents">
 				<c:choose>
 				<c:when test="${fn:length(sellvo.tra_subject) gt 10}">
-				<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: block; text-decoration: none;">${fn:substring(sellvo.tra_subject, 0, 9)}...</a>
+				<a href="Tradecontent.do?num=${sellvo.tra_num }" style="color:black; display: block; text-decoration: none;">${fn:substring(sellvo.tra_subject, 0, 9)}...</a>
         		</c:when>
         		<c:otherwise>
-        		<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: block; text-decoration: none;">${sellvo.tra_subject}</a>
+        		<a href="Tradecontent.do?num=${sellvo.tra_num }" style="color:black; display: block; text-decoration: none;">${sellvo.tra_subject}</a>
         		</c:otherwise>
         		</c:choose>
         </p>

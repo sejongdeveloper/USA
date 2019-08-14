@@ -1,7 +1,6 @@
 package action.mem;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +20,7 @@ public class MemIdPwdAction implements Command {
 		
 		// json 방식으로 값 전달하기
 		response.getWriter().print("{\"result\":" + isLogin + "}");
+
 		return null;
 	}
 

@@ -14,9 +14,11 @@ public class TradeBoardDeleteAction implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		//게시판 번호
 		int traNum=Integer.parseInt(request.getParameter("num"));
 		TradeBoardDAO dao=new TradeBoardDAO();
+		
+		//업데이트 결과 저장.
 		boolean flag=dao.deletetraboard(traNum);
 		
 		

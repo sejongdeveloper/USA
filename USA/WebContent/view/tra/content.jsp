@@ -14,7 +14,7 @@
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
-<body onload="sessioncheck()">
+<body onload="replycheck()">
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
 <jsp:include page="/view/main/weather.jsp" />
@@ -31,6 +31,7 @@
 	<td style="font-family:돋음; font-size:12" height="16">
 			<div align="center">작성자&nbsp;&nbsp;</div>
 			</td>
+			<!-- 작성자 -->
 			<td>${vo.tra_writer }</td>
 			
 	</tr>
@@ -38,7 +39,7 @@
 		<td style="font-family:돋음; font-size:12" height="16">
 			<div align="center">제 목&nbsp;&nbsp;</div>
 		</td>
-		
+		<!-- 제목 -->
 		<td style="font-family:돋음; font-size:12">
 		${vo.tra_subject }
 		</td>
@@ -57,8 +58,8 @@
 			<table border=0 width=490 height=250 style="table-layout:fixed">
 				<tr>
 					<td valign=top style="font-family:돋음; font-size:12">
-					<c:if test="${vo.tra_filename!=null}">
-					<img src="${pageContext.request.contextPath}/upload/${vo.tra_filename}" width="355" height="650" />
+					<c:if test="${vo.tra_filename!=null}"><!-- 파일네임이 널이 아니면. -->
+					<img src="${pageContext.request.contextPath}/upload/${vo.tra_filename}" width="355" height="650" /><!-- 파일을 다운로드할수있게. -->
 					
 					</c:if>
 					${vo.tra_contents}
@@ -74,7 +75,7 @@
 		<td style="font-family:돋음; font-size:12px">
 		<c:if test="${vo.tra_filename!=null }">
 	
-		<a href="FileDownload.do?file_name=${vo.tra_filename}">
+		<a href="TradeFileDownload.do?file_name=${vo.tra_filename}">
 			${vo.tra_filename }
 		</a>
 		</c:if>
@@ -87,9 +88,8 @@
 	<tr><td colspan="2">&nbsp;</td></tr>
 	<
 	<tr align="right" valign="middle">
-		<td colspan="5">
-			<font size=2>
-			
+		<td colspan="5"><font size=2>
+			<!-- 닉네임과 작성자가 똑같다면.수정할수있고 삭제할수있게. -->
 			 <c:if test="${sessionScope.nickname ==vo.tra_writer }"> 
 			<a href="./TradeBoardModifyFormAction.do?num=${vo.tra_num }">
 			[수정]
@@ -99,7 +99,7 @@
 			</a>&nbsp;&nbsp;
 			 </c:if>
 			
-			<a href="./list.do">[목록]</a>&nbsp;&nbsp;
+			<a href="./Tradelist.do">[목록]</a>&nbsp;&nbsp;
 			</font>
 		</td>
 	</tr>
@@ -118,30 +118,26 @@
 
 	
 	
+<!-- 아래부터  리플-->
 
-
-<!-- 아래부터 -->
-
-
-
-<!-- 지울것 -->
-
+<!-- 총 댓글 표현하기 위한 id 자바스크립트에서 innerhtml로 총 댓글수 넣어줌/ -->
 <li id='sessiontotalreplylist' style="list-style: none; margin-bottom: 30;"></li>
 
+<!--리플,수정,답글 폼은 자바스크립트에서 리플수만큼 만들어두고 innerhtml로 테이블 주입. -->
 <div id='trareplypaging'>
 
 </div>
 
-
+<!-- 세션값이 있다면. -->
 <c:if test="${not empty sessionScope.member }">
 <input type="text" id="ajaxjung">
 <input type="button" onclick="subajax('0','${sessionScope.member}')"value="댓글등록" onclick="replycheck()">
 </c:if>
 
-
+<!-- 가로로 댓글 리스트 보여주기위해 css에서 replypaging을 제어. -->
 <ul class="replypaging">
 
-
+<!-- 실질적으로 댓글페이징처리해주는곳. -->
 <li id='sessionjavalist' style="list-style: none"></li>
 </ul>
 
@@ -164,12 +160,14 @@ console.log(session+"찍혀?");
 
 }
 
-//페이징 처리 참고.
+//페이징 처리 참고. currentpagemove는 현재 내가 누른 페이지 이동창이 어느곳인지. <a href 값의 this를 가져옴.
 function alink(currentpagemove){
-    event.preventDefault();
-	console.log(currentpagemove.innerText);
-	currentpage=currentpagemove.innerText;
-	if(currentpagemove.innerText=="이후"){
+    event.preventDefault();  //A링크 눌렀을떄 페이지이동을 안하게.
+	currentpage=currentpagemove.innerText;    //예시 <a href="~~">1 </a>  여기서 1이라는 값을 얻기위해 사용.
+	if(currentpagemove.innerText=="이후"){ // 이전과 이후는 특정값이 아니라 밸류를 이전과 이후로 잡아줬기떄문에.
+		//                         //지금 눌린노드에서 부모노드를찾아간후. 이전 노드를 찾아가고. 거기에있는 innerText값을 가져옴
+								   //즉  1 2 3 이후  이렇게 돼있으면 3이라는 값을 찾기위해 노드를 직접 지정해줌. 여기서는 3 그리고 +1하면 4가되니. 페이지이동은 4페이지로
+								   //이동가능.
 	currentpage=String( Number(currentpagemove.parentNode.previousSibling.innerText)+1);
 		
 	}else if(currentpagemove.innerText=="이전"){
@@ -178,48 +176,25 @@ function alink(currentpagemove){
 		currentpage=String( Number(currentpagemove.parentNode.nextSibling.innerText)-1);
 		
 	}
-	
+	//그후 페이지상태를 move로 해줘서 눌러준 페이지로 이동할수있게끔 해준다.
 	pagestatus="move";
-	sessioncheck();
+	replycheck();
 	
 	
 }
 //페이징처리 참고
 
-	/* function insert(insert,ref){
-		var i =document.getElementById(insert).value;
-		console.log(i);
-		}
-	function modify(){
-	location.href='dddd.do';
-} */
-
-
-//그냥 등록전송 눌렀을떄
-	function sub(TradeBoardreply_Content,ref,writer){
-// 써야할것 작성자  ,  게시판 글 번호 ,글내용,답글인지 아닌지, writer는 답글일경우 답글
-// 
-   var tradeboardnum=document.getElementById('tradeboardnum').value;   //글번호 또는 = writer
-   
-   console.log(tradeboardnum);
-    var tradeBoardreply_Content =document.getElementById(TradeBoardreply_Content).value; //글내용  TradeBoardreply_Content
-   var tradecontentcomment_id=document.getElementById('tradecontentcomment_id').value; //작성자
-    //ref 그냥인지 대댓글인지.
-    
-    console.log(tradeBoardreply_Content,ref,tradecontentcomment_id,tradeboardnum); 
-     location.href="TradeBoardreplyWriteAction.do?tradeboardnum=" +tradeboardnum+ "&TradeBoardreply_Content="+tradeBoardreply_Content+"&tradecontentcomment_id="+tradecontentcomment_id+"&ref="+ref+"&tradeBoardreplyWriterNum=0&tradeBoarReplyNumlv=0";
-	console.log("TradeBoardreplyWriteAction.do?tradeboardnum=" +tradeboardnum+ "&TradeBoardreply_Content="+tradeBoardreply_Content+"&tradecontentcomment_id="+tradecontentcomment_id+"&ref="+ref+"&tradeBoardreplyWriterNum=0"
-	 );
-}
- 
  //ajax 글 등록
  
  function subajax(ref,writer){
-// 써야할것 작성자  ,  게시판 글 번호 ,글내용,답글인지 아닌지, writer는 답글일경우 답글
-// 
-   var tradeboardnum=document.getElementById('tradeboardnum').value;   //글번호 또는 = writer
-   	obj=new Object();
-	obj.content=document.getElementById('ajaxjung').value;//글 내용 변수로 담아옴.
+	if(document.getElementById('ajaxjung')==null || document.getElementById('ajaxjung')==""){
+		alert("내용을 입력해주세여");
+		return 
+	}
+				//작성자와 답글인지만 판단.
+	var tradeboardnum=document.getElementById('tradeboardnum').value;   //글번호 또는 = writer
+   	obj=new Object();  //ajax를위한 오브젝트 생성.
+	obj.content=document.getElementById('ajaxjung').value;//글 내용 담아옴.
 	obj.writer=document.getElementById('tradecontentcomment_id').value;//글 작성자
 	obj.ref=ref;    //0 
 	obj.writernum="0";  //누구의 댓글인지 근데 원댓글이기떄문에 0으로 셋팅 action에서 ref값이 1이여야 값을 요청함.원댓글이기떄문에 고유번호가  작성자참고번호.
@@ -230,45 +205,37 @@ function alink(currentpagemove){
 	
 	$.ajax({
          type:"post",
-        async:false, 
+        async:true, 
         url:"./TradeBoardReplyWriteAction.do",
         data:{data : JSON.stringify(obj)},
         success:function(data2){
-       // var json=	JSON.parse(data2);
            if(data2[0].result!=null){
-            alert(data2);
+            alert(data2);          //null 이 아니라면 "댓글등록에 실패하셨습니다 라고 뜸
            }
-           pagestatus="insert";
+           pagestatus="insert";   //페이지 status가 insert이기떄문에 가장 마지막페이지로이동.
            
-           sessioncheck();		
+           replycheck();		  //리플확인.
         }
 	});
  }
  
- //글 등록 로직.
  
  
  
- //답글 전송 눌렀을떄
-	function subrereply(TradeBoardreply_Content,ref,writer,rewriterrep,tradeBoarReplyNumlv,tradeboardreplywriterreplywriter){
-	// 써야할것 작성자  ,  게시판 글 번호 ,글내용,답글인지 아닌지, writer는 답글일경우 답글
-	// 
-	   var tradeboardnum=document.getElementById('tradeboardnum').value;   //글번호 또는 = writer
-	    var tradeBoardreply_Content =document.getElementById(TradeBoardreply_Content).value; //글내용 
-	   var tradecontentcomment_id=document.getElementById('tradecontentcomment_id').value; //작성자
-	   var tradeBoardreplyWriterNum=rewriterrep //답글다는사람의 번호
-	    var tradeBoarReplyNumlv=tradeBoarReplyNumlv+1; 											//답글 레벨
-	   
-	   //ref 그냥인지 대댓글인지.
-	    console.log("TradeBoardreplyWriteAction.do?tradeboardnum=" +tradeboardnum+ "&TradeBoardreply_Content="+tradeBoardreply_Content+"&tradecontentcomment_id="+tradecontentcomment_id+"&ref="+ref+"&tradeBoardreplyWriterNum="+tradeBoardreplyWriterNum); 
-	     location.href="TradeBoardreplyWriteAction.do?tradeboardnum=" +tradeboardnum+ "&TradeBoardreply_Content="+tradeBoardreply_Content+"&tradecontentcomment_id="+tradecontentcomment_id+"&ref="+ref+"&tradeBoardreplyWriterNum="+tradeBoardreplyWriterNum+"&tradeBoarReplyNumlv="+tradeBoarReplyNumlv+"&tradeboardreplywriterreplywriter="+tradeboardreplywriterreplywriter;
-	 }
+
  
  
+ //답글.
  	function subajaxrep(replynum,Tradeboardreplyref,tradeboardwriter,Tradeboardrewriterrep,tradeBoarReplyNumlv,tradeboardreplywriterreplywriter){
- 		console.log(342)
- 		 var tranum=document.getElementById('tradeboardnum').value;
- 		console.log(document.getElementById(replynum+"WRITE").value +"답글컨텐츠내용");
+						//리플번호     답글인지아닌지        작성자                 부모그룹번호             답글순서                        누구의답글을한건지 저장.
+	    var tranum=document.getElementById('tradeboardnum').value;
+
+		if(document.getElementById(replynum+"WRITE").value==null || document.getElementById(replynum+"WRITE").value==""){
+ 			alert("내용을 입력해주세요");
+ 			document.getElementById(replynum+"WRITE").focus();
+ 			return 
+ 		}
+		//에이잭스 보내기위한 설정. 게시판번호,내용,답글인지,작성자,누구의답글인지,몇번쨰답글인지, 부모그룹 순서
  		obj =new Object();
  		obj.tranum=Number(document.getElementById('tradeboardnum').value);
  		obj.content=document.getElementById(replynum+"WRITE").value;
@@ -277,7 +244,6 @@ function alink(currentpagemove){
  		obj.wrtierrepwriter=tradeboardreplywriterreplywriter;
  		obj.numlv=tradeBoarReplyNumlv;
  		obj.writernum=Tradeboardrewriterrep;
- 		//답글달면  
  		
  		
  		$.ajax({
@@ -286,45 +252,37 @@ function alink(currentpagemove){
  	        url:"./TradeBoardReplyWriteAction.do",
  	        data:{data : JSON.stringify(obj)},
  	        success:function(data2){
- 	       // var json=	JSON.parse(data2);
  	           if(data2[0].result!=null){
- 	            alert(data2);
+ 	            alert(data2);     //null이 아니라는것은 실패했다는것이니 액션에서 실패했다고 뜨게함.
  	           }
  	          pagestatus="move";//답글다는사람이 있는페이지로 지정하기위해서.
  	           
- 	           sessioncheck();		
+ 	           replycheck();	   //리플찍어줌.	
  	        }
  	}); 
  	}
+ 
  	function subajaxdelete(replynum){
- 		
- 		 
- 			  if(confirm("정말 삭제하시겠습니까?")){
+ 			  if(confirm("정말 삭제하시겠습니까?")){//삭제버튼을 누르면 실행됨.
 
- 				  
- 				 obj=new Object();
+ 				obj=new Object();
  		 		obj.trarepnum=replynum;
- 		 		
- 		 		
+
  		 		$.ajax({
  		 	         type:"post",
  		 	        async:false, 
  		 	        url:"./TradeBoardReplyDeleteAction.do",
  		 	        data:{data : JSON.stringify(obj)},
  		 	        success:function(data2){
- 		 	       // var json=	JSON.parse(data2);
  		 	           if(data2[0].result!=null){
- 		 	            alert(data2);
+ 		 	            alert(data2);   //삭제실패하면 뜨게만듬.
  		 	           }
- 		 	          pagestatus="move";//삭제하는페이지로 가게하기위해서.
+ 		 	          pagestatus="move";//삭제하고있는 페이지로 가기위해.
  		 	           
- 		 	           sessioncheck();		
+ 		 	           replycheck();		
  		 	        }
  		 	}); 
- 		 		
- 				  
- 			  
- 			  }else{
+ 			  }else{//아니요 누르면 리턴.
  				return false;
  			   }
  		  
@@ -334,14 +292,17 @@ function alink(currentpagemove){
  
  //수정눌렀을떄 고유번호,게시판번호,컨텐츠
  	function submodi(tra_num,tra_tranum){
-	 
+	 if(document.getElementById(tra_num+'MODI_VAL').value==null||document.getElementById(tra_num+'MODI_VAL').value==""){
+		 alert("내용을 입력해주세요.");
+		 return
+	 }
+	  //내용
 	 var tradeBoardreply_Content =document.getElementById(tra_num+'MODI_VAL').value;
-	 console.log(tradeBoardreply_Content);
 	 
 	 
-	 obj=new Object();
-		obj.trarepnum=tra_num;
-		obj.content      =tradeBoardreply_Content;
+	obj=new Object();
+	obj.trarepnum=tra_num;                  //리플내용.
+	obj.content      =tradeBoardreply_Content; //바뀐내용
 		
 		
 		$.ajax({
@@ -350,159 +311,109 @@ function alink(currentpagemove){
 	        url:"./TradeBoardReplyModifyAction.do",
 	        data:{data : JSON.stringify(obj)},
 	        success:function(data2){
-	       // var json=	JSON.parse(data2);
 	           if(data2[0].result!=null){
-	            alert(data2);
+	            alert(data2);  //널아니면 실패했다는것.
 	           }
 	          pagestatus="move";//삭제하는페이지로 가게하기위해서.
-	           
-	           sessioncheck();		
+	           replycheck();		
 	        }
 	}); 
 	 
  }
-	 
-  function replydelete(replynum,tradeboardnum){
-	  if(confirm("정말 삭제하시겠습니까?")){
-		location.href="TradeBoardReplyDelete.do?trarep_num="+replynum+"&tradeboardnum="+tradeboardnum;
-	   }else{
-		return false;
-	   }
-  }
- 
+	
   
-  
- 
- 
- 
  //글 css정리
  
- //수정 MODI_VA
-function fncModi(moditranum,dd)
-{
+ //수정을눌렀을경우. 해당하는 댓글만 수정이 보이게끔하는것.
+function fncModi(moditranum,dd){
+	 		
 	 
-
-	
-	 console.log('MODI'+moditranum);
-	 
-    var i=document.getElementsByClassName('modi');
-    for (let index = 0; index < i.length; index++) {
-        // i[index].style.display=' ';
-        document.getElementsByClassName('read')[index].style.display = 'block';
-        
+    var i=document.getElementsByClassName('modi'); 
+    for (let index = 0; index < i.length; index++) {  //class가 modi의 길이만큼 가져와서.
+        document.getElementsByClassName('read')[index].style.display = 'block';  //클래스가 read,modi,write인부분을 전부 보여주고 안보여주고 정함.
+         																		//
         document.getElementsByClassName('modi')[index].style.display = 'none';
         document.getElementsByClassName('write')[index].style.display = 'none';
         
         
     }
-    //jstl로 변수명 지정해줄것.
    
- document.getElementById('MODI'+moditranum).style.display='block ';
- 
-    //이것을 누른 폼(리드)을 안보이게하고.
-  dd.parentNode.parentNode.style.display="none";
+                                                                      
+  dd.parentNode.parentNode.style.display="none";    //직접 노드를 찾아줘서 그부분의 READ댓글 양식을 block시켜줌. 
     
     
- console.log(dd.parentNode.parentNode.childNodes[2].childNodes[0])
  //수정폼을 보이게함.
+// document.getElementById('MODI'+moditranum).style.display='block '; 원래는 이 코드 그러나 작동을안해서
  dd.parentNode.parentNode.nextSibling.style.display="block";
  
- console.log(dd.parentNode.parentNode.nextSibling.nextSibling); 
  
  
- console.log(dd.parentNode.parentNode.nextSibling.childNodes[1].childNodes[0])
  
- //수정폼에다가 read안에있는 text값을 불러옴. css가 적용되지 않아서 위와같은 방법을 사용했음. 정적이면 무조건 아래에있는방법으로 사용할것.
-   dd.parentNode.parentNode.nextSibling.childNodes[1].childNodes[0].value=dd.parentNode.parentNode.childNodes[2].childNodes[0].innerText;
+ //수정하고자하는 글의 내용을 수정폼에 주입해줌.  첫번쨰코드가 안돼서 두번쨰로 대체.
  //document.getElementById(moditranum+'MODI_VAL').value=document.getElementById(moditranum+'READ_VAL').innerText;
- 
- //console.log(dd.parentNode.parentNode.nextSibling.childNode)
- 
- //document.getElementById('READ'+moditranum).style.display='none';
- //document.getElementById('writeForm2').style.display='none';
-
-
-
-
-
+   dd.parentNode.parentNode.nextSibling.childNodes[1].childNodes[0].value=dd.parentNode.parentNode.childNodes[2].childNodes[0].innerText;
 }
 
 
 
 //답글
 function fncWriteform(writenum,dd){
-    var i=document.getElementsByClassName('read');
+    var i=document.getElementsByClassName('read');//댓글목록수만큼 == read의 클래스 수만큼임.
+	//read클래스(댓글내용)을 제외하고 수정,답글은 모두 눈에 안보이게 none시킴.
     for (let index = 0; index < i.length; index++) {
-        // i[index].style.display=' ';
         document.getElementsByClassName('read')[index].style.display = 'block';
-        
         document.getElementsByClassName('modi')[index].style.display = 'none';
         document.getElementsByClassName('write')[index].style.display = 'none';
-        
-    
     }
    
 
-/*  document.getElementById('WRITE').style.display='';
  
- document.getElementById('writeForm2').style.display='none';
-   */
-  
-   dd.parentNode.parentNode.style.display="block";
-   dd.parentNode.parentNode.nextSibling.style.display="none";
-   dd.parentNode.parentNode.nextSibling.nextSibling.style.display="block";
- //document.getElementById('MODI'+writenum).style.display='none';
+  //수정폼을 보이게하고.
  //document.getElementById('WRITE'+writenum).style.display='block';
+   dd.parentNode.parentNode.style.display="block";
+
+   //수정폼을 none으로 시키고. 
+ //document.getElementById('MODI'+writenum).style.display='none';
+   dd.parentNode.parentNode.nextSibling.style.display="none";
+	
+   //맨 아래 댓글창도 none으로 만들어줌.
  //document.getElementById('writeForm2').style.display='none';
-
-  
-  
-    // document.getElementById('READ').style.display = '';
-    // document.getElementById('write_form').innerText='';
-    // document.getElementById('MODI').style.display = 'none';
-    // document.getElementById('write').style.display='';
-    // document.getElementById('writeForm2').style.display='none';
-
+   dd.parentNode.parentNode.nextSibling.nextSibling.style.display="block";
 }
+
+//수정취소 답글 취소를 눌렀을떄.
 function fncmodicancle()
 {
+	
     var i=document.getElementsByClassName('read');
-
+	//read폼만 살려놓고 댓글목록.
     for (let index = 0; index < i.length; index++) {
-        // i[index].style.display=' ';
         document.getElementsByClassName('read')[index].style.display = '';
-        
         document.getElementsByClassName('modi')[index].style.display = 'none';
         document.getElementsByClassName('write')[index].style.display = 'none';
-        
-    
     }
 
-    
+    //맨 아래 댓글창을 display시켜줌.
     document.getElementById('writeForm2').style.display='';
 }
 
 
-/////////////////////아래부터는 테스트
- var currentpage="1";
+//시작할떄 currentpage는 1로시작.
+var currentpage="1";
  
  //시작일때는 가장 처음에 달린 댓글부터.'start' 페이지 이동일떄는 
  var pagestatus="start";
+ //session의 초기값은 없음임.
  var session="없음";
- function currentpageclick(){
-	 var i=2;
-	 currentpage=String(i);
-	 sessioncheck();
- }
- function replyinsertclick(){
-	 
- }
-function sessioncheck(){
-	console.log(currentpage);
+
+ 
+//리플목록 보여주는것.
+ function replycheck(){
+	//에이잭스로 보내주기위해 
 	var obj=new Object();
-	obj.tranum=${vo.tra_num};
-	obj.pagestatus=pagestatus;
-	obj.currentpage=currentpage;
+	obj.tranum=${vo.tra_num};  //게시판번호
+	obj.pagestatus=pagestatus;  //게시판이 이동인지 누구의 답글이나 수정인지 새로운 댓글인지 판단.
+	obj.currentpage=currentpage;   //최근페이지를 판단.
 	
 	
 	$.ajax({
@@ -512,16 +423,16 @@ function sessioncheck(){
         data:{data:JSON.stringify(obj)},
         success:function(data2){
         var json=	JSON.parse(data2);
-        	currentpage=String(json.page[0].currentpage);
-           // sessioncompare(json);//댓글화면에 찍어주기
-            sessionpage(json); //페이징처리뿌리기
+        	currentpage=String(json.page[0].currentpage); //최근페이지값을 받아와서 설정후
+            sessionpage(json); //페이징처리 메소드
             
-            if(json.session[0].session!=null){
+            if(json.session[0].session!=null){   //session이 널이 아니라는것은 로그인했다는것이니 session에 없음대신 값을 넣어줌.
             session=json.session[0].session;
             }
-
+			//총댓글 목록을 보여줌.
             document.getElementById('sessiontotalreplylist').innerText='총 댓글 '+json.totalreply;
-            tableinsert(json);
+       		//실질적으로 html에 테이블들을 추가해주는 메소드.
+			tableinsert(json);
         }
 	
 })
@@ -529,63 +440,39 @@ function sessioncheck(){
 
 
 
-//댓글 찍어주는곳 아래에서 나머지 개발중.
-function sessioncompare(data){
-	var i;
-	console.log(data.session[0].session);
-
-	
-	
-	if(data.session[0].session!=null){
-		for(j in data.replyinfo){
-		//if(data.replyinfo[j].)
-		i+="<div>";
-		i+="<table border='1'>";
-		i+="<tr id='writeForm2'  height='25' style='display:'>";
-		i+="<td>"+data.replyinfo[j].content+ "<td>";
-		i+="</tr></table>+${sessionScope.member}";
-		}
-		document.getElementById('sessionjava').innerHTML=i;
-		console.log(111);
-		}
-
-
-		
-}
-
-
-
-
-//여기까지 테스트
 //페이징처리
 function sessionpage(data){
 	var j="";  //임시 태그저장소.
-	var startpage=data.page[0].startpage;
+	var startpage=data.page[0].startpage; 
 	var endpage=data.page[0].endpage;
 	var pagecount=data.page[0].pagecount;
 	
-	if(pagestatus=="insert"){
+	if(pagestatus=="insert"){//만약 페이지상태가 insert면. 새댓글이라는 의미이니. start는 가장 마지막페이지블럭의 첫 페이지 블럭으로 설정.
 		
-		//(currentpage-1)/pageBlock) * pageBlock + 1
+		                   //(currentpage-1)/pageBlock) * pageBlock + 1
+		                   //MAth.flooer 내림 역할 왜냐하면 제이슨에서 값 받아올떄는 실수형태로 받아옴.
 		startpage=( Math.floor((data.page[0].currentpage-1) /data.page[0].pageblock ) )*data.page[0].pageblock  +1;
-		endpage=data.page[0].pagecount;
+		endpage=data.page[0].pagecount;  //그리고 마지막 페이지는 가장 마지막 페이지번호로 설정.
 	}
-	
+	//startpagenum을 ++gownrldnlgo 임시 변수를 담아줌.
 	var tempnum=startpage;
+	 //시작번호가 페이지블럭보다 크면 이전버튼을 생성.
 		if(data.page[0].pageblock<startpage){
 			j+="<li><a href='#' onclick='alink(this)'>";
 	 		j+="이전"+"</a></li>";
 		}
+	 //이전 4 5 6 이후    여기부분에서 4 5 6 부분 찍어주는곳.
 	for(var i=startpage;i<=endpage;i++){
 		j+="<li><a href='#' onclick='alink(this)'>";
 		j+=tempnum+"</a></li>"
 		tempnum++;
 	}
+	//페이지크기보다 한번에보여주는 마지막페이지가 작으면 이후를 만들고
 	if(pagecount>endpage){
 		j+="<li><a href='#' onclick='alink(this)'>";
 		j+="이후"+"</a></li>";
 	}
-	
+	//테이블 주입.
 	document.getElementById('sessionjavalist').innerHTML=j;
 	}
 	
@@ -600,51 +487,58 @@ function tableinsert(data){
 	i+='<div>';
 	i+='<table border="1" style="border-collapse: collapse">';
 	
-	if(data.replyinfo[j].alive==0){
-	
-		//고칠것
+if(data.replyinfo[j].alive==0){
+		          //read는 글쓰기 리드폼 부분.
 	i+='<tr class="read" height="40" style="display:  ;" id="READ'+data.replyinfo[j].num+'" >';
-
 	i+='<td width="90px;" >';
+	//numref가 1이라면 답글이 있다는것.
 		if( data.replyinfo[j].numref ==1){
 	i+='<font size="1" color="gray">ㄴ'+data.replyinfo[j].trarep_writerrepwriter+'</font> ';	
 		}
+	//작성자
 	i+=data.replyinfo[j].writer+'</td>';
-	i+='<td width="10px;"">:</td>';	
+	i+='<td width="10px;"">:</td>';
+	                                   //컨텐츠 값 가져오기위해 댓글고유번호를 span id값으로 설정.												//올린날
     i+='<td width="330px;"><span id="'+data.replyinfo[j].num+'">'+data.replyinfo[j].content   +'</span> <font style="font-size:5px;" >'+data.replyinfo[j].trarep_date+'</font>&nbsp;&nbsp;</td>'
-    	if(data.replyinfo[j].writer==data.session[0].session){
+    				//작성자와 세션이 같다는것은 같은사람이니. 수정
+    if(data.replyinfo[j].writer==data.session[0].session){
     i+='<td width="40px;"><span id="MODBTN" style="cursor:hand;" onclick="fncModi('+data.replyinfo[j].num+',this)">수정</span></td>'
     i+='<td width="40px;"><span  onclick="subajaxdelete('+data.replyinfo[j].num+')">삭제</span></td>';
+    }  //작성자와 세션이 같은 if문 끝
+    	
+    	if(data.session[0].session!=null){
+    i+='<td width="40px;"><span id="write_form" onclick="javascript:fncWriteform('+ data.replyinfo[j].num +',this)">답글</span></td>';
       	} //세션값과 글쓴이가 같은지.
-	  i+='<td width="40px;"><span id="write_form" onclick="javascript:fncWriteform('+ data.replyinfo[j].num +',this)">답글</span></td>';
 	i+="</tr>";		
-	}	//alve==0세션끝나는곳
-	//글쓰기 끝.
+}	//alve==0세션끝나는곳
+	//글이 살아있을떄 보여지는부분.
 	
+	//글이 죽어있다면.
 	if(data.replyinfo[j].alive==1){
 	i+='<tr class="read" height="25" style="display:  ;"  >   <td width="465px">삭제된 댓글입니다.</td>';
 	i+='</tr><tr class="modi" style="display: none "><td></td></tr>';
 	i+='<tr class="write" style="display: none "><td></td></tr>';
 	i+='</table>';
-	
-	
 	}
-	//none으로 바꿀것.
+
+	//데이터 낭비 방지를 위해 alive가 0이여야만 수정 답글폼도 만듦.
 	if(data.replyinfo[j].alive==0){
 		
-		
-	
+														//수정폼 자바스크립트로 제어하기위해 class와 id각각 설정해줌.	    
 	i+='<tr class="modi" style="display: none " height="25" id="MODI'+data.replyinfo[j].num+'">';
 	i+='<td width="50px">'+data.session[0].session+'</td>';
+																//수정 id는 구분을위해 고유댓글번호MODI_VAL 이라는 값으로 설정.
 	i+='<td width="350px;""><input type="text" id="'+data.replyinfo[j].num+'MODI_VAL" name="MODI_VAL" style="width:300px; height:25px;"></td>';
+																//수정에 필요한것은 게시판번호와 댓글고유번호만 있으면됨 컨텐츠는 자스단에서 해결.
 	i+='<td width="30px;"><input type="button" onclick="javascript:submodi('+data.replyinfo[j].num +','+data.replyinfo[j].tranum +');" value="입력"></td>';
-	//i+='<td><span id="write_form" onclick="javascript:fncWriteform('+data.replyinfo[j].num +')">답글 </span></td>';
 	i+='<td onclick="javascript:fncmodicancle()">입력취소</td></tr>';
 	
 
 	var tempi="'";
+	//답글일떄 마찬가지로 class와 id로 각각 나눠서 개별제어 한번에 제어를 가능하게 설정.
 	i+='<tr class="write" style="display: none " height="25" id="WRITE'+data.replyinfo[j].num +'">';
 	i+='<td>답글</td> <td>:</td>';
+	                                                     //구분을위해 고유번호WRITE로 id설정.
 	i+='<td width="350px"><input type="text" id="'+data.replyinfo[j].num+'WRITE" style="width: 360px; height:20px;"></td>';
 	i+='<td><input type="button" value="입력" onclick="subajaxrep( ' +data.replyinfo[j].num+',1,'+tempi+data.session[0].session+tempi+','+data.replyinfo[j].trarep_writerrep+','+data.replyinfo[j].trarep_numref_lv+','+tempi+data.replyinfo[j].writer+tempi+') "></td>';
 	
@@ -655,8 +549,8 @@ function tableinsert(data){
 	i+='</div>';
 	}
 	}
+	//이모든것이 끝나면        저 아이디값태그안에 위의 태그들을 주입해줌.
 	document.getElementById('trareplypaging').innerHTML=i;
-	console.log("되고있나");
 	
 }
 

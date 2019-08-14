@@ -16,12 +16,15 @@
 <jsp:include page="/view/main/weather.jsp" />
 <div>
 <div class="body">
-<div class="regView_regname">&nbsp;${ reg_list[0].reg_name }&nbsp;</div>
+<!-- 지역이름 -->
+<div class="regView_regname">&nbsp;${ reg_name }&nbsp;</div>
+<!-- 지역사진 -->
 <div class="regView_picture">
 <c:forEach var="picture" items="${ reg_list }">
 <img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }">
 </c:forEach>
 </div>
+<!-- 지역설명 -->
 <c:forEach var="post" items="${ reg_list }">
 	<div class="regView_posts">
 	<div class="regView_title">${ post.reg_subject }</div>

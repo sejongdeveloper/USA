@@ -28,7 +28,7 @@ public class MemNaverAction implements Command {
 	    String clientId = "fRezVk5_Htz8SWJjSj7d";
 	    // 애플리케이션 클라이언트 시크릿값
 	    String clientSecret = "2tckaN8GEV";
-	    String code = request.getParameter("code");
+	    String code = request.getParameter("code"); // 로그인 연동인지 여부
 	    String state = request.getParameter("state");
 	    // 콜백함수 주소
 	    String redirectURI = URLEncoder.encode("http://localhost:8080/USA/naver.do", "UTF-8");
@@ -65,7 +65,6 @@ public class MemNaverAction implements Command {
 	      }
 	      
 	      // json 라이브러리를 통하여 연결 토큰값 얻기
-	      parser = new JSONParser();
 	      json = (JSONObject) parser.parse(sb.toString());
 	      access_token = (String) json.get("access_token");
 	      // 회원 탈퇴할 경우 끊어주기 위해 토큰값 전달
@@ -94,9 +93,11 @@ public class MemNaverAction implements Command {
 	         
 	         String inputLine;
 	         StringBuffer sb = new StringBuffer();
+	         
 	         while ((inputLine = br.readLine()) != null) {
 	             sb.append(inputLine);           
 	         }
+	         
 	         br.close();
 	         
 	         // json으로 파싱하여 네이버 회원정보 얻기
