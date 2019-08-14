@@ -222,74 +222,73 @@ public class FrontController extends HttpServlet implements Process{
 			MoneyAction.execute(request, response);
 			return;
 		}
-		//리스트
+		// 리스트
 		else if(com.equals("list.do")) {
 		nextPage=new TradeBoardListAction().execute(request, response);
 		
-		//글쓰기 누르면 글쓰기폼이 나옴
+		// 글쓰기 누르면 글쓰기폼이 나옴
 		}else if (com.equals("writeForm.do")) {
 			nextPage= "/view/tra/WriteForm.jsp";
 		
-		//글쓰기 완료 누르면 실행
+		// 글쓰기 완료 누르면 실행
 		}else if(com.equals("TradeBoardWriteAction.do")) {
 			nextPage=new TradeBoardWriteAction().execute(request, response);
 			
-		//글 자세히 보기
+		// 글 자세히 보기
 		}else if(com.equals("content.do")) {
 			nextPage=new TradeBoardDetailAction().execute(request, response);
 			
-		//다운로드 처리
+		// 다운로드 처리
 		}else if(com.equals("FileDownload.do")) {
 			
 			new TradeBoardDownloadAction().execute(request, response);
 
-			//글쓰기수정 눌렀을떄
+		// 글쓰기수정 눌렀을떄
 		}else if(com.equals("TradeBoardModifyFormAction.do")) {
 			nextPage=new TradeBoardModifyFormAction().execute(request, response);
 			
-			//글쓰기수정 완료할떄
+		// 글쓰기수정 완료할떄
 		}else if(com.equals("TradeBoardModifyProAction.do")) {
 			nextPage=new TradeBoardModifyProAction().execute(request, response);
 			
-			//삭제 눌렀을떄
+		// 삭제 눌렀을떄
 		}else if(com.equals("TradeBoardDeleteAction.do")) {
 			nextPage=new TradeBoardDeleteAction().execute(request, response);
 			
-			//댓글 글쓰기 눌렀을떄
+		// 댓글 글쓰기 눌렀을떄
 		}else if(com.equals("TradeBoardReplyWriteAction.do")) {
 			new TradeBoardReplyWriteAction().execute(request, response);
 			return ;
 			
-			
+		// 
 		}else if(com.equals("TradeBoardReplyModifyAction.do")) {
 			new TradeBoardReplyModifyAction().execute(request, response);
 			return ;
+		
+		// 
 		}else if(com.equals("TradeBoardReplyDeleteAction.do")) {
 			new TradeBoardReplyDeleteAction().execute(request, response);
 			return ;
-			
+		
+		// 
 		}else if(com.equals("TradeBoardReplyListAction.do")) {
 			new TradeBoardReplyListAction().execute(request, response);
 			return ;
-		}
-		else if(com.equals("main.do")){
-			 nextPage=new MainAction().execute(request, response);
+		
+		// 이벤트 응모
 		} else if(com.equals("Eventcheck.do")){
 			new MemEvent().execute(request, response);
 			return ;
+		
+		// 네이버 로그인
 		}  else if(com.equals("naver.do")) {
 			nextPage = new MemNaverAction().execute(request, response);
 		}
 		
-		if(nextPage!=null&&nextPage!="") {
+		if (nextPage != null && nextPage != "") {
 	         RequestDispatcher dis = request.getRequestDispatcher(nextPage);
-	         if(!nextPage.equals("/index.jsp")) request.setAttribute("contents", nextPage);
 	         dis.forward(request, response);
-		
-		} 
-		
-
-		
+		}
 		
 	}
 

@@ -30,13 +30,13 @@ public class RevDAO {
 		return ds.getConnection();
 	}
 	
-	// 관광지 삭제 안된 리뷰 데이터 가져오기
+	// 해당 관광지 삭제 안된 리뷰 데이터 가져오기
 	public ArrayList<RevVO> getRevContents(String rev_locname){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<RevVO> list = new ArrayList<RevVO>();
-		String sql = "SELECT REV_NUM, REV_DATE, REV_WRITER, REV_CONTENTS, REV_SCORE FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1";
+		String sql = "SELECT REV_NUM, REV_DATE, REV_WRITER, REV_CONTENTS, REV_SCORE FROM REV WHERE REV_LOCNAME = ? AND REV_ALIVE = 1 ORDER BY REV_NUM";
 		
 		try {
 			conn = getConnection();
@@ -63,7 +63,7 @@ public class RevDAO {
 		return list;
 	}
 	
-	// 관광지 삭제 안된 리뷰 총 개수
+	// 해당 관광지 삭제 안된 리뷰 총 개수 가져오기
 	public int getAllCount(String rev_locname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -88,7 +88,7 @@ public class RevDAO {
 		return count;
 	}
 	
-	// 관광지 삭제 안된 리뷰 총 평점 가져오기
+	// 해당 관광지 삭제 안된 리뷰 총 평점 가져오기
 	public double getAllScore(String rev_locname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -141,7 +141,7 @@ public class RevDAO {
 		return list;
 	}
 	
-	// 관광지 삭제 안된 리뷰 각 점수 개수
+	// 해당 관광지 삭제 안된 리뷰 각 점수 개수 가져오기
 	public HashMap<Integer, Integer> getEachCount(String rev_locname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
