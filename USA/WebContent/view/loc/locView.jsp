@@ -33,11 +33,12 @@
 <div class="locView_allScore">${ rev_allScore } / 5.0</div>
 <!-- 각 리뷰 개수 -->
 <div class="locView_count">
-<div class="locView_count5">5점 <progress value="${ rev_count5 }" max="${ rev_allCount }"></progress> ${ rev_count5 }</div>
-<div class="locView_count4">4점 <progress value="${ rev_count4 }" max="${ rev_allCount }"></progress> ${ rev_count4 }</div>
-<div class="locView_count3">3점 <progress value="${ rev_count3 }" max="${ rev_allCount }"></progress> ${ rev_count3 }</div>
-<div class="locView_count2">2점 <progress value="${ rev_count2 }" max="${ rev_allCount }"></progress> ${ rev_count2 }</div>
-<div class="locView_count1">1점 <progress value="${ rev_count1 }" max="${ rev_allCount }"></progress> ${ rev_count1 }</div>
+
+<div class="locView_count5">5점 <progress value="${ rev_count5 }" max="${ rev_allCount }"></progress> ${ rev_count5 }<c:if test="${ rev_count5 == null}">0</c:if></div>
+<div class="locView_count4">4점 <progress value="${ rev_count4 }" max="${ rev_allCount }"></progress> ${ rev_count4 }<c:if test="${ rev_count4 == null}">0</c:if></div>
+<div class="locView_count3">3점 <progress value="${ rev_count3 }" max="${ rev_allCount }"></progress> ${ rev_count3 }<c:if test="${ rev_count3 == null}">0</c:if></div>
+<div class="locView_count2">2점 <progress value="${ rev_count2 }" max="${ rev_allCount }"></progress> ${ rev_count2 }<c:if test="${ rev_count2 == null}">0</c:if></div>
+<div class="locView_count1">1점 <progress value="${ rev_count1 }" max="${ rev_allCount }"></progress> ${ rev_count1 }<c:if test="${ rev_count1 == null}">0</c:if></div>
 </div>
 
 <div class="locView_revWriteForm"><div class="locView_revWriteframe">

@@ -22,7 +22,7 @@
 <div class="locList_reg">${ loc_regname }</div>
 <!-- 로그인 여부 -->
 <c:if test="${ sessionScope.member != null }">
-<div class="locList_add"><a href="locListWriteForm.do?loc_regname=${ loc_nameFileList[0].loc_regname }">관광지 추가</a></div><!-- 관광지 추가하기 -->
+<div class="locList_add"><a href="locListWriteForm.do?loc_regname=${ loc_regname }">관광지 추가</a></div><!-- 관광지 추가하기 -->
 </c:if>
 </div>
 <!-- 관광지들 평점 -->
@@ -39,7 +39,7 @@
 <!-- 관광지 수정하기 -->
 <div class="locList_modidel"><a href="locListModifyForm.do?loc_name=${ list.loc_name }">수정</a></div>
 <!-- 관광지 삭제하기 -->
-<div class="locList_modidel"><a href="locListDeletePro.do?loc_regname=${ loc_nameFileList[0].loc_regname }&loc_name=${ list.loc_name }">삭제</a></div>
+<div class="locList_modidel"><a href="locListDeletePro.do?loc_regname=${ loc_regname }&loc_name=${ list.loc_name }">삭제</a></div>
 </c:if>
 <c:if test="${ sessionScope.member != list.loc_writer }"><!-- 작성자가 아니라면 -->
 <div class="locList_modidel">&nbsp;</div>

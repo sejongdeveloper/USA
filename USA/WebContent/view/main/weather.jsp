@@ -13,13 +13,14 @@
    var i = 0;
    
   $(document).ready(function(){
-     async function slideWeather(i) {
+	  	startWeather();
+     	async function slideWeather(i) {
         while (true) {
           await new Promise(resolve => setTimeout(resolve, 2000));
-          var city = [ "Hawaii", "New%20York", "California", "Delaware", "Pennsylvania", "New%20Jersey", "Georgia", "Connecticut", "Massachusetts", "Maryland",
+          var city = [ "Hawaii", "California", "Delaware", "Pennsylvania", "New%20Jersey", "Georgia", "Connecticut", "Massachusetts", "Maryland",
         	 "South Carolina", "New Hampshire", "Virginia", "North Carolina", "Rhode Island", "Vermont", "Kentucky", "	Tennessee", "Ohio", "Louisiana", 
         	 "Indiana", "Mississippi", "Illinois", "Alabama", "Maine", "Missouri", "Arkansas", "Michigan", "Florida", "Texas", "Iowa", "Wisconsin", "Minnesota",
-        	 "Oregon", "Kansas", "	West Virginia", "Nevada", "Nebraska", "Colorado", "North Dakota", "South Dakota", "Montana", "Washington", "Idaho",
+        	 "Oregon", "Kansas", "West Virginia", "Nevada", "Nebraska", "Colorado", "North Dakota", "South Dakota", "Montana", "Washington", "Idaho",
         	 "Wyoming", "Utah", "Oklahoma", "New Mexico", "Arizona", "	Alaska" ];
          
          var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city[i] + "&appid=03b991ee6df0d0733ada010a51bacf08";
@@ -37,10 +38,19 @@
      slideWeather(i)
      
    });
-   
-
-   
-         
+      
+  function startWeather(){
+	  var city = "New%20York";
+      
+      var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=03b991ee6df0d0733ada010a51bacf08";
+       $.getJSON(url+"&callback=?", function(data) {
+    		$(".weacountry").html(data.name);
+    		$(".weatemp").html((data.main.temp- 273.15).toFixed(1)+'˚C');
+    		$(".weaweather").html(data.weather[0].main);
+       });
+       
+       i++;
+  }
 
 </script>
 </head>

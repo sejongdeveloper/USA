@@ -1,4 +1,4 @@
-package action.tra;
+package action.qa;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,10 +14,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import model.tra.TradeBoardreplyDAO;
-import model.tra.TradeBoardreplyVO;
+import model.qa.QABoardreplyDAO;
+import model.qa.QABoardreplyVO;
 
-public class TradeBoardReplyListAction extends HttpServlet {
+public class QABoardReplyListAction extends HttpServlet {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
@@ -25,7 +25,7 @@ public class TradeBoardReplyListAction extends HttpServlet {
 		// 받을떄
 		String jsoninfo = request.getParameter("data");
 		JSONParser jsonParser = new JSONParser();
-		int tranum = 0;// 초기화
+		int qanum = 0;// 초기화
 		int currentpage = 1; // 최근페이지 초기화
 		String pagestatus = "start";
 
@@ -36,7 +36,7 @@ public class TradeBoardReplyListAction extends HttpServlet {
 			// json값 가져올떄 int는 long형으로 가져옴
 
 			// 게시판번호
-			tranum = (int) (long) jsonObject.get("tranum");
+			qanum = (int) (long) jsonObject.get("qanum");
 			// 이동인지 글등록인지 게시판 처음시작한건지 판단.
 			pagestatus = (String) jsonObject.get("pagestatus");
 
@@ -53,16 +53,15 @@ public class TradeBoardReplyListAction extends HttpServlet {
 		JSONObject totalObject = new JSONObject();
 		JSONArray replyarray = new JSONArray();
 		JSONObject replyinfo = new JSONObject();
-		TradeBoardreplyDAO dao = new TradeBoardreplyDAO();
-		TradeBoardreplyVO vo = new TradeBoardreplyVO();
+		QABoardreplyDAO dao = new QABoardreplyDAO();
+		QABoardreplyVO vo = new QABoardreplyVO();
 		// 게시판 내용불러오는메소드
-		ArrayList<TradeBoardreplyVO> list = new ArrayList<TradeBoardreplyVO>();
+		ArrayList<QABoardreplyVO> list = new ArrayList<QABoardreplyVO>();
 
 		// 아래부터는 페이지 변수 필요한것들.
 		// 게시글 숫자를 구함
-		list = dao.getreplylist(tranum);
-		//LIST.SIZE();
-		
+		list = dao.getreplylist(qanum);
+
 		// 한번에 몇개의 게시물을 볼것인지
 		int pageSize = 5;
 		// 게시물 마지막 번호를 구하기 위한 변수
@@ -84,21 +83,21 @@ public class TradeBoardReplyListAction extends HttpServlet {
 		if (pagestatus.equals("start")) {
 			currentpage = 1;
 			// insert일떄는 처음 댓글 등록할떄이니 가장 마지막 페이지로 이동.
-		} else if (pagestatus.equals("insert")) {  //START  insert move
+		} else if (pagestatus.equals("insert")) {
 			currentpage = pageCount;
 		} // move일경우 값 변경이 없으니
 
 		// 시작 댓글
-		int TradeBoardReplystartnum = currentpage * pageSize - pageSizeref;
+		int qadeBoardReplystartnum = currentpage * pageSize - pageSizeref;
 
 		// 한번에 볼 댓글페이지
-		int TradeBoardReplypagenum = 5;
+		int qadeBoardReplypagenum = 5;
 
-		int TradeBoardReplyendnum = TradeBoardReplystartnum + pageSize - 1;
+		int qadeBoardReplyendnum = qadeBoardReplystartnum + pageSize - 1;
 
 		// 한번에 보여줄 댓글 게시글 내용 담기
-		ArrayList<TradeBoardreplyVO> replylist = dao.getreplylist2(tranum, TradeBoardReplystartnum,
-				TradeBoardReplyendnum);
+		ArrayList<QABoardreplyVO> replylist = dao.getreplylist2(qanum, qadeBoardReplystartnum,
+				qadeBoardReplyendnum);
 		//
 
 		JSONArray jsonpage = new JSONArray();
@@ -115,25 +114,25 @@ public class TradeBoardReplyListAction extends HttpServlet {
 		for (int i = 0; i < replylist.size(); i++) {
 			replyinfo = new JSONObject();
 			// 고유번호
-			replyinfo.put("num", replylist.get(i).getTrarep_num());
+			replyinfo.put("num", replylist.get(i).getqarep_num());
 			// 게시판번호
-			replyinfo.put("tranum", replylist.get(i).getTrarep_tranum());
+			replyinfo.put("qanum", replylist.get(i).getqarep_qanum());
 			// 내용
-			replyinfo.put("content", replylist.get(i).getTrarep_contents());
+			replyinfo.put("content", replylist.get(i).getqarep_contents());
 			// 작성자
-			replyinfo.put("writer", replylist.get(i).getTrarep_writer());
+			replyinfo.put("writer", replylist.get(i).getqarep_writer());
 			// 답글일경우 답글작성자의 번호(그룹을 위함)
-			replyinfo.put("trarep_writerrep", replylist.get(i).getTrarep_writerrep());
+			replyinfo.put("qarep_writerrep", replylist.get(i).getqarep_writerrep());
 			// 답글이면 1아니면0
-			replyinfo.put("numref", replylist.get(i).getTrarep_numref());
+			replyinfo.put("numref", replylist.get(i).getqarep_numref());
 			// 몇번쨰 답글인지 레벨을 구함 높으면 가장 나중
-			replyinfo.put("trarep_numref_lv", replylist.get(i).getTrarep_numref_lv());
+			replyinfo.put("qarep_numref_lv", replylist.get(i).getqarep_numref_lv());
 			// 살아있는지
-			replyinfo.put("alive", replylist.get(i).getTrarep_alive());
+			replyinfo.put("alive", replylist.get(i).getqarep_alive());
 			// 누구의 답글인지 작성자이름을 저장
-			replyinfo.put("trarep_writerrepwriter", replylist.get(i).getTrarep_writerrepwriter());
+			replyinfo.put("qarep_writerrepwriter", replylist.get(i).getqarep_writerrepwriter());
 			// 게시판이 언제 씌여졌는지 저장.
-			replyinfo.put("trarep_date", replylist.get(i).getTrarep_date());
+			replyinfo.put("qarep_date", replylist.get(i).getqarep_date());
 			// vo라고 생각.
 			replyarray.add(replyinfo);
 

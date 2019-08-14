@@ -25,11 +25,14 @@
 다른 아이디나 사이트에서 사용한 적 없는 안전한 비밀번호로 변경해 주세요.
 </div>
 
+<!-- submit으로 action 주소로 이동하기전에 onsubmit에서 지정한 함수로 먼저 이동 -->
+<!-- chk()란 비밀번호 입력을 정확하게 한 후에 submit 버튼을 클릭한건지 판단하는 함수 -->
 <form action="${contextPath }/memPwdPro.do" onsubmit="return chk()">
 <input type="hidden" name="mem_id" value="${param.mem_id }">
 <div class="dataLine">
 	<div id="top"></div>
 	<h4>네이버 아이디&nbsp; &nbsp;:&nbsp; &nbsp;</h4><span id="mem_id">${param.mem_id }</span>
+	<!-- 설명글(placeholder) / 포커스를 벗어나면 유효성검사(onfocusout) / 포커스 중일때 디자인변경(onfocusin) -->
 	<div class="data" id="pwdDiv"><input type="password" name="mem_pwd" id="mem_pwd" placeholder="새 비밀번호" onfocusout="pwdValidate()" onfocusin="pwdIn('pwdDiv')"></div>
 	<div class="idPwdMsg" id="pwdMsg"></div>
 	<div class="data" id="pwdChkDiv"><input type="password" name="mem_pwdChk" id="mem_pwdChk" placeholder="새 비밀번호 확인" onfocusout="pwdChkValidate()" onfocusin="pwdIn('pwdChkDiv')"></div>

@@ -12,7 +12,7 @@
 <title>아이디 찾기</title>
 
 <link rel="stylesheet" href="${contextPath }/css/memId.css">
-
+<!-- DB에 전달받은 아이디가 없을때 받는 err 파라미터값이 있으면 javascript 실행 -->
 <c:if test="${not empty param.err }">
 <script type="text/javascript">
 	alert("입력한 회원정보와 일치하는 아이디가 없습니다");

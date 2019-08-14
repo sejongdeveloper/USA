@@ -80,8 +80,8 @@
       </li>
       <li class="headercenter"><a href="#" class="headercontent">Community</a>
           <ul>
-           <a href="#" class="headercontentqa"><li><p>Q & A</p></li></a>
-           <a href="list.do" class="headercontenttra"><li><p>거래</p></li></a>
+           <a href="QAlist.do" class="headercontentqa"><li><p>Q & A</p></li></a>
+           <a href="Tradelist.do" class="headercontenttra"><li><p>거래</p></li></a>
          </ul>
       </li>
       <a href="event.do" class="headercontent"><li class="headercenter"><p>Event</p></li></a>

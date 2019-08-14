@@ -1,11 +1,10 @@
-/**
- * 
- */
+/* 아이디 유효성 검사 */
 function idValidate() {
 	var mem_id = document.getElementById("mem_id").value;
 	var outIdMsg = document.getElementById("outIdMsg");
 	var idDiv = document.getElementById("idDiv");
 	
+	/* 빈값 체크 */
 	if(mem_id == "") {
 		outIdMsg.innerHTML = "필수 정보입니다.";
 		outIdMsg.style.color = "red";
@@ -13,6 +12,7 @@ function idValidate() {
 		return;
 	}
 	
+	/* 유효성 검사 */
 	var idChk = /^[a-zA-Z0-9-_]{5,20}$/;
 	if(!idChk.test(mem_id)){
 		outIdMsg.innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
@@ -21,6 +21,7 @@ function idValidate() {
 		return;
 	}
 	
+	/* ajax를 통하여 아이디가 존재하는지 판단 */
 	function getXMLHttpRequest() {
 		if(window.XMLHttpRequest) {
 			return new XMLHttpRequest();
@@ -36,11 +37,13 @@ function idValidate() {
 	httpRequest.onreadystatechange = callback;
 	httpRequest.open("post", url, true);
 	
+	/* post방식으로 데이터 전달하기 */
 	httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	httpRequest.send(args);
 	
 	function callback() {
 		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+			/* json 방식 */
 			var data = httpRequest.responseText;
 			var json = JSON.parse(data);
 			
@@ -59,20 +62,22 @@ function idValidate() {
 	}
 }
 
-
+/* 비밀번호 유효성 검사 */
 function pwdValidate() {
 	var pwdChk = /^[a-zA-Z0-9!@#$%^&*()-_=+]{8,16}$/;
 	var pwd = document.getElementById("mem_pwd").value;
 	var outPwdMsg = document.getElementById("outPwdMsg");
 	var pwdDiv = document.getElementById("pwdDiv");
 		
-if(pwd == "") {
-	outPwdMsg.innerHTML = "필수 정보입니다.";
-	outPwdMsg.style.color = "red";
-	pwdDiv.style.border = "1px solid red";
-	return;
-}
-
+	/* 빈값 체크 */
+	if(pwd == "") {
+		outPwdMsg.innerHTML = "필수 정보입니다.";
+		outPwdMsg.style.color = "red";
+		pwdDiv.style.border = "1px solid red";
+		return;
+	}
+	
+	/* 유효성 검사 */
 	if(pwdChk.test(pwd)){
 		outPwdMsg.innerHTML = "";
 		pwdDiv.style.border = "1px solid #dadada";
@@ -86,22 +91,22 @@ if(pwd == "") {
 	pwdChkValidate();
 }
 
-
-
-
+/* 비밀번호 재확인 */
 function pwdChkValidate(){
 	var pwdChk = document.getElementById("mem_pwdChk").value;
 	var outPwdChkMsg = document.getElementById("outPwdChkMsg");
 	var pwdChkDiv = document.getElementById("pwdChkDiv");
 
-if(pwdChk == "") {
-	outPwdChkMsg.innerHTML = "필수 정보입니다.";
-	outPwdChkMsg.style.color = "red";
-	pwdChkDiv.style.border = "1px solid red";
-	return;
-}
-
-var pwd = document.getElementById("mem_pwd").value;
+	/* 빈값 체크 */
+	if(pwdChk == "") {
+		outPwdChkMsg.innerHTML = "필수 정보입니다.";
+		outPwdChkMsg.style.color = "red";
+		pwdChkDiv.style.border = "1px solid red";
+		return;
+	}
+	
+	/* 비밀번호화 비밀번호 재확인 값이 일치하는지 판단 */
+	var pwd = document.getElementById("mem_pwd").value;
 	if(pwd == pwdChk) {
 		outPwdChkMsg.innerHTML = "";
 		pwdChkDiv.style.border = "1px solid #dadada";
@@ -112,11 +117,12 @@ var pwd = document.getElementById("mem_pwd").value;
 	}
 }
 
-
+/* 디자인 변경 */
 function basic(id) {
   document.getElementById(id).style.border = "1px solid green";
 }
 
+/* 빈값인지 판단 */
 function basicValidate(input, div, msg) {
 	var input = document.getElementById(input).value;
 	var div = document.getElementById(div);
@@ -132,6 +138,7 @@ function basicValidate(input, div, msg) {
 	}
 }
 
+/* 모든 유효성 검사를 통과했는지 판단 */
 function check() {
 	var id = document.getElementById("outIdMsg").innerHTML;
 	var pwd = document.getElementById("outPwdMsg").innerHTML;
@@ -162,6 +169,7 @@ function check() {
 	return true;
 }
 /*
+길이 조절 함수 (현재 사용x)
 function maxLength(object){
     if (object.value.length > object.maxLength){
         object.value = object.value.slice(0, object.maxLength);

@@ -12,18 +12,24 @@
 <title>회원가입</title>
 
 <link rel="stylesheet" href="${contextPath }/css/memWrite.css">
-	
+
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
 <div id="memWrite">
 
+<!-- 회원가입 폼 -->
+<!-- 파일 업로드를 하기 위해 post방식과 multipart/form-data를 이용 -->
+<!-- onsubmit란 submit을 하면 action 주소로 이동하기전에 check() 함수로 이동 -->
 <form action="${contextPath }/memWritePro.do" method="post" enctype="multipart/form-data" onsubmit="return check()">
 	<div class="subject"><label for="mem_id">아이디</label></div>
 	<div class="inputBack" id="idDiv">
+		<!-- 포커스 벗어나면(onfocusout) 아이디 유효성 검사 함수(idValidate()) 실행 -->
+		<!-- 포커스 중일때(onfocusin) 디자인 변경 함수(basic()) 실행 -->
 		<input type="text" name="mem_id" class="inputReal" id="mem_id" onfocusout="idValidate()" onfocusin="basic('idDiv')">
 		<div class="imgDiv"><img src="${contextPath }/view/mem/upload/test.svg"></div>
 	</div>
+	<!-- 유효성 검사 결과값 출력(outmsg) -->
 	<span class="outmsg" id="outIdMsg"></span>
 
 	<div class="subject"><label for="mem_pwd">비밀번호</label></div>
@@ -32,7 +38,7 @@
 		<div class="imgDiv"><img src="${contextPath }/view/mem/upload/test.svg"></div>
 	</div>
 	<span class="outmsg" id="outPwdMsg"></span>
-	
+
 	<div class="subject"><label for="mem_pwdChk">비밀번호 재확인</label></div>
 	<div class="inputBack" id="pwdChkDiv" >
 		<input type="password" name="mem_pwd" class="inputReal" id="mem_pwdChk" onfocusout="pwdChkValidate()" onfocusin="basic('pwdChkDiv')">
@@ -63,7 +69,7 @@
 
 	<div class="subject"><label for="mem_id">파일</label></div>
 	<input type="file" name="mem_filename" id="mem_filename"><br>
-	
+
 	<input type="submit" value="회원가입" >
 </form>
 

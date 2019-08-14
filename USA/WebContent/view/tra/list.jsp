@@ -20,11 +20,11 @@
 
 	<center>
 	  보기 > 
-	  <div style="display: inline-block;"><a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 30;">전체</a></div>
-	  <div style="display: inline-block;"><a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 30;">팝니다 </a></div>
-	  <div style="display: inline-block;"><a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 200;">삽니다 </a></div>
-	  <div style="display: inline-block;"><a href="list.do?pagesize=10&condition=${condition}&opt=${opt}&tra_head=${tra_head}" style="text-decoration: none; font-size: 20; margin-right: 20;">10개씩보기 </a></div>
-	  <div style="display: inline-block;"><a href="list.do?pagesize=20&condition=${condition}&opt=${opt}&tra_head=${tra_head}" style="text-decoration: none; font-size: 20;">20개씩보기 </a></div>
+	  <div style="display: inline-block;"><a href="Tradelist.do?tra_head=전체&pagesize=${pagesize }" style="text-decoration: none; font-size: 20; margin-right: 30;">전체</a></div>
+	  <div style="display: inline-block;"><a href="Tradelist.do?tra_head=팝니다&pagesize=${pagesize }" style="text-decoration: none; font-size: 20; margin-right: 30;">팝니다 </a></div>
+	  <div style="display: inline-block;"><a href="Tradelist.do?tra_head=삽니다&pagesize=${pagesize }" style="text-decoration: none; font-size: 20; margin-right: 200;">삽니다 </a></div>
+	  <div style="display: inline-block;"><a href="Tradelist.do?pagesize=10&condition=${condition}&opt=${opt}&tra_head=${tra_head}" style="text-decoration: none; font-size: 20; margin-right: 20;">10개씩보기 </a></div>
+	  <div style="display: inline-block;"><a href="Tradelist.do?pagesize=20&condition=${condition}&opt=${opt}&tra_head=${tra_head}" style="text-decoration: none; font-size: 20;">20개씩보기 </a></div>
 <br><Br><Br>
 	
 		<b><br>
@@ -36,7 +36,7 @@
 		<!-- 로그인해야만 글쓰기 가능 -->
 		<c:if test="${sessionScope.member!=null }">
 			<td  align="right">
-				<a href="writeForm.do" style="text-decoration: none;">글쓰기</a>
+				<a href="TradewriteForm.do" style="text-decoration: none;">글쓰기</a>
 			</td>
 			</c:if>
 		</tr>
@@ -74,7 +74,7 @@
 			
 
 	   <!-- 어느페이지의 어떤글인지 글선택을 했을시 넘김. --> 
-	  <a 	href="content.do?num=${list.tra_num }&page=${ currentPage }" style="text-decoration: none; color: black;">
+	  <a 	href="Tradecontent.do?num=${list.tra_num }&page=${ currentPage }" style="text-decoration: none; color: black;">
 					${ list.tra_subject }</a> 
 	
 	
@@ -120,15 +120,15 @@
 		<c:when test="${opt!=null }">
 		<%-- 그래서 이전 이후 다음 그리고 몇번쨰 페이지로 갈지를 정할떄 검색조건 검색내용 페이지를 몇개볼건지 같이 넘김.--%>
 		<c:if test="${startPage >5 }" >
-			<a href="list.do?page=${ startPage-1  }&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[이전] </a>
+			<a href="Tradelist.do?page=${ startPage-1  }&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[이전] </a>
 		</c:if>
 
 		<c:forEach  var="i" begin="${startPage }" end="${ endPage }">
-			<a href="list.do?page=${i}&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[${ i }] </a>
+			<a href="Tradelist.do?page=${i}&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[${ i }] </a>
 	   </c:forEach>
 	
 	<c:if test="${ endPage < pageCount }" >
-		<a href="list.do?page=${ startPage+pageBlock }&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[다음] </a>
+		<a href="Tradelist.do?page=${ startPage+pageBlock }&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[다음] </a>
 	</c:if>
 	</c:when>
 	<%-- 여기까지가 검색조건이 있을떄. --%>
@@ -136,15 +136,15 @@
 	<%-- 검색조건이 null이면. 몇번쨰 페이지인지 몇개씩 볼건지  분류는 어떤건지만 서버로 값을 넘겨줌. --%>
 	<c:when test="${opt==null }">
 		<c:if test="${startPage >5 }" >
-			<a href="list.do?page=${ startPage-1  }&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[이전] </a>
+			<a href="Tradelist.do?page=${ startPage-1  }&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[이전] </a>
 		</c:if>
 
 		<c:forEach  var="i" begin="${startPage }" end="${ endPage }">
-			<a href="list.do?page=${i}&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[${ i }] </a>
+			<a href="Tradelist.do?page=${i}&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[${ i }] </a>
 	   </c:forEach>
 	
 	<c:if test="${ endPage < pageCount }" >
-		<a href="list.do?page=${ startPage+pageBlock }&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[다음] </a>
+		<a href="Tradelist.do?page=${ startPage+pageBlock }&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[다음] </a>
 	</c:if>
 
 	</c:when>

@@ -15,11 +15,15 @@ import model.mem.MemVO;
 
 public class MemWriteProAction implements Command {
 
+	// 회원가입 실행
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 파일 저장위치
 		String saveDirectory = request.getSession().getServletContext().getRealPath("/view/mem/upload");
+		// 파일 크기
 		int maxPostSize = 5*1024*1024;
 		
+		// cos.jar 라이브러리 방식으로 multipart/form-data 방식의 form 태그의 값들을 처리
 		try {
 			MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxPostSize, "utf-8", new DefaultFileRenamePolicy());
 			String mem_id = multi.getParameter("mem_id");

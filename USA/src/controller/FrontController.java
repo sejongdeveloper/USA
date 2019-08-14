@@ -35,6 +35,17 @@ import action.mem.MemUpdateFromAction;
 import action.mem.MemUpdatePro;
 import action.mem.MemWriteProAction;
 import action.mem.MemWriterFormAction;
+import action.qa.QABoardDeleteAction;
+import action.qa.QABoardDetailAction;
+import action.qa.QABoardDownloadAction;
+import action.qa.QABoardListAction;
+import action.qa.QABoardModifyFormAction;
+import action.qa.QABoardModifyProAction;
+import action.qa.QABoardReplyDeleteAction;
+import action.qa.QABoardReplyListAction;
+import action.qa.QABoardReplyModifyAction;
+import action.qa.QABoardReplyWriteAction;
+import action.qa.QABoardWriteAction;
 import action.mem.MemNaverAction;
 import action.reg.RegMainAction;
 import action.reg.RegViewAction;
@@ -109,10 +120,6 @@ public class FrontController extends HttpServlet implements Process{
 		// 이벤트 응모
 		} else if(com.equals("event.do")) {
 			nextPage = "/view/event/event.jsp";
-		
-		// 메인 페이지
-		} else if(com.equals("main.do")) {
-			nextPage = new MainAction().execute(request, response);
 		
 		// 환율
 		} else if(com.equals("money.do")) {
@@ -222,65 +229,115 @@ public class FrontController extends HttpServlet implements Process{
 			MoneyAction.execute(request, response);
 			return;
 		}
-		// 리스트
-		else if(com.equals("list.do")) {
-		nextPage=new TradeBoardListAction().execute(request, response);
-		
-		// 글쓰기 누르면 글쓰기폼이 나옴
-		}else if (com.equals("writeForm.do")) {
-			nextPage= "/view/tra/WriteForm.jsp";
-		
-		// 글쓰기 완료 누르면 실행
-		}else if(com.equals("TradeBoardWriteAction.do")) {
-			nextPage=new TradeBoardWriteAction().execute(request, response);
-			
-		// 글 자세히 보기
-		}else if(com.equals("content.do")) {
-			nextPage=new TradeBoardDetailAction().execute(request, response);
-			
-		// 다운로드 처리
-		}else if(com.equals("FileDownload.do")) {
-			
-			new TradeBoardDownloadAction().execute(request, response);
+		//리스트
+				else if(com.equals("Tradelist.do")) {
+				nextPage=new TradeBoardListAction().execute(request, response);
+				
+				//글쓰기 누르면 글쓰기폼이 나옴
+				}else if (com.equals("TradewriteForm.do")) {
+					nextPage= "/view/tra/WriteForm.jsp";
+				
+				//글쓰기 완료 누르면 실행
+				}else if(com.equals("TradeBoardWriteAction.do")) {
+					nextPage=new TradeBoardWriteAction().execute(request, response);
+					
+				//글 자세히 보기
+				}else if(com.equals("Tradecontent.do")) {
+					nextPage=new TradeBoardDetailAction().execute(request, response);
+					
+				//다운로드 처리
+				}else if(com.equals("TradeFileDownload.do")) {
+					
+					new TradeBoardDownloadAction().execute(request, response);
 
-		// 글쓰기수정 눌렀을떄
-		}else if(com.equals("TradeBoardModifyFormAction.do")) {
-			nextPage=new TradeBoardModifyFormAction().execute(request, response);
-			
-		// 글쓰기수정 완료할떄
-		}else if(com.equals("TradeBoardModifyProAction.do")) {
-			nextPage=new TradeBoardModifyProAction().execute(request, response);
-			
-		// 삭제 눌렀을떄
-		}else if(com.equals("TradeBoardDeleteAction.do")) {
-			nextPage=new TradeBoardDeleteAction().execute(request, response);
-			
-		// 댓글 글쓰기 눌렀을떄
-		}else if(com.equals("TradeBoardReplyWriteAction.do")) {
-			new TradeBoardReplyWriteAction().execute(request, response);
-			return ;
-			
-		// tra게시판 댓글 수정
-		}else if(com.equals("TradeBoardReplyModifyAction.do")) {
-			new TradeBoardReplyModifyAction().execute(request, response);
-			return ;
+					//글쓰기수정 눌렀을떄
+				}else if(com.equals("TradeBoardModifyFormAction.do")) {
+					nextPage=new TradeBoardModifyFormAction().execute(request, response);
+					
+					//글쓰기수정 완료할떄
+				}else if(com.equals("TradeBoardModifyProAction.do")) {
+					nextPage=new TradeBoardModifyProAction().execute(request, response);
+					
+					//삭제 눌렀을떄
+				}else if(com.equals("TradeBoardDeleteAction.do")) {
+					nextPage=new TradeBoardDeleteAction().execute(request, response);
+					
+					//댓글 글쓰기 눌렀을떄
+				}else if(com.equals("TradeBoardReplyWriteAction.do")) {
+					new TradeBoardReplyWriteAction().execute(request, response);
+					return ;
+					
+					
+				}else if(com.equals("TradeBoardReplyModifyAction.do")) {
+					new TradeBoardReplyModifyAction().execute(request, response);
+					return ;
+				}else if(com.equals("TradeBoardReplyDeleteAction.do")) {
+					new TradeBoardReplyDeleteAction().execute(request, response);
+					return ;
+					
+				}else if(com.equals("TradeBoardReplyListAction.do")) {
+					new TradeBoardReplyListAction().execute(request, response);
+					return ;
+				}
 		
-		// tra게시판 댓글 삭제
-		}else if(com.equals("TradeBoardReplyDeleteAction.do")) {
-			new TradeBoardReplyDeleteAction().execute(request, response);
-			return ;
+		///QA
 		
-		// tra게시판 댓글 보기
-		}else if(com.equals("TradeBoardReplyListAction.do")) {
-			new TradeBoardReplyListAction().execute(request, response);
-			return ;
+		//리스트
+		else if(com.equals("QAlist.do")) {
+		nextPage=new QABoardListAction().execute(request, response);
 		
-		// 이벤트 응모
+		//글쓰기 누르면 글쓰기폼이 나옴
+		}else if (com.equals("QAwriteForm.do")) {
+			nextPage= "/view/qa/WriteForm.jsp";
+		
+		//글쓰기 완료 누르면 실행
+		}else if(com.equals("QABoardWriteAction.do")) {
+			nextPage=new QABoardWriteAction().execute(request, response);
+			
+		//글 자세히 보기
+		}else if(com.equals("QAcontent.do")) {
+			nextPage=new QABoardDetailAction().execute(request, response);
+			
+		//다운로드 처리
+		}else if(com.equals("QAFileDownload.do")) {
+			
+			new QABoardDownloadAction().execute(request, response);
+
+			//글쓰기수정 눌렀을떄
+		}else if(com.equals("QABoardModifyFormAction.do")) {
+			nextPage=new QABoardModifyFormAction().execute(request, response);
+			
+			//글쓰기수정 완료할떄
+		}else if(com.equals("QABoardModifyProAction.do")) {
+			nextPage=new QABoardModifyProAction().execute(request, response);
+			
+			//삭제 눌렀을떄
+		}else if(com.equals("QABoardDeleteAction.do")) {
+			nextPage=new QABoardDeleteAction().execute(request, response);
+			
+			//댓글 글쓰기 눌렀을떄
+		}else if(com.equals("QABoardReplyWriteAction.do")) {
+			new QABoardReplyWriteAction().execute(request, response);
+			return ;
+			
+			
+		}else if(com.equals("QABoardReplyModifyAction.do")) {
+			new QABoardReplyModifyAction().execute(request, response);
+			return ;
+		}else if(com.equals("QABoardReplyDeleteAction.do")) {
+			new QABoardReplyDeleteAction().execute(request, response);
+			return ;
+			
+		}else if(com.equals("QABoardReplyListAction.do")) {
+			new QABoardReplyListAction().execute(request, response);
+			return ;
+		}
+		
+		else if(com.equals("main.do")){
+			 nextPage=new MainAction().execute(request, response);
 		} else if(com.equals("Eventcheck.do")){
 			new MemEvent().execute(request, response);
 			return ;
-		
-		// 네이버 로그인
 		}  else if(com.equals("naver.do")) {
 			nextPage = new MemNaverAction().execute(request, response);
 		}

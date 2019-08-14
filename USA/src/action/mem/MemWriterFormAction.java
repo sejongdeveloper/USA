@@ -10,9 +10,12 @@ import action.Command;
 
 public class MemWriterFormAction implements Command {
 
+	// 회원가입 폼
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		return "/view/mem/memWrite.jsp";
+		// 입력폼이므로 request 초기화
+		response.sendRedirect("view/mem/memWrite.jsp");
+		return "";
 	}
 
 }

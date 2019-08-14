@@ -32,7 +32,7 @@
 			<div align="center">작성자&nbsp;&nbsp;</div>
 			</td>
 			<!-- 작성자 -->
-			<td>${vo.tra_writer }</td>
+			<td>${vo.qa_writer }</td>
 			
 	</tr>
 	<tr>
@@ -41,7 +41,7 @@
 		</td>
 		<!-- 제목 -->
 		<td style="font-family:돋음; font-size:12">
-		${vo.tra_subject }
+		${vo.qa_subject }
 		</td>
 	</tr>
 	
@@ -58,11 +58,11 @@
 			<table border=0 width=490 height=250 style="table-layout:fixed">
 				<tr>
 					<td valign=top style="font-family:돋음; font-size:12">
-					<c:if test="${vo.tra_filename!=null}"><!-- 파일네임이 널이 아니면. -->
-					<img src="${pageContext.request.contextPath}/upload/${vo.tra_filename}" width="355" height="650" /><!-- 파일을 다운로드할수있게. -->
+					<c:if test="${vo.qa_filename!=null}"><!-- 파일네임이 널이 아니면. -->
+					<img src="${pageContext.request.contextPath}/upload/${vo.qa_filename}" width="355" height="650" /><!-- 파일을 다운로드할수있게. -->
 					
 					</c:if>
-					${vo.tra_contents}
+					${vo.qa_contents}
 					</td>
 				</tr>
 			</table>
@@ -73,10 +73,10 @@
 			<div align="center">첨부파일</div>
 		</td>
 		<td style="font-family:돋음; font-size:12px">
-		<c:if test="${vo.tra_filename!=null }">
+		<c:if test="${vo.qa_filename!=null }">
 	
-		<a href="TradeFileDownload.do?file_name=${vo.tra_filename}">
-			${vo.tra_filename }
+		<a href="FileDownload.do?file_name=${vo.qa_filename}">
+			${vo.qa_filename }
 		</a>
 		</c:if>
 		</td>
@@ -90,16 +90,16 @@
 	<tr align="right" valign="middle">
 		<td colspan="5"><font size=2>
 			<!-- 닉네임과 작성자가 똑같다면.수정할수있고 삭제할수있게. -->
-			 <c:if test="${sessionScope.nickname ==vo.tra_writer }"> 
-			<a href="./TradeBoardModifyFormAction.do?num=${vo.tra_num }">
+			 <c:if test="${sessionScope.nickname ==vo.qa_writer }"> 
+			<a href="./QABoardModifyFormAction.do?num=${vo.qa_num }">
 			[수정]
 			</a>&nbsp;&nbsp;
-			<a href="./TradeBoardDeleteAction.do?num=${vo.tra_num}">
+			<a href="./QABoardDeleteAction.do?num=${vo.qa_num}">
 			[삭제]
 			</a>&nbsp;&nbsp;
 			 </c:if>
 			
-			<a href="./Tradelist.do">[목록]</a>&nbsp;&nbsp;
+			<a href="./list.do">[목록]</a>&nbsp;&nbsp;
 			</font>
 		</td>
 	</tr>
@@ -107,8 +107,8 @@
 <br><br><br>
 				<!-- 본문 작성-->
 				
-				<input type="hidden" id="tradeboardnum" value="${vo.tra_num}">
-				<input type="hidden" id="tradecontentcomment_id" value="${sessionScope.member}">
+				<input type="hidden" id="QAboardnum" value="${vo.qa_num}">
+				<input type="hidden" id="QAcontentcomment_id" value="${sessionScope.member}">
 
 
 		
@@ -124,7 +124,7 @@
 <li id='sessiontotalreplylist' style="list-style: none; margin-bottom: 30;"></li>
 
 <!--리플,수정,답글 폼은 자바스크립트에서 리플수만큼 만들어두고 innerhtml로 테이블 주입. -->
-<div id='trareplypaging'>
+<div id='qareplypaging'>
 
 </div>
 
@@ -192,21 +192,21 @@ function alink(currentpagemove){
 		return 
 	}
 				//작성자와 답글인지만 판단.
-	var tradeboardnum=document.getElementById('tradeboardnum').value;   //글번호 또는 = writer
+	var QAboardnum=document.getElementById('QAboardnum').value;   //글번호 또는 = writer
    	obj=new Object();  //ajax를위한 오브젝트 생성.
 	obj.content=document.getElementById('ajaxjung').value;//글 내용 담아옴.
-	obj.writer=document.getElementById('tradecontentcomment_id').value;//글 작성자
+	obj.writer=document.getElementById('QAcontentcomment_id').value;//글 작성자
 	obj.ref=ref;    //0 
 	obj.writernum="0";  //누구의 댓글인지 근데 원댓글이기떄문에 0으로 셋팅 action에서 ref값이 1이여야 값을 요청함.원댓글이기떄문에 고유번호가  작성자참고번호.
 	obj.numlv="0";
-	obj.tranum= ${vo.tra_num};
+	obj.qanum= ${vo.qa_num};
 	
 	
 	
 	$.ajax({
          type:"post",
         async:true, 
-        url:"./TradeBoardReplyWriteAction.do",
+        url:"./QABoardReplyWriteAction.do",
         data:{data : JSON.stringify(obj)},
         success:function(data2){
            if(data2[0].result!=null){
@@ -226,9 +226,9 @@ function alink(currentpagemove){
  
  
  //답글.
- 	function subajaxrep(replynum,Tradeboardreplyref,tradeboardwriter,Tradeboardrewriterrep,tradeBoarReplyNumlv,tradeboardreplywriterreplywriter){
+ 	function subajaxrep(replynum,QAboardreplyref,QAboardwriter,QAboardrewriterrep,QABoarReplyNumlv,QAboardreplywriterreplywriter){
 						//리플번호     답글인지아닌지        작성자                 부모그룹번호             답글순서                        누구의답글을한건지 저장.
-	    var tranum=document.getElementById('tradeboardnum').value;
+	    var qanum=document.getElementById('QAboardnum').value;
 
 		if(document.getElementById(replynum+"WRITE").value==null || document.getElementById(replynum+"WRITE").value==""){
  			alert("내용을 입력해주세요");
@@ -237,19 +237,19 @@ function alink(currentpagemove){
  		}
 		//에이잭스 보내기위한 설정. 게시판번호,내용,답글인지,작성자,누구의답글인지,몇번쨰답글인지, 부모그룹 순서
  		obj =new Object();
- 		obj.tranum=Number(document.getElementById('tradeboardnum').value);
+ 		obj.qanum=Number(document.getElementById('QAboardnum').value);
  		obj.content=document.getElementById(replynum+"WRITE").value;
  		obj.ref="1";
- 		obj.writer=tradeboardwriter;
- 		obj.wrtierrepwriter=tradeboardreplywriterreplywriter;
- 		obj.numlv=tradeBoarReplyNumlv;
- 		obj.writernum=Tradeboardrewriterrep;
+ 		obj.writer=QAboardwriter;
+ 		obj.wrtierrepwriter=QAboardreplywriterreplywriter;
+ 		obj.numlv=QABoarReplyNumlv;
+ 		obj.writernum=QAboardrewriterrep;
  		
  		
  		$.ajax({
  	         type:"post",
  	        async:false, 
- 	        url:"./TradeBoardReplyWriteAction.do",
+ 	        url:"./QABoardReplyWriteAction.do",
  	        data:{data : JSON.stringify(obj)},
  	        success:function(data2){
  	           if(data2[0].result!=null){
@@ -266,12 +266,12 @@ function alink(currentpagemove){
  			  if(confirm("정말 삭제하시겠습니까?")){//삭제버튼을 누르면 실행됨.
 
  				obj=new Object();
- 		 		obj.trarepnum=replynum;
+ 		 		obj.qarepnum=replynum;
 
  		 		$.ajax({
  		 	         type:"post",
  		 	        async:false, 
- 		 	        url:"./TradeBoardReplyDeleteAction.do",
+ 		 	        url:"./QABoardReplyDeleteAction.do",
  		 	        data:{data : JSON.stringify(obj)},
  		 	        success:function(data2){
  		 	           if(data2[0].result!=null){
@@ -291,24 +291,24 @@ function alink(currentpagemove){
  	
  
  //수정눌렀을떄 고유번호,게시판번호,컨텐츠
- 	function submodi(tra_num,tra_tranum){
-	 if(document.getElementById(tra_num+'MODI_VAL').value==null||document.getElementById(tra_num+'MODI_VAL').value==""){
+ 	function submodi(qa_num,qa_qanum){
+	 if(document.getElementById(qa_num+'MODI_VAL').value==null||document.getElementById(qa_num+'MODI_VAL').value==""){
 		 alert("내용을 입력해주세요.");
 		 return
 	 }
 	  //내용
-	 var tradeBoardreply_Content =document.getElementById(tra_num+'MODI_VAL').value;
+	 var QABoardreply_Content =document.getElementById(qa_num+'MODI_VAL').value;
 	 
 	 
 	obj=new Object();
-	obj.trarepnum=tra_num;                  //리플내용.
-	obj.content      =tradeBoardreply_Content; //바뀐내용
+	obj.qarepnum=qa_num;                  //리플내용.
+	obj.content      =QABoardreply_Content; //바뀐내용
 		
 		
 		$.ajax({
 	         type:"post",
 	        async:false, 
-	        url:"./TradeBoardReplyModifyAction.do",
+	        url:"./QABoardReplyModifyAction.do",
 	        data:{data : JSON.stringify(obj)},
 	        success:function(data2){
 	           if(data2[0].result!=null){
@@ -325,7 +325,7 @@ function alink(currentpagemove){
  //글 css정리
  
  //수정을눌렀을경우. 해당하는 댓글만 수정이 보이게끔하는것.
-function fncModi(moditranum,dd){
+function fncModi(modiqanum,dd){
 	 		
 	 
     var i=document.getElementsByClassName('modi'); 
@@ -343,14 +343,14 @@ function fncModi(moditranum,dd){
     
     
  //수정폼을 보이게함.
-// document.getElementById('MODI'+moditranum).style.display='block '; 원래는 이 코드 그러나 작동을안해서
+// document.getElementById('MODI'+modiqanum).style.display='block '; 원래는 이 코드 그러나 작동을안해서
  dd.parentNode.parentNode.nextSibling.style.display="block";
  
  
  
  
  //수정하고자하는 글의 내용을 수정폼에 주입해줌.  첫번쨰코드가 안돼서 두번쨰로 대체.
- //document.getElementById(moditranum+'MODI_VAL').value=document.getElementById(moditranum+'READ_VAL').innerText;
+ //document.getElementById(modiqanum+'MODI_VAL').value=document.getElementById(modiqanum+'READ_VAL').innerText;
    dd.parentNode.parentNode.nextSibling.childNodes[1].childNodes[0].value=dd.parentNode.parentNode.childNodes[2].childNodes[0].innerText;
 }
 
@@ -411,7 +411,7 @@ var currentpage="1";
  function replycheck(){
 	//에이잭스로 보내주기위해 
 	var obj=new Object();
-	obj.tranum=${vo.tra_num};  //게시판번호
+	obj.qanum=${vo.qa_num};  //게시판번호
 	obj.pagestatus=pagestatus;  //게시판이 이동인지 누구의 답글이나 수정인지 새로운 댓글인지 판단.
 	obj.currentpage=currentpage;   //최근페이지를 판단.
 	
@@ -419,7 +419,7 @@ var currentpage="1";
 	$.ajax({
          type:"post",
         async:false, 
-        url:"./TradeBoardReplyListAction.do",
+        url:"./QABoardReplyListAction.do",
         data:{data:JSON.stringify(obj)},
         success:function(data2){
         var json=	JSON.parse(data2);
@@ -493,13 +493,13 @@ if(data.replyinfo[j].alive==0){
 	i+='<td width="90px;" >';
 	//numref가 1이라면 답글이 있다는것.
 		if( data.replyinfo[j].numref ==1){
-	i+='<font size="1" color="gray">ㄴ'+data.replyinfo[j].trarep_writerrepwriter+'</font> ';	
+	i+='<font size="1" color="gray">ㄴ'+data.replyinfo[j].qarep_writerrepwriter+'</font> ';	
 		}
 	//작성자
 	i+=data.replyinfo[j].writer+'</td>';
 	i+='<td width="10px;"">:</td>';
 	                                   //컨텐츠 값 가져오기위해 댓글고유번호를 span id값으로 설정.												//올린날
-    i+='<td width="330px;"><span id="'+data.replyinfo[j].num+'">'+data.replyinfo[j].content   +'</span> <font style="font-size:5px;" >'+data.replyinfo[j].trarep_date+'</font>&nbsp;&nbsp;</td>'
+    i+='<td width="330px;"><span id="'+data.replyinfo[j].num+'">'+data.replyinfo[j].content   +'</span> <font style="font-size:5px;" >'+data.replyinfo[j].qarep_date+'</font>&nbsp;&nbsp;</td>'
     				//작성자와 세션이 같다는것은 같은사람이니. 수정
     if(data.replyinfo[j].writer==data.session[0].session){
     i+='<td width="40px;"><span id="MODBTN" style="cursor:hand;" onclick="fncModi('+data.replyinfo[j].num+',this)">수정</span></td>'
@@ -530,7 +530,7 @@ if(data.replyinfo[j].alive==0){
 																//수정 id는 구분을위해 고유댓글번호MODI_VAL 이라는 값으로 설정.
 	i+='<td width="350px;""><input type="text" id="'+data.replyinfo[j].num+'MODI_VAL" name="MODI_VAL" style="width:300px; height:25px;"></td>';
 																//수정에 필요한것은 게시판번호와 댓글고유번호만 있으면됨 컨텐츠는 자스단에서 해결.
-	i+='<td width="30px;"><input type="button" onclick="javascript:submodi('+data.replyinfo[j].num +','+data.replyinfo[j].tranum +');" value="입력"></td>';
+	i+='<td width="30px;"><input type="button" onclick="javascript:submodi('+data.replyinfo[j].num +','+data.replyinfo[j].qanum +');" value="입력"></td>';
 	i+='<td onclick="javascript:fncmodicancle()">입력취소</td></tr>';
 	
 
@@ -540,7 +540,7 @@ if(data.replyinfo[j].alive==0){
 	i+='<td>답글</td> <td>:</td>';
 	                                                     //구분을위해 고유번호WRITE로 id설정.
 	i+='<td width="350px"><input type="text" id="'+data.replyinfo[j].num+'WRITE" style="width: 360px; height:20px;"></td>';
-	i+='<td><input type="button" value="입력" onclick="subajaxrep( ' +data.replyinfo[j].num+',1,'+tempi+data.session[0].session+tempi+','+data.replyinfo[j].trarep_writerrep+','+data.replyinfo[j].trarep_numref_lv+','+tempi+data.replyinfo[j].writer+tempi+') "></td>';
+	i+='<td><input type="button" value="입력" onclick="subajaxrep( ' +data.replyinfo[j].num+',1,'+tempi+data.session[0].session+tempi+','+data.replyinfo[j].qarep_writerrep+','+data.replyinfo[j].qarep_numref_lv+','+tempi+data.replyinfo[j].writer+tempi+') "></td>';
 	
 	
 	i+='<td onclick="javascript:fncmodicancle()">취소</td>';
@@ -550,7 +550,7 @@ if(data.replyinfo[j].alive==0){
 	}
 	}
 	//이모든것이 끝나면        저 아이디값태그안에 위의 태그들을 주입해줌.
-	document.getElementById('trareplypaging').innerHTML=i;
+	document.getElementById('qareplypaging').innerHTML=i;
 	
 }
 

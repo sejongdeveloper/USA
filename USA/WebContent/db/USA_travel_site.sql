@@ -21,7 +21,7 @@ create table qa(
     qa_num number constraint qa_num_pk primary key, -- 번호PK
     qa_subject varchar2(300), -- 제목
     qa_readcount number, -- 조회수
-    qa_date date default sysdate, -- 작성날짜
+    qa_sysdate date default sysdate, -- 작성날짜
     qa_writer varchar2(120), -- 아이디FK
     qa_filename varchar2(520), -- 파일이름
     qa_contents varchar2(4000), -- 내용
@@ -36,12 +36,12 @@ create table qarep(
     qarep_qanum number constraint qarep_qanum_fk references qa(qa_num), -- 질문게시판 번호FK
     qarep_date date default sysdate, -- 작성날짜
     qarep_contents varchar2(4000), -- 내용
-    qarep_writer varchar2(120), -- 아이디FK
-    qarep_writerrep number, -- 부모작성자 번호 
+    qarep_writer varchar2(120) constraint qarep_writer_fk references mem(mem_id), -- 아이디FK
+    qarep_writerrep number constraint qarep_writerrep_fk references qa(qa_num), -- 부모작성자 번호 
     qarep_alive number default 0, -- 삭제유무
     qarep_numref number, -- 대댓글 유무
     qarep_numref_lv number, -- 대댓글 순서
-    qarep_writerrepwriter varchar2(40) -- 누구의 대댓글인지 저장하는 컬럼
+    qarep_writerrepwriter varchar2(40) -- 누구의 대댓글인지 저장하는 컬럼.
 );
 
 ------------

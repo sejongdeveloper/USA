@@ -27,7 +27,7 @@ public class LocListAction implements Command {
 		
 		RevDAO revdao = RevDAO.getInstance();
 		// 지역의 모든 관광지 삭제 안된 리뷰 총 평점 가져오기(평점순)
-		ArrayList<Double> loc_scoreList =  revdao.getAllLocScore();
+		ArrayList<Double> loc_scoreList =  revdao.getAllLocScore(loc_regname);
 		request.setAttribute("loc_scoreList", loc_scoreList);
 		
 		return "/view/loc/locList.jsp";

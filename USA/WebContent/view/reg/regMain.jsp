@@ -129,8 +129,8 @@
       });
     }
 </script>
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6DBIjjrf8gvxa2LtZgeXngddkxQw79D8&callback=initMap">
+<script async defer 
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6DBIjjrf8gvxa2LtZgeXngddkxQw79D8&callback=initMap">
 </script>
 
 </html>

@@ -116,16 +116,17 @@ public class RevDAO {
 	}
 	
 	// 지역의 모든 관광지 삭제 안된 리뷰 총 평점 가져오기(평점순)
-	public ArrayList<Double> getAllLocScore() {
+	public ArrayList<Double> getAllLocScore(String loc_regname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Double> list = new ArrayList<Double>();
-		String sql = "SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV GROUP BY REV_LOCNAME ORDER BY AVG(REV_SCORE) desc";
+		String sql = "SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV where rev_locname in(select loc_name from loc where loc_regname=?) GROUP BY REV_LOCNAME ORDER BY AVG(REV_SCORE) desc";
 		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, loc_regname);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

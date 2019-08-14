@@ -1,4 +1,4 @@
-package action.tra;
+package action.qa;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Command;
-import model.tra.TradeBoardDAO;
-import model.tra.TradeBoardVO;
+import model.qa.QABoardDAO;
+import model.qa.QABoardVO;
 
-public class TradeBoardListAction implements Command {
+public class QABoardListAction implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -30,23 +30,19 @@ public class TradeBoardListAction implements Command {
 		  
 
 		  //최신페이지 구하기전에 1로 셋팅
-		    int TradeBoardCurrentPage = 1;
+		    int qaBoardCurrentPage = 1;
 		  //지금 몇페이지인지.
 	        String page = request.getParameter("page");
 	      //삽니다인지 팝니다인지.
-	        String tra_header=request.getParameter("tra_head");
 
-	        //처음 LIST로 불리면 TRA_HEAD가 null 또는 ""이니 defualt로 전체로 설정.
-	        if(tra_header==null||tra_header==""||tra_header.equals("전체")) tra_header="전체";
-	        //가져온페이지가 널이아니면 시작페이지를 가져온 페이지로
-	        if(page != null&&page!="")  TradeBoardCurrentPage = Integer.parseInt(page);
+	        if(page != null&&page!="")  qaBoardCurrentPage = Integer.parseInt(page);
 	        //     페이지 시작 글번호             최근페이지*한번에 볼 페이지- (한번에볼페이지-1) 이러면 첫페이지를 구할수가 있음.
-	        int tradeStartNum=TradeBoardCurrentPage*pageSize-pageSizeref; //시작 글번호
+	        int qaStartNum=qaBoardCurrentPage*pageSize-pageSizeref; //시작 글번호
 	        
 	        //시작번호에 endnum을 더해주기 위해 만들었음.
-	        int tradeEndNum=pageSize; //끝번호 사실상 의미없음. pageSize와 같은값.
+	        int qaEndNum=pageSize; //끝번호 사실상 의미없음. pageSize와 같은값.
 	        
-	        //검색 옵션 0제목 1 내용 2 제목+내용 3 글쓴이
+	        //검색 옵션 0제목 1 제목+내용 2 글쓴이
 	        String opt = request.getParameter("opt");
 	        //검색조건
 	        String condition=request.getParameter("condition");
@@ -63,23 +59,20 @@ public class TradeBoardListAction implements Command {
 	       HashMap<String, Object> listOpt = new HashMap<String, Object>();
 	        listOpt.put("opt", opt);
 	        listOpt.put("condition", condition);
-	        listOpt.put("tra_head",tra_header);
 	        //첫 시작 글번호 
-	        listOpt.put("start", tradeStartNum);
-	        listOpt.put("end",tradeEndNum);
-	        TradeBoardDAO dao = TradeBoardDAO.getInstance();
+	        listOpt.put("start", qaStartNum);
+	        listOpt.put("end",qaEndNum);
+	        QABoardDAO dao = QABoardDAO.getInstance();
 	        
 	        //전체 게시물숫자 조회
-	        int listCount = dao.getBoardListCount(listOpt,tra_header);
-	        
-	        
+	        int listCount = dao.getBoardListCount(listOpt);
 	        //,시작 글 번호 사용안하고있음? 왜냐하면 위의 쿼리에서 알아서 걸러버림. 지울것.
-	        int TradeBoardNumberSize=listCount-(TradeBoardCurrentPage-1) *pageSize;
+	        int qaBoardNumberSize=listCount-(qaBoardCurrentPage-1) *pageSize;
 	        
 	        
 	        
 	        //게시물 내용 담음
-	        ArrayList<TradeBoardVO> list =  dao.getBoardList(listOpt);
+	        ArrayList<QABoardVO> list =  dao.getBoardList(listOpt);
 
 	        
 
@@ -92,7 +85,7 @@ public class TradeBoardListAction implements Command {
 	        int pageCount = listCount / pageSize + ( listCount % pageSize == 0 ? 0 : 1 );
 	       
 	        
-	        int startPage = (int)((TradeBoardCurrentPage-1)/pageBlock) * pageBlock + 1;
+	        int startPage = (int)((qaBoardCurrentPage-1)/pageBlock) * pageBlock + 1;
 	        int endPage = startPage +pageBlock- 1;
 	        
 	        //마지막보여줄 페이지보다 총 페이지수보다 작으면 마지막보여줄 페이지를 총페이지수로.
@@ -112,7 +105,7 @@ public class TradeBoardListAction implements Command {
 	        
 	        
 	        //페이지 관련 정보 보내줌.
-	        request.setAttribute("TradeBoardCurrentPage", TradeBoardCurrentPage);
+	        request.setAttribute("qaBoardCurrentPage", qaBoardCurrentPage);
 	        request.setAttribute("pageCount", pageCount);
 	        request.setAttribute("startPage", startPage);
 	        request.setAttribute("endPage", endPage);
@@ -122,14 +115,13 @@ public class TradeBoardListAction implements Command {
 	        //전체 게시물  게시물 내용 분류
 	        request.setAttribute("listCount", listCount);
 	        request.setAttribute("list", list);
-	        request.setAttribute("tra_head", tra_header);
 	        
 	        //검색조건이 걸려있으면 셋팅해서 보내줌.
 	        if(opt!=null) {
 	        request.setAttribute("opt", opt);
 	        request.setAttribute("condition", condition);
 	       }
-			return "/view/tra/list.jsp";
+			return "/view/qa/list.jsp";
 	        
 	      	        
 	       

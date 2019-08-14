@@ -199,6 +199,8 @@ public class TradeBoardDAO {
 				//총 게시물을 실질적으로 담는곳.
 	public ArrayList<TradeBoardVO> getBoardList(HashMap<String, Object> listOpt) throws UnsupportedEncodingException {
 		ArrayList<TradeBoardVO> list = new ArrayList<TradeBoardVO>();
+		
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일 HH시mm분");  //db로부터 값을 가져올떄 형태를 정해줌.
 		String opt = (String) listOpt.get("opt"); // 조건
 		String condition = (String) listOpt.get("condition"); // 내용
@@ -421,6 +423,7 @@ public class TradeBoardDAO {
 		conn.close();
 		return result;
 	} // end updateCount
+	
 
 				//특정 게시판을 들어갔을떄 그 내용을 불러오는것.
 	public TradeBoardVO getDetail(int boardNum) throws SQLException {
