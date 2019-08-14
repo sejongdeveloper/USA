@@ -21,6 +21,7 @@
 
 </head>
 <body>
+<jsp:include page="/view/main/header.jsp" />
 <div id="memId">
 
 <div class="subject">아이디 찾기</div>

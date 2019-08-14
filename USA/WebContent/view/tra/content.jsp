@@ -614,11 +614,9 @@ function tableinsert(data){
     i+='<td width="330px;"><span id="'+data.replyinfo[j].num+'">'+data.replyinfo[j].content   +'</span> <font style="font-size:5px;" >'+data.replyinfo[j].trarep_date+'</font>&nbsp;&nbsp;</td>'
     	if(data.replyinfo[j].writer==data.session[0].session){
     i+='<td width="40px;"><span id="MODBTN" style="cursor:hand;" onclick="fncModi('+data.replyinfo[j].num+',this)">수정</span></td>'
-    	if(data.session[0].session!=null){
-    i+='<td width="40px;"><span id="write_form" onclick="javascript:fncWriteform('+ data.replyinfo[j].num +',this)">답글</span></td>';
-    	}
     i+='<td width="40px;"><span  onclick="subajaxdelete('+data.replyinfo[j].num+')">삭제</span></td>';
       	} //세션값과 글쓴이가 같은지.
+	  i+='<td width="40px;"><span id="write_form" onclick="javascript:fncWriteform('+ data.replyinfo[j].num +',this)">답글</span></td>';
 	i+="</tr>";		
 	}	//alve==0세션끝나는곳
 	//글쓰기 끝.

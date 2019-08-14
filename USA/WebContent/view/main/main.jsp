@@ -38,11 +38,11 @@
 				<td>
 				<p class="tablecontents">
 				<c:choose>
-				<c:when test="${fn:length(buyvo.tra_subject) gt 3}">
-				<a href="./content.do?num=${buyvo.tra_num }" style="color:black; display: 'block;  ' ">${fn:substring(buyvo.tra_subject, 0, 2)}...</a>
+				<c:when test="${fn:length(buyvo.tra_subject) gt 10}">
+				<a href="./content.do?num=${buyvo.tra_num }" style="color:black; display: block; text-decoration: none;">${fn:substring(buyvo.tra_subject, 0, 9)}...</a>
         		</c:when>
         		<c:otherwise>
-        		<a href="./content.do?num=?${buyvo.tra_num }" style="color:black; display: 'block;  ' ">${buyvo.tra_subject}</a>
+        		<a href="./content.do?num=?${buyvo.tra_num }" style="color:black; display: block; text-decoration: none;">${buyvo.tra_subject}</a>
         		</c:otherwise>
         		</c:choose>
     			</p>
@@ -65,10 +65,10 @@
 		<p class="tablecontents">
 				<c:choose>
 				<c:when test="${fn:length(sellvo.tra_subject) gt 10}">
-				<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: 'block;  ' ">${fn:substring(sellvo.tra_subject, 0, 9)}...</a>
+				<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: block; text-decoration: none;">${fn:substring(sellvo.tra_subject, 0, 9)}...</a>
         		</c:when>
         		<c:otherwise>
-        		<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: 'block; ' ">${sellvo.tra_subject}</a>
+        		<a href="./content.do?num=${sellvo.tra_num }" style="color:black; display: block; text-decoration: none;">${sellvo.tra_subject}</a>
         		</c:otherwise>
         		</c:choose>
         </p>
