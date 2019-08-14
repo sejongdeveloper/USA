@@ -28,30 +28,30 @@
 	   
 	   function slideExchage() {
 
-		      var url = "../../money.do";
-			  
-		      $.ajax({
-		         type : "get",
-		         async : false,
-		         
-		         url: url,
-		         success : function(data) {
-		            var info = $.parseJSON(data);
-		            
-		            $(".country").html(info[index].cur_nm);
-		            $(".exchangeRate").html(info[index].bkpr);
-		            $(".unit").html(info[index].cur_unit);
-		            
-		            index++;
-		            
-					if (index > data.length) {
-						index = 0;
-					}
-					
-					}
-				});
-		      	
-				setTimeout(slideExchage, 2000);
+	      var url = "./money.do";
+		  
+	      $.ajax({
+	         type : "get",
+	         async : false,
+	         
+	         url: url,
+	         success : function(data) {
+	            var info = $.parseJSON(data);
+	            
+	            $(".country").html(info[index].cur_nm);
+	            $(".exchangeRate").html(info[index].bkpr);
+	            $(".unit").html(info[index].cur_unit);
+	            
+	            index++;
+	            
+				if (index > data.length) {
+					index = 0;
 				}
+				
+				}
+			});
+		      	
+			setTimeout(slideExchage, 2000);
+		}
 </script>
 </html>

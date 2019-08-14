@@ -71,15 +71,15 @@
 		</tr>
 		
 		<tr bgcolor="white" top="130px" width="70" height="30">
-			<td align="center"><font color="gray">총 응모 &nbsp; &nbsp; &nbsp; &nbsp; 187 &nbsp; &nbsp;
+			<td align="center"><font color="gray">총 응모 &nbsp; &nbsp; &nbsp; &nbsp; 243 &nbsp; &nbsp;
 													 &nbsp;</font></td>
 			<td align="center"><font color="gray">&nbsp; &nbsp; &nbsp; 총 응모 &nbsp; &nbsp; &nbsp;
 													 &nbsp; 243&nbsp; &nbsp; &nbsp;</font></td>
 		</tr>
 		
 		<tr top="130px" width="70" height="30">
-			 <td align="center" bgcolor="D8D8D8" style="cursor: pointer;" onclick="ajaxevent()")><font size="2" weight="bold">&nbsp; &nbsp;응모하기</font></td>
-			<td align="center" bgcolor="D8D8D8" onClick="ajaxevent()")><font size="2" weight="bold" style="cursor: pointer;">&nbsp; &nbsp;응모하기</font></td>
+			 <td align="center" bgcolor="D8D8D8" onclick="ajaxevent()")><font size="2" weight="bold">&nbsp; &nbsp;응모하기</font></td>
+			<td align="center" bgcolor="D8D8D8" onClick="ajaxevent()")><font size="2" weight="bold">&nbsp; &nbsp;응모하기</font></td>
 		</tr>
 		
 		<tr><td align="center"><font color="white" size="1" weight="bold">#</font></td></tr>
@@ -101,21 +101,19 @@
  function ajaxevent(){
 	  sessionid="${sessionScope.member}";
 	 if(sessionid==null||sessionid==""){
-		 alert("로그인하셔야이용할수 있어요~");
+		 alert("로그인하셔야 이용할수 있어요~");
 		 return ;
 	 }  
 	 
 	 obj = new Object();
 	 obj.session=sessionid;
 	 $.ajax({ 
-		 type:"post",  
+		type:"post",  
 		url:"./Eventcheck.do",
-		 data:{data : JSON.stringify(obj)},
+		data:{data : JSON.stringify(obj)},
 		success:function(data2){
-			alert("응모가 완료됐습니다.");
-		}
-		,error:function(){
-			alert("응모가 실패하였습니다");
+			var data2 = JSON.parse(data2)
+			alert(data2.result);
 		}
 	 });
   

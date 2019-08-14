@@ -8,11 +8,13 @@
 <title>gogo</title>
 </head>
 <body>
+<jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
 <jsp:include page="/view/main/weather.jsp" />
-	<br>
-	<b><font size="6" color="gray">글쓰기</font></b>
-	<br>
+	<br><br><br><br><br>
+	<div style="display: inline-block; margin-left: 350px; width: 1250px; margin-bottom: 130px;">
+	<b style="margin-left: 530px;"><font size="6" color="gray">글쓰기 양식</font></b>
+	<br><br><br>
 	
 	<form method="post" action="TradeBoardWriteAction.do" name="TradeBoardForm" enctype="multipart/form-data">
 	<input type="hidden" name="board_id" value="${sessionScope.nickname}">
@@ -65,7 +67,7 @@
 		</tr>
 	</table>	
 	</form>
-	
-
+	</div>
+<jsp:include page="/view/main/footer.html" />
 </body>
 </html>

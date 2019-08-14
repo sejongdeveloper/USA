@@ -21,6 +21,7 @@ public class RegMainAction implements Command {
 		String regname = request.getParameter("regname");
 		ArrayList<RegVO> reg_filenameList = dao.getRegFileName(regname);
 		
+		request.setAttribute("regname", regname);
 		request.setAttribute("reg_filenameList", reg_filenameList);
 		
 		RegNameDAO regnamedao = RegNameDAO.getInstance();

@@ -38,17 +38,22 @@
         slideShow();
     })
     
+   	// 사진 슬라이드쇼
     function slideShow() {
     var i;
-    var x = document.getElementsByClassName("reg_img");  //slide1에 대한 dom 참조
+    var x = document.getElementsByClassName("reg_img");  // class가 reg_img인 것들
     for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
+       x[i].style.display = "none";   // 처음에 전부 display를 none으로
     }
-    index++;
+    
+    index++; // 보여질 사진 순서 증가
+    
     if (index > x.length) {
-        index = 1;  //인덱스가 초과되면 1로 변경
+        index = 0;  //인덱스가 초과되면 0로 변경
     }   
-    x[index-1].style.display = "block";  //해당 인덱스는 block으로
+    
+    x[index].style.display = "block";  //해당 인덱스는 block으로
+    
     setTimeout(slideShow, 2000);   //함수를 2초마다 호출
  	
 	}

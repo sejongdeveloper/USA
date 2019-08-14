@@ -145,7 +145,7 @@ insert into regname(regname, regNameEng, regGmt, regflight) values ('메릴랜�
 insert into regname(regname, regNameEng, regGmt, regflight) values ('사우스캐롤라이나', 'South Carolina', '-5', 15);
 insert into regname(regname, regNameEng, regGmt, regflight) values ('뉴햄프셔', 'New Hampshire', '-5', 15);
 insert into regname(regname, regNameEng, regGmt, regflight) values ('버지니아', 'Virginia', '-5', 15);
-insert into regname(regname, regNameEng, regGmt, regflight) values ('노스캐롤라이나주', 'North Carolina', '-5', 15);
+insert into regname(regname, regNameEng, regGmt, regflight) values ('노스캐롤라이나', 'North Carolina', '-5', 15);
 insert into regname(regname, regNameEng, regGmt, regflight) values ('로드아일랜드', 'Rhode Island', '-5', 15);
 insert into regname(regname, regNameEng, regGmt, regflight) values ('버몬트', 'Vermont', '-5', 15);
 insert into regname(regname, regNameEng, regGmt, regflight) values ('켄터키', 'Kentucky', '-5', 15);

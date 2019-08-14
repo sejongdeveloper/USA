@@ -16,65 +16,60 @@
 <jsp:include page="/view/main/money.jsp" />
 <jsp:include page="/view/main/weather.jsp" />
 <div class="body">
-<c:if test="${ result == null }">
-	<c:set value="-1" var="result"/>
-</c:if>
+
 <div class="locView_loc">
-	<div class="locView_picture"><img class="locView_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ loc_data.loc_filename }"></div>
-	<div class="locView_locname">${ loc_data.loc_writer }님의 추천 ▷ '${ loc_data.loc_name }'</div>
-	<div class="locView_contents">${ loc_data.loc_contents }</div>
+	<div class="locView_picture"><img class="locView_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ loc_data.loc_filename }"></div><!-- 사진 파일명 -->
+	<div class="locView_locname">${ loc_data.loc_writer }님의 추천 ▷ '${ loc_data.loc_name }'</div><!-- 작성자, 관광지명 -->
+	<div class="locView_contents">${ loc_data.loc_contents }</div><!-- 관광지 내용 -->
 </div>
+
 <div class="locView_rev">
-<div class="locView_allCount">리뷰&nbsp;${ rev_allCount }</div>
-<div class="locView_allScore">${ rev_allScore } / 5.0</div>
-<div class="locView_count">
+<div class="locView_allCount">리뷰&nbsp;${ rev_allCount }</div><!-- 리뷰 개수 -->
+<div class="locView_allScore">${ rev_allScore } / 5.0</div><!-- 리뷰 총 평균 -->
+<div class="locView_count"><!-- 각 리뷰 개수 -->
 <div class="locView_count5">5점 <progress value="${ rev_count5 }" max="${ rev_allCount }"></progress> ${ rev_count5 }</div>
 <div class="locView_count4">4점 <progress value="${ rev_count4 }" max="${ rev_allCount }"></progress> ${ rev_count4 }</div>
 <div class="locView_count3">3점 <progress value="${ rev_count3 }" max="${ rev_allCount }"></progress> ${ rev_count3 }</div>
 <div class="locView_count2">2점 <progress value="${ rev_count2 }" max="${ rev_allCount }"></progress> ${ rev_count2 }</div>
 <div class="locView_count1">1점 <progress value="${ rev_count1 }" max="${ rev_allCount }"></progress> ${ rev_count1 }</div>
 </div>
-<div class="locView_revWriteForm">
-<div class="locView_revWriteframe">
-<c:if test="${ sessionScope.member != null }" >
+
+<div class="locView_revWriteForm"><div class="locView_revWriteframe">
+<c:if test="${ sessionScope.member != null }" ><!-- 로그인 되있으면 -->
 <form action="locWritePro.do" method="post" onsubmit="return revWrite()">
-<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname">
+<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname"><!-- 관광지명 -->
+
 <div class="locView_revTitle">평점을 선택해주세요.</div>
-<div class="locView_revWriteScoreFrame">
+<div class="locView_revWriteScoreFrame"><!-- 평점 선택 -->
 <div class="locView_revWriteScore"><label><input type="radio" value="1" name="rev_score" class="radio" id="rev_score"><img alt="1" src="${ pageContext.request.contextPath }/upload/1.jpg" class="laimg"></label></div>
 <div class="locView_revWriteScore"><label><input type="radio" value="2" name="rev_score" class="radio" id="rev_score"><img alt="1" src="${ pageContext.request.contextPath }/upload/2.jpg" class="laimg"></label></div>
 <div class="locView_revWriteScore"><label><input type="radio" value="3" name="rev_score" class="radio" id="rev_score"><img alt="1" src="${ pageContext.request.contextPath }/upload/3.jpg" class="laimg"></label></div>
 <div class="locView_revWriteScore"><label><input type="radio" value="4" name="rev_score" class="radio" id="rev_score"><img alt="1" src="${ pageContext.request.contextPath }/upload/4.jpg" class="laimg"></label></div>
 <div class="locView_revWriteScore"><label><input type="radio" value="5" name="rev_score" class="radio" id="rev_score"><img alt="1" src="${ pageContext.request.contextPath }/upload/5.jpg" class="laimg"></label></div>
 </div>
+
 <div class="locView_revWrite">
-<div class="locView_revWriteImg"><img class="locView_faceimg" alt="사진" src="${ pageContext.request.contextPath }/upload/사람이미지.jpeg"></div>
-<div class="locView_revWriteContents"><textarea rows="10" cols="100" name="rev_contents" id="rev_contents" class="locView_revWriteContents"></textarea></div>
+<div class="locView_revWriteImg"><img class="locView_faceimg" alt="사진" src="${ pageContext.request.contextPath }/upload/사람이미지.jpeg"></div><!-- 좌측 사람 이미지 -->
+<div class="locView_revWriteContents"><textarea rows="10" cols="100" name="rev_contents" id="rev_contents" class="locView_revWriteContents"></textarea></div><!-- 리뷰 작성 영역 -->
 <div class="locView_revWriteSubmit"><input type="submit" value="등록" class="locView_revWriteSubmit"></div>
-</div>
-</div>
-</form>
-</c:if>
-<c:if test="${ sessionScope.member == null }" >
+</div></form></c:if></div>
+
+<c:if test="${ sessionScope.member == null }" ><!-- 로그인 안되있으면 -->
 <div class="locView_loginwant">
 <marquee width="300" direction="right" behavior="alternate">리뷰를 원하시면 회원가입해주세요.</marquee>
-</div>
-</c:if>
-</div>
+</div></c:if></div>
 
 <c:forEach items="${ rev_list }" var="list">
 <table>
 	<tr>
-		<td rowspan="2" class="locView_revWriter">
-		${ list.rev_writer }
-		</td>
+		<td rowspan="2" class="locView_revWriter">${ list.rev_writer }</td>
 		<td class="locView_revContents">
-		<form action="locModifyPro.do" method="post" onsubmit="return revModi()">
-		<input type="hidden" value="${ list.rev_num }" name="rev_num">
-		<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname">
-		<div id="revView_contents${ list.rev_num }" class="revView_contents">${ list.rev_contents }</div>
+		<form action="locModifyPro.do" method="post" onsubmit="return revModi()"> <!-- 수정 양식 -->
+		<input type="hidden" value="${ list.rev_num }" name="rev_num"><!-- 리뷰 번호 -->
+		<input type="hidden" value="${ loc_data.loc_name }" name="rev_locname"><!-- 리뷰 관광지명 -->
+		<div id="revView_contents${ list.rev_num }" class="revView_contents">${ list.rev_contents }</div><!-- 리뷰 내용 -->
 		<div id="revView_contentsmodiform${ list.rev_num }" class="revView_contentsmodiform"><textarea cols="100" rows="8" name="rev_contents" id="rev_modicontents">${ list.rev_contents }</textarea></div>
-		</td>
+		</td><!-- 리뷰 수정 내용 -->
 		<td rowspan="2" class="locView_revScore">
 		<div id="locView_revScorein${ list.rev_num }" class="locView_revScorein">${ list.rev_score }</div>
 		<div id="locView_revScoreinmodiform${ list.rev_num }" class="locView_revScoreinmodiform">
@@ -88,6 +83,7 @@
 		<td rowspan="2">
 		<input type="submit" value="완료" class="modifyend" id="modifyend${ list.rev_num }">
 		</form>
+		
 		<c:if test="${ list.rev_writer == sessionScope.member }">
 			<input type="button" name="modifystart" class="modifystart" value="수정" onclick="modify('${ list.rev_num }', this)" id="modifystart${ list.rev_num }">
 			<form action="locDeletePro.do" method="post">

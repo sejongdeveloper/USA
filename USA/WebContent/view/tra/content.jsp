@@ -6,9 +6,9 @@
 <head>
 	<title></title>
 	<style>
-	.replypaging { display: block; margin: 0; }
-	.replypaging li { display: inline; font-size: 20px }
-	.replypaging li a { font-family: 'Trebuchet MS', sans-serif; font-size: 25px; }
+	.replypaging { display: block; margin: 0; margin-bottom: 50; margin-top: 30;}
+	.replypaging li { display: inline; font-size: 20px; }
+	.replypaging li a { font-family: 'Trebuchet MS', sans-serif; font-size: 25px; text-decoration: none; color: black; }
 	
 	</style>
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -18,9 +18,9 @@
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
 <jsp:include page="/view/main/weather.jsp" />
-<br><br>
-<center>
 
+<center>
+<br><br><br><br>
 
 
 <!-- 게시판 수정 -->
@@ -126,7 +126,7 @@
 
 <!-- 지울것 -->
 
-<li id='sessiontotalreplylist' style="list-style: none"></li>
+<li id='sessiontotalreplylist' style="list-style: none; margin-bottom: 30;"></li>
 
 <div id='trareplypaging'>
 
@@ -614,11 +614,9 @@ function tableinsert(data){
     i+='<td width="330px;"><span id="'+data.replyinfo[j].num+'">'+data.replyinfo[j].content   +'</span> <font style="font-size:5px;" >'+data.replyinfo[j].trarep_date+'</font>&nbsp;&nbsp;</td>'
     	if(data.replyinfo[j].writer==data.session[0].session){
     i+='<td width="40px;"><span id="MODBTN" style="cursor:hand;" onclick="fncModi('+data.replyinfo[j].num+',this)">수정</span></td>'
-    	if(data.session[0].session!=null){
-    i+='<td width="40px;"><span id="write_form" onclick="javascript:fncWriteform('+ data.replyinfo[j].num +',this)">답글</span></td>';
-    	}
     i+='<td width="40px;"><span  onclick="subajaxdelete('+data.replyinfo[j].num+')">삭제</span></td>';
       	} //세션값과 글쓴이가 같은지.
+	  i+='<td width="40px;"><span id="write_form" onclick="javascript:fncWriteform('+ data.replyinfo[j].num +',this)">답글</span></td>';
 	i+="</tr>";		
 	}	//alve==0세션끝나는곳
 	//글쓰기 끝.

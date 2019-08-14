@@ -65,6 +65,30 @@ public class MemDAO {
 		
 	} // insert() end
 	
+   // 닉네임
+   public String nickname(String mem_id) {
+      String nickname = null;
+      
+      try {
+         conn = getConnection();
+         String sql = "select mem_name from mem where mem_id = ?";
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, mem_id);
+         rs = pstmt.executeQuery();
+         
+         if(rs.next()) {
+            nickname = rs.getString("mem_name");
+         }
+      } catch (Exception e) {
+         e.printStackTrace();
+      } finally {
+         CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+      } // try end
+      
+      return nickname;
+
+   }
+	
 	// 로그인
 	public boolean login(String mem_id, String mem_pwd) {
 		boolean isLogin = false;
@@ -254,28 +278,39 @@ public class MemDAO {
 		return isId;
 	} // idValidate() end
 	
-	   public void getPoint(String mem_id) {
-		      try {
-		         conn = getConnection();
-		         String sql = "update mem set mem_point = mem_point - 10 where mem_id=?";
-		         pstmt = conn.prepareStatement(sql);
-		         pstmt.setString(1, mem_id);
-		         pstmt.executeQuery();
-		         
-		      } catch (Exception e) {
-		         e.printStackTrace();
-		      } finally {
-		         CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
-		      } 
-		      
-		   }
-	   
+		public void getPoint(String mem_id) {
+	      try {
+	         conn = getConnection();
+	         String sql = "update mem set mem_point = mem_point - 10 where mem_id=?";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, mem_id);
+	         pstmt.executeQuery();
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         CloseUtil.close(rs); CloseUtil.close(pstmt); CloseUtil.close(conn);
+	      } 
+	      
+	   }
 	   
 	   public boolean lostPoint(String mem_id) {
 		   boolean result=false;
 		   try {
 			conn=getConnection();
-			String sql="update mem set mem_point =(select mem_point from mem where mem_id=?)- 10 where mem_id= ?";
+			String sql = "select mem_point from mem where mem_id = ?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, mem_id);
+			rs = pstmt.executeQuery();
+			int point = 0;
+			
+			while(rs.next()) {
+				point = rs.getInt("mem_point");
+			}
+			
+			if(point < 100) return false;
+			
+			sql="update mem set mem_point =(select mem_point from mem where mem_id=?)-100 where mem_id= ?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, mem_id);
 			pstmt.setString(2, mem_id);

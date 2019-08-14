@@ -16,7 +16,6 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
-<jsp:include page="/view/main/money.jsp" />
 <div id="memPwd">
 
 <div class="subject">비밀번호 찾기</div>

@@ -16,7 +16,6 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
-<jsp:include page="/view/main/money.jsp" />
 <c:if test="${not empty param.err }">
 <script type="text/javascript">
 	alert("회원정보를 정확하게 입력해 주세요");

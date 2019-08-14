@@ -14,29 +14,28 @@
 <jsp:include page="/view/main/header.jsp" />
 <jsp:include page="/view/main/money.jsp" />
 <jsp:include page="/view/main/weather.jsp" />
-<Br><Br><Br>
-<div>
+<Br><Br><Br><Br>
+<div style="height: 700">
 
 
 	<center>
-	  
-	  <a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}">전체 </a>
-	  <a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}">팝니다. </a>
-	  <a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}">삽니다 </a>  
-<br>
-	<a href="list.do?pagesize=10&condition=${condition}&opt=${opt}&tra_head=${tra_head}">10개씩보기 </a>
-	<a href="list.do?pagesize=20&condition=${condition}&opt=${opt}&tra_head=${tra_head}">20개씩보기 </a>
-<br>
+	  보기 > 
+	  <div style="display: inline-block;"><a href="list.do?tra_head=전체&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 30;">전체</a></div>
+	  <div style="display: inline-block;"><a href="list.do?tra_head=팝니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 30;">팝니다 </a></div>
+	  <div style="display: inline-block;"><a href="list.do?tra_head=삽니다&pagesize=${pagesize }&condition=${condition}" style="text-decoration: none; font-size: 20; margin-right: 200;">삽니다 </a></div>
+	  <div style="display: inline-block;"><a href="list.do?pagesize=10&condition=${condition}&opt=${opt}&tra_head=${tra_head}" style="text-decoration: none; font-size: 20; margin-right: 20;">10개씩보기 </a></div>
+	  <div style="display: inline-block;"><a href="list.do?pagesize=20&condition=${condition}&opt=${opt}&tra_head=${tra_head}" style="text-decoration: none; font-size: 20;">20개씩보기 </a></div>
+<br><Br><Br>
 	
-		<b>
+		<b><br>
 		${tra_head }글 목록(전체 글 : ${ listCount })
-		</b>
+		</b><br>
 
 	 <table width="700">
 		<tr>
 		<c:if test="${sessionScope.member!=null }">
 			<td  align="right">
-				<a href="writeForm.do">글쓰기</a>
+				<a href="writeForm.do" style="text-decoration: none;">글쓰기</a>
 			</td>
 			</c:if>
 		</tr>
@@ -73,7 +72,7 @@
 			
 
 	   
-	  <a 	href="content.do?num=${list.tra_num }&page=${ currentPage }">
+	  <a 	href="content.do?num=${list.tra_num }&page=${ currentPage }" style="text-decoration: none; color: black;">
 					${ list.tra_subject }</a> 
 	
 	
@@ -88,8 +87,7 @@
 </c:if>  
   
 
-
-
+<br>
 
 
 
@@ -118,28 +116,28 @@
 		<c:choose>
 		<c:when test="${opt!=null }">
 		<c:if test="${startPage >5 }" >
-			<a href="list.do?page=${ startPage-1  }&condition=${condition}&opt=${opt}&pagesize=${pagesize}">[이전] </a>
+			<a href="list.do?page=${ startPage-1  }&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[이전] </a>
 		</c:if>
 
 		<c:forEach  var="i" begin="${startPage }" end="${ endPage }">
-			<a href="list.do?page=${i}&condition=${condition}&opt=${opt}&pagesize=${pagesize}">[${ i }] </a>
+			<a href="list.do?page=${i}&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[${ i }] </a>
 	   </c:forEach>
 	
 	<c:if test="${ endPage < pageCount }" >
-		<a href="list.do?page=${ startPage+pageBlock }&condition=${condition}&opt=${opt}&pagesize=${pagesize}">[다음] </a>
+		<a href="list.do?page=${ startPage+pageBlock }&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[다음] </a>
 	</c:if>
 	</c:when>
 	<c:when test="${opt==null }">
 		<c:if test="${startPage >5 }" >
-			<a href="list.do?page=${ startPage-1  }&pagesize=${pagesize}&tra_head=${tra_head}">[이전] </a>
+			<a href="list.do?page=${ startPage-1  }&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[이전] </a>
 		</c:if>
 
 		<c:forEach  var="i" begin="${startPage }" end="${ endPage }">
-			<a href="list.do?page=${i}&pagesize=${pagesize}&tra_head=${tra_head}">[${ i }] </a>
+			<a href="list.do?page=${i}&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[${ i }] </a>
 	   </c:forEach>
 	
 	<c:if test="${ endPage < pageCount }" >
-		<a href="list.do?page=${ startPage+pageBlock }&pagesize=${pagesize}&tra_head=${tra_head}">[다음] </a>
+		<a href="list.do?page=${ startPage+pageBlock }&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[다음] </a>
 	</c:if>
 
 	</c:when>
@@ -148,6 +146,7 @@
 	
 </c:if> 
 <br>
+<br><br>
 <form>
 	<select id="tra_head" >
 				<option value="전체">전체</option>

@@ -40,7 +40,10 @@ public class MemLoginProAction implements Command {
 					} // for end
 				} // if(cookies) end
 			}
+			String nickname = MemDAO.getInstance().nickname(mem_id);
+			request.getSession().setAttribute("nickname", nickname);
 			request.getSession().setAttribute("member", mem_id);
+			
 			return "/index.jsp";
 		} else {
 			response.sendRedirect(request.getHeader("referer") + "?outmsg=true");

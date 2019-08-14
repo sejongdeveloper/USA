@@ -17,6 +17,7 @@ public class LocListAction implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String loc_regname = request.getParameter("loc_regname");
+		request.setAttribute("loc_regname", loc_regname);
 		
 		LocDAO locdao = LocDAO.getInstance();
 		
