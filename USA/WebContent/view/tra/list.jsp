@@ -33,6 +33,7 @@
 
 	 <table width="700">
 		<tr>
+		<!-- 로그인해야만 글쓰기 가능 -->
 		<c:if test="${sessionScope.member!=null }">
 			<td  align="right">
 				<a href="writeForm.do" style="text-decoration: none;">글쓰기</a>
@@ -40,7 +41,7 @@
 			</c:if>
 		</tr>
 	</table>
-	
+<!-- 게시글이 하나도 없다면 게시글이 없다고 설명. -->
 <c:if test="${ listCount == 0 }">	
 	<table width="700" border="1" cellpadding="0" cellspacing="0">
 		<tr>
@@ -62,16 +63,17 @@
 			<td align="center" width="50">분 류 </td>
 			</tr>
 			
-		
+	 <!-- 게시글글 목록은 여러개이기떄문에  list에 foreach로 돌림. -->
 	 <c:forEach var="list"  items="${ list }">    		
 		<tr height="30">
 			<td align="center" width="50">
+				<!--  게시판글번호. --> 
 				<c:out value="${ list.tra_num }" />
 			</td>
 			<td width="250">
 			
 
-	   
+	   <!-- 어느페이지의 어떤글인지 글선택을 했을시 넘김. --> 
 	  <a 	href="content.do?num=${list.tra_num }&page=${ currentPage }" style="text-decoration: none; color: black;">
 					${ list.tra_subject }</a> 
 	
@@ -102,19 +104,21 @@
 
 
 
-
+<%-- 게시글이 하나도 없을수있으니 >0으로 구분. --%>
  <c:if test="${ listCount > 0 }"> <!--  전체 페이지의 수를 연산 -->
 		
 		
 		
 		
-
+<%-- 총페이지보다 마지막페이지가 크면  총페이지를 마지막페이지로 설정. --%>
 		<c:if test="${ endPage > pageCount }" >
 			<c:set  var="endPage"  value="${ pageCount }" />
 		</c:if>
 		
 		<c:choose>
+		<%-- opt가 null이 아니라는것은 검색조건이 있다는것. --%>
 		<c:when test="${opt!=null }">
+		<%-- 그래서 이전 이후 다음 그리고 몇번쨰 페이지로 갈지를 정할떄 검색조건 검색내용 페이지를 몇개볼건지 같이 넘김.--%>
 		<c:if test="${startPage >5 }" >
 			<a href="list.do?page=${ startPage-1  }&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[이전] </a>
 		</c:if>
@@ -127,6 +131,9 @@
 		<a href="list.do?page=${ startPage+pageBlock }&condition=${condition}&opt=${opt}&pagesize=${pagesize}" style="text-decoration: none; color: black;">[다음] </a>
 	</c:if>
 	</c:when>
+	<%-- 여기까지가 검색조건이 있을떄. --%>
+	
+	<%-- 검색조건이 null이면. 몇번쨰 페이지인지 몇개씩 볼건지  분류는 어떤건지만 서버로 값을 넘겨줌. --%>
 	<c:when test="${opt==null }">
 		<c:if test="${startPage >5 }" >
 			<a href="list.do?page=${ startPage-1  }&pagesize=${pagesize}&tra_head=${tra_head}" style="text-decoration: none; color: black;">[이전] </a>
@@ -167,6 +174,7 @@
 <jsp:include page="/view/main/footer.html" />
 </body>
 <script>
+//서버로부터 값을 가져올떄 삽니다 팝니다등의 값을 유지하기위해. 자바스크립트로 처리.
 function tra_headcheck(){
 	var check= "${tra_head}";
 	if(check=="전체"){
