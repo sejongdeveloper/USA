@@ -18,10 +18,9 @@ public class MemDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	// 싱글톤 방식 
 	private static MemDAO singleton = new MemDAO();
-
-	private MemDAO() {}
-	
+	private MemDAO() {}	
 	public static MemDAO getInstance() {
 		return singleton;
 	} // getInstance() end
@@ -42,6 +41,7 @@ public class MemDAO {
 	} // getConnection() end
 	
 	// 회원가입
+	// 아이디, 비밀번호, 전화번호, 이름, 주소, 파일이름을 DB에 추가하기
 	public int insert(MemVO vo) {
 		int result = 0;
 		try {
@@ -55,6 +55,7 @@ public class MemDAO {
 			pstmt.setString(5, vo.getMem_addr());
 			pstmt.setString(6, vo.getMem_filename());
 			result = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -65,7 +66,8 @@ public class MemDAO {
 		
 	} // insert() end
 	
-   // 닉네임
+   // 닉네임 얻기
+   // 전달받은 아이디를 이용하여 닉네임 조회
    public String nickname(String mem_id) {
       String nickname = null;
       
@@ -90,6 +92,7 @@ public class MemDAO {
    }
 	
 	// 로그인
+    // 아이디와 비밀번호가 일치하여 mem_alive = 1인지 판단
 	public boolean login(String mem_id, String mem_pwd) {
 		boolean isLogin = false;
 		try {
@@ -104,7 +107,6 @@ public class MemDAO {
 				isLogin = true;
 			}
 			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -115,6 +117,7 @@ public class MemDAO {
 	} // login() end
 	
 	// 회원수정 폼
+	// 해당하는 아이디에 대한 회원정보 조회
 	public MemVO update(String mem_id) {
 		MemVO vo = null;
 		try {
@@ -133,7 +136,6 @@ public class MemDAO {
 				vo.setMem_addr(rs.getString("mem_addr"));
 				vo.setMem_filename(rs.getString("mem_filename"));
 				vo.setMem_point(rs.getInt("mem_point"));
-				System.out.println("회원수정 정보갖고옴");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,6 +147,7 @@ public class MemDAO {
 	} // update() end
 	
 	// 회원수정 실행
+	// 해당하는 아이디(mem_id)에 해당하는 컬럼(calc)의 값(mem_value)를 수정
 	public int update(String mem_id, String calc, String mem_value) {
 		int result = 0;
 		
@@ -165,6 +168,7 @@ public class MemDAO {
 	} // update() end
 	
 	// 아이디 찾기
+	// 이름(mem_name)과 주소(mem_addr)와 일치하는 아이디를 전부 조회
 	public ArrayList<MemVO> id(String mem_name, String mem_addr) {
 		ArrayList<MemVO> list = new ArrayList<>();
 		try {
@@ -192,6 +196,7 @@ public class MemDAO {
 	} // id() end
 	
 	// 비밀번호 찾기 
+	// 아이디(mem_id), 이름(mem_name), 전화번호(mem_ph)와 일치하는 비밀번호 조회
 	public String pwd(String mem_id, String mem_name, String mem_ph) {
 		String mem_pwd = null;
 		
@@ -218,6 +223,7 @@ public class MemDAO {
 	} // pwd() end
 	
 	// 비밀번호 변경
+	// 아이디(mem_id)와 일치하는 비밀번호(mem_pwd)를 수정 
 	public int update(String mem_id, String mem_pwd) {
 		int result = 0;
 		try {
@@ -238,6 +244,7 @@ public class MemDAO {
 	} //update() end
 	
 	// 회원탈퇴
+	// 해당 아이디(mem_id)를 mem_alive = 0으로 수정
 	public int delete(String mem_id) {
 		int result = 0;
 		try {
@@ -257,6 +264,7 @@ public class MemDAO {
 	} // delete() end
 	
 	// 아이디 중복검사
+	// DB에 해당하는 아이디(mem_id)가 있는지 조회
 	public boolean idValidate(String mem_id) {
 		boolean isId = false;
 		try {
@@ -278,6 +286,7 @@ public class MemDAO {
 		return isId;
 	} // idValidate() end
 	
+		// 포인트 감소(-10)
 		public void getPoint(String mem_id) {
 	      try {
 	         conn = getConnection();
@@ -294,6 +303,7 @@ public class MemDAO {
 	      
 	   }
 	   
+	   // 포인트 감소 (-100)
 	   public boolean lostPoint(String mem_id) {
 		   boolean result=false;
 		   try {

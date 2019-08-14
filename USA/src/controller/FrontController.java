@@ -215,8 +215,7 @@ public class FrontController extends HttpServlet implements Process{
 			
 		// 로그인 유효성 검사
 		} else if(com.equals("memIdValidate.do")) {
-			new MemIdValidateAction().execute(request, response);
-			return;
+			nextPage = new MemIdValidateAction().execute(request, response);
 		// 환율 	
 		} else if(com.equals("money.do")) {
 			MoneyAction.execute(request, response);

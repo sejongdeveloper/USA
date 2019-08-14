@@ -12,7 +12,8 @@ import model.mem.MemDAO;
 import model.mem.MemVO;
 
 public class MemIdProAction implements Command {
-
+	
+	// 아이디 찾기 실행
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mem_name = request.getParameter("mem_name");
@@ -22,6 +23,7 @@ public class MemIdProAction implements Command {
 			request.setAttribute("mem_list", list);
 			return "/view/mem/memIdPro.jsp";
 		} else {
+			// request.getHeader("referer")란 현재 요청했던 주소값 얻는 방식
 			response.sendRedirect(request.getHeader("referer") + "?err=true");
 			return "";
 		}

@@ -16,6 +16,7 @@
 </head>
 <body>
 <jsp:include page="/view/main/header.jsp" />
+<!-- 전달받은 회원정보와 일치하는 DB가 없을때 받는 err 파라미터 값이 있으면 javascript 실행 -->
 <c:if test="${not empty param.err }">
 <script type="text/javascript">
 	alert("회원정보를 정확하게 입력해 주세요");
@@ -29,6 +30,7 @@
 <div id="idDetail">비밀번호를 찾고자 하는 회원정보를 입력해 주세요.</div>
 
 <form action="${contextPath }/memPwdForm3.do">
+<!-- 전달할 id 값을 클라이언트한테 숨김 -->
 <input type="hidden" name="mem_id" value="${param.mem_id }">
 <div class="main">
 	<h4>본인 확인 후 비밀번호를 변경해드립니다.</h4>

@@ -6,19 +6,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
+import action.Command;
 import model.mem.MemDAO;
 
-public class MemIdValidateAction {
-
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class MemIdValidateAction implements Command{
+	
+	// 로그인 유효성 검사
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		  String mem_id = request.getParameter("idInfo"); 
 		  boolean isId = MemDAO.getInstance().idValidate(mem_id);
 		  response.getWriter().print("{\"result\":" + isId + "}");
+		  return null;
 	}
 
 }
