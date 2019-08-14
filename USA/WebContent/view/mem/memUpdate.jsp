@@ -98,7 +98,6 @@
 		<th><div class="inputName">비밀번호 변경</div></th>
 		<td>
 			<div class="inputDiv">
-			<p class="inputData" id="calcmem_pwd">${vo.mem_addr }</p>
 			<p class="explanation">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 사이트로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
 			<p><input type="button" class="btn" id="pwdBtn" value="수정" onclick="updateForm(this,'pwdInput')"></p>
 			<div class="inputNone" id="pwdInput">
