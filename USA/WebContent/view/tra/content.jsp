@@ -22,7 +22,8 @@
 <center>
 <br><br><br><br>
 
-<!-- 게시판 수정 --> 
+
+<!-- 게시판 수정 -->
 <table cellpadding="0" cellspacing="0">
 	<tr align="center" valign="middle">
 		<td colspan="5">게시판</td>
@@ -144,24 +145,19 @@
 <script>
 
 //구현해야할것.
-function replycheck(){
-console.log(session+"찍혀?");
 
-	if(session=="없음"){
-		if(confirm('로그인하시겠습니까?')){
-			
-			
-		}else{
-			return ;
-		}
-		
-	}
+window.addEventListener("hashchange",function(){
+        pagestatus="move";
+       currentpage=location.hash.substring(1);
+       if(currentpage=="") currentpage="1";
+       replycheck();
 
-}
-
+    } 
+        
+    )
+  
 //페이징 처리 참고. currentpagemove는 현재 내가 누른 페이지 이동창이 어느곳인지. <a href 값의 this를 가져옴.
 function alink(currentpagemove){
-    event.preventDefault();  //A링크 눌렀을떄 페이지이동을 안하게.
 	currentpage=currentpagemove.innerText;    //예시 <a href="~~">1 </a>  여기서 1이라는 값을 얻기위해 사용.
 	if(currentpagemove.innerText=="이후"){ // 이전과 이후는 특정값이 아니라 밸류를 이전과 이후로 잡아줬기떄문에.
 		//                         //지금 눌린노드에서 부모노드를찾아간후. 이전 노드를 찾아가고. 거기에있는 innerText값을 가져옴
@@ -186,14 +182,10 @@ function alink(currentpagemove){
  //ajax 글 등록
  
  function subajax(ref,writer){
-	
 	if(document.getElementById('ajaxjung').value==null || document.getElementById('ajaxjung').value==""){
 		alert("내용을 입력해주세여");
 		return 
 	}
-	
-	
-	
 				//작성자와 답글인지만 판단.
 	var tradeboardnum=document.getElementById('tradeboardnum').value;   //글번호 또는 = writer
    	obj=new Object();  //ajax를위한 오브젝트 생성.
@@ -461,18 +453,18 @@ function sessionpage(data){
 	var tempnum=startpage;
 	 //시작번호가 페이지블럭보다 크면 이전버튼을 생성.
 		if(data.page[0].pageblock<startpage){
-			j+="<li><a href='#' onclick='alink(this)'>";
+			j+="<li><a href='#"+(startpage-1)+"' onclick='alink(this)'>";
 	 		j+="이전"+"</a></li>";
 		}
 	 //이전 4 5 6 이후    여기부분에서 4 5 6 부분 찍어주는곳.
 	for(var i=startpage;i<=endpage;i++){
-		j+="<li><a href='#' onclick='alink(this)'>";
+		j+="<li><a href='#"+tempnum+"' onclick='alink(this)'>";
 		j+=tempnum+"</a></li>"
 		tempnum++;
 	}
 	//페이지크기보다 한번에보여주는 마지막페이지가 작으면 이후를 만들고
 	if(pagecount>endpage){
-		j+="<li><a href='#' onclick='alink(this)'>";
+		j+="<li><a href='#"+(endpage+1)+"' onclick='alink(this)'>";
 		j+="이후"+"</a></li>";
 	}
 	//테이블 주입.
