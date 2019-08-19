@@ -187,10 +187,14 @@ function alink(currentpagemove){
  //ajax 글 등록
  
  function subajax(ref,writer){
-	if(document.getElementById('ajaxjung')==null || document.getElementById('ajaxjung')==""){
+	
+	if(document.getElementById('ajaxjung').value==null || document.getElementById('ajaxjung').value==""){
 		alert("내용을 입력해주세여");
 		return 
 	}
+	
+	
+	
 				//작성자와 답글인지만 판단.
 	var tradeboardnum=document.getElementById('tradeboardnum').value;   //글번호 또는 = writer
    	obj=new Object();  //ajax를위한 오브젝트 생성.
