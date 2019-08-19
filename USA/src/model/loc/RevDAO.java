@@ -121,7 +121,7 @@ public class RevDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Double> list = new ArrayList<Double>();
-		String sql = "SELECT AVG(REV_SCORE), REV_LOCNAME FROM REV where rev_locname in(select loc_name from loc where loc_regname=?) GROUP BY REV_LOCNAME ORDER BY AVG(REV_SCORE) desc";
+		String sql = "SELECT AVG(REV_SCORE) AVG, REV_LOCNAME FROM REV WHERE REV_LOCNAME IN(SELECT LOC_NAME FROM LOC WHERE LOC_REGNAME = ?) AND REV_ALIVE = 1 GROUP BY REV_LOCNAME ORDER BY AVG DESC";
 		
 		try {
 			conn = getConnection();
