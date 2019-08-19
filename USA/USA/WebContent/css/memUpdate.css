@@ -1,0 +1,110 @@
+@charset "UTF-8";
+#memUpdate {
+	margin-top: 100px;
+    margin-bottom: 20px;
+    margin-left: 630px;
+}
+
+#memUpdate table {
+
+  border: 1px solid #e5e5e5;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+#memUpdate th, td {
+	border: 1px solid #e5e5e5;
+	margin-left: -1px;
+}
+
+#memUpdate .inputName {
+	text-align: initial;
+	font-size: 14px;
+	margin-left: 50px;
+}
+
+#memUpdate th {
+	width: 187px;
+	background-color:#f5f4f4;
+}
+
+#memUpdate td {
+	padding-right: 50px;
+}
+#memUpdate .inputDiv {
+	padding: 10px 0 13px 28px;
+}
+
+#memUpdate .inputData {
+	font-size: 15px;
+}
+
+#memUpdate .inputData img{
+	max-width: 200px;
+    max-height: 200px;
+}
+
+#memUpdate .explanation {
+	color: #8e8e8e;
+	font-family: Dotum,sans-serif;
+	font-size: 12px;
+	margin-top: -3px;
+}
+
+#memUpdate .btn {
+	padding: 7px 23px 7px 23px;
+	font-weight:bold;
+	font-size: 12px;
+	background-color:white;
+	border: 1px solid #a3a3a3;
+	margin-top: 12px;
+	margin-right: 10px;
+	margin-right: 10px;
+}
+}
+
+#memUpdate h4 {
+	font-size: 13px;
+}
+
+#memUpdate .update {
+	font-size: 12px;
+	width: 254px;
+	height: 27px;
+	margin-top: -6px;
+
+}
+
+#memUpdate .inputNone {
+	display: none;
+}
+
+#memUpdate .inputDiv .btnOk {
+	padding: 7px 23px 7px 23px;
+	font-weight:bold;
+	font-size: 12px;
+	background-color:white;
+	border: 1px solid #a3a3a3;
+	margin-top: 12px;
+	margin-right: 10px;
+	color:#08a600;
+}
+
+#memUpdate #del {
+	color: #899197;
+	font-size: 13px;
+	font-family: Dotum,sans-serif;
+}
+
+#memUpdate #delLink {
+	color: #390;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 5px;
+	font-family: Dotum,sans-serif;
+	text-decoration: underline;
+}
+
+#memUpdate #delLink:hover {
+	cursor: pointer;
+}
