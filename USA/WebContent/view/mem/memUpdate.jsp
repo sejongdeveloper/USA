@@ -24,7 +24,7 @@
 		<td>
 			<div class="inputDiv">
 			<p class="inputData" id="calcmem_name">${vo.mem_name }</p>
-			<p class="explanation">실명 정보(이름, 생년월일, 성별, 개인 고유 식별 정보)가 변경된 경우 본인 확인을 통해 정보를 수정하실 수 있습니다.</p>
+			<p class="explanation">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우  사용할 사용자 이름입니다.</p>
 			<!-- 클릭하면(onclick) 클릭한 버튼은 사라지고 해당 div를 보여주는 updateForm() 함수 실행 -->
 			<p><input type="button" class="btn" id="nameBtn" value="수정" onclick="updateForm(this,'nameInput')"></p>
 			<div class="inputNone" id="nameInput">
@@ -44,7 +44,7 @@
 		<td>
 			<div class="inputDiv">
 			<p class="inputData" id="calcmem_ph">${vo.mem_ph }</p>
-			<p class="explanation">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 사이트로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
+			<p class="explanation">비밀번호 찾기 등 본인확인이 필요한 경우  사용할 휴대전화입니다.</p>
 			<p><input type="button" class="btn" id="phBtn" value="수정" onclick="updateForm(this,'phInput')"></p>
 			<div class="inputNone" id="phInput">
 				<h4>변경할 전화번호</h4>
@@ -61,7 +61,7 @@
 		<td>
 			<div class="inputDiv">
 			<p class="inputData" id="calcmem_addr">${vo.mem_addr }</p>
-			<p class="explanation">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 사이트로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
+			<p class="explanation">아이디 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 사이트로부터 알림을 받을 때 사용할 주소입니다.</p>
 			<p><input type="button" class="btn" id="addrBtn" value="수정" onclick="updateForm(this,'addrInput')"></p>
 			<div class="inputNone" id="addrInput">
 				<h4>변경할 주소</h4>
@@ -78,7 +78,7 @@
 		<td>
 			<div class="inputDiv">
 			<p class="inputData"><img alt="프로필 사진" src="${contextPath }/view/mem/upload/${vo.mem_filename }"></p> 
-			<p class="explanation">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 사이트로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
+			<p class="explanation">회원님의 프로필 사진을 변경할 수 있습니다.</p>
 			<p><input type="button" class="btn" id="filenameBtn" value="수정" onclick="updateForm(this,'filenameInput')"></p>
 			<div class="inputNone" id="filenameInput">
 				<h4>변경할 파일명</h4>
@@ -98,11 +98,11 @@
 		<th><div class="inputName">비밀번호 변경</div></th>
 		<td>
 			<div class="inputDiv">
-			<p class="explanation">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 사이트로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
+			<p class="explanation">회원의 비밀번호를 변경할 수 있습니다.</p>
 			<p><input type="button" class="btn" id="pwdBtn" value="수정" onclick="updateForm(this,'pwdInput')"></p>
 			<div class="inputNone" id="pwdInput">
 				<h4>현재 비밀번호</h4>
-				<input type="text" class="update" name="mem_pwd" id="mem_pwd"><br>
+				<input type="password" class="update" name="mem_pwd" id="mem_pwd"><br>
 				<input type="button" class="btn" value="수정취소" onclick="updateFormCancel(this,'pwdBtn')">
 				<!-- 클릭하면(onclick) ajax를 통하여 아이디와 비밀번호가 일치하는지 확인하는 pwdUpdate() 함수 실행 -->
 				<!-- 아이디와 비밀번호기 일치하면 변경하는 페이지로 이동 -->
@@ -118,7 +118,7 @@
 		<td>
 			<div class="inputDiv">
 			<p class="inputData">${vo.mem_point }</p>
-			<p class="explanation">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 사이트로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
+			<p class="explanation">이벤트 등 포인트가 필요한 경우  사용할 총포인트입니다.</p>
 			</div>
 		</td>
 	</tr>
