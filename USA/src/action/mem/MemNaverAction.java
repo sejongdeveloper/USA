@@ -31,7 +31,7 @@ public class MemNaverAction implements Command {
 	    String code = request.getParameter("code"); // 로그인 연동인지 여부
 	    String state = request.getParameter("state");
 	    // 콜백함수 주소
-	    String redirectURI = URLEncoder.encode("http://localhost:8080/USA/naver.do", "UTF-8");
+	    String redirectURI = URLEncoder.encode("http://10.10.10.165:8080/USA/naver.do", "UTF-8");
 	    String apiURL;
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 	    apiURL += "client_id=" + clientId;
