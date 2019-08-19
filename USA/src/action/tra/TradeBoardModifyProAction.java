@@ -71,7 +71,7 @@ public class TradeBoardModifyProAction implements Command {
 			System.out.println("파일 등록 실패 " + e.getMessage());
 		}
 
-		return "/view/tra/content.do?num=" + num;
+		return "/view/tra/Tradecontent.do?num=" + num;
 
 	}
 }

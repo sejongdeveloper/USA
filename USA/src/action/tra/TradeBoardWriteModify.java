@@ -50,7 +50,7 @@ public class TradeBoardWriteModify implements Command {
 			boolean result = dao.boardInsert(vo);
 
 			if (result) {
-				return "/view/tra/list.do";
+				return "/view/tra/Tradelist.do";
 			}
 
 		} catch (Exception e) {
@@ -58,7 +58,7 @@ public class TradeBoardWriteModify implements Command {
 			System.out.println("파일 등록 실패 " + e.getMessage());
 		}
 
-		return "/view/tra/list.do";
+		return "/view/tra/Tradelist.do";
 	}
 
 }

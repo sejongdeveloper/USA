@@ -24,10 +24,10 @@ public class TradeBoardDeleteAction implements Command {
 		
 		//나중에 flag 참 거짓에 따라서 list에서 삭제성공 불가 뜨게 구현할것.
 		if(flag) {
-			return "/view/tra/list.do";
+			return "/view/tra/Tradelist.do";
 		}
 		
-		return "/view/tra/list.do";
+		return "/view/tra/Tradelist.do";
 	}
 
 }

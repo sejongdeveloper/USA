@@ -22,6 +22,10 @@ public class MemUpdatePro implements Command{
 		// xml 방식으로 데이터 전달
 		response.getWriter().print("<result>" + check + "</result>");
 		
+		if(check > 0 && calc.equals("mem_name")) {
+			request.getSession().setAttribute("nickname", mem_value);
+		}
+		
 		return null;
 	}
 
