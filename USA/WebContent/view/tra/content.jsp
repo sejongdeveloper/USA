@@ -22,8 +22,7 @@
 <center>
 <br><br><br><br>
 
-
-<!-- 게시판 수정 -->
+<!-- 게시판 수정 --> 
 <table cellpadding="0" cellspacing="0">
 	<tr align="center" valign="middle">
 		<td colspan="5">게시판</td>

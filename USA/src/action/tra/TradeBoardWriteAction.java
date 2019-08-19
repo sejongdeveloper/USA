@@ -57,14 +57,14 @@ public class TradeBoardWriteAction implements Command {
 
 			MemDAO.getInstance().getPoint(replyWriter);
 			if (result) {
-				return "/view/tra/content.do?num=" + tranum;
+				return "/view/tra/Tradecontent.do?num=" + tranum;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("파일 등록 실패 " + e.getMessage());
 		}
 
-		return "/view/tra/list.do";
+		return "/view/tra/Tradelist.do";
 	}
 
 }
