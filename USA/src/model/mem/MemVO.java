@@ -13,9 +13,11 @@ public class MemVO {
 	private int mem_alive; // 탈퇴유무
 	private Timestamp mem_cdate; // 가입날짜
 	private Timestamp mem_ddate; // 탈퇴날짜
-
-	public MemVO() {} // 기본생성자
 	
+	// 기본생성자
+	public MemVO() {} 
+	
+	// 매개변수 있는 생성자
 	public MemVO(String mem_id, String mem_pwd, String mem_ph, String mem_name, String mem_addr, String mem_filename) {
 		super();
 		this.mem_id = mem_id;
@@ -25,6 +27,7 @@ public class MemVO {
 		this.mem_addr = mem_addr;
 		this.mem_filename = mem_filename;
 	}
+	
 	public String getMem_id() {
 		return mem_id;
 	}

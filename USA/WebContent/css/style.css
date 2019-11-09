@@ -27,7 +27,6 @@
 	color: white;
 }
 .dropmenu {
-	width: 1000px;
 	text-align: center;
 	margin-top: 0px;
 	margin-left: 400px;
@@ -70,7 +69,7 @@ ul li:hover > ul{
 .headerSignin {
 	position: absolute;
 	right: 100px;
-	top: 10px;
+	top: 20px;
 }
 .dropmenu3 {
 	left: 140px;

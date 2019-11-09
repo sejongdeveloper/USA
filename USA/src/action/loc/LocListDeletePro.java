@@ -23,8 +23,10 @@ public class LocListDeletePro implements Command {
 		String loc_regname = request.getParameter("loc_regname");
 		String loc_name = request.getParameter("loc_name");
 		
+		// 관광지 삭제
 		int result = LocDAO.getInstance().deleteLocList(loc_name);
 		
+		// 결과 출력 후 페이지 이동
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");

@@ -1,6 +1,4 @@
-/**
- * 
- */
+/* 디자인 변경 */
 function pwdIn(data) {
 	document.getElementById(data).style.border = "2px solid lightblue";
 }
@@ -11,10 +9,12 @@ function pwdValidate() {
 	var pwdDiv = document.getElementById("pwdDiv");
 	var pwdMsg = document.getElementById("pwdMsg"); 
 	
+	/* 빈값 체크 */
 	if(pwd == "") {
 		pwdDiv.style.border = "1px solid red";
 		pwdMsg.innerHTML = "필수 정보입니다.";
 	
+	/* 유효성 검사 */
 	} else if(pwdChk.test(pwd)){
 		pwdMsg.innerHTML = "";
 		pwdDiv.style.border = "1px solid #dadada";
@@ -25,7 +25,6 @@ function pwdValidate() {
 		pwdDiv.style.border = "1px solid red";
 		
 	}
-
 	
 }
 
@@ -35,11 +34,12 @@ function pwdChkValidate() {
 	var pwdChkMsg = document.getElementById("pwdChkMsg");	
 	var pwdChkDiv = document.getElementById("pwdChkDiv");
 	
-	
+	/* 빈값 체크 */
 	if(pwdChk == "") {
 		pwdChkMsg.innerHTML = "필수 정보입니다.";
 		pwdChkDiv.style.border = "border: 1px solid red";
 		
+	/* 유효성 검사 */
 	} else if(pwd == pwdChk) {
 		pwdChkMsg.innerHTML = "";
 		pwdChkDiv.style.border = "border: 1px solid #dadada";
@@ -50,6 +50,7 @@ function pwdChkValidate() {
 	}
 }
 
+/* 유효성 검사를 모두 만족했는지 여부판단 */
 function chk() {
 	var isPwd = document.getElementById("pwdMsg").innerHTML;
 	var isPwdChk = document.getElementById("pwdChkMsg").innerHTML;

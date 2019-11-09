@@ -38,8 +38,10 @@ public class LocListWritePro implements Command {
 			vo.setLoc_contents(loc_contents);
 			vo.setLoc_filename(loc_filename);			
 			
+			// 관광지 추가
 			int result = LocDAO.getInstance().insertLocList(vo);
 			
+			// 결과 출력 후 페이지 이동
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");

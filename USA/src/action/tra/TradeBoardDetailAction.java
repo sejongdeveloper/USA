@@ -12,43 +12,42 @@ import model.tra.TradeBoardDAO;
 import model.tra.TradeBoardVO;
 import model.tra.TradeBoardreplyDAO;
 import model.tra.TradeBoardreplyVO;
-public class TradeBoardDetailAction  implements Command{
-	
 
-	
-	public String execute(HttpServletRequest request,
-				 HttpServletResponse response) { 
-			 
-			try {
-				request.setCharacterEncoding("UTF-8");
-				//게시판 내용에 대한 정보
-				TradeBoardDAO dao= new TradeBoardDAO();
-				TradeBoardVO vo=new TradeBoardVO();
-				
-				TradeBoardreplyDAO dao2=new TradeBoardreplyDAO();
-				ArrayList<TradeBoardreplyVO> replylist=new ArrayList<TradeBoardreplyVO>();
-				
-				int num=Integer.parseInt(request.getParameter("num"));
-			
-				
-				
-				dao.updateCount(num);
-				vo=dao.getDetail(num);
-				replylist=dao2.getreplylist(num);
+public class TradeBoardDetailAction implements Command {
 
-				if(vo==null){
-					return "/view/tra/list.jsp";
-				}
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-				request.setAttribute("vo", vo);
-				request.setAttribute("replylist", replylist);
-			} catch (Exception e) {
-				e.printStackTrace();
+		try {
+			request.setCharacterEncoding("UTF-8");
+			// 게시판 내용에 대한 정보
+			TradeBoardDAO dao = new TradeBoardDAO();
+			TradeBoardVO vo = new TradeBoardVO();
+			// 리플 dao불러옴.
+			TradeBoardreplyDAO dao2 = new TradeBoardreplyDAO();
+			// 리플리스트 담아오기위해 만듬.
+			ArrayList<TradeBoardreplyVO> replylist = new ArrayList<TradeBoardreplyVO>();
+
+			// 게시판 고유번호.
+			int num = Integer.parseInt(request.getParameter("num"));
+
+			// 게시판이 조회수 관리
+			dao.updateCount(num);
+			// 게시판 상세보기 가져오기.
+			vo = dao.getDetail(num);
+			replylist = dao2.getreplylist(num);
+
+			// 게시판에 아무글도없다면 list로
+			if (vo == null) {
+				return "/view/tra/list.jsp";
 			}
-	   		
-		   	
-	   		return "/view/tra/content.jsp";
 
-		 }
+			request.setAttribute("vo", vo);
+			request.setAttribute("replylist", replylist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "/view/tra/content.jsp";
+
 	}
-
+}

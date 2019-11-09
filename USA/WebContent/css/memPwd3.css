@@ -27,14 +27,13 @@ hr {
 	margin-top: 13px;
 }
 
-input[type=text] {
-	width: 290px;
-	height: 25px;
-	border: 1px solid #ccc;
-	margin-left: 5px;
-	border: 1px solid #ffffff;
-
-	outline: none;
+.data input {
+	width: 287px;
+    margin-left: 6px;
+    margin-top: 1.5px;
+    height: 23px;
+    border: none;
+    outline: none;
 }
 
 input[type=submit] {

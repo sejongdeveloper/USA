@@ -28,13 +28,13 @@ public class LocDAO {
 		return ds.getConnection();
 	}
 	
-	// 관광지 이름, 사진 가져오기
+	// 관광지 이름, 사진, 작성자 가져오기(평점순)
 	public ArrayList<LocVO> getLocFileName(String loc_regname) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<LocVO> list = new ArrayList<LocVO>();
-		String sql = "SELECT LOC.LOC_NAME, LOC.LOC_FILENAME, LOC.LOC_REGNAME, LOC.LOC_WRITER, NVL(AVG(REV.REV_SCORE),0) FROM LOC right OUTER JOIN REV ON LOC.LOC_NAME=REV.REV_LOCNAME WHERE LOC_REGNAME = ? GROUP BY (LOC.LOC_NAME, LOC.LOC_FILENAME, LOC.LOC_REGNAME, LOC.LOC_WRITER) ORDER BY NVL(AVG(REV.REV_SCORE),0) DESC";
+		String sql = "SELECT LOC.LOC_NAME, LOC.LOC_FILENAME, LOC.LOC_REGNAME, LOC.LOC_WRITER, NVL(AVG(REV.REV_SCORE),0) FROM LOC left OUTER JOIN REV ON LOC.LOC_NAME=REV.REV_LOCNAME and rev_alive = 1 WHERE LOC_REGNAME = ? GROUP BY (LOC.LOC_NAME, LOC.LOC_FILENAME, LOC.LOC_REGNAME, LOC.LOC_WRITER) ORDER BY NVL(AVG(REV.REV_SCORE),0) DESC";
 		
 		try {
 			conn = getConnection();

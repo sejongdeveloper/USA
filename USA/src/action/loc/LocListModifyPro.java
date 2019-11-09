@@ -34,15 +34,18 @@ public class LocListModifyPro implements Command {
 			LocVO vo = new LocVO();
 			vo.setLoc_name(loc_name);
 			vo.setLoc_contents(loc_contents);
-			// null이면 기존 파일명 그대로 넣기
+			
+			// null이면 기존 파일명 그대로 입력
 			if(loc_filename == null) {
 				vo.setLoc_filename(dao.getLocFile(loc_name));
 			} else {
 				vo.setLoc_filename(loc_filename);			
 			}
 			
+			// 관광지 수정
 			int result = dao.updateLocList(vo);
 			
+			// 결과 출력 후 페이지 이동
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");

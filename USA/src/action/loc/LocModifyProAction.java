@@ -27,10 +27,12 @@ public class LocModifyProAction implements Command {
 		vo.setRev_contents(rev_contents);
 		vo.setRev_score(rev_score);
 		
+		// 리뷰 수정
 		int result = dao.update(vo);
 		
 		String rev_locname = request.getParameter("rev_locname");
 		
+		// 결과 출력 후 페이지 이동
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");

@@ -16,12 +16,15 @@
 <jsp:include page="/view/main/weather.jsp" />
 <div>
 <div class="body">
-<div class="regView_regname">&nbsp;${ reg_list[0].reg_name }&nbsp;</div>
+<!-- 지역이름 -->
+<div class="regView_regname">&nbsp;${ reg_name }&nbsp;</div>
+<!-- 지역사진 -->
 <div class="regView_picture">
 <c:forEach var="picture" items="${ reg_list }">
 <img class="reg_img" alt="사진" src="${ pageContext.request.contextPath }/upload/${ picture.reg_filename }">
 </c:forEach>
 </div>
+<!-- 지역설명 -->
 <c:forEach var="post" items="${ reg_list }">
 	<div class="regView_posts">
 	<div class="regView_title">${ post.reg_subject }</div>
@@ -33,28 +36,28 @@
 </div>
 </body>
 <script>
-    var index = 0;   //이미지에 접근하는 인덱스
+	var pic = 0;   //이미지에 접근하는 인덱스
     $(document).ready(function(){
         slideShow();
     })
     
-   	// 사진 슬라이드쇼
+    // 사진 슬라이드쇼
     function slideShow() {
-    var i;
-    var x = document.getElementsByClassName("reg_img");  // class가 reg_img인 것들
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";   // 처음에 전부 display를 none으로
-    }
-    
-    index++; // 보여질 사진 순서 증가
-    
-    if (index > x.length) {
-        index = 0;  //인덱스가 초과되면 0로 변경
-    }   
-    
-    x[index].style.display = "block";  //해당 인덱스는 block으로
-    
-    setTimeout(slideShow, 2000);   //함수를 2초마다 호출
+
+	    var x = document.getElementsByClassName("reg_img");  // class가 reg_img인 것들 가져옴 
+	    for (i = 0; i < x.length; i++) {
+	       x[i].style.display = "none";   // 처음에 전부 display를 none으로
+	    }
+	    
+	    x[pic].style.display = "block";  // 해당 인덱스는 block으로
+	    
+	    pic++; // 보여질 사진 순서 증가
+	    
+	    if (pic == x.length) {
+	        pic = 0;  //인덱스가 초과되면 0로 변경
+	    }
+	    
+	    setTimeout(slideShow, 2000);   //함수를 2초마다 호출
  	
 	}
 	

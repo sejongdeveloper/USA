@@ -30,6 +30,7 @@ public class LocWriteProAction implements Command {
 		int rev_score = Integer.parseInt(request.getParameter("rev_score"));
 		String rev_locname = request.getParameter("rev_locname");
 		
+		// 포인트 증가
 		MemDAO.getInstance().getPoint(rev_writer);
 		
 		vo.setRev_date(new Timestamp(System.currentTimeMillis()));
@@ -39,8 +40,10 @@ public class LocWriteProAction implements Command {
 		vo.setRev_score(rev_score);
 		vo.setRev_locname(rev_locname);
 		
+		// 리뷰 등록
 		int result = dao.insert(vo);
 		
+		// 결과 출력 후 페이지 이동
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<script>");
